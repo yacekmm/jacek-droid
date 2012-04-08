@@ -59,7 +59,7 @@ public class PeoplePays {
 	public double howMuchShouldReturnTo(String personB){
 		double howMuchPersonBPaid = otherPeoplePayments.get(personB);
 		if(howMuchPersonBPaid > howMuchIPaid){
-			return howMuchPersonBPaid - howMuchPerPerson;
+			return howMuchPersonBPaid - (howMuchPerPerson*(otherPeoplePayments.size()-1));
 		}else
 			return 0.0;
 	}
