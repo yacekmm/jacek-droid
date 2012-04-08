@@ -11,6 +11,7 @@ public class PeoplePays {
 	private double totalRefundForThisPerson;
 	private HashMap<String, Double> otherPeoplePayments;
 	private double howMuchPerPerson;
+	private double alreadyReturned;
 	
 	public PeoplePays(String _personName, HashMap<String, Double> inputPays) {
 		setPersonName(_personName);
@@ -59,7 +60,15 @@ public class PeoplePays {
 	public double howMuchShouldReturnTo(String personB){
 		double howMuchPersonBPaid = otherPeoplePayments.get(personB);
 		if(howMuchPersonBPaid > howMuchIPaid){
-			return howMuchPersonBPaid - (howMuchPerPerson*(otherPeoplePayments.size()-1));
+			double tmpToReturn = howMuchPerPerson - howMuchIPaid;
+			if(alreadyReturned + tmpToReturn > toReturn){
+				tmpToReturn = toReturn - alreadyReturned;
+				alreadyReturned = toReturn;
+			}else{
+				alreadyReturned += tmpToReturn;
+			}
+			return tmpToReturn;
+			//return howMuchPersonBPaid - (howMuchPerPerson*(otherPeoplePayments.size()-1));
 		}else
 			return 0.0;
 	}
