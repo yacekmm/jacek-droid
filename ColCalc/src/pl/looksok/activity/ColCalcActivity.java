@@ -1,5 +1,6 @@
-package pl.looksok;
+package pl.looksok.activity;
 
+import pl.looksok.R;
 import android.app.Activity;
 import android.os.Bundle;
 
