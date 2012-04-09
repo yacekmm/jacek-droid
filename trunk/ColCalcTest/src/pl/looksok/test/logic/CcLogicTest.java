@@ -11,11 +11,12 @@ import pl.looksok.logic.PeoplePays;
 
 public class CcLogicTest extends TestCase {
 
-	private static final String INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE = "Incorrect calculation between two people.";
+	private static final String INCORRECT_CALCULATION_BETWEEN_TWO = "Incorrect calculation between two people.";
 	private static final String INCORRECT_TO_RETURN = "Incorrect amount to return for this person.";
 	private static final String INCORRECT_REFUND = "Incorrect refund for person.";
 	private static final String SHOULD_THROW_EXCEPTION = "Should throw Exception: ";
 	private static final String INCORRECT_PAYMENT_PER_PERSON = "Resulted in incorrect payment per person.";
+	private static final String INCORRECT_CALCULATION_BETWEEN_THREE = "Incorrect calculation between three people.";
 	
 	private CcLogic calc;
 	private HashMap<String, Double> inputPays;
@@ -139,24 +140,24 @@ public class CcLogicTest extends TestCase {
 		buildTestCaseTwoPeople(0.0, 0.0);
 		
 		calc.calculate(inputPays);
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
 	}
 	
 	public void testRefundOfNonZeroPayTwoPeopleOnePaidWhoToWhom(){
 		buildTestCaseTwoPeople(10.0, 0.0);
 		
 		calc.calculate(inputPays);
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO, 5.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
 	}
 	
 	public void testRefundOfNonZeroPayTwoPeopleTwoPaidWhoToWhom(){
 		buildTestCaseTwoPeople(10.0, 2.0);
 		
 		calc.calculate(inputPays);
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 4.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO, 4.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleOnePaidWhoToWhom(){
@@ -164,14 +165,14 @@ public class CcLogicTest extends TestCase {
 		
 		calc.calculate(inputPays);
 		
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
 		
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
 		
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleTwoPaidWhoToWhom(){
@@ -179,14 +180,44 @@ public class CcLogicTest extends TestCase {
 		
 		calc.calculate(inputPays);
 		
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 2.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 2.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
 		
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
 		
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
-		assertEquals(INCORRECT_CALCULATION_BETWEEN_TWO_PEOPLE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+	}
+	
+	public void testRefundOfNonZeroPayThreePeopleThreePaidWhoToWhom(){
+		buildTestCaseThreePeople(11.0, 3.0, 4.0);
+		
+		calc.calculate(inputPays);
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 3.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 2.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+	}
+	
+	public void testRefundOfNonZeroPayThreePeopleTwoPaidEquallyWhoToWhom(){
+		buildTestCaseThreePeople(9.0, 9.0, 0.0);
+		
+		calc.calculate(inputPays);
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 3.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 3.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
 	}
 	
 	//howMuchOneGivesBackToAnother(personAName, personBName) should throw exception if not yet calculated
