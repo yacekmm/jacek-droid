@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_ScreenBorderSmall">10dip</dimen>
+    <dimen name="margin_ScreenBorderBig">15dip</dimen>
+    <dimen name="margin_SpanBetweenViewsSmall">10dip</dimen>
+    <dimen name="margin_SpanBetweenViewsBig">15dip</dimen>
+    
+</resources>
