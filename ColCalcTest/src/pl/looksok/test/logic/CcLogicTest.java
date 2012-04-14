@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import junit.framework.TestCase;
 import pl.looksok.exception.BadPayException;
 import pl.looksok.exception.BadPeopleCountException;
+import pl.looksok.exception.PaysNotCalculatedException;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.PeoplePays;
 
@@ -175,6 +176,21 @@ public class CcLogicTest extends TestCase {
 		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
 	}
 	
+	public void testRefundOfNonZeroPayThreePeopleOnePaidWhoToWhomV2(){
+		buildTestCaseThreePeople(0.0, 0.0, 15.0);
+		
+		calc.calculate(inputPays);
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+	}
+	
 	public void testRefundOfNonZeroPayThreePeopleTwoPaidWhoToWhom(){
 		buildTestCaseThreePeople(12.0, 3.0, 0.0);
 		
@@ -220,7 +236,28 @@ public class CcLogicTest extends TestCase {
 		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
 	}
 	
-	//howMuchOneGivesBackToAnother(personAName, personBName) should throw exception if not yet calculated
+	public void testRefundOfNonZeroPayThreePeopleTwoPaidEquallyWhoToWhomV2(){
+		buildTestCaseThreePeople(0.0, 9.0, 9.0);
+		
+		calc.calculate(inputPays);
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 3.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 3.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+	}
+	
+	public void testThrowExceptionIfNotCalculated(){
+		try{
+			buildTestCaseThreePeople(9.0, 9.0, 0.0);
+			calc.howMuchPersonAGivesBackToPersonB(personBName, personAName);
+			fail(SHOULD_THROW_EXCEPTION + PaysNotCalculatedException.class.getSimpleName());
+		}catch (PaysNotCalculatedException e){}
+	}
 	
 	private void buildTestCaseTwoPeople(double paymentA, double paymentB) {
 		inputPays.put(personAName, paymentA);
