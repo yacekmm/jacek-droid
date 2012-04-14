@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import pl.looksok.exception.BadPayException;
 import pl.looksok.exception.BadPeopleCountException;
+import pl.looksok.exception.DuplicatePersonNameException;
 import pl.looksok.exception.PaysNotCalculatedException;
 
 public class CcLogic {
@@ -16,7 +18,7 @@ public class CcLogic {
 		calculationResult = new Hashtable<String, PeoplePays>();
 	}
 
-	public double howMuchPerPerson(double totalPay, int peopleCount) {
+	private double howMuchPerPerson(double totalPay, int peopleCount) {
 		if(totalPay < 0)
 			throw new BadPayException();
 		if(peopleCount < 0)
@@ -25,7 +27,18 @@ public class CcLogic {
 		return totalPay / peopleCount;
 	}
 
-	public Hashtable<String, PeoplePays> calculate(HashMap<String, Double> inputPays) {
+	public Hashtable<String, PeoplePays> calculate(List<InputData> inputPaysList){
+		HashMap<String, Double> inputPays = new HashMap<String, Double>();
+		for (InputData in : inputPaysList) {
+			if(inputPays.containsKey(in.getName()))
+				throw new DuplicatePersonNameException();
+			else
+				inputPays.put(in.getName(), in.getPay());
+		}
+		return calculate(inputPays);
+	}
+	
+	private Hashtable<String, PeoplePays> calculate(HashMap<String, Double> inputPays) {
 		Double totalPay = calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPerPerson = howMuchPerPerson(totalPay, peopleCount);
