@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import pl.looksok.exception.BadPayException;
 import pl.looksok.exception.BadPeopleCountException;
+import pl.looksok.exception.PaysNotCalculatedException;
 
 public class CcLogic {
 	private Hashtable<String, PeoplePays> calculationResult;
@@ -54,7 +55,10 @@ public class CcLogic {
 	}
 
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
-		return calculationResult.get(personA).howMuchShouldReturnTo(personB);
+		try{
+			return calculationResult.get(personA).howMuchShouldReturnTo(personB);
+		}catch(NullPointerException e){
+			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
+		}
 	}
-
 }
