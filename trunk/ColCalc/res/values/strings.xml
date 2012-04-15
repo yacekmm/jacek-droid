@@ -10,6 +10,7 @@
     <string name="EnterPays_Button_AddToList">Dodaj do listy</string>
     <string name="EnterPays_Button_Calculate">Przelicz</string>
     <string name="EnterPays_Toast_BadInputDataError">Wpisz Imię i poprawną kwotę</string>
+    <string name="EnterPays_Toast_DuplicatedNameError">Osoba o tym imieniu jest już na liście</string>
     <string name="EnterPays_Toast_PersonAdded">Składka dodana!</string>
 
 </resources>
