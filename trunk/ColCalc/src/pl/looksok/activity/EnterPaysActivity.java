@@ -24,6 +24,7 @@ public class EnterPaysActivity extends Activity {
 	private EditText mNewPersonNameInput;
 	private EditText mNewPersonPayInput;
 	private ListView mPeopleList;
+	private Button mCalculateButton;
 	
     /** Called when the activity is first created. */
     @Override
@@ -45,6 +46,9 @@ public class EnterPaysActivity extends Activity {
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
+        mCalculateButton = (Button)findViewById(R.id.EnterPays_Button_Calculate);
+        mCalculateButton.setOnClickListener(calculateButtonClickListener);
+        mCalculateButton.setVisibility(View.GONE);
 	}
     
 	OnClickListener addPersonClickListener = new OnClickListener() {
@@ -62,9 +66,16 @@ public class EnterPaysActivity extends Activity {
             
             mNewPersonNameInput.setText("");
             mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
+            mCalculateButton.setVisibility(View.VISIBLE);
             
     		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT);
     		t.show();
+        }
+    };
+    
+	OnClickListener calculateButtonClickListener = new OnClickListener() {
+        public void onClick(View v) {
+        	
         }
     };
     
