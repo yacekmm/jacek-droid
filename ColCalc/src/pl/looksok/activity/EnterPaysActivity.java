@@ -62,6 +62,12 @@ public class EnterPaysActivity extends Activity {
         		return;
         	}
         	
+        	if(duplicatedName(name)){
+        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT);
+        		t.show();
+        		return;
+        	}
+        	
             adapter.add(new InputData(name, payDouble));
             
             mNewPersonNameInput.setText("");
@@ -71,6 +77,15 @@ public class EnterPaysActivity extends Activity {
     		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT);
     		t.show();
         }
+
+		private boolean duplicatedName(String name) {
+			for (InputData in : inputPaysList) {
+				if (in.getName().equals(name)){
+					return true;
+				}
+			}
+			return false;
+		}
     };
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {

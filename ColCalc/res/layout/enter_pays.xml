@@ -77,25 +77,27 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent">
-   	<ListView
-	    android:id="@+id/EnterPays_List_People"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:layout_marginBottom="@dimen/margin_SpanBetweenViewsSmall"
-	    android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
-	    android:layout_marginRight="@dimen/margin_ScreenBorderBig"
-	    android:layout_above="@+id/EnterPays_Button_Calculate" 
-	    android:layout_alignParentTop="true">
-	</ListView>
-	
-	<Button
-	    android:id="@+id/EnterPays_Button_Calculate"
-	    android:layout_marginBottom="@dimen/margin_ScreenBorderSmall"
-	    android:layout_gravity="center_horizontal"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:text="@string/EnterPays_Button_Calculate" />
-</RelativeLayout>
+	   
+       	<ListView
+		    android:id="@+id/EnterPays_List_People"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_marginBottom="@dimen/margin_SpanBetweenViewsSmall"
+		    android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
+		    android:layout_marginRight="@dimen/margin_ScreenBorderBig"
+		    android:layout_above="@+id/EnterPays_Button_Calculate" 
+		    android:layout_alignParentTop="true" >
+		</ListView>
+		
+		<Button
+		    android:id="@+id/EnterPays_Button_Calculate"
+		    android:layout_marginBottom="@dimen/margin_ScreenBorderSmall"
+		    android:layout_gravity="center_horizontal"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentBottom="true"
+		    android:layout_centerHorizontal="true"
+		    android:text="@string/EnterPays_Button_Calculate" />
+		
+	</RelativeLayout>
 </LinearLayout>
