@@ -9,6 +9,11 @@ public class InputData {
 		setPay(_pay);
 	}
 	
+	@Override
+	public String toString() {
+		return getName() + ": " + getPay();
+	}
+
 	public String getName() {
 		return name;
 	}
