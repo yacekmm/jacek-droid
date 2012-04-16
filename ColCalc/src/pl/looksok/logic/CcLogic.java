@@ -80,7 +80,7 @@ public class CcLogic implements Serializable {
 			double result = calculationResult.get(personA).howMuchShouldReturnTo(personB);
 			int decimalPlace = 2;
 		    BigDecimal bd = new BigDecimal(result);
-		    bd = bd.setScale(decimalPlace, BigDecimal.ROUND_UP);
+		    bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
 		    result = bd.doubleValue();
 			return result;
 		}catch(NullPointerException e){
