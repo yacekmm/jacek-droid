@@ -1,6 +1,7 @@
 package pl.looksok.logic;
 
-public class InputData {
+
+public class InputData{
 	private String name = "";
 	private double pay = 0.0;
 	

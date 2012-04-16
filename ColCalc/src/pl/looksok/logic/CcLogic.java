@@ -1,19 +1,26 @@
 package pl.looksok.logic;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import pl.looksok.exception.BadPayException;
 import pl.looksok.exception.BadPeopleCountException;
 import pl.looksok.exception.DuplicatePersonNameException;
 import pl.looksok.exception.PaysNotCalculatedException;
 
-public class CcLogic {
+public class CcLogic implements Serializable {
+	private static final long serialVersionUID = -1238265432953764569L;
 	private Hashtable<String, PeoplePays> calculationResult;
 	
+	public Hashtable<String, PeoplePays> getCalculationResult() {
+		return calculationResult;
+	}
+
 	public CcLogic(){
 		calculationResult = new Hashtable<String, PeoplePays>();
 	}
@@ -73,5 +80,39 @@ public class CcLogic {
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder("");
+		
+		if(calculationResult != null){
+			Hashtable<String, PeoplePays> tmpTable = new Hashtable<String, PeoplePays>();
+			tmpTable = calculationResult;
+			
+			Set<String> c = calculationResult.keySet();
+			Set<String> c2 = tmpTable.keySet();
+			Iterator<String> it = c.iterator();
+			Iterator<String> it2 = c2.iterator();
+			
+			while (it.hasNext()){
+				PeoplePays pp = calculationResult.get(it.next());
+				while(it2.hasNext()) {
+					PeoplePays pp2 = calculationResult.get(it2.next());
+					if(pp.getPersonName() != pp2.getPersonName()){
+						sb.append(pp.getPersonName());
+						sb.append("\n\tpaid: ");
+						sb.append(pp.getPayMadeByPerson());
+						sb.append(", and returns: ");
+						sb.append(howMuchPersonAGivesBackToPersonB(pp.getPersonName(), pp2.getPersonName()));
+						sb.append(" to: ");
+						sb.append(pp2.getPersonName());
+						sb.append("\n\n");
+					}
+				}
+				it2 = c2.iterator();
+			}
+		}
+		return sb.toString();
 	}
 }

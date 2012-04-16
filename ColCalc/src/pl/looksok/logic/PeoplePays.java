@@ -1,10 +1,12 @@
 package pl.looksok.logic;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 
-public class PeoplePays {
+public class PeoplePays implements Serializable{
 
+	private static final long serialVersionUID = 4909331903428866567L;
 	private String personName;
 	private double howMuchIPaid;
 	private double toReturn;
