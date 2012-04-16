@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.InputData;
+import pl.looksok.utils.Constants;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,17 +59,8 @@ public class EnterPaysActivity extends Activity {
         	String name = mNewPersonNameInput.getText().toString();
         	double payDouble = readPayFromEditText();
         	
-        	if(name.length()<1 || payDouble < 0){
-        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT);
-        		t.show();
+        	if(!inputIsValid(name, payDouble))
         		return;
-        	}
-        	
-        	if(duplicatedName(name)){
-        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT);
-        		t.show();
-        		return;
-        	}
         	
             adapter.add(new InputData(name, payDouble));
             
@@ -77,6 +71,20 @@ public class EnterPaysActivity extends Activity {
     		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT);
     		t.show();
         }
+
+		private boolean inputIsValid(String name, double payDouble) {
+			if(name.length()<1 || payDouble < 0){
+        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT);
+        		t.show();
+        		return false;
+        	}else if(duplicatedName(name)){
+        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT);
+        		t.show();
+        		return false;
+        	}
+        	
+        	return true;
+		}
 
 		private boolean duplicatedName(String name) {
 			for (InputData in : inputPaysList) {
@@ -90,7 +98,13 @@ public class EnterPaysActivity extends Activity {
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
+        	CcLogic calc = new CcLogic();
+        	calc.calculate(inputPaysList);
         	
+        	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
+        	intent.putExtra(Constants.CALCULATION_OBJECT, calc);
+        	startActivity(intent);
+        	finish();
         }
     };
     

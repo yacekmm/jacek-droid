@@ -255,6 +255,21 @@ public class CcLogicTest extends TestCase {
 		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
 	}
 	
+	public void testRefundOfNonZeroPayThreePeopleTwoPaidNotEquallyWhoToWhom(){
+		buildTestCaseThreePeople(18.0, 6.0, 0.0);
+		
+		calc.calculate(inputPaysList);
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 2.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 8.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+	}
+	
 	public void testThrowExceptionIfNotCalculated(){
 		try{
 			buildTestCaseThreePeople(9.0, 9.0, 0.0);
