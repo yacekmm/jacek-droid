@@ -65,6 +65,7 @@ public class EnterPaysActivity extends Activity {
             adapter.add(new InputData(name, payDouble));
             
             mNewPersonNameInput.setText("");
+            mNewPersonNameInput.requestFocus();
             mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
             mCalculateButton.setVisibility(View.VISIBLE);
             

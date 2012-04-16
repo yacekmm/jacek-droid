@@ -1,6 +1,7 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -76,7 +77,12 @@ public class CcLogic implements Serializable {
 
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
-			return calculationResult.get(personA).howMuchShouldReturnTo(personB);
+			double result = calculationResult.get(personA).howMuchShouldReturnTo(personB);
+			int decimalPlace = 2;
+		    BigDecimal bd = new BigDecimal(result);
+		    bd = bd.setScale(decimalPlace, BigDecimal.ROUND_UP);
+		    result = bd.doubleValue();
+			return result;
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
@@ -97,6 +103,7 @@ public class CcLogic implements Serializable {
 			
 			while (it.hasNext()){
 				PeoplePays pp = calculationResult.get(it.next());
+				
 				sb.append(pp.getPersonName());
 				sb.append(" - paid: ");
 				sb.append(pp.getPayMadeByPerson());
@@ -107,11 +114,10 @@ public class CcLogic implements Serializable {
 						sb.append(howMuchPersonAGivesBackToPersonB(pp.getPersonName(), pp2.getPersonName()));
 						sb.append(" to: ");
 						sb.append(pp2.getPersonName());
-						sb.append("\n");
 					}
 				}
 				it2 = c2.iterator();
-				sb.append("\n");
+				sb.append("\n\n");
 			}
 		}
 		return sb.toString();
