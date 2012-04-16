@@ -86,6 +86,8 @@ public class PeoplePays implements Serializable{
 	private double givePersonBNoMoreThanHeWants(double howMuchPersonBPaid) {
 		double tmpToReturn;
 		tmpToReturn = howMuchPersonBPaid - howMuchPerPerson;
+		if(tmpToReturn<0)
+			tmpToReturn = 0;
 		alreadyReturned += tmpToReturn;
 		return tmpToReturn;
 	}
