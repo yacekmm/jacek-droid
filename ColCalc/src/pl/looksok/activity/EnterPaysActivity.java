@@ -49,7 +49,7 @@ public class EnterPaysActivity extends Activity {
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
-        mCalculateButton = (Button)findViewById(R.id.EnterPays_Button_Calculate);
+        mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
         mCalculateButton.setVisibility(View.GONE);
 	}
