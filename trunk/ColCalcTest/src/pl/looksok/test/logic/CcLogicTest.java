@@ -28,6 +28,7 @@ public class CcLogicTest extends TestCase {
 	private String personAName = "personA";
 	private String personBName = "personB";
 	private String personCName = "personC";
+	private String personDName = "personD";
 
 	public CcLogicTest() {
 		super();
@@ -270,6 +271,28 @@ public class CcLogicTest extends TestCase {
 		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
 	}
 	
+	public void testRefundOfNonZeroPayFourPeopleThreePaidNotEquallyWhoToWhom(){
+		buildTestCaseFourPeople(55.0, 36.0, 0.0, 25.0);
+		
+		calc.calculate(inputPaysList);
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personBName, personDName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 7.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 22.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personCName, personDName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personCName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personAName, personDName));
+		
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 4.0, calc.howMuchPersonAGivesBackToPersonB(personDName, personAName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personDName, personBName));
+		assertEquals(INCORRECT_CALCULATION_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(personDName, personCName));
+	}
+	
 	public void testThrowExceptionIfNotCalculated(){
 		try{
 			buildTestCaseThreePeople(9.0, 9.0, 0.0);
@@ -310,5 +333,17 @@ public class CcLogicTest extends TestCase {
 		inputPaysList.add(new InputData(personAName, paymentA));
 		inputPaysList.add(new InputData(personBName, paymentB));
 		inputPaysList.add(new InputData(personCName, paymentC));
+	}
+	
+	private void buildTestCaseFourPeople(double paymentA, double paymentB, double paymentC, double paymentD) {
+		inputPays.put(personAName, paymentA);
+		inputPays.put(personBName, paymentB);
+		inputPays.put(personCName, paymentC);
+		inputPays.put(personDName, paymentD);
+		
+		inputPaysList.add(new InputData(personAName, paymentA));
+		inputPaysList.add(new InputData(personBName, paymentB));
+		inputPaysList.add(new InputData(personCName, paymentC));
+		inputPaysList.add(new InputData(personDName, paymentD));
 	}
 }
