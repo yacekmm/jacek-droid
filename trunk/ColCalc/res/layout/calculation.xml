@@ -7,6 +7,19 @@
     <TextView
         android:id="@+id/Calculation_text_debug"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
+        android:layout_marginTop="@dimen/margin_ScreenBorderSmall"
+        android:layout_marginRight="@dimen/margin_ScreenBorderSmall"
+        android:layout_marginBottom="@dimen/margin_SpanBetweenViewsBig" />
+
+    <Button
+        android:id="@+id/calculation_button_save"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calculation_button_save_text" 
+        android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
+        android:layout_marginRight="@dimen/margin_ScreenBorderSmall"/>
 
 </LinearLayout>

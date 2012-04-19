@@ -5,4 +5,6 @@
     <dimen name="margin_SpanBetweenViewsSmall">10dip</dimen>
     <dimen name="margin_SpanBetweenViewsBig">15dip</dimen>
     
+    <dimen name="button_minWidth">120dip</dimen>
+    
 </resources>

@@ -47,13 +47,14 @@ public class EnterPaysActivity extends Activity {
 	private void readInputBundleIfNotEmpty() {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			CcLogic calc = (CcLogic)extras.getSerializable(Constants.CALCULATION_OBJECT);
+			CcLogic calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 			for (InputData data : calc.getInputPaysList()) {
 				adapter.add(data);
 			}
 			if(inputPaysList.size() < 1)
 	        	mCalculateButton.setVisibility(View.GONE);
-		}
+		} else
+			mCalculateButton.setVisibility(View.GONE);
 	}
 
 	private void initActivityViews() {
@@ -116,7 +117,7 @@ public class EnterPaysActivity extends Activity {
         	calc.calculate(inputPaysList);
         	
         	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
-        	intent.putExtra(Constants.CALCULATION_OBJECT, calc);
+        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
         	finish();
         }
@@ -136,6 +137,15 @@ public class EnterPaysActivity extends Activity {
 		}
 	};
 	
+	
+	
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
+    	startActivity(intent);
+    	finish();
+	}
+
 	private double readPayFromEditText() {
 		String payString = mNewPersonPayInput.getText().toString();
     	
