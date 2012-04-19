@@ -4,6 +4,7 @@ import pl.looksok.R;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,4 +23,14 @@ public class CalculationActivity extends Activity {
 			view.setText(calc.toString());
 		}
     }
+
+	@Override
+	public void onBackPressed() {
+    	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
+    	intent.putExtra(Constants.CALCULATION_OBJECT, calc);
+    	startActivity(intent);
+    	finish();
+	}
+    
+    
 }

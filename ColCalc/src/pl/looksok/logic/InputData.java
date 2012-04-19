@@ -1,7 +1,10 @@
 package pl.looksok.logic;
 
+import java.io.Serializable;
 
-public class InputData{
+
+public class InputData implements Serializable{
+	private static final long serialVersionUID = 3343687271954154566L;
 	private String name = "";
 	private double pay = 0.0;
 	

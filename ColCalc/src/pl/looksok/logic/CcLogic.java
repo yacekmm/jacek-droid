@@ -17,6 +17,7 @@ import pl.looksok.exception.PaysNotCalculatedException;
 public class CcLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
 	private Hashtable<String, PeoplePays> calculationResult;
+	private List<InputData> inputPaysList = null;
 	
 	public Hashtable<String, PeoplePays> getCalculationResult() {
 		return calculationResult;
@@ -36,6 +37,7 @@ public class CcLogic implements Serializable {
 	}
 
 	public Hashtable<String, PeoplePays> calculate(List<InputData> inputPaysList){
+		this.inputPaysList = inputPaysList;
 		HashMap<String, Double> inputPays = new HashMap<String, Double>();
 		for (InputData in : inputPaysList) {
 			if(inputPays.containsKey(in.getName()))
@@ -121,5 +123,9 @@ public class CcLogic implements Serializable {
 			}
 		}
 		return sb.toString();
+	}
+
+	public List<InputData> getInputPaysList() {
+		return inputPaysList;
 	}
 }
