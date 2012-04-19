@@ -18,7 +18,7 @@ public class CalculationActivity extends Activity {
         
         Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			calc = (CcLogic)extras.getSerializable(Constants.CALCULATION_OBJECT);
+			calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 			TextView view = (TextView) findViewById(R.id.Calculation_text_debug);
 			view.setText(calc.toString());
 		}
@@ -27,7 +27,7 @@ public class CalculationActivity extends Activity {
 	@Override
 	public void onBackPressed() {
     	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
-    	intent.putExtra(Constants.CALCULATION_OBJECT, calc);
+    	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
     	startActivity(intent);
     	finish();
 	}
