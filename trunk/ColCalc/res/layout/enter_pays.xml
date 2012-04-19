@@ -91,5 +91,6 @@
 	    android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
 	    android:layout_marginRight="@dimen/margin_ScreenBorderBig"
 	    >
+        
 	</ListView>
 </LinearLayout>
