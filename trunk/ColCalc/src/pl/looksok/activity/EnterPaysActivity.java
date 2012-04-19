@@ -40,7 +40,21 @@ public class EnterPaysActivity extends Activity {
         adapter = new ArrayAdapter<InputData>(this, android.R.layout.simple_expandable_list_item_1,
         		android.R.id.text1, inputPaysList);
         mPeopleList.setAdapter(adapter);
+        
+        readInputBundleIfNotEmpty();
     }
+
+	private void readInputBundleIfNotEmpty() {
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			CcLogic calc = (CcLogic)extras.getSerializable(Constants.CALCULATION_OBJECT);
+			for (InputData data : calc.getInputPaysList()) {
+				adapter.add(data);
+			}
+			if(inputPaysList.size() < 1)
+	        	mCalculateButton.setVisibility(View.GONE);
+		}
+	}
 
 	private void initActivityViews() {
 		mAddPersonButton = (Button)findViewById(R.id.EnterPays_Button_AddPerson);
@@ -51,7 +65,6 @@ public class EnterPaysActivity extends Activity {
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
-        mCalculateButton.setVisibility(View.GONE);
 	}
     
 	OnClickListener addPersonClickListener = new OnClickListener() {
@@ -122,7 +135,7 @@ public class EnterPaysActivity extends Activity {
 			}
 		}
 	};
-    
+	
 	private double readPayFromEditText() {
 		String payString = mNewPersonPayInput.getText().toString();
     	
