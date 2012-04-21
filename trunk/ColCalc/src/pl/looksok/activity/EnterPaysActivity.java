@@ -13,11 +13,12 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,9 @@ public class EnterPaysActivity extends Activity {
 	private EditText mNewPersonPayInput;
 	private ListView mPeopleList;
 	private Button mCalculateButton;
+	
+	private static final int MENU_EDIT = Menu.FIRST;
+	private static final int MENU_DELETE = MENU_EDIT+1;
 	
     /** Called when the activity is first created. */
     @Override
@@ -69,29 +73,47 @@ public class EnterPaysActivity extends Activity {
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
-        mPeopleList.setOnItemClickListener(listItemClickListener);
         registerForContextMenu(mPeopleList);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
 	}
-	
-	OnItemClickListener listItemClickListener = new OnItemClickListener() {
-	    public void onItemClick(AdapterView<?> parent, View view,
-	        int position, long id) {
-	    }
-	  };
-	  
-	  @Override
-	  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 	  	super.onCreateContextMenu(menu, v, menuInfo);
-	  	
+
 	  	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-	  	
 	    menu.setHeaderTitle(adapter.getItem(info.position).getName());
-	  	menu.add(0, Menu.FIRST, 0, "Edytuj");
-	  	menu.add(0, Menu.FIRST+1, 1, "Usuń");
-	  }
+	  	menu.add(0, MENU_EDIT, 0, getResources().getString(R.string.EnterPays_Menu_Edit));
+	  	menu.add(0, MENU_DELETE, 1, getResources().getString(R.string.EnterPays_Menu_Remove));
+	}
     
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	 
+	    switch (item.getItemId()) {
+	    case MENU_EDIT:
+	    	editPerson(info.position);
+	    	return true;
+	    case MENU_DELETE:
+	    	removePerson(info.position);
+	    	return true;
+	    }
+	    return super.onContextItemSelected(item);
+	}
+	
+	private void removePerson(int position) {
+		adapter.remove(adapter.getItem(position));
+	}
+
+	private void editPerson(int position) {
+		InputData person = adapter.getItem(position);
+		mNewPersonNameInput.setText(person.getName());
+		mNewPersonPayInput.setText(String.valueOf(person.getPay()));
+		removePerson(position);
+	}
+
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	String name = mNewPersonNameInput.getText().toString();
@@ -107,18 +129,15 @@ public class EnterPaysActivity extends Activity {
             mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
             mCalculateButton.setVisibility(View.VISIBLE);
             
-    		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT);
-    		t.show();
+    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
         }
 
 		private boolean inputIsValid(String name, double payDouble) {
 			if(name.length()<1 || payDouble < 0){
-        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT);
-        		t.show();
+        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
         		return false;
         	}else if(duplicatedName(name)){
-        		Toast t = Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT);
-        		t.show();
+        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT).show();
         		return false;
         	}
         	
@@ -160,8 +179,6 @@ public class EnterPaysActivity extends Activity {
 			}
 		}
 	};
-	
-	
 	
 	@Override
 	public void onBackPressed() {
