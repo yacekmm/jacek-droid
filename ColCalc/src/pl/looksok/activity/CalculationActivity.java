@@ -1,17 +1,12 @@
 package pl.looksok.activity;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
 import pl.looksok.R;
 import pl.looksok.logic.CcLogic;
+import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,22 +29,7 @@ public class CalculationActivity extends Activity {
 
 	OnClickListener saveButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-    		String filename = "installedapplist.txt";
-    	    	//Stores the object to internal storage at the filename above
-
-    	    	FileOutputStream fos = null;
-    		ObjectOutputStream out = null;
-    		try {
-    			fos = openFileOutput(filename, Context.MODE_PRIVATE);
-    			out = new ObjectOutputStream(fos);
-    			out.writeObject(calc);
-    			out.close();
-    			fos.close();
-    			
-    			Log.v("saveList", "Successful Save");
-    		} catch (IOException ex) {
-    			ex.printStackTrace();
-    		}
+    	    CalcPersistence.saveCalculation(getApplicationContext(), "installedapplist.txt", calc);
         }
     };
     
