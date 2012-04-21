@@ -16,6 +16,8 @@
     <string name="EnterPays_Toast_BadInputDataError">Wpisz Imię i poprawną kwotę</string>
     <string name="EnterPays_Toast_DuplicatedNameError">Osoba o tym imieniu jest już na liście</string>
     <string name="EnterPays_Toast_PersonAdded">Składka dodana!</string>
+    <string name="EnterPays_Menu_Edit">Edytuj</string>
+    <string name="EnterPays_Menu_Remove">Usuń</string>
     
     <string name="calculation_button_save_text">Zapisz rozliczenie</string>
 
