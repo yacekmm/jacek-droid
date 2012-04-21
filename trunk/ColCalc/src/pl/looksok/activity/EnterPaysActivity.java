@@ -10,9 +10,14 @@ import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,9 +69,28 @@ public class EnterPaysActivity extends Activity {
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
+        mPeopleList.setOnItemClickListener(listItemClickListener);
+        registerForContextMenu(mPeopleList);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
 	}
+	
+	OnItemClickListener listItemClickListener = new OnItemClickListener() {
+	    public void onItemClick(AdapterView<?> parent, View view,
+	        int position, long id) {
+	    }
+	  };
+	  
+	  @Override
+	  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+	  	super.onCreateContextMenu(menu, v, menuInfo);
+	  	
+	  	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+	  	
+	    menu.setHeaderTitle(adapter.getItem(info.position).getName());
+	  	menu.add(0, Menu.FIRST, 0, "Edytuj");
+	  	menu.add(0, Menu.FIRST+1, 1, "Usuń");
+	  }
     
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
