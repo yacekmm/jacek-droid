@@ -10,6 +10,7 @@ import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -21,6 +22,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,8 +38,11 @@ public class EnterPaysActivity extends Activity {
 	protected boolean equalPayments = true;
 	
 	private Button mAddPersonButton;
+	private CheckBox equalPaymentsBox;
 	private EditText mNewPersonNameInput;
 	private EditText mNewPersonPayInput;
+	private EditText mNewPersonShouldPayInput;
+	private TextView mNewPersonShouldPayText;
 	private ListView mPeopleList;
 	private Button mCalculateButton;
 	
@@ -72,13 +80,35 @@ public class EnterPaysActivity extends Activity {
 	private void initActivityViews() {
 		mAddPersonButton = (Button)findViewById(R.id.EnterPays_Button_AddPerson);
         mAddPersonButton.setOnClickListener(addPersonClickListener);
+        equalPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
+        equalPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
+        equalPaymentsBox.setChecked(equalPayments);
         mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
+        mNewPersonShouldPayText = (TextView)findViewById(R.id.EnterPays_TextView_ShouldPay);
+        mNewPersonShouldPayInput = (EditText)findViewById(R.id.EnterPays_EditText_ShouldPay);
+        mNewPersonShouldPayInput.setOnFocusChangeListener(shouldPayEditTextFocusListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         registerForContextMenu(mPeopleList);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
+      
+        setShouldPaymentsFieldsVisibility();
+	}
+
+	private void setShouldPaymentsFieldsVisibility() {
+		try{
+	        if(equalPayments){
+	        	mNewPersonShouldPayInput.setVisibility(View.VISIBLE);
+	        	mNewPersonShouldPayText.setVisibility(View.VISIBLE);
+	        }else{
+	        	mNewPersonShouldPayInput.setVisibility(View.GONE);
+	        	mNewPersonShouldPayText.setVisibility(View.GONE);
+	        }
+		}catch(NullPointerException e){
+			Log.d("ColCalc", "Not yet Initialized");
+		}
 	}
 
 	@Override
@@ -114,33 +144,42 @@ public class EnterPaysActivity extends Activity {
 		InputData person = adapter.getItem(position);
 		mNewPersonNameInput.setText(person.getName());
 		mNewPersonPayInput.setText(String.valueOf(person.getPay()));
+		mNewPersonShouldPayInput.setText(String.valueOf(person.getShouldPay()));
 		removePerson(position);
 	}
 
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	String name = mNewPersonNameInput.getText().toString();
-        	double payDouble = readPayFromEditText();
+        	double payDouble = readPayFromEditText(mNewPersonPayInput);
+        	double shouldPayDouble = readPayFromEditText(mNewPersonShouldPayInput);
         	
-        	if(!inputIsValid(name, payDouble))
+        	if(!inputIsValid(name, payDouble, shouldPayDouble))
         		return;
         	
-            adapter.add(new InputData(name, payDouble));
+        	if(equalPayments)
+        		adapter.add(new InputData(name, payDouble));
+        	else
+        		adapter.add(new InputData(name, payDouble, shouldPayDouble));
             
             mNewPersonNameInput.setText("");
             mNewPersonNameInput.requestFocus();
             mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
+            mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
             mCalculateButton.setVisibility(View.VISIBLE);
             
     		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
         }
 
-		private boolean inputIsValid(String name, double payDouble) {
+		private boolean inputIsValid(String name, double payDouble, double shouldPayDouble) {
 			if(name.length()<1 || payDouble < 0){
         		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
         		return false;
         	}else if(duplicatedName(name)){
         		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT).show();
+        		return false;
+        	}else if(shouldPayDouble < 0 && !equalPayments){
+        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_ShouldPayError), Toast.LENGTH_SHORT).show();
         		return false;
         	}
         	
@@ -172,7 +211,7 @@ public class EnterPaysActivity extends Activity {
     OnFocusChangeListener payEditTextFocusListener = new OnFocusChangeListener() {
 		public void onFocusChange(View v, boolean hasFocus) {
 			if(hasFocus){
-				double payDouble = readPayFromEditText();
+				double payDouble = readPayFromEditText(mNewPersonPayInput);
 	        	if(payDouble == 0.0){
 	        		mNewPersonPayInput.setText("");
 	        	}
@@ -183,6 +222,29 @@ public class EnterPaysActivity extends Activity {
 		}
 	};
 	
+	OnFocusChangeListener shouldPayEditTextFocusListener = new OnFocusChangeListener() {
+		public void onFocusChange(View v, boolean hasFocus) {
+			if(hasFocus){
+				double payDouble = readPayFromEditText(mNewPersonShouldPayInput);
+	        	if(payDouble == 0.0){
+	        		mNewPersonShouldPayInput.setText("");
+	        	}
+			}else{
+				if(mNewPersonShouldPayInput.getText().length() == 0)
+					mNewPersonShouldPayInput.setText("0");
+			}
+		}
+	};
+	
+	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener()
+	{
+	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	    {
+	        equalPayments = isChecked;
+	        setShouldPaymentsFieldsVisibility();
+	    }
+	};
+	
 	@Override
 	public void onBackPressed() {
 		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
@@ -190,8 +252,8 @@ public class EnterPaysActivity extends Activity {
     	finish();
 	}
 
-	private double readPayFromEditText() {
-		String payString = mNewPersonPayInput.getText().toString();
+	private double readPayFromEditText(EditText mEditText) {
+		String payString = mEditText.getText().toString();
     	
     	double payDouble = 0.0;
     	if(payString.length() > 0)
