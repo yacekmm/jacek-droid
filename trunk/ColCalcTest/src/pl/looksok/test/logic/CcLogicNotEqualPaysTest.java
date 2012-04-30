@@ -23,36 +23,36 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 		super.setUp();
 	}
 	
-//	public CcLogicNotEqualPaysTest(String name) {
-//		super(name);
-//	}
-//	
-//	public void testZeroPayTwoPeople(){
-//		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(0.0, 0.0, 
-//				0.0, 0.0);
-//		
-//		Hashtable<String, PeoplePays> result = calc.calculate(inputPaysList, equalPayments);
-//		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testEqualPayTwoPeople(){
-//		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(10.0, 5.0, 
-//				20.0, 25.0);
-//		
-//		Hashtable<String, PeoplePays> result = calc.calculate(inputPaysList, equalPayments);
-//		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 5.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testEqualPayTwoPeopleV2(){
-//		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(3.0, 8.0, 
-//				7.0, 2.0);
-//		
-//		Hashtable<String, PeoplePays> result = calc.calculate(inputPaysList, equalPayments);
-//		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 5.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
-//	}
+	public CcLogicNotEqualPaysTest(String name) {
+		super(name);
+	}
+	
+	public void testZeroPayTwoPeople(){
+		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(0.0, 0.0, 
+				0.0, 0.0);
+		
+		Hashtable<String, PeoplePays> result = calc.calculate(inputPaysList, equalPayments);
+		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
+		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
+	}
+	
+	public void testEqualPayTwoPeople(){
+		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(10.0, 5.0, 
+				20.0, 25.0);
+		
+		Hashtable<String, PeoplePays> result = calc.calculate(inputPaysList, equalPayments);
+		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 5.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
+		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
+	}
+	
+	public void testEqualPayTwoPeopleV2(){
+		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(3.0, 8.0, 
+				7.0, 2.0);
+		
+		Hashtable<String, PeoplePays> result = calc.calculate(inputPaysList, equalPayments);
+		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
+		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 5.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
+	}
 
 	public void testCalculationOfNonZeroPayTwoPeopleTwoPaid(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(3.0, 8.0, 
