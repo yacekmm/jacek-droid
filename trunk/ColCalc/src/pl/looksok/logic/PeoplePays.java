@@ -68,7 +68,8 @@ public class PeoplePays implements Serializable{
 	public double howMuchShouldReturnTo(String personB){
 		InputData personBData = otherPeoplePayments.get(personB);
 		double howMuchPersonBPaid = personBData.getPay();
-		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - personBData.getShouldPay() - personBData.getAlreadyRefunded();
+		double howMuchPersonBShouldPay = personBData.getShouldPay();
+		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
 		
 		if(howMuchPersonBPaid > howMuchIPaid){
 			double tmpToReturn = howMuchIShouldPay - howMuchIPaid;
@@ -76,7 +77,7 @@ public class PeoplePays implements Serializable{
 			if(personBNeedsMoreThanIShouldGive(tmpToReturn)){
 				tmpToReturn = splitMyReturnAmount();
 			}else if(personBWantsLessThanIHaveToReturn(howMuchPersonBPaid, tmpToReturn)){
-				tmpToReturn = givePersonBNoMoreThanHeWants(howMuchPersonBPaid);
+				tmpToReturn = givePersonBNoMoreThanHeWants(howMuchPersonBPaid, howMuchPersonBShouldPay);
 			}
 			
 			if(tmpToReturn > howMuchRefundPersonBNeeds){
@@ -93,8 +94,12 @@ public class PeoplePays implements Serializable{
 			return 0.0;
 	}
 
-	private double givePersonBNoMoreThanHeWants(double howMuchPersonBPaid) {
+	private double givePersonBNoMoreThanHeWants(double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
 		double tmpToReturn;
+		double refundForPersonBNeeded = howMuchPersonBPaid - howMuchPersonBShouldPay;
+		if(refundForPersonBNeeded<0)
+			tmpToReturn = 0.0;
+		
 		tmpToReturn = howMuchPersonBPaid - howMuchIShouldPay;
 		if(tmpToReturn<0)
 			tmpToReturn = 0;

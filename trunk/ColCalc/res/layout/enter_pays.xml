@@ -15,25 +15,20 @@
         android:layout_marginBottom="@dimen/margin_SpanBetweenViewsBig"
         android:layout_height="wrap_content"
         android:text="@string/EnterPays_TextView_EnterPayPerEachPerson" />
+    
+    <CheckBox
+        android:id="@+id/EnterPays_CheckBox_EverybodyPaysEqually"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
+        android:layout_marginRight="@dimen/margin_ScreenBorderBig"
+        android:text="@string/EnterPays_CheckBox_EqualPays" />
 
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
         android:layout_marginRight="@dimen/margin_ScreenBorderBig" >
-
-        <TableRow
-            android:id="@+id/EnterPays_Row_EqualPays"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-            <CheckBox
-		        android:id="@+id/EnterPays_CheckBox_EverybodyPaysEqually"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_span="4"
-		        android:text="@string/EnterPays_CheckBox_EqualPays" />
-        </TableRow>
         
         <TableRow
             android:id="@+id/EnterPays_Row_Name"
