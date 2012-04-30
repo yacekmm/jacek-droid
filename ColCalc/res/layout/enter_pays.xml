@@ -15,13 +15,26 @@
         android:layout_marginBottom="@dimen/margin_SpanBetweenViewsBig"
         android:layout_height="wrap_content"
         android:text="@string/EnterPays_TextView_EnterPayPerEachPerson" />
-
+
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
         android:layout_marginRight="@dimen/margin_ScreenBorderBig" >
 
+        <TableRow
+            android:id="@+id/EnterPays_Row_EqualPays"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+		        android:id="@+id/EnterPays_CheckBox_EverybodyPaysEqually"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_span="4"
+		        android:text="@string/EnterPays_CheckBox_EqualPays" />
+        </TableRow>
+        
         <TableRow
             android:id="@+id/EnterPays_Row_Name"
             android:layout_width="fill_parent"
@@ -56,7 +69,25 @@
                 android:inputType="numberDecimal"
                 android:text="@string/EnterPays_TextView_DefaultPayValue" />
         </TableRow>
-
+        
+        <TableRow
+            android:id="@+id/EnterPays_Row_ShouldPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/EnterPays_TextView_ShouldPay"
+                android:layout_column="0"
+                android:text="@string/EnterPays_TextView_ShouldPay" />
+
+            <EditText
+                android:id="@+id/EnterPays_EditText_ShouldPay"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:text="@string/EnterPays_TextView_DefaultPayValue" />
+        </TableRow>
+
         <TableRow
             android:id="@+id/EnterPays_Row_AddPerson"
             android:layout_width="fill_parent"
