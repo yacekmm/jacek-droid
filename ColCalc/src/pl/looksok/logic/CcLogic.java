@@ -122,10 +122,13 @@ public class CcLogic implements Serializable {
 				while(it2.hasNext()) {
 					PeoplePays pp2 = calculationResult.get(it2.next());
 					if(pp.getPersonName() != pp2.getPersonName()){
-						sb.append("\n\treturns: ");
-						sb.append(howMuchPersonAGivesBackToPersonB(pp.getPersonName(), pp2.getPersonName()));
-						sb.append(" to: ");
-						sb.append(pp2.getPersonName());
+						double returnValue = howMuchPersonAGivesBackToPersonB(pp.getPersonName(), pp2.getPersonName());
+						if(returnValue!=0.0){
+							sb.append("\n\treturns: ");
+							sb.append(returnValue);
+							sb.append(" to: ");
+							sb.append(pp2.getPersonName());
+						}
 					}
 				}
 				it2 = c2.iterator();
