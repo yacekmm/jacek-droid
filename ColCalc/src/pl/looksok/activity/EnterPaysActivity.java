@@ -38,7 +38,7 @@ public class EnterPaysActivity extends Activity {
 	protected boolean equalPayments = true;
 	
 	private Button mAddPersonButton;
-	private CheckBox equalPaymentsBox;
+	private CheckBox mEqualPaymentsBox;
 	private EditText mNewPersonNameInput;
 	private EditText mNewPersonPayInput;
 	private EditText mNewPersonShouldPayInput;
@@ -71,18 +71,22 @@ public class EnterPaysActivity extends Activity {
 			for (InputData data : calc.getInputPaysList()) {
 				adapter.add(data);
 			}
-			if(inputPaysList.size() < 1)
-	        	mCalculateButton.setVisibility(View.GONE);
-		} else
+			if(inputPaysList.size() < 1){
+				mCalculateButton.setVisibility(View.GONE);
+				mEqualPaymentsBox.setEnabled(true);
+			}
+		} else{
 			mCalculateButton.setVisibility(View.GONE);
+			mEqualPaymentsBox.setEnabled(true);
+		}
 	}
 
 	private void initActivityViews() {
 		mAddPersonButton = (Button)findViewById(R.id.EnterPays_Button_AddPerson);
         mAddPersonButton.setOnClickListener(addPersonClickListener);
-        equalPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
-        equalPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
-        equalPaymentsBox.setChecked(equalPayments);
+        mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
+        mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
+        mEqualPaymentsBox.setChecked(equalPayments);
         mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
@@ -99,7 +103,7 @@ public class EnterPaysActivity extends Activity {
 
 	private void setShouldPaymentsFieldsVisibility() {
 		try{
-	        if(equalPayments){
+	        if(!equalPayments){
 	        	mNewPersonShouldPayInput.setVisibility(View.VISIBLE);
 	        	mNewPersonShouldPayText.setVisibility(View.VISIBLE);
 	        }else{
@@ -138,6 +142,10 @@ public class EnterPaysActivity extends Activity {
 	
 	private void removePerson(int position) {
 		adapter.remove(adapter.getItem(position));
+		if(inputPaysList.size()==0){
+			mCalculateButton.setVisibility(View.GONE);
+            mEqualPaymentsBox.setEnabled(true);
+		}
 	}
 
 	private void editPerson(int position) {
@@ -167,6 +175,7 @@ public class EnterPaysActivity extends Activity {
             mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
             mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
             mCalculateButton.setVisibility(View.VISIBLE);
+            mEqualPaymentsBox.setEnabled(false);
             
     		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
         }
@@ -238,8 +247,7 @@ public class EnterPaysActivity extends Activity {
 	
 	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener()
 	{
-	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-	    {
+	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
 	        equalPayments = isChecked;
 	        setShouldPaymentsFieldsVisibility();
 	    }
