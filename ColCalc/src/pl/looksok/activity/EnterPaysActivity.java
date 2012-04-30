@@ -29,6 +29,9 @@ public class EnterPaysActivity extends Activity {
 	private List<InputData> inputPaysList = new ArrayList<InputData>();
 	private ArrayAdapter<InputData> adapter;
 	
+	//FIXME: change it according to checkbox in GUI
+	protected boolean equalPayments = true;
+	
 	private Button mAddPersonButton;
 	private EditText mNewPersonNameInput;
 	private EditText mNewPersonPayInput;
@@ -157,7 +160,7 @@ public class EnterPaysActivity extends Activity {
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	CcLogic calc = new CcLogic();
-        	calc.calculate(inputPaysList);
+        	calc.calculate(inputPaysList, equalPayments);
         	
         	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
