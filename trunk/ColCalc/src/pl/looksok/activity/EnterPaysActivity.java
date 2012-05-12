@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.exception.BadInputDataException;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.InputData;
 import pl.looksok.logic.PeoplePays;
@@ -74,15 +75,8 @@ public class EnterPaysActivity extends Activity {
 				data.setAlreadyRefunded(0.0);
 				adapter.add(data);
 			}
-			if(inputPaysList.size() < 1){
-				mCalculateButton.setVisibility(View.GONE);
-				mEqualPaymentsBox.setEnabled(true);
-			}else
-				mEqualPaymentsBox.setEnabled(false);
-		} else{
-			mCalculateButton.setVisibility(View.GONE);
-			mEqualPaymentsBox.setEnabled(true);
 		}
+		updateFieldsDependantOnPeopleListSizeVisibility();
 	}
 
 	private void initActivityViews() {
@@ -146,9 +140,16 @@ public class EnterPaysActivity extends Activity {
 	
 	private void removePerson(int position) {
 		adapter.remove(adapter.getItem(position));
+		updateFieldsDependantOnPeopleListSizeVisibility();
+	}
+
+	private void updateFieldsDependantOnPeopleListSizeVisibility() {
 		if(inputPaysList.size()==0){
 			mCalculateButton.setVisibility(View.GONE);
             mEqualPaymentsBox.setEnabled(true);
+		}else{
+			mCalculateButton.setVisibility(View.VISIBLE);
+            mEqualPaymentsBox.setEnabled(false);
 		}
 	}
 
@@ -162,27 +163,32 @@ public class EnterPaysActivity extends Activity {
 
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	String name = mNewPersonNameInput.getText().toString();
+        	addNewInputDataToList();
+            clearInputFieldsToDefaults();
+    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
+        }
+
+		private void clearInputFieldsToDefaults() {
+			mNewPersonNameInput.setText("");
+            mNewPersonNameInput.requestFocus();
+            mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
+            mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
+            updateFieldsDependantOnPeopleListSizeVisibility();
+		}
+
+		private void addNewInputDataToList() throws BadInputDataException{
+			String name = mNewPersonNameInput.getText().toString();
         	double payDouble = readPayFromEditText(mNewPersonPayInput);
         	double shouldPayDouble = readPayFromEditText(mNewPersonShouldPayInput);
         	
         	if(!inputIsValid(name, payDouble, shouldPayDouble))
-        		return;
+        		throw new BadInputDataException();
         	
         	if(calc.isEqualPayments())
         		adapter.add(new InputData(name, payDouble));
         	else
         		adapter.add(new InputData(name, payDouble, shouldPayDouble));
-            
-            mNewPersonNameInput.setText("");
-            mNewPersonNameInput.requestFocus();
-            mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
-            mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
-            mCalculateButton.setVisibility(View.VISIBLE);
-            mEqualPaymentsBox.setEnabled(false);
-            
-    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
-        }
+		}
 
 		private boolean inputIsValid(String name, double payDouble, double shouldPayDouble) {
 			if(name.length()<1 || payDouble < 0){
