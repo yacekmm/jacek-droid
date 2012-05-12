@@ -1,11 +1,13 @@
 package pl.looksok.activity;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.InputData;
+import pl.looksok.logic.PeoplePays;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,18 +26,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EnterPaysActivity extends Activity {
 	private List<InputData> inputPaysList = new ArrayList<InputData>();
 	private ArrayAdapter<InputData> adapter;
-	
-	//FIXME: change it according to checkbox in GUI
-	protected boolean equalPayments = true;
+	private CcLogic calc = new CcLogic();
 	
 	private Button mAddPersonButton;
 	private CheckBox mEqualPaymentsBox;
@@ -67,14 +67,18 @@ public class EnterPaysActivity extends Activity {
 	private void readInputBundleIfNotEmpty() {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			CcLogic calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
+			calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
+			calc.setCalculationResult(new Hashtable<String, PeoplePays>());
+			setHowMuchShouldPayFieldsVisibility();
 			for (InputData data : calc.getInputPaysList()) {
+				data.setAlreadyRefunded(0.0);
 				adapter.add(data);
 			}
 			if(inputPaysList.size() < 1){
 				mCalculateButton.setVisibility(View.GONE);
 				mEqualPaymentsBox.setEnabled(true);
-			}
+			}else
+				mEqualPaymentsBox.setEnabled(false);
 		} else{
 			mCalculateButton.setVisibility(View.GONE);
 			mEqualPaymentsBox.setEnabled(true);
@@ -86,7 +90,7 @@ public class EnterPaysActivity extends Activity {
         mAddPersonButton.setOnClickListener(addPersonClickListener);
         mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
         mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
-        mEqualPaymentsBox.setChecked(equalPayments);
+        mEqualPaymentsBox.setChecked(calc.isEqualPayments());
         mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
@@ -98,12 +102,12 @@ public class EnterPaysActivity extends Activity {
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
       
-        setShouldPaymentsFieldsVisibility();
+        setHowMuchShouldPayFieldsVisibility();
 	}
 
-	private void setShouldPaymentsFieldsVisibility() {
+	private void setHowMuchShouldPayFieldsVisibility() {
 		try{
-	        if(!equalPayments){
+	        if(!calc.isEqualPayments()){
 	        	mNewPersonShouldPayInput.setVisibility(View.VISIBLE);
 	        	mNewPersonShouldPayText.setVisibility(View.VISIBLE);
 	        }else{
@@ -165,7 +169,7 @@ public class EnterPaysActivity extends Activity {
         	if(!inputIsValid(name, payDouble, shouldPayDouble))
         		return;
         	
-        	if(equalPayments)
+        	if(calc.isEqualPayments())
         		adapter.add(new InputData(name, payDouble));
         	else
         		adapter.add(new InputData(name, payDouble, shouldPayDouble));
@@ -187,7 +191,7 @@ public class EnterPaysActivity extends Activity {
         	}else if(duplicatedName(name)){
         		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT).show();
         		return false;
-        	}else if(shouldPayDouble < 0 && !equalPayments){
+        	}else if(shouldPayDouble < 0 && !calc.isEqualPayments()){
         		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_ShouldPayError), Toast.LENGTH_SHORT).show();
         		return false;
         	}
@@ -207,8 +211,7 @@ public class EnterPaysActivity extends Activity {
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	CcLogic calc = new CcLogic();
-        	calc.calculate(inputPaysList, equalPayments);
+    		calc.calculate(inputPaysList, calc.isEqualPayments());
         	
         	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
@@ -248,8 +251,8 @@ public class EnterPaysActivity extends Activity {
 	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener()
 	{
 	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-	        equalPayments = isChecked;
-	        setShouldPaymentsFieldsVisibility();
+	    	calc.setEqualPayments(isChecked);
+	        setHowMuchShouldPayFieldsVisibility();
 	    }
 	};
 	

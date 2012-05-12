@@ -40,6 +40,7 @@ public class WelcomeActivity extends Activity {
 	OnClickListener loadCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	CcLogic calc = CalcPersistence.readStoredCalculation(getApplicationContext(), "installedapplist.txt");
+//        	InputData inputData = CalcPersistence.readStoredInputData(getApplicationContext(), "installedapplist.txt");
         	
         	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
