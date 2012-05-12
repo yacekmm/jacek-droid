@@ -2,6 +2,8 @@ package pl.looksok.logic;
 
 import java.io.Serializable;
 
+import pl.looksok.utils.FormatterHelper;
+
 
 public class InputData implements Serializable{
 	private static final long serialVersionUID = 3343687271954154566L;
@@ -57,7 +59,7 @@ public class InputData implements Serializable{
 	}
 
 	public void setShouldPay(double shouldPay) {
-		this.shouldPay = shouldPay;
+		this.shouldPay = FormatterHelper.roundDouble(shouldPay, 2);
 	}
 
 	public double getAlreadyRefunded() {
@@ -66,5 +68,9 @@ public class InputData implements Serializable{
 	
 	public void addToAlreadyRefunded(double valueToAdd) {
 		alreadyRefunded += valueToAdd;
+	}
+
+	public void setAlreadyRefunded(double alreadyRefunded) {
+		this.alreadyRefunded = alreadyRefunded;
 	}
 }

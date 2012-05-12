@@ -55,4 +55,47 @@ public class CalcPersistence {
 		ex.printStackTrace();
 		}
 	}
+	
+//	public static void saveInputData(Context context, String filename, InputData inputData) {
+//		FileOutputStream fos = null;
+//		ObjectOutputStream out = null;
+//		try {
+//		fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
+//		out = new ObjectOutputStream(fos);
+//		out.writeObject(inputData);
+//		out.close();
+//		fos.close();
+//		
+//		Log.v("saveList", "Successful Save");
+//		} catch (IOException ex) {
+//		ex.printStackTrace();
+//		}
+//	}
+//	
+//	public static InputData readStoredInputData(Context context, String filename) {
+//		
+//		InputData inputData = null;
+//    	
+//    	FileInputStream fis = null;
+//    	ObjectInputStream in = null;
+//    	try {
+//    		fis = context.openFileInput(filename);
+//    		in = new ObjectInputStream(fis);
+//    		inputData = (InputData) in.readObject();
+//    		in.close();
+//    		fis.close();
+//    	}catch (ClassNotFoundException e) {
+//    		e.printStackTrace();
+//    		
+//    	} catch (FileNotFoundException e) {
+//    		e.printStackTrace();
+//    	} catch (StreamCorruptedException e) {
+//    		
+//    	} catch (IOException e) {
+//    		e.printStackTrace();
+//    	}
+//    	
+//    	Log.v("opened Calc", "success");
+//		return inputData;
+//	}
 }

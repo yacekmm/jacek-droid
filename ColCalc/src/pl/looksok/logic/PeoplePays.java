@@ -3,6 +3,8 @@ package pl.looksok.logic;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import pl.looksok.utils.FormatterHelper;
+
 
 public class PeoplePays implements Serializable{
 
@@ -39,7 +41,7 @@ public class PeoplePays implements Serializable{
 	}
 
 	public void calculateToReturnAndRefund(double _howMuchPerPerson) {
-		howMuchIShouldPay = _howMuchPerPerson;
+		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
 		
 		calculateHowMuchIShouldReturn();
 		calculateHowMuchRefundIShouldHave();

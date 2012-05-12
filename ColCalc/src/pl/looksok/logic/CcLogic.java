@@ -1,7 +1,6 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -13,12 +12,13 @@ import pl.looksok.exception.BadPayException;
 import pl.looksok.exception.BadPeopleCountException;
 import pl.looksok.exception.DuplicatePersonNameException;
 import pl.looksok.exception.PaysNotCalculatedException;
+import pl.looksok.utils.FormatterHelper;
 
 public class CcLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
 	private Hashtable<String, PeoplePays> calculationResult;
 	private List<InputData> inputPaysList = null;
-	private boolean equalPayments;
+	private boolean equalPayments = true;
 	
 	public Hashtable<String, PeoplePays> getCalculationResult() {
 		return calculationResult;
@@ -88,11 +88,7 @@ public class CcLogic implements Serializable {
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
 			double result = calculationResult.get(personA).howMuchShouldReturnTo(personB);
-			int decimalPlace = 2;
-		    BigDecimal bd = new BigDecimal(result);
-		    bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-		    result = bd.doubleValue();
-			return result;
+			return FormatterHelper.roundDouble(result, 2);
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
@@ -134,11 +130,25 @@ public class CcLogic implements Serializable {
 				it2 = c2.iterator();
 				sb.append("\n\n");
 			}
+			it = c.iterator();
+			it2 = c2.iterator();
 		}
 		return sb.toString();
 	}
 
 	public List<InputData> getInputPaysList() {
 		return inputPaysList;
+	}
+
+	public void setCalculationResult(Hashtable<String, PeoplePays> calculationResult) {
+		this.calculationResult = calculationResult;
+	}
+
+	public boolean isEqualPayments() {
+		return equalPayments;
+	}
+
+	public void setEqualPayments(boolean equalPayments) {
+		this.equalPayments = equalPayments;
 	}
 }
