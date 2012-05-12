@@ -15,6 +15,8 @@ import pl.looksok.utils.exceptions.BadInputDataException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -95,9 +97,11 @@ public class EnterPaysActivity extends Activity {
         mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
         mNewPersonPayInput.setOnFocusChangeListener(editTextFocusListener);
+        mNewPersonPayInput.addTextChangedListener(payTextChangedListener);
         mNewPersonShouldPayText = (TextView)findViewById(R.id.EnterPays_TextView_ShouldPay);
         mNewPersonShouldPayInput = (EditText)findViewById(R.id.EnterPays_EditText_ShouldPay);
         mNewPersonShouldPayInput.setOnFocusChangeListener(editTextFocusListener);
+        mNewPersonShouldPayInput.addTextChangedListener(payTextChangedListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         registerForContextMenu(mPeopleList);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
@@ -148,6 +152,8 @@ public class EnterPaysActivity extends Activity {
 	private void removePerson(int position) {
 		adapter.remove(adapter.getItem(position));
 		updateFieldsDependantOnPeopleListSizeVisibility();
+		updateShouldPayTextFields(FormatterHelper.readDoubleFromEditText(mNewPersonPayInput), 
+				FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput));
 	}
 
 	private void updateFieldsDependantOnPeopleListSizeVisibility() {
@@ -168,16 +174,50 @@ public class EnterPaysActivity extends Activity {
 		removePerson(position);
 	}
 
+	private TextWatcher payTextChangedListener = new TextWatcher() {
+		
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			updateShouldPayTextFields(FormatterHelper.readDoubleFromEditText(mNewPersonPayInput),
+					FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput));
+		}
+		
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+		}
+		
+		public void afterTextChanged(Editable s) {
+		}
+	};
+	
+	private void updateShouldPayTextFields(double editedPay, double editedShouldPay) {
+		if(!calc.isEqualPayments()){
+			double howMuchLeftToPay = InputValidator.validatePaysConsistency(inputPaysList, calc.isEqualPayments(), editedPay, editedShouldPay);
+
+			if(howMuchLeftToPay > 0){
+				mNewPersonShouldPayText.setText(getResources().getString(R.string.EnterPays_TextView_ShouldPay) +
+						"\n" + getResources().getString(R.string.EnterPays_TextView_ShouldPay_HowMuchLeft_Start) +
+						" " + howMuchLeftToPay +
+						getResources().getString(R.string.EnterPays_TextView_ShouldPay_HowMuchLeft_End));
+			}else if (howMuchLeftToPay <0){
+				mNewPersonShouldPayText.setText(getResources().getString(R.string.EnterPays_TextView_ShouldPay) +
+						"\n" + getResources().getString(R.string.EnterPays_TextView_ShouldPay_HowMuchLeft_TooMuch_Start) +
+						" " + -1 * howMuchLeftToPay + " " +
+						getResources().getString(R.string.EnterPays_TextView_ShouldPay_HowMuchLeft_End));
+			}else {
+				mNewPersonShouldPayText.setText(getResources().getString(R.string.EnterPays_TextView_ShouldPay));
+			}
+		}
+	}
+	
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	try{
-        		addNewInputDataToList();
+        		adapter.add(getNewInputDataToAdd());
         		clearInputFieldsToDefaults();
         		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
         	}catch(BadInputDataException e){
         		Log.d(LOG_TAG, "Input data was not valid");
         	}
-            
         }
 
 		private void clearInputFieldsToDefaults() {
@@ -188,7 +228,7 @@ public class EnterPaysActivity extends Activity {
             updateFieldsDependantOnPeopleListSizeVisibility();
 		}
 
-		private void addNewInputDataToList() throws BadInputDataException{
+		private InputData getNewInputDataToAdd() throws BadInputDataException{
 			String name = mNewPersonNameInput.getText().toString();
         	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
         	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
@@ -197,9 +237,9 @@ public class EnterPaysActivity extends Activity {
         		throw new BadInputDataException();
         	
         	if(calc.isEqualPayments())
-        		adapter.add(new InputData(name, payDouble));
+        		return new InputData(name, payDouble);
         	else
-        		adapter.add(new InputData(name, payDouble, shouldPayDouble));
+        		return new InputData(name, payDouble, shouldPayDouble);
 		}
     };
     
