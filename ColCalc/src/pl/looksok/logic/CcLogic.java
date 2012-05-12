@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import pl.looksok.exception.BadInputDataException;
 import pl.looksok.exception.BadPayException;
 import pl.looksok.exception.BadPeopleCountException;
 import pl.looksok.exception.DuplicatePersonNameException;
@@ -37,16 +38,28 @@ public class CcLogic implements Serializable {
 		return totalPay / peopleCount;
 	}
 
-	public Hashtable<String, PeoplePays> calculate(List<InputData> inputPaysList, boolean equalPayments){
+	public Hashtable<String, PeoplePays> calculate(List<InputData> inputPaysList){
 		this.inputPaysList = inputPaysList;
-		this.equalPayments = equalPayments;
 		HashMap<String, InputData> inputPays = new HashMap<String, InputData>();
+		double sumOfAllPays = 0.0;
+		double sumOfAllShouldPays = 0.0;
+		
 		for (InputData in : inputPaysList) {
 			if(inputPays.containsKey(in.getName()))
 				throw new DuplicatePersonNameException();
-			else
+			else{
 				inputPays.put(in.getName(), in);
+				sumOfAllPays += in.getPay();
+				sumOfAllShouldPays += in.getShouldPay();
+			}
 		}
+		
+		if(!equalPayments){
+			if(sumOfAllPays != sumOfAllShouldPays){
+				throw new BadInputDataException("Sum of all Pays made by persons is not equal to sum of amount that they should pay");
+			}
+		}
+		
 		return calculate(inputPays);
 	}
 	
