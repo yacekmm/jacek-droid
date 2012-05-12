@@ -31,4 +31,20 @@ public class InputValidator {
 		}
 		return false;
 	}
+
+	public static double validatePaysConsistency(List<InputData> inputPaysList, boolean equalPayments, double editedPay, double editedShouldPay) {
+		double totalPayMade = editedPay;
+		double totalShouldPaysDeclared = editedShouldPay;
+		double result = 0.0;
+		
+		if(!equalPayments){
+			for (InputData data : inputPaysList) {
+				totalPayMade += data.getPay();
+				totalShouldPaysDeclared += data.getShouldPay();
+			}
+			result = totalPayMade - totalShouldPaysDeclared;
+		}
+		
+		return result;
+	}
 }

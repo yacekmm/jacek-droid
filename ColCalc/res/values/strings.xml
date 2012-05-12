@@ -14,6 +14,9 @@
     <string name="EnterPays_TextView_ZeroValue">0</string>
     <string name="EnterPays_TextView_EmptyText"></string>
     <string name="EnterPays_TextView_ShouldPay">Ile powinien zapłacić:</string>
+    <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_Start">(Wciąż brakuje</string>
+    <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_TooMuch_Start">(Za dużo o</string>
+    <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_End">zł)</string>
     <string name="EnterPays_Button_AddToList">Dodaj do listy</string>
     <string name="EnterPays_Button_Calculate">Pokaż rozliczenie</string>
     <string name="EnterPays_Toast_BadNameAndPayError">Wpisz Imię i poprawną kwotę</string>
@@ -25,4 +28,7 @@
     <string name="EnterPays_Menu_Remove">Usuń</string>
     
     <string name="calculation_button_save_text">Zapisz rozliczenie</string>
+    
+    <string name="table_column0_weight">2.5</string>
+    <string name="table_column1_weight">1</string>
 </resources>

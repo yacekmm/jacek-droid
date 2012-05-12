@@ -12,7 +12,6 @@
         android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
         android:layout_marginTop="@dimen/margin_ScreenBorderSmall"
         android:layout_marginRight="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginBottom="@dimen/margin_SpanBetweenViewsBig"
         android:layout_height="wrap_content"
         android:text="@string/EnterPays_TextView_EnterPayPerEachPerson" />
     
@@ -38,14 +37,14 @@
             <TextView
                 android:id="@+id/EnterPays_TextView_Name"
                 android:layout_width="0dip"
-				android:layout_weight="1"
+				android:layout_weight="@string/table_column0_weight"
                 android:layout_column="0"
                 android:text="@string/EnterPays_TextView_Name" />
 
             <EditText
                 android:id="@+id/EnterPays_EditText_Name"
                 android:layout_width="0dip"
-				android:layout_weight="1"
+				android:layout_weight="@string/table_column1_weight"
                 android:layout_column="1"
                 android:inputType="text" />
         </TableRow>
@@ -58,14 +57,14 @@
             <TextView
                 android:id="@+id/EnterPays_TextView_Pay"
                 android:layout_width="0dip"
-				android:layout_weight="1"
+				android:layout_weight="@string/table_column0_weight"
                 android:layout_column="0"
                 android:text="@string/EnterPays_TextView_Pay" />
 
             <EditText
                 android:id="@+id/EnterPays_EditText_Pay"
                 android:layout_width="0dip"
-				android:layout_weight="1"
+				android:layout_weight="@string/table_column1_weight"
                 android:layout_column="1"
                 android:inputType="numberDecimal"
                 android:text="@string/EnterPays_TextView_ZeroValue" />
@@ -79,14 +78,14 @@
             <TextView
                 android:id="@+id/EnterPays_TextView_ShouldPay"
                 android:layout_width="0dip"
-				android:layout_weight="1"
+				android:layout_weight="@string/table_column0_weight"
                 android:layout_column="0"
                 android:text="@string/EnterPays_TextView_ShouldPay" />
 
             <EditText
                 android:id="@+id/EnterPays_EditText_ShouldPay"
                 android:layout_width="0dip"
-				android:layout_weight="1"
+				android:layout_weight="@string/table_column1_weight"
                 android:layout_column="1"
                 android:inputType="numberDecimal"
                 android:text="@string/EnterPays_TextView_ZeroValue" />
