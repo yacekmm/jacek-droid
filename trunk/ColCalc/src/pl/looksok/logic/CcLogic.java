@@ -8,12 +8,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import pl.looksok.exception.BadInputDataException;
-import pl.looksok.exception.BadPayException;
-import pl.looksok.exception.BadPeopleCountException;
-import pl.looksok.exception.DuplicatePersonNameException;
-import pl.looksok.exception.PaysNotCalculatedException;
 import pl.looksok.utils.FormatterHelper;
+import pl.looksok.utils.exceptions.BadInputDataException;
+import pl.looksok.utils.exceptions.BadPayException;
+import pl.looksok.utils.exceptions.BadPeopleCountException;
+import pl.looksok.utils.exceptions.DuplicatePersonNameException;
+import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 public class CcLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;

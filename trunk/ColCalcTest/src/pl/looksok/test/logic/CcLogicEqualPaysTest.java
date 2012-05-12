@@ -5,14 +5,14 @@ import java.util.Hashtable;
 import java.util.List;
 
 import junit.framework.TestCase;
-import pl.looksok.exception.BadPayException;
-import pl.looksok.exception.DuplicatePersonNameException;
-import pl.looksok.exception.PaysNotCalculatedException;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.InputData;
 import pl.looksok.logic.PeoplePays;
 import pl.looksok.test.utils.Constants;
 import pl.looksok.test.utils.TestScenarioBuilder;
+import pl.looksok.utils.exceptions.BadPayException;
+import pl.looksok.utils.exceptions.DuplicatePersonNameException;
+import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 public class CcLogicEqualPaysTest extends TestCase {
 

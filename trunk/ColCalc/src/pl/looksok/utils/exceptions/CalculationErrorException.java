@@ -1,4 +1,4 @@
-package pl.looksok.exception;
+package pl.looksok.utils.exceptions;
 
 public class CalculationErrorException extends RuntimeException {
 	private static final long serialVersionUID = 2430551010018367929L;

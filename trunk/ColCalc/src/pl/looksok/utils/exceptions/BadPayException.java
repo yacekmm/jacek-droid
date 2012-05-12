@@ -1,4 +1,4 @@
-package pl.looksok.exception;
+package pl.looksok.utils.exceptions;
 
 public class BadPayException extends RuntimeException {
 
