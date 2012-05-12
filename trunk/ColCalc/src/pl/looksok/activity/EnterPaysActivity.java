@@ -10,6 +10,8 @@ import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.InputData;
 import pl.looksok.logic.PeoplePays;
 import pl.looksok.utils.Constants;
+import pl.looksok.utils.FormatterHelper;
+import pl.looksok.utils.InputValidator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ public class EnterPaysActivity extends Activity {
 	
 	private static final int MENU_EDIT = Menu.FIRST;
 	private static final int MENU_DELETE = MENU_EDIT+1;
+	protected static final String LOG_TAG = EnterPaysActivity.class.getSimpleName();
 	
     /** Called when the activity is first created. */
     @Override
@@ -66,17 +69,21 @@ public class EnterPaysActivity extends Activity {
     }
 
 	private void readInputBundleIfNotEmpty() {
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-			calc.setCalculationResult(new Hashtable<String, PeoplePays>());
-			setHowMuchShouldPayFieldsVisibility();
-			for (InputData data : calc.getInputPaysList()) {
-				data.setAlreadyRefunded(0.0);
-				adapter.add(data);
-			}
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			loadInputDataFromBundle(bundle);
 		}
 		updateFieldsDependantOnPeopleListSizeVisibility();
+	}
+
+	private void loadInputDataFromBundle(Bundle extras) {
+		calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
+		calc.setCalculationResult(new Hashtable<String, PeoplePays>());
+		setHowMuchShouldPayFieldsVisibility();
+		for (InputData data : calc.getInputPaysList()) {
+			data.setAlreadyRefunded(0.0);
+			adapter.add(data);
+		}
 	}
 
 	private void initActivityViews() {
@@ -87,10 +94,10 @@ public class EnterPaysActivity extends Activity {
         mEqualPaymentsBox.setChecked(calc.isEqualPayments());
         mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
         mNewPersonPayInput = (EditText)findViewById(R.id.EnterPays_EditText_Pay);
-        mNewPersonPayInput.setOnFocusChangeListener(payEditTextFocusListener);
+        mNewPersonPayInput.setOnFocusChangeListener(editTextFocusListener);
         mNewPersonShouldPayText = (TextView)findViewById(R.id.EnterPays_TextView_ShouldPay);
         mNewPersonShouldPayInput = (EditText)findViewById(R.id.EnterPays_EditText_ShouldPay);
-        mNewPersonShouldPayInput.setOnFocusChangeListener(shouldPayEditTextFocusListener);
+        mNewPersonShouldPayInput.setOnFocusChangeListener(editTextFocusListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         registerForContextMenu(mPeopleList);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
@@ -109,7 +116,7 @@ public class EnterPaysActivity extends Activity {
 	        	mNewPersonShouldPayText.setVisibility(View.GONE);
 	        }
 		}catch(NullPointerException e){
-			Log.d("ColCalc", "Not yet Initialized");
+			Log.d(LOG_TAG, "Not yet Initialized");
 		}
 	}
 
@@ -163,25 +170,30 @@ public class EnterPaysActivity extends Activity {
 
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	addNewInputDataToList();
-            clearInputFieldsToDefaults();
-    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
+        	try{
+        		addNewInputDataToList();
+        		clearInputFieldsToDefaults();
+        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
+        	}catch(BadInputDataException e){
+        		Log.d(LOG_TAG, "Input data was not valid");
+        	}
+            
         }
 
 		private void clearInputFieldsToDefaults() {
-			mNewPersonNameInput.setText("");
+			mNewPersonNameInput.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
             mNewPersonNameInput.requestFocus();
-            mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
-            mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_DefaultPayValue));
+            mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+            mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
             updateFieldsDependantOnPeopleListSizeVisibility();
 		}
 
 		private void addNewInputDataToList() throws BadInputDataException{
 			String name = mNewPersonNameInput.getText().toString();
-        	double payDouble = readPayFromEditText(mNewPersonPayInput);
-        	double shouldPayDouble = readPayFromEditText(mNewPersonShouldPayInput);
+        	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
+        	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
         	
-        	if(!inputIsValid(name, payDouble, shouldPayDouble))
+        	if(!InputValidator.inputIsValid(getApplicationContext(), name, payDouble, shouldPayDouble, calc.isEqualPayments(), inputPaysList))
         		throw new BadInputDataException();
         	
         	if(calc.isEqualPayments())
@@ -189,73 +201,42 @@ public class EnterPaysActivity extends Activity {
         	else
         		adapter.add(new InputData(name, payDouble, shouldPayDouble));
 		}
-
-		private boolean inputIsValid(String name, double payDouble, double shouldPayDouble) {
-			if(name.length()<1 || payDouble < 0){
-        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
-        		return false;
-        	}else if(duplicatedName(name)){
-        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT).show();
-        		return false;
-        	}else if(shouldPayDouble < 0 && !calc.isEqualPayments()){
-        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_ShouldPayError), Toast.LENGTH_SHORT).show();
-        		return false;
-        	}
-        	
-        	return true;
-		}
-
-		private boolean duplicatedName(String name) {
-			for (InputData in : inputPaysList) {
-				if (in.getName().equals(name)){
-					return true;
-				}
-			}
-			return false;
-		}
     };
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-    		calc.calculate(inputPaysList, calc.isEqualPayments());
-        	
-        	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
-        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-        	startActivity(intent);
-        	finish();
+    		try{
+    			calc.calculate(inputPaysList);
+    			
+    			Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
+            	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+            	startActivity(intent);
+            	finish();
+    		}catch(BadInputDataException e){
+    			Log.d(LOG_TAG, "Bad input provided: " + e.getMessage());
+    			Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
+    		}
         }
     };
     
-    OnFocusChangeListener payEditTextFocusListener = new OnFocusChangeListener() {
+    OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
 		public void onFocusChange(View v, boolean hasFocus) {
-			if(hasFocus){
-				double payDouble = readPayFromEditText(mNewPersonPayInput);
-	        	if(payDouble == 0.0){
-	        		mNewPersonPayInput.setText("");
-	        	}
-			}else{
-				if(mNewPersonPayInput.getText().length() == 0)
-					mNewPersonPayInput.setText("0");
+			if(v.getId() == mNewPersonPayInput.getId() || v.getId() == mNewPersonShouldPayInput.getId() ){
+				EditText editTextView = (EditText)v;
+				if(hasFocus){
+					double payDouble = FormatterHelper.readDoubleFromEditText(editTextView);
+					if(payDouble == 0.0){
+		        		editTextView.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
+		        	}
+				}else{
+					if(editTextView.getText().length() == 0)
+						editTextView.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+				}
 			}
 		}
 	};
 	
-	OnFocusChangeListener shouldPayEditTextFocusListener = new OnFocusChangeListener() {
-		public void onFocusChange(View v, boolean hasFocus) {
-			if(hasFocus){
-				double payDouble = readPayFromEditText(mNewPersonShouldPayInput);
-	        	if(payDouble == 0.0){
-	        		mNewPersonShouldPayInput.setText("");
-	        	}
-			}else{
-				if(mNewPersonShouldPayInput.getText().length() == 0)
-					mNewPersonShouldPayInput.setText("0");
-			}
-		}
-	};
-	
-	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener()
-	{
+	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener(){
 	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
 	    	calc.setEqualPayments(isChecked);
 	        setHowMuchShouldPayFieldsVisibility();
@@ -267,14 +248,5 @@ public class EnterPaysActivity extends Activity {
 		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
     	startActivity(intent);
     	finish();
-	}
-
-	private double readPayFromEditText(EditText mEditText) {
-		String payString = mEditText.getText().toString();
-    	
-    	double payDouble = 0.0;
-    	if(payString.length() > 0)
-    		payDouble = Double.parseDouble(payString);
-		return payDouble;
 	}
 }

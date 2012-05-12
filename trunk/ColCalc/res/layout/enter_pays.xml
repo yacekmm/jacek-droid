@@ -68,7 +68,7 @@
 				android:layout_weight="1"
                 android:layout_column="1"
                 android:inputType="numberDecimal"
-                android:text="@string/EnterPays_TextView_DefaultPayValue" />
+                android:text="@string/EnterPays_TextView_ZeroValue" />
         </TableRow>
         
         <TableRow
@@ -89,7 +89,7 @@
 				android:layout_weight="1"
                 android:layout_column="1"
                 android:inputType="numberDecimal"
-                android:text="@string/EnterPays_TextView_DefaultPayValue" />
+                android:text="@string/EnterPays_TextView_ZeroValue" />
         </TableRow>
     </TableLayout>
 
