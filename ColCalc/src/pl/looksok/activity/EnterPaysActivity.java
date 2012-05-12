@@ -5,13 +5,13 @@ import java.util.Hashtable;
 import java.util.List;
 
 import pl.looksok.R;
-import pl.looksok.exception.BadInputDataException;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.logic.InputData;
 import pl.looksok.logic.PeoplePays;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.InputValidator;
+import pl.looksok.utils.exceptions.BadInputDataException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
