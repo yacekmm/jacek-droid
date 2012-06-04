@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_ScreenBorderSmall">10dip</dimen>
-    <dimen name="margin_ScreenBorderBig">15dip</dimen>
-    <dimen name="margin_SpanBetweenViewsSmall">10dip</dimen>
-    <dimen name="margin_SpanBetweenViewsBig">15dip</dimen>
+    <dimen name="margin_micro">5sp</dimen>
+    <dimen name="margin_small">10sp</dimen>
+    <dimen name="margin_big">15sp</dimen>
     
-    <dimen name="button_minWidth">120dip</dimen>
+    <dimen name="button_minWidth">120sp</dimen>
+    
+    <dimen name="calc_listItem_height">110sp</dimen>
+    <dimen name="calc_listItem_mainBar_height">30sp</dimen>
     
     
     

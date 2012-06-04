@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/calc_listItem_height"
+    android:background="@drawable/calc_listitem"
+    android:paddingBottom="@dimen/margin_small" >
+
+    <RelativeLayout
+        android:id="@+id/calcItem_mainBar_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/calc_listItem_mainBar_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_small"
+        android:orientation="horizontal" 
+        android:background="@drawable/calc_listitem_nameGradient"
+        >
+
+        <TextView
+            android:id="@+id/calcItem_textView_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="true"
+            android:layout_toLeftOf="@id/calcItem_image_edit"
+            android:gravity="center_vertical"
+            android:text="@string/calculation_TextView_name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/calcItem_image_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/calcItem_image_delete"
+            android:src="@drawable/5-content-edit"
+            android:contentDescription="@string/EnterPays_Menu_Edit" 
+            />
+
+        <ImageView
+            android:id="@+id/calcItem_image_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/5-content-discard" 
+            android:contentDescription="@string/EnterPays_Menu_Remove" 
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calcItem_mainBar_layout"
+        android:layout_margin="@dimen/margin_small"
+        >
+
+        <TextView
+            android:id="@+id/calcItem_textView_personPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/calculation_TextView_personPay"
+            android:textColor="@color/green_kotak"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+             />
+
+        <TextView
+            android:id="@+id/calcItem_textView_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/calcItem_textView_personPay"
+            android:layout_marginLeft="@dimen/margin_micro"
+            android:text="@string/calculation_TextView_currency"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/green_kotak" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

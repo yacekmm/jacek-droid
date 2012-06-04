@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:background="@color/background_moonage_daydream"
+    >
 
     <TextView
-        android:id="@+id/Calculation_text_debug"
-        android:layout_width="wrap_content"
+        android:id="@+id/calc_textView_title"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginTop="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginRight="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginBottom="@dimen/margin_SpanBetweenViewsBig" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_big"
+        android:layout_marginBottom="@dimen/margin_big"
+        android:gravity="center"
+        android:text="@string/calculation_TextView_title"
+        android:textColor="@color/text_grr_ey"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <ListView
+        android:id="@+id/calc_listView_list" 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/calc_textView_title"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:cacheColorHint="@color/transparent"
+    	android:divider="@null"
+		android:dividerHeight="0dp"
+        >
+        
+    </ListView>
 
-    <Button
-        android:id="@+id/calculation_button_save"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calculation_button_save_text" 
-        android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginRight="@dimen/margin_ScreenBorderSmall"/>
-
-</LinearLayout>
+</RelativeLayout>

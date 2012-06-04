@@ -10,11 +10,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginTop="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginRight="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginBottom="@dimen/margin_SpanBetweenViewsBig"
-        android:text="@string/welcome_TextView_title" />
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_big"
+        android:text="@string/calculation_TextView_title" />
     
     <Button
         android:id="@+id/welcome_Button_newCalculation"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/welcome_Button_loadCalculation"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_SpanBetweenViewsSmall"
+        android:layout_marginBottom="@dimen/margin_small"
         android:text="@string/welcome_Button_newCalculation" />
 
     <Button
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_ScreenBorderBig"
+        android:layout_marginBottom="@dimen/margin_big"
         android:text="@string/welcome_Button_loadCalculation" />
 
 </RelativeLayout>
