@@ -7,6 +7,7 @@
     <dimen name="button_minWidth">120sp</dimen>
     
     <dimen name="calc_listItem_height">110sp</dimen>
+    <dimen name="calc_listItem_borderSize">5sp</dimen>
     <dimen name="calc_listItem_mainBar_height">30sp</dimen>
     
     

@@ -1,16 +1,23 @@
 package pl.looksok.activity;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import pl.looksok.R;
+import pl.looksok.customviews.ResultsListAdapter;
 import pl.looksok.logic.CcLogic;
-import pl.looksok.utils.CalcPersistence;
+import pl.looksok.logic.PeoplePays;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.ListView;
 
 public class CalculationActivity extends ColCalcActivity {
 	private CcLogic calc = null;
+	private ListView resultList;
+	private List<PeoplePays> listArray;
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,14 +25,23 @@ public class CalculationActivity extends ColCalcActivity {
         setContentView(R.layout.calculation);
         
         readInputBundle();
+        populateListArray();
     }
 
-	OnClickListener saveButtonClickListener = new OnClickListener() {
-        public void onClick(View v) {
-    	    CalcPersistence.saveCalculation(getApplicationContext(), "installedapplist.txt", calc);
-        }
-    };
-    
+	private void populateListArray() {
+		listArray = new ArrayList<PeoplePays>();
+		
+		Set<String> c = calc.getCalculationResult().keySet();
+		Iterator<String> it = c.iterator();
+		while (it.hasNext()){
+			listArray.add(calc.getCalculationResult().get(it.next()));
+		}
+		
+		resultList = (ListView)findViewById(R.id.calc_listView_list);
+		ResultsListAdapter adapter = new ResultsListAdapter(getApplicationContext(), R.layout.calculation_list_item, listArray);
+		resultList.setAdapter(adapter);
+	}
+
 	private void readInputBundle() {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
