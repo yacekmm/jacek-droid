@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/calc_listItem_height"
     android:background="@drawable/calc_listitem"
-    android:paddingBottom="@dimen/margin_small" >
+    >
 
     <RelativeLayout
         android:id="@+id/calcItem_mainBar_layout"
@@ -12,17 +12,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/margin_small"
+        android:layout_margin="@dimen/calc_listItem_borderSize"
         android:orientation="horizontal" 
-        android:background="@drawable/calc_listitem_nameGradient"
+        android:background="@drawable/calc_listitem_name_gradient"
         >
 
         <TextView
             android:id="@+id/calcItem_textView_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignBottom="true"
-            android:layout_toLeftOf="@id/calcItem_image_edit"
+            android:layout_toLeftOf="@+id/calcItem_image_edit"
             android:gravity="center_vertical"
             android:text="@string/calculation_TextView_name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -31,8 +30,8 @@
             android:id="@+id/calcItem_image_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/calcItem_image_delete"
-            android:src="@drawable/5-content-edit"
+            android:layout_toLeftOf="@+id/calcItem_image_delete"
+            android:src="@drawable/content_edit"
             android:contentDescription="@string/EnterPays_Menu_Edit" 
             />
 
@@ -41,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/5-content-discard" 
+            android:src="@drawable/content_discard" 
             android:contentDescription="@string/EnterPays_Menu_Remove" 
             />
 

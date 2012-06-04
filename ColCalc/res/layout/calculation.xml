@@ -25,12 +25,12 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/calc_textView_title"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+    	android:layout_marginRight="@dimen/margin_small"
         android:cacheColorHint="@color/transparent"
     	android:divider="@null"
-		android:dividerHeight="0dp"
+		android:dividerHeight="@dimen/margin_small"
         >
         
     </ListView>
