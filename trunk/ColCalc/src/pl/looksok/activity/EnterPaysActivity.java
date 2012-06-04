@@ -12,7 +12,6 @@ import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.InputValidator;
 import pl.looksok.utils.exceptions.BadInputDataException;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,7 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EnterPaysActivity extends Activity {
+public class EnterPaysActivity extends ColCalcActivity {
 	private List<InputData> inputPaysList = new ArrayList<InputData>();
 	private ArrayAdapter<InputData> adapter;
 	private CcLogic calc = new CcLogic();

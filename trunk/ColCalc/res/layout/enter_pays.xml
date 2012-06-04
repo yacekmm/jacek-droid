@@ -9,9 +9,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="fill_parent"
         android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginTop="@dimen/margin_ScreenBorderSmall"
-        android:layout_marginRight="@dimen/margin_ScreenBorderSmall"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         android:layout_height="wrap_content"
         android:text="@string/EnterPays_TextView_EnterPayPerEachPerson" />
     
@@ -19,15 +19,15 @@
         android:id="@+id/EnterPays_CheckBox_EverybodyPaysEqually"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
-        android:layout_marginRight="@dimen/margin_ScreenBorderBig"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big"
         android:text="@string/EnterPays_CheckBox_EqualPays" />
 
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
-        android:layout_marginRight="@dimen/margin_ScreenBorderBig" >
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big" >
         
         <TableRow
             android:id="@+id/EnterPays_Row_Name"
@@ -115,9 +115,9 @@
 	    android:id="@+id/EnterPays_List_People"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:layout_marginBottom="@dimen/margin_SpanBetweenViewsSmall"
-	    android:layout_marginLeft="@dimen/margin_ScreenBorderBig"
-	    android:layout_marginRight="@dimen/margin_ScreenBorderBig"
+	    android:layout_marginBottom="@dimen/margin_small"
+	    android:layout_marginLeft="@dimen/margin_big"
+	    android:layout_marginRight="@dimen/margin_big"
 	    >
         
 	</ListView>

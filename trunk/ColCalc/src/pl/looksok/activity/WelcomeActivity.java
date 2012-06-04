@@ -4,14 +4,13 @@ import pl.looksok.R;
 import pl.looksok.logic.CcLogic;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends ColCalcActivity {
 
 	private Button mNewButton;
 
