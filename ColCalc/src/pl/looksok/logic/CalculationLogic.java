@@ -15,18 +15,18 @@ import pl.looksok.utils.exceptions.BadPeopleCountException;
 import pl.looksok.utils.exceptions.DuplicatePersonNameException;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
-public class CcLogic implements Serializable {
+public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
-	private Hashtable<String, PeoplePays> calculationResult;
+	private Hashtable<String, PersonData> calculationResult;
 	private List<InputData> inputPaysList = null;
 	private boolean equalPayments = true;
 	
-	public Hashtable<String, PeoplePays> getCalculationResult() {
+	public Hashtable<String, PersonData> getCalculationResult() {
 		return calculationResult;
 	}
 
-	public CcLogic(){
-		calculationResult = new Hashtable<String, PeoplePays>();
+	public CalculationLogic(){
+		calculationResult = new Hashtable<String, PersonData>();
 	}
 
 	private double howMuchPerPerson(double totalPay, int peopleCount) {
@@ -38,7 +38,7 @@ public class CcLogic implements Serializable {
 		return totalPay / peopleCount;
 	}
 
-	public Hashtable<String, PeoplePays> calculate(List<InputData> inputPaysList){
+	public Hashtable<String, PersonData> calculate(List<InputData> inputPaysList){
 		this.inputPaysList = inputPaysList;
 		HashMap<String, InputData> inputPays = new HashMap<String, InputData>();
 		double sumOfAllPays = 0.0;
@@ -63,13 +63,22 @@ public class CcLogic implements Serializable {
 		return calculate(inputPays);
 	}
 	
-	private Hashtable<String, PeoplePays> calculate(HashMap<String, InputData> inputPays) {
+	private Hashtable<String, PersonData> calculate(HashMap<String, InputData> inputPays) {
 		Double totalPay = calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
 		if(equalPayments)
 			howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
 		
+		prepareCalculationObject(inputPays, howMuchPersonShouldPay);
+		
+		performCalculation();
+		
+		return calculationResult;
+	}
+
+	private void prepareCalculationObject(HashMap<String, InputData> inputPays,
+			double howMuchPersonShouldPay) {
 		Collection<String> c = inputPays.keySet();
 		Iterator<String> itr = c.iterator();
 		while (itr.hasNext()){
@@ -78,12 +87,25 @@ public class CcLogic implements Serializable {
 				howMuchPersonShouldPay = inputPays.get(key).getShouldPay();
 			inputPays.get(key).setShouldPay(howMuchPersonShouldPay);
 			
-			PeoplePays p = new PeoplePays(key, inputPays);
-			p.calculateToReturnAndRefund(howMuchPersonShouldPay);
-			calculationResult.put(p.getPersonName(), p);
+			PersonData p = new PersonData(key, inputPays);
+			p.prepareCalculationData(howMuchPersonShouldPay);
+			calculationResult.put(p.getName(), p);
+		}
+	}
+
+	private void performCalculation() {
+		Set<String> c2 = calculationResult.keySet();
+		Iterator<String> it = c2.iterator();
+		
+		Hashtable<String, PersonData> newCalculationResult = new Hashtable<String, PersonData>();
+		
+		while (it.hasNext()){
+			PersonData pp = calculationResult.get(it.next());
+			pp.calculateRefundToOthers(calculationResult);
+			newCalculationResult.put(pp.getName(), pp);
 		}
 		
-		return calculationResult;
+		calculationResult = newCalculationResult;
 	}
 
 	private Double calculateTotalPayValue(HashMap<String, InputData> inputPays) {
@@ -97,10 +119,10 @@ public class CcLogic implements Serializable {
 		}
 		return totalPay;
 	}
-
+	
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
-			double result = calculationResult.get(personA).howMuchShouldReturnTo(personB);
+			double result = calculationResult.get(personA).getCalculatedReturnForPersonB(personB);
 			return FormatterHelper.roundDouble(result, 2);
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
@@ -109,42 +131,16 @@ public class CcLogic implements Serializable {
 	
 	@Override
 	public String toString(){
-		StringBuilder sb = new StringBuilder("");
+		StringBuilder sb = new StringBuilder("Calculation results: \n");
 		
 		if(calculationResult != null){
-			Hashtable<String, PeoplePays> tmpTable = new Hashtable<String, PeoplePays>();
-			tmpTable = calculationResult;
-			
 			Set<String> c = calculationResult.keySet();
-			Set<String> c2 = tmpTable.keySet();
 			Iterator<String> it = c.iterator();
-			Iterator<String> it2 = c2.iterator();
 			
 			while (it.hasNext()){
-				PeoplePays pp = calculationResult.get(it.next());
-				
-				sb.append(pp.getPersonName());
-				sb.append(" - paid: ");
-				sb.append(pp.getPayMadeByPerson());
-				sb.append("\n\tshould pay: ");
-				sb.append(pp.getHowMuchPersonShouldPay());
-				while(it2.hasNext()) {
-					PeoplePays pp2 = calculationResult.get(it2.next());
-					if(pp.getPersonName() != pp2.getPersonName()){
-						double returnValue = howMuchPersonAGivesBackToPersonB(pp.getPersonName(), pp2.getPersonName());
-						if(returnValue!=0.0){
-							sb.append("\n\treturns: ");
-							sb.append(returnValue);
-							sb.append(" to: ");
-							sb.append(pp2.getPersonName());
-						}
-					}
-				}
-				it2 = c2.iterator();
-				sb.append("\n\n");
+				PersonData pp = calculationResult.get(it.next());
+				sb.append(pp.printPersonReturnsToOthers()).append("\n");
 			}
-			it = c.iterator();
-			it2 = c2.iterator();
 		}
 		return sb.toString();
 	}
@@ -153,7 +149,7 @@ public class CcLogic implements Serializable {
 		return inputPaysList;
 	}
 
-	public void setCalculationResult(Hashtable<String, PeoplePays> calculationResult) {
+	public void setCalculationResult(Hashtable<String, PersonData> calculationResult) {
 		this.calculationResult = calculationResult;
 	}
 

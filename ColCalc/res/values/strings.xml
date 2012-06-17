@@ -6,7 +6,8 @@
     <string name="calculation_TextView_title">Rozlicz się z imprezy składkowej!</string>
     <string name="calculation_TextView_name">Imię</string>
     <string name="calculation_TextView_personPay">0,00</string>
-    <string name="calculation_TextView_currency">zł.</string>
+    <string name="calculation_TextView_currency">zł</string>
+    <string name="calculationResult_list_header">Oddaje pieniądze dla:</string>
     
     <string name="welcome_Button_newCalculation">Nowe rozliczenie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>

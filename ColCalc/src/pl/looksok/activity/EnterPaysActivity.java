@@ -5,9 +5,9 @@ import java.util.Hashtable;
 import java.util.List;
 
 import pl.looksok.R;
-import pl.looksok.logic.CcLogic;
+import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.InputData;
-import pl.looksok.logic.PeoplePays;
+import pl.looksok.logic.PersonData;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.InputValidator;
@@ -39,7 +39,7 @@ import android.widget.Toast;
 public class EnterPaysActivity extends ColCalcActivity {
 	private List<InputData> inputPaysList = new ArrayList<InputData>();
 	private ArrayAdapter<InputData> adapter;
-	private CcLogic calc = new CcLogic();
+	private CalculationLogic calc = new CalculationLogic();
 	
 	private Button mAddPersonButton;
 	private CheckBox mEqualPaymentsBox;
@@ -78,8 +78,8 @@ public class EnterPaysActivity extends ColCalcActivity {
 	}
 
 	private void loadInputDataFromBundle(Bundle extras) {
-		calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-		calc.setCalculationResult(new Hashtable<String, PeoplePays>());
+		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
+		calc.setCalculationResult(new Hashtable<String, PersonData>());
 		setHowMuchShouldPayFieldsVisibility();
 		for (InputData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);
@@ -247,7 +247,7 @@ public class EnterPaysActivity extends ColCalcActivity {
     		try{
     			calc.calculate(inputPaysList);
     			
-    			Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
+    			Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
             	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
             	startActivity(intent);
             	finish();
