@@ -18,7 +18,7 @@ import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
 	private Hashtable<String, PersonData> calculationResult;
-	private List<InputData> inputPaysList = null;
+	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
 	
 	public Hashtable<String, PersonData> getCalculationResult() {
@@ -38,19 +38,19 @@ public class CalculationLogic implements Serializable {
 		return totalPay / peopleCount;
 	}
 
-	public Hashtable<String, PersonData> calculate(List<InputData> inputPaysList){
+	public Hashtable<String, PersonData> calculate(List<PersonData> inputPaysList){
 		this.inputPaysList = inputPaysList;
-		HashMap<String, InputData> inputPays = new HashMap<String, InputData>();
+		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
 		double sumOfAllPays = 0.0;
 		double sumOfAllShouldPays = 0.0;
 		
-		for (InputData in : inputPaysList) {
+		for (PersonData in : inputPaysList) {
 			if(inputPays.containsKey(in.getName()))
 				throw new DuplicatePersonNameException();
 			else{
 				inputPays.put(in.getName(), in);
-				sumOfAllPays += in.getPay();
-				sumOfAllShouldPays += in.getShouldPay();
+				sumOfAllPays += in.getPayMadeByPerson();
+				sumOfAllShouldPays += in.getHowMuchPersonShouldPay();
 			}
 		}
 		
@@ -63,7 +63,7 @@ public class CalculationLogic implements Serializable {
 		return calculate(inputPays);
 	}
 	
-	private Hashtable<String, PersonData> calculate(HashMap<String, InputData> inputPays) {
+	private Hashtable<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
 		Double totalPay = calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
@@ -77,15 +77,15 @@ public class CalculationLogic implements Serializable {
 		return calculationResult;
 	}
 
-	private void prepareCalculationObject(HashMap<String, InputData> inputPays,
+	private void prepareCalculationObject(HashMap<String, PersonData> inputPays,
 			double howMuchPersonShouldPay) {
 		Collection<String> c = inputPays.keySet();
 		Iterator<String> itr = c.iterator();
 		while (itr.hasNext()){
 			String key = itr.next();
 			if(!equalPayments)
-				howMuchPersonShouldPay = inputPays.get(key).getShouldPay();
-			inputPays.get(key).setShouldPay(howMuchPersonShouldPay);
+				howMuchPersonShouldPay = inputPays.get(key).getHowMuchPersonShouldPay();
+			inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
 			
 			PersonData p = new PersonData(key, inputPays);
 			p.prepareCalculationData(howMuchPersonShouldPay);
@@ -108,14 +108,14 @@ public class CalculationLogic implements Serializable {
 		calculationResult = newCalculationResult;
 	}
 
-	private Double calculateTotalPayValue(HashMap<String, InputData> inputPays) {
+	private Double calculateTotalPayValue(HashMap<String, PersonData> inputPays) {
 		Double totalPay = 0.0;
 		
-		Collection<InputData> c = inputPays.values();
-		Iterator<InputData> itr = c.iterator();
+		Collection<PersonData> c = inputPays.values();
+		Iterator<PersonData> itr = c.iterator();
 
 		while (itr.hasNext()){
-			totalPay += itr.next().getPay();
+			totalPay += itr.next().getPayMadeByPerson();
 		}
 		return totalPay;
 	}
@@ -145,7 +145,7 @@ public class CalculationLogic implements Serializable {
 		return sb.toString();
 	}
 
-	public List<InputData> getInputPaysList() {
+	public List<PersonData> getInputPaysList() {
 		return inputPaysList;
 	}
 

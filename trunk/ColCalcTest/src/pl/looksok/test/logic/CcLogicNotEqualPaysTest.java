@@ -6,7 +6,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import pl.looksok.logic.CalculationLogic;
-import pl.looksok.logic.InputData;
 import pl.looksok.logic.PersonData;
 import pl.looksok.test.utils.Constants;
 import pl.looksok.test.utils.TestScenarioBuilder;
@@ -14,13 +13,13 @@ import pl.looksok.test.utils.TestScenarioBuilder;
 public class CcLogicNotEqualPaysTest extends TestCase {
 
 	private CalculationLogic calc;
-	private List<InputData> inputPaysList;
+	private List<PersonData> inputPaysList;
 	private boolean equalPayments = false;
 
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
 		calc.setEqualPayments(equalPayments);
-		inputPaysList = new ArrayList<InputData>();
+		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
 	}
 	
