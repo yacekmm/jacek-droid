@@ -15,19 +15,30 @@ public class PersonData implements Serializable{
 	private static final long serialVersionUID = 4909331903428866567L;
 	private String name;
 	private double howMuchIPaid;
+	private double howMuchIShouldPay;
 	private double toReturn;
 	private double totalRefundForThisPerson;
-	private HashMap<String, InputData> otherPeoplePayments;
+	private HashMap<String, PersonData> otherPeoplePayments;
 	private HashMap<String, Double> refundForOtherPeople;
-	private double howMuchIShouldPay;
 	private double alreadyReturned;
+	private double alreadyRefunded = 0.0;
 	
-	public PersonData(String _personName, HashMap<String, InputData> inputPays) {
+	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		setPersonName(_personName);
-		setPayMadeByPerson(inputPays.get(getName()).getPay());
+		setPayMadeByPerson(inputPays.get(getName()).getPayMadeByPerson());
 		
 		otherPeoplePayments = inputPays;
 		refundForOtherPeople = new HashMap<String, Double>();
+	}
+
+	public PersonData(String name, double payDouble) {
+		this.name = name;
+		this.setPayMadeByPerson(payDouble);
+	}
+
+	public PersonData(String name, double payDouble, double shouldPayDouble) {
+		this(name, payDouble);
+		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
 
 	public String getName() {
@@ -96,9 +107,9 @@ public class PersonData implements Serializable{
 	}
 	
 	private double howMuchShouldReturnTo(String personBName){
-		InputData personBData = otherPeoplePayments.get(personBName);
-		double howMuchPersonBPaid = personBData.getPay();
-		double howMuchPersonBShouldPay = personBData.getShouldPay();
+		PersonData personBData = otherPeoplePayments.get(personBName);
+		double howMuchPersonBPaid = personBData.getPayMadeByPerson();
+		double howMuchPersonBShouldPay = personBData.getHowMuchPersonShouldPay();
 		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
 		
 		if(howMuchRefundPersonBNeeds>0){
@@ -122,6 +133,10 @@ public class PersonData implements Serializable{
 			return tmpToReturn;
 		}else
 			return 0.0;
+	}
+
+	private void addToAlreadyRefunded(double valueToAdd) {
+		setAlreadyRefunded(getAlreadyRefunded() + valueToAdd);
 	}
 
 	private double givePersonBNoMoreThanHeWants(double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
@@ -154,6 +169,10 @@ public class PersonData implements Serializable{
 	public double getHowMuchPersonShouldPay() {
 		return howMuchIShouldPay;
 	}
+	
+	public void setHowMuchPersonShouldPay(double value) {
+		this.howMuchIShouldPay = value;
+	}
 
 	public HashMap<String, Double> getRefundForOtherPeople() {
 		return refundForOtherPeople;
@@ -181,6 +200,14 @@ public class PersonData implements Serializable{
 		}
 		
 		return sb.toString();
+	}
+
+	public double getAlreadyRefunded() {
+		return alreadyRefunded;
+	}
+
+	public void setAlreadyRefunded(double alreadyRefunded) {
+		this.alreadyRefunded = alreadyRefunded;
 	}
 	
 }

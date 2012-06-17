@@ -6,7 +6,6 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
-import pl.looksok.logic.InputData;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
@@ -37,8 +36,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EnterPaysActivity extends ColCalcActivity {
-	private List<InputData> inputPaysList = new ArrayList<InputData>();
-	private ArrayAdapter<InputData> adapter;
+	private List<PersonData> inputPaysList = new ArrayList<PersonData>();
+	private ArrayAdapter<PersonData> adapter;
 	private CalculationLogic calc = new CalculationLogic();
 	
 	private Button mAddPersonButton;
@@ -62,7 +61,7 @@ public class EnterPaysActivity extends ColCalcActivity {
         
         initActivityViews();
         
-        adapter = new ArrayAdapter<InputData>(this, android.R.layout.simple_expandable_list_item_1,
+        adapter = new ArrayAdapter<PersonData>(this, android.R.layout.simple_expandable_list_item_1,
         		android.R.id.text1, inputPaysList);
         mPeopleList.setAdapter(adapter);
         
@@ -81,7 +80,7 @@ public class EnterPaysActivity extends ColCalcActivity {
 		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 		calc.setCalculationResult(new Hashtable<String, PersonData>());
 		setHowMuchShouldPayFieldsVisibility();
-		for (InputData data : calc.getInputPaysList()) {
+		for (PersonData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);
 			adapter.add(data);
 		}
@@ -166,10 +165,10 @@ public class EnterPaysActivity extends ColCalcActivity {
 	}
 
 	private void editPerson(int position) {
-		InputData person = adapter.getItem(position);
+		PersonData person = adapter.getItem(position);
 		mNewPersonNameInput.setText(person.getName());
-		mNewPersonPayInput.setText(String.valueOf(person.getPay()));
-		mNewPersonShouldPayInput.setText(String.valueOf(person.getShouldPay()));
+		mNewPersonPayInput.setText(String.valueOf(person.getPayMadeByPerson()));
+		mNewPersonShouldPayInput.setText(String.valueOf(person.getHowMuchPersonShouldPay()));
 		removePerson(position);
 	}
 
@@ -227,7 +226,7 @@ public class EnterPaysActivity extends ColCalcActivity {
             updateFieldsDependantOnPeopleListSizeVisibility();
 		}
 
-		private InputData getNewInputDataToAdd() throws BadInputDataException{
+		private PersonData getNewInputDataToAdd() throws BadInputDataException{
 			String name = mNewPersonNameInput.getText().toString();
         	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
         	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
@@ -236,9 +235,9 @@ public class EnterPaysActivity extends ColCalcActivity {
         		throw new BadInputDataException();
         	
         	if(calc.isEqualPayments())
-        		return new InputData(name, payDouble);
+        		return new PersonData(name, payDouble);
         	else
-        		return new InputData(name, payDouble, shouldPayDouble);
+        		return new PersonData(name, payDouble, shouldPayDouble);
 		}
     };
     
