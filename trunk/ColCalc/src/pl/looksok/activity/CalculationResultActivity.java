@@ -7,17 +7,17 @@ import java.util.Set;
 
 import pl.looksok.R;
 import pl.looksok.customviews.ResultsListAdapter;
-import pl.looksok.logic.CcLogic;
-import pl.looksok.logic.PeoplePays;
+import pl.looksok.logic.CalculationLogic;
+import pl.looksok.logic.PersonData;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
-public class CalculationActivity extends ColCalcActivity {
-	private CcLogic calc = null;
+public class CalculationResultActivity extends ColCalcActivity {
+	private CalculationLogic calc = null;
 	private ListView resultList;
-	private List<PeoplePays> listArray;
+	private List<PersonData> listArray;
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class CalculationActivity extends ColCalcActivity {
     }
 
 	private void populateListArray() {
-		listArray = new ArrayList<PeoplePays>();
+		listArray = new ArrayList<PersonData>();
 		
 		Set<String> c = calc.getCalculationResult().keySet();
 		Iterator<String> it = c.iterator();
@@ -45,7 +45,7 @@ public class CalculationActivity extends ColCalcActivity {
 	private void readInputBundle() {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			calc = (CcLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
+			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 		}
 	}
 

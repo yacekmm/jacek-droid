@@ -16,7 +16,7 @@
         </activity>
         
         <activity
-            android:name=".activity.CalculationActivity"
+            android:name=".activity.CalculationResultActivity"
             android:label="@string/app_name" >
         </activity>
         

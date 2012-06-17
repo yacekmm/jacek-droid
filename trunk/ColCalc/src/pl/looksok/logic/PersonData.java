@@ -2,34 +2,40 @@ package pl.looksok.logic;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 
 import pl.looksok.utils.FormatterHelper;
+import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 
-public class PeoplePays implements Serializable{
+public class PersonData implements Serializable{
 
 	private static final long serialVersionUID = 4909331903428866567L;
-	private String personName;
+	private String name;
 	private double howMuchIPaid;
 	private double toReturn;
 	private double totalRefundForThisPerson;
 	private HashMap<String, InputData> otherPeoplePayments;
+	private HashMap<String, Double> refundForOtherPeople;
 	private double howMuchIShouldPay;
 	private double alreadyReturned;
 	
-	public PeoplePays(String _personName, HashMap<String, InputData> inputPays) {
+	public PersonData(String _personName, HashMap<String, InputData> inputPays) {
 		setPersonName(_personName);
-		setPayMadeByPerson(inputPays.get(getPersonName()).getPay());
+		setPayMadeByPerson(inputPays.get(getName()).getPay());
 		
 		otherPeoplePayments = inputPays;
+		refundForOtherPeople = new HashMap<String, Double>();
 	}
 
-	public String getPersonName() {
-		return personName;
+	public String getName() {
+		return name;
 	}
 
 	public void setPersonName(String personName) {
-		this.personName = personName;
+		this.name = personName;
 	}
 
 	public double getPayMadeByPerson() {
@@ -40,11 +46,33 @@ public class PeoplePays implements Serializable{
 		this.howMuchIPaid = payMadeByPerson;
 	}
 
-	public void calculateToReturnAndRefund(double _howMuchPerPerson) {
+	public void prepareCalculationData(double _howMuchPerPerson) {
 		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
 		
 		calculateHowMuchIShouldReturn();
 		calculateHowMuchRefundIShouldHave();
+	}
+
+	public void calculateRefundToOthers(Hashtable<String, PersonData> calculationResult) {
+		Set<String> c = calculationResult.keySet();
+		Iterator<String> it = c.iterator();
+		
+		while(it.hasNext()) {
+			PersonData pp2 = calculationResult.get(it.next());
+			if(this.getName() != pp2.getName()){
+				double returnValue = howMuchIGiveBackToPersonB(pp2);
+				getRefundForOtherPeople().put(pp2.getName(), returnValue);
+			}
+		}
+	}
+	
+	private double howMuchIGiveBackToPersonB(PersonData personB) {
+		try{
+			double result = this.howMuchShouldReturnTo(personB.getName());
+			return FormatterHelper.roundDouble(result, 2);
+		}catch(NullPointerException e){
+			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
+		}
 	}
 
 	private void calculateHowMuchIShouldReturn() {
@@ -67,8 +95,8 @@ public class PeoplePays implements Serializable{
 		return totalRefundForThisPerson;
 	}
 	
-	public double howMuchShouldReturnTo(String personB){
-		InputData personBData = otherPeoplePayments.get(personB);
+	private double howMuchShouldReturnTo(String personBName){
+		InputData personBData = otherPeoplePayments.get(personBName);
 		double howMuchPersonBPaid = personBData.getPay();
 		double howMuchPersonBShouldPay = personBData.getShouldPay();
 		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
@@ -90,7 +118,7 @@ public class PeoplePays implements Serializable{
 				tmpToReturn = 0.0;
 			
 			alreadyReturned += tmpToReturn;
-			otherPeoplePayments.get(personB).addToAlreadyRefunded(tmpToReturn);
+			otherPeoplePayments.get(personBName).addToAlreadyRefunded(tmpToReturn);
 			return tmpToReturn;
 		}else
 			return 0.0;
@@ -127,5 +155,32 @@ public class PeoplePays implements Serializable{
 		return howMuchIShouldPay;
 	}
 
+	public HashMap<String, Double> getRefundForOtherPeople() {
+		return refundForOtherPeople;
+	}
+
+	public void setRefundForOtherPeople(HashMap<String, Double> refundForOtherPeople) {
+		this.refundForOtherPeople = refundForOtherPeople;
+	}
+
+	public double getCalculatedReturnForPersonB(String personB) {
+		return getRefundForOtherPeople().get(personB);
+	}
+
+	public String printPersonReturnsToOthers(){
+		StringBuilder sb = new StringBuilder(getName());
+		sb.append(" should return to:\n");
+		
+		Set<String> c = getRefundForOtherPeople().keySet();
+		Iterator<String> it = c.iterator();
+		
+		while(it.hasNext()) {
+			String key = it.next();
+			double result = getRefundForOtherPeople().get(key);
+			sb.append(key).append(": ").append(result).append("\n");
+		}
+		
+		return sb.toString();
+	}
 	
 }

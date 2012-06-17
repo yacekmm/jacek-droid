@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import pl.looksok.R;
-import pl.looksok.logic.PeoplePays;
+import pl.looksok.logic.PersonData;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ResultsListAdapter extends ArrayAdapter<PeoplePays> {
+public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 
-	private List<PeoplePays> items;
+	private List<PersonData> items;
 	private int layoutResourceId;
 	private Context context;
 
-	public ResultsListAdapter(Context context, int layoutResourceId, List<PeoplePays> items) {
+	public ResultsListAdapter(Context context, int layoutResourceId, List<PersonData> items) {
 		super(context, layoutResourceId, items);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -45,8 +45,8 @@ public class ResultsListAdapter extends ArrayAdapter<PeoplePays> {
             holder = (ResultHolder)row.getTag();
         }
 
-        PeoplePays pp = items.get(position);
-        holder.txtName.setText(pp.getPersonName());
+        PersonData pp = items.get(position);
+        holder.txtName.setText(pp.getName());
         holder.txtBalance.setText(String.valueOf(pp.getTotalRefundForThisPerson()));
         holder.txtCurrency.setText(Currency.getInstance(Locale.getDefault()).getSymbol());
         

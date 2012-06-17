@@ -1,7 +1,7 @@
 package pl.looksok.activity;
 
 import pl.looksok.R;
-import pl.looksok.logic.CcLogic;
+import pl.looksok.logic.CalculationLogic;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
@@ -38,7 +38,7 @@ public class WelcomeActivity extends ColCalcActivity {
     
 	OnClickListener loadCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	CcLogic calc = CalcPersistence.readStoredCalculation(getApplicationContext(), "installedapplist.txt");
+        	CalculationLogic calc = CalcPersistence.readStoredCalculation(getApplicationContext(), "installedapplist.txt");
 //        	InputData inputData = CalcPersistence.readStoredInputData(getApplicationContext(), "installedapplist.txt");
         	
         	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;

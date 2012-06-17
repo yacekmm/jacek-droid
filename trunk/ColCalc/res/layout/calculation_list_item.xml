@@ -12,7 +12,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/calc_listItem_borderSize"
+        android:layout_marginLeft="@dimen/calc_listItem_borderSize"
+        android:layout_marginRight="@dimen/calc_listItem_borderSize"
+        android:layout_marginTop="@dimen/calc_listItem_borderSize"
         android:orientation="horizontal" 
         android:background="@drawable/calc_listitem_name_gradient"
         >
@@ -46,33 +48,55 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/calcItem_mainBar_layout"
-        android:layout_margin="@dimen/margin_small"
+    <LinearLayout 
+	        android:id="@+id/calcItem_itemContent"
+	        android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:layout_below="@+id/calcItem_mainBar_layout"
+	        android:layout_marginLeft="@dimen/calc_listItem_borderSize"
+	        android:layout_marginRight="@dimen/calc_listItem_borderSize"
+	        android:layout_marginBottom="@dimen/calc_listItem_borderSize"
         >
-
-        <TextView
-            android:id="@+id/calcItem_textView_personPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/calculation_TextView_personPay"
-            android:textColor="@color/green_kotak"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-             />
-
-        <TextView
-            android:id="@+id/calcItem_textView_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/calcItem_textView_personPay"
-            android:layout_marginLeft="@dimen/margin_micro"
-            android:text="@string/calculation_TextView_currency"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/green_kotak" />
-
-    </RelativeLayout>
+        
+	    <ListView
+	        android:id="@+id/calcItem_calculation_list"
+	        android:layout_width="0dp"
+	    	android:layout_height="wrap_content"
+	        android:layout_weight="0.7"
+            android:cacheColorHint="@color/transparent"
+	    	android:divider="@null"
+	        >
+	    </ListView>
+	        
+	    <RelativeLayout
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="0.3"
+	        >
+	
+	        <TextView
+	            android:id="@+id/calcItem_textView_personPay"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_toLeftOf="@+id/calcItem_textView_currency"
+	            android:text="@string/calculation_TextView_personPay"
+	            android:textAppearance="?android:attr/textAppearanceLarge"
+	            android:textColor="@color/green_kotak" />
+	
+	        <TextView
+	            android:id="@+id/calcItem_textView_currency"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="@dimen/margin_micro"
+	            android:layout_marginRight="@dimen/margin_micro"
+	            android:text="@string/calculation_TextView_currency"
+	            android:textAppearance="?android:attr/textAppearanceLarge"
+	            android:textColor="@color/green_kotak" />
+	
+	    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

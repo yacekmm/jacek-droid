@@ -8,21 +8,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 
-import pl.looksok.logic.CcLogic;
+import pl.looksok.logic.CalculationLogic;
 import android.content.Context;
 import android.util.Log;
 
 public class CalcPersistence {
-	public static CcLogic readStoredCalculation(Context context, String filename) {
+	public static CalculationLogic readStoredCalculation(Context context, String filename) {
 		
-		CcLogic calc = null;
+		CalculationLogic calc = null;
     	
     	FileInputStream fis = null;
     	ObjectInputStream in = null;
     	try {
     		fis = context.openFileInput(filename);
     		in = new ObjectInputStream(fis);
-    		calc = (CcLogic) in.readObject();
+    		calc = (CalculationLogic) in.readObject();
     		in.close();
     		fis.close();
     	}catch (ClassNotFoundException e) {
@@ -40,7 +40,7 @@ public class CalcPersistence {
 		return calc;
 	}
 	
-	public static void saveCalculation(Context context, String filename, CcLogic calc) {
+	public static void saveCalculation(Context context, String filename, CalculationLogic calc) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try {
