@@ -23,7 +23,7 @@
     <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_Start">(Wciąż brakuje</string>
     <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_TooMuch_Start">(Za dużo o</string>
     <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_End">zł)</string>
-    <string name="EnterPays_Button_AddToList">Dodaj do listy</string>
+    <string name="EnterPays_Button_AddToList">Zapisz</string>
     <string name="EnterPays_Button_Calculate">Pokaż rozliczenie</string>
     <string name="EnterPays_Toast_BadNameAndPayError">Wpisz Imię i poprawną kwotę</string>
     <string name="EnterPays_Toast_DuplicatedNameError">Osoba o tym imieniu jest już na liście</string>

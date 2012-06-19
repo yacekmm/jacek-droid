@@ -32,7 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/calcItem_image_delete"
             android:contentDescription="@string/EnterPays_Menu_Edit"
-            android:src="@drawable/content_edit" />
+            android:src="@drawable/content_edit" 
+            android:onClick="edit"
+            />
 
         <ImageView
             android:id="@+id/calcItem_image_delete"

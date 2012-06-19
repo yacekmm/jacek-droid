@@ -7,11 +7,13 @@ import java.util.Locale;
 import pl.looksok.R;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.FormatterHelper;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultsListAdapter extends ArrayAdapter<PersonData> {
@@ -33,7 +35,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         ResultHolder holder = null;
         
         if(row == null) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new ResultHolder();
@@ -41,20 +43,26 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_personPay);
             holder.txtCurrency = (TextView)row.findViewById(R.id.calcItem_textView_currency);
             holder.txtDetails = (TextView)row.findViewById(R.id.calcItem_details_text);
+            holder.imgEditPerson = (ImageView)row.findViewById(R.id.calcItem_image_edit);
+            holder.imgEditPerson.setTag(items.get(position));
             
             row.setTag(holder);
+
+            setupItem(position, holder);
         } else {
             holder = (ResultHolder)row.getTag();
         }
+        
+        return row;
+    }
 
-        PersonData pp = items.get(position);
+	private void setupItem(int position, ResultHolder holder) {
+		PersonData pp = items.get(position);
         holder.txtName.setText(pp.getName());
         setBalance(holder, pp);
         holder.txtCurrency.setText(Currency.getInstance(Locale.getDefault()).getSymbol());
         holder.txtDetails.setText(pp.printPersonReturnsToOthers());
-        
-        return row;
-    }
+	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
 		double refund = pp.getTotalRefundForThisPerson();
@@ -71,10 +79,11 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		}
 	}
 	
-    static class ResultHolder {
+    public static class ResultHolder {
     	TextView txtName;
     	TextView txtBalance;
     	TextView txtCurrency;
     	TextView txtDetails;
+    	ImageView imgEditPerson;
     }
 }

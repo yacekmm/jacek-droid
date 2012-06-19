@@ -44,13 +44,13 @@ public class CalculationResultActivity extends ColCalcActivity {
 		}
 		
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
-		ResultsListAdapter adapter = new ResultsListAdapter(getApplicationContext(), R.layout.calculation_list_item, listArray);
+		ResultsListAdapter adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		
 		saveCalculationButton = (Button)findViewById(R.id.calc_button_saveCalculation);
 		saveCalculationButton.setOnClickListener(saveCalculationButtonClickListener);
 	}
-
+	
 	private void readInputBundle() {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -65,6 +65,24 @@ public class CalculationResultActivity extends ColCalcActivity {
         }
     };
 
+	public void edit(View v) {
+		PersonData pd = (PersonData)v.getTag();
+		for (PersonData data : calc.getInputPaysList()) {
+			if(data.getName().equals(pd.getName())){
+				pd = data;
+				break;
+			}
+		}
+		calc.getInputPaysList().remove(pd);
+		
+		Toast.makeText(getApplicationContext(), "Going to edit...", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
+    	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
+    	startActivity(intent);
+    	finish();
+	}
+	
 	@Override
 	public void onBackPressed() {
     	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
