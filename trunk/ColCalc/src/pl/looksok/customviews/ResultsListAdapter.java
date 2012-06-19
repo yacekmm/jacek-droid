@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.logic.PersonData;
+import pl.looksok.utils.FormatterHelper;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.txtName = (TextView)row.findViewById(R.id.calcItem_textView_name);
             holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_personPay);
             holder.txtCurrency = (TextView)row.findViewById(R.id.calcItem_textView_currency);
+            holder.txtDetails = (TextView)row.findViewById(R.id.calcItem_details_text);
             
             row.setTag(holder);
         } else {
@@ -47,15 +49,32 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 
         PersonData pp = items.get(position);
         holder.txtName.setText(pp.getName());
-        holder.txtBalance.setText(String.valueOf(pp.getTotalRefundForThisPerson()));
+        setBalance(holder, pp);
         holder.txtCurrency.setText(Currency.getInstance(Locale.getDefault()).getSymbol());
+        holder.txtDetails.setText(pp.printPersonReturnsToOthers());
         
         return row;
     }
+
+	private void setBalance(ResultHolder holder, PersonData pp) {
+		double refund = pp.getTotalRefundForThisPerson();
+		double toReturn = pp.getToReturn();
+		
+		if(refund > toReturn){
+			holder.txtBalance.setText("+" + FormatterHelper.roundDouble(refund,2));
+			holder.txtBalance.setTextAppearance(context, R.style.balancePositiveText);
+			holder.txtCurrency.setTextAppearance(context, R.style.balancePositiveText);
+		}else{
+			holder.txtBalance.setText("-" +  FormatterHelper.roundDouble(toReturn, 2));
+			holder.txtBalance.setTextAppearance(context, R.style.balanceNegativeText);
+			holder.txtCurrency.setTextAppearance(context, R.style.balanceNegativeText);
+		}
+	}
 	
     static class ResultHolder {
     	TextView txtName;
     	TextView txtBalance;
     	TextView txtCurrency;
+    	TextView txtDetails;
     }
 }

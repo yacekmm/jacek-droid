@@ -56,6 +56,39 @@ public class PersonData implements Serializable{
 	public void setPayMadeByPerson(Double payMadeByPerson) {
 		this.howMuchIPaid = payMadeByPerson;
 	}
+	
+	
+	private boolean personBNeedsMoreThanIShouldGive(double tmpToReturn) {
+		return alreadyReturned + tmpToReturn > toReturn;
+	}
+	
+	public double getHowMuchPersonShouldPay() {
+		return howMuchIShouldPay;
+	}
+	
+	public void setHowMuchPersonShouldPay(double value) {
+		this.howMuchIShouldPay = value;
+	}
+	
+	public HashMap<String, Double> getRefundForOtherPeople() {
+		return refundForOtherPeople;
+	}
+	
+	public void setRefundForOtherPeople(HashMap<String, Double> refundForOtherPeople) {
+		this.refundForOtherPeople = refundForOtherPeople;
+	}
+	
+	public double getCalculatedReturnForPersonB(String personB) {
+		return getRefundForOtherPeople().get(personB);
+	}
+	
+	public double getAlreadyRefunded() {
+		return alreadyRefunded;
+	}
+	
+	public void setAlreadyRefunded(double alreadyRefunded) {
+		this.alreadyRefunded = alreadyRefunded;
+	}
 
 	public void prepareCalculationData(double _howMuchPerPerson) {
 		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
@@ -162,30 +195,6 @@ public class PersonData implements Serializable{
 		return tmpToReturn;
 	}
 
-	private boolean personBNeedsMoreThanIShouldGive(double tmpToReturn) {
-		return alreadyReturned + tmpToReturn > toReturn;
-	}
-
-	public double getHowMuchPersonShouldPay() {
-		return howMuchIShouldPay;
-	}
-	
-	public void setHowMuchPersonShouldPay(double value) {
-		this.howMuchIShouldPay = value;
-	}
-
-	public HashMap<String, Double> getRefundForOtherPeople() {
-		return refundForOtherPeople;
-	}
-
-	public void setRefundForOtherPeople(HashMap<String, Double> refundForOtherPeople) {
-		this.refundForOtherPeople = refundForOtherPeople;
-	}
-
-	public double getCalculatedReturnForPersonB(String personB) {
-		return getRefundForOtherPeople().get(personB);
-	}
-
 	public String printPersonReturnsToOthers(){
 		StringBuilder sb = new StringBuilder(getName());
 		sb.append(" should return to:\n");
@@ -196,18 +205,18 @@ public class PersonData implements Serializable{
 		while(it.hasNext()) {
 			String key = it.next();
 			double result = getRefundForOtherPeople().get(key);
+			if(result >0)
 			sb.append(key).append(": ").append(result).append("\n");
 		}
 		
 		return sb.toString();
 	}
 
-	public double getAlreadyRefunded() {
-		return alreadyRefunded;
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getName()).append(" paid: ").append(getPayMadeByPerson());
+		
+		return sb.toString();
 	}
-
-	public void setAlreadyRefunded(double alreadyRefunded) {
-		this.alreadyRefunded = alreadyRefunded;
-	}
-	
 }

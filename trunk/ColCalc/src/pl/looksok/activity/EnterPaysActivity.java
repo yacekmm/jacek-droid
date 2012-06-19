@@ -11,8 +11,12 @@ import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.InputValidator;
 import pl.looksok.utils.exceptions.BadInputDataException;
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -48,10 +52,12 @@ public class EnterPaysActivity extends ColCalcActivity {
 	private TextView mNewPersonShouldPayText;
 	private ListView mPeopleList;
 	private Button mCalculateButton;
+	private Button mGetPersonContactButton;
 	
 	private static final int MENU_EDIT = Menu.FIRST;
 	private static final int MENU_DELETE = MENU_EDIT+1;
 	protected static final String LOG_TAG = EnterPaysActivity.class.getSimpleName();
+	protected static final int PICK_CONTACT = 0;
 	
     /** Called when the activity is first created. */
     @Override
@@ -89,6 +95,8 @@ public class EnterPaysActivity extends ColCalcActivity {
 	private void initActivityViews() {
 		mAddPersonButton = (Button)findViewById(R.id.EnterPays_Button_AddPerson);
         mAddPersonButton.setOnClickListener(addPersonClickListener);
+        mGetPersonContactButton = (Button)findViewById(R.id.EnterPays_button_getPersonFromContacts);
+        mGetPersonContactButton.setOnClickListener(getContactClickListener);
         mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
         mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
         mEqualPaymentsBox.setChecked(calc.isEqualPayments());
@@ -205,6 +213,31 @@ public class EnterPaysActivity extends ColCalcActivity {
 				mNewPersonShouldPayText.setText(getResources().getString(R.string.EnterPays_TextView_ShouldPay));
 			}
 		}
+	}
+	
+	OnClickListener getContactClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+			startActivityForResult(intent, PICK_CONTACT);
+		}
+	};
+	
+	@Override
+	public void onActivityResult(int reqCode, int resultCode, Intent data) {
+	  super.onActivityResult(reqCode, resultCode, data);
+
+	  switch (reqCode) {
+	    case (PICK_CONTACT) :
+	      if (resultCode == Activity.RESULT_OK) {
+	        Uri contactData = data.getData();
+	        Cursor c =  managedQuery(contactData, null, null, null, null);
+	        if (c.moveToFirst()) {
+	          String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+	          mNewPersonNameInput.setText(name);
+	        }
+	      }
+	      break;
+	  }
 	}
 	
 	OnClickListener addPersonClickListener = new OnClickListener() {
