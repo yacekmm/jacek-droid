@@ -41,11 +41,18 @@
                 android:layout_column="0"
                 android:text="@string/EnterPays_TextView_Name" />
 
+            <Button
+                android:id="@+id/EnterPays_button_getPersonFromContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="@string/EnterPays_button_getContact" />
+
             <EditText
                 android:id="@+id/EnterPays_EditText_Name"
                 android:layout_width="0dip"
 				android:layout_weight="@string/table_column1_weight"
-                android:layout_column="1"
+                android:layout_column="2"
                 android:inputType="text" />
         </TableRow>
 
