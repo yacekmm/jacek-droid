@@ -86,10 +86,19 @@ public class EnterPaysActivity extends ColCalcActivity {
 		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 		calc.setCalculationResult(new Hashtable<String, PersonData>());
 		setHowMuchShouldPayFieldsVisibility();
+
+		PersonData pd = (PersonData)extras.getSerializable(Constants.BUNDLE_PERSON_TO_EDIT);
+		if(pd!=null){
+			mNewPersonNameInput.setText(pd.getName());
+			mNewPersonPayInput.setText(String.valueOf(pd.getPayMadeByPerson()));
+			mNewPersonShouldPayInput.setText(String.valueOf(pd.getHowMuchPersonShouldPay()));
+		}
+		
 		for (PersonData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);
 			adapter.add(data);
 		}
+		
 	}
 
 	private void initActivityViews() {

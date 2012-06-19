@@ -17,6 +17,5 @@ public class ColCalcActivity extends Activity {
 		getWindow().setFormat(PixelFormat.RGBA_8888); 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
 	}
-
 	
 }
