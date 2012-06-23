@@ -1,4 +1,4 @@
-package pl.looksok.activity;
+package pl.looksok.activity.calcresult;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import pl.looksok.R;
+import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.addperson.AddNewPerson;
 import pl.looksok.customviews.ResultsListAdapter;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
@@ -24,7 +26,10 @@ public class CalculationResultActivity extends ColCalcActivity {
 	private ListView resultList;
 	private List<PersonData> listArray;
 	private Button saveCalculationButton;
+	private Button shareCalculationButton;
 	private ResultsListAdapter adapter;
+	
+	private CalcResultUtils utils = new CalcResultUtils();
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,16 @@ public class CalculationResultActivity extends ColCalcActivity {
         
         readInputBundle();
         populateListArray();
+        initViews();
     }
+
+	private void initViews() {
+		saveCalculationButton = (Button)findViewById(R.id.calc_button_saveCalculation);
+        saveCalculationButton.setOnClickListener(saveCalculationButtonClickListener);
+        
+        shareCalculationButton = (Button)findViewById(R.id.calc_button_sendCalculation);
+        shareCalculationButton.setOnClickListener(shareCalculationButtonClickListener);
+	}
 
 	private void populateListArray() {
 		listArray = new ArrayList<PersonData>();
@@ -47,9 +61,6 @@ public class CalculationResultActivity extends ColCalcActivity {
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
 		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
-		
-		saveCalculationButton = (Button)findViewById(R.id.calc_button_saveCalculation);
-		saveCalculationButton.setOnClickListener(saveCalculationButtonClickListener);
 	}
 
 	private void readInputBundle() {
@@ -65,12 +76,23 @@ public class CalculationResultActivity extends ColCalcActivity {
         	Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
         }
     };
+    
+    OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
+    	public void onClick(View v) {
+    		Intent emailIntent = new Intent(Intent.ACTION_SEND);
+    		emailIntent.putExtra(Intent.EXTRA_EMAIL, utils.getEmailsArray(calc));		  
+    		emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
+    		emailIntent.putExtra(Intent.EXTRA_TEXT, utils.buildEmailMessage(getApplicationContext()));
+    		emailIntent.setType("message/rfc822");
+    		startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
+    	}
+    };
 
 	public void editPerson(View v) {
 		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
 		calc.getInputPaysList().remove(pd);
 		
-    	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
+    	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
     	startActivity(intent);
@@ -82,16 +104,11 @@ public class CalculationResultActivity extends ColCalcActivity {
 		calc.removePerson(pd);
 		calc.calculate(calc.getInputPaysList());
 		populateListArray();
-//		adapter.remove(pd);
-//		boolean result = calc.getInputPaysList().remove(pd);
-//		populateListFromCalcObject();
-//		calc.calculate(calc.getInputPaysList());
-		
 	}
 	
 	@Override
 	public void onBackPressed() {
-    	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
+    	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
     	startActivity(intent);
     	finish();

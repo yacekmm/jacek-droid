@@ -41,7 +41,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
         android:text="@string/calculation_button_save_text" />
+
+    <Button
+        android:id="@+id/calc_button_sendCalculation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/calc_button_saveCalculation"
+        android:text="@string/calculation_button_sendCalculation_text" />
 
 </RelativeLayout>

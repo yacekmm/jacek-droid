@@ -14,6 +14,7 @@ public class PersonData implements Serializable{
 
 	private static final long serialVersionUID = 4909331903428866567L;
 	private String name;
+	private String email = "";
 	private double howMuchIPaid;
 	private double howMuchIShouldPay;
 	private double toReturn;
@@ -31,13 +32,14 @@ public class PersonData implements Serializable{
 		refundForOtherPeople = new HashMap<String, Double>();
 	}
 
-	public PersonData(String name, double payDouble) {
+	public PersonData(String name, double payDouble, String email) {
 		this.name = name;
 		this.setPayMadeByPerson(payDouble);
+		this.email = email;
 	}
 
-	public PersonData(String name, double payDouble, double shouldPayDouble) {
-		this(name, payDouble);
+	public PersonData(String name, double payDouble, double shouldPayDouble, String email) {
+		this(name, payDouble, email);
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
 
@@ -218,5 +220,13 @@ public class PersonData implements Serializable{
 		sb.append(getName()).append(" paid: ").append(getPayMadeByPerson());
 		
 		return sb.toString();
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

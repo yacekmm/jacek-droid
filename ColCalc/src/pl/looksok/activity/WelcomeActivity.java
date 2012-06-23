@@ -1,6 +1,7 @@
 package pl.looksok.activity;
 
 import pl.looksok.R;
+import pl.looksok.activity.addperson.AddNewPerson;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
@@ -30,7 +31,7 @@ public class WelcomeActivity extends ColCalcActivity {
 	
 	OnClickListener newCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
+        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	startActivity(intent);
         	finish();
         }
@@ -41,7 +42,7 @@ public class WelcomeActivity extends ColCalcActivity {
         	CalculationLogic calc = CalcPersistence.readStoredCalculation(getApplicationContext(), "installedapplist.txt");
 //        	InputData inputData = CalcPersistence.readStoredInputData(getApplicationContext(), "installedapplist.txt");
         	
-        	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
+        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
         	finish();

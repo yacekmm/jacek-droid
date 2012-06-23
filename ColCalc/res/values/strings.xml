@@ -34,8 +34,18 @@
     <string name="EnterPays_Menu_Remove">Usuń</string>
     
     <string name="calculation_button_save_text">Zapisz rozliczenie</string>
+    <string name="calculation_button_sendCalculation_text">Wyślij rozliczenie</string>
     <string name="calculation_saved_text">Zapisano!</string>
     
     <string name="table_column0_weight">2</string>
     <string name="table_column1_weight">1</string>
+
+    <string name="email_subject">Rozliczenie naszych składek</string>
+    <string name="email_content_welcome">Hej!</string>
+    <string name="email_content_text">Przesyłam rozliczenie po naszych składkach. Poniżej znajdziecie informacje kto komu ile powinien oddać.</string>
+    <string name="email_content_madeBy">Obliczyła to wszystko aplikacja</string>
+    <string name="email_content_greetings">Pozdrawiam!</string>
+    <string name="email_utils_chooseEmailClient">Wybierz program pocztowy:</string>
+    
+    
 </resources>

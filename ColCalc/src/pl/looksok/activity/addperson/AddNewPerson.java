@@ -1,10 +1,13 @@
-package pl.looksok.activity;
+package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.WelcomeActivity;
+import pl.looksok.activity.calcresult.CalculationResultActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.Constants;
@@ -17,6 +20,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -39,12 +43,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EnterPaysActivity extends ColCalcActivity {
+public class AddNewPerson extends ColCalcActivity {
 	private List<PersonData> inputPaysList = new ArrayList<PersonData>();
 	private ArrayAdapter<PersonData> adapter;
 	private CalculationLogic calc = new CalculationLogic();
 	
-	private Button mAddPersonButton;
 	private CheckBox mEqualPaymentsBox;
 	private EditText mNewPersonNameInput;
 	private EditText mNewPersonPayInput;
@@ -52,12 +55,14 @@ public class EnterPaysActivity extends ColCalcActivity {
 	private TextView mNewPersonShouldPayText;
 	private ListView mPeopleList;
 	private Button mCalculateButton;
-	private Button mGetPersonContactButton;
 	
 	private static final int MENU_EDIT = Menu.FIRST;
 	private static final int MENU_DELETE = MENU_EDIT+1;
-	protected static final String LOG_TAG = EnterPaysActivity.class.getSimpleName();
+	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
 	protected static final int PICK_CONTACT = 0;
+	private String email = "";
+	
+//	private AddPersonUtils utils = new AddPersonUtils(getApplicationContext());
 	
     /** Called when the activity is first created. */
     @Override
@@ -102,10 +107,8 @@ public class EnterPaysActivity extends ColCalcActivity {
 	}
 
 	private void initActivityViews() {
-		mAddPersonButton = (Button)findViewById(R.id.EnterPays_Button_AddPerson);
-        mAddPersonButton.setOnClickListener(addPersonClickListener);
-        mGetPersonContactButton = (Button)findViewById(R.id.EnterPays_button_getPersonFromContacts);
-        mGetPersonContactButton.setOnClickListener(getContactClickListener);
+		((Button)findViewById(R.id.EnterPays_Button_AddPerson)).setOnClickListener(addPersonClickListener);
+        ((Button)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
         mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
         mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
         mEqualPaymentsBox.setChecked(calc.isEqualPayments());
@@ -242,7 +245,19 @@ public class EnterPaysActivity extends ColCalcActivity {
 	        Cursor c =  managedQuery(contactData, null, null, null, null);
 	        if (c.moveToFirst()) {
 	          String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+	          String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
 	          mNewPersonNameInput.setText(name);
+	          
+//	          email  = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+//	          Cursor emailCur = managedQuery( 
+//	      			Contacts.ContactMethods.CONTENT_EMAIL_URI, 
+//	      			null,
+//	      			Contacts.ContactMethods.PERSON_ID + " = ?", 
+//	      			new String[]{id}, null); 
+//	      	while (emailCur.moveToNext()) { 
+//	      	    // This would allow you get several email addresses
+//	      	} 
+//	      	emailCur.close();
 	        }
 	      }
 	      break;
@@ -277,9 +292,9 @@ public class EnterPaysActivity extends ColCalcActivity {
         		throw new BadInputDataException();
         	
         	if(calc.isEqualPayments())
-        		return new PersonData(name, payDouble);
+        		return new PersonData(name, payDouble, email);
         	else
-        		return new PersonData(name, payDouble, shouldPayDouble);
+        		return new PersonData(name, payDouble, shouldPayDouble, email);
 		}
     };
     
