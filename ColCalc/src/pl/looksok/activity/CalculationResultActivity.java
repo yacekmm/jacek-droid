@@ -24,6 +24,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	private ListView resultList;
 	private List<PersonData> listArray;
 	private Button saveCalculationButton;
+	private ResultsListAdapter adapter;
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,13 +45,13 @@ public class CalculationResultActivity extends ColCalcActivity {
 		}
 		
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
-		ResultsListAdapter adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
+		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		
 		saveCalculationButton = (Button)findViewById(R.id.calc_button_saveCalculation);
 		saveCalculationButton.setOnClickListener(saveCalculationButtonClickListener);
 	}
-	
+
 	private void readInputBundle() {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -65,22 +66,27 @@ public class CalculationResultActivity extends ColCalcActivity {
         }
     };
 
-	public void edit(View v) {
-		PersonData pd = (PersonData)v.getTag();
-		for (PersonData data : calc.getInputPaysList()) {
-			if(data.getName().equals(pd.getName())){
-				pd = data;
-				break;
-			}
-		}
+	public void editPerson(View v) {
+		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
 		calc.getInputPaysList().remove(pd);
 		
-		Toast.makeText(getApplicationContext(), "Going to edit...", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(getApplicationContext(), EnterPaysActivity.class) ;
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
     	startActivity(intent);
     	finish();
+	}
+
+	public void removePerson(View v){
+		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
+		calc.removePerson(pd);
+		calc.calculate(calc.getInputPaysList());
+		populateListArray();
+//		adapter.remove(pd);
+//		boolean result = calc.getInputPaysList().remove(pd);
+//		populateListFromCalcObject();
+//		calc.calculate(calc.getInputPaysList());
+		
 	}
 	
 	@Override

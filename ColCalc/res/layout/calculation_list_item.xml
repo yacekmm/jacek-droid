@@ -33,7 +33,7 @@
             android:layout_toLeftOf="@+id/calcItem_image_delete"
             android:contentDescription="@string/EnterPays_Menu_Edit"
             android:src="@drawable/content_edit" 
-            android:onClick="edit"
+            android:onClick="editPerson"
             />
 
         <ImageView
@@ -42,7 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:contentDescription="@string/EnterPays_Menu_Remove"
-            android:src="@drawable/content_discard" />
+            android:src="@drawable/content_discard"
+            android:onClick="removePerson"
+            />
     </RelativeLayout>
 
     <LinearLayout

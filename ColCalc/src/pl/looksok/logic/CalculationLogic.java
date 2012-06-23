@@ -38,13 +38,13 @@ public class CalculationLogic implements Serializable {
 		return totalPay / peopleCount;
 	}
 
-	public Hashtable<String, PersonData> calculate(List<PersonData> inputPaysList){
+	public Hashtable<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
 		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
 		double sumOfAllPays = 0.0;
 		double sumOfAllShouldPays = 0.0;
 		
-		for (PersonData in : inputPaysList) {
+		for (PersonData in : this.inputPaysList) {
 			if(inputPays.containsKey(in.getName()))
 				throw new DuplicatePersonNameException();
 			else{
@@ -159,5 +159,20 @@ public class CalculationLogic implements Serializable {
 
 	public void setEqualPayments(boolean equalPayments) {
 		this.equalPayments = equalPayments;
+	}
+
+	public PersonData findPersonInList(PersonData pd) {
+		for (PersonData data : getInputPaysList()) {
+			if(data.getName().equals(pd.getName())){
+				pd = data;
+				break;
+			}
+		}
+		return pd;
+	}
+
+	public void removePerson(PersonData pd) {
+		inputPaysList.remove(pd);
+		getCalculationResult().remove(pd.getName());
 	}
 }

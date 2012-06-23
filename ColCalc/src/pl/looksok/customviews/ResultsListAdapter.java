@@ -45,6 +45,8 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.txtDetails = (TextView)row.findViewById(R.id.calcItem_details_text);
             holder.imgEditPerson = (ImageView)row.findViewById(R.id.calcItem_image_edit);
             holder.imgEditPerson.setTag(items.get(position));
+            holder.imgRemovePerson = (ImageView)row.findViewById(R.id.calcItem_image_delete);
+            holder.imgRemovePerson.setTag(items.get(position));
             
             row.setTag(holder);
 
@@ -85,5 +87,6 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     	TextView txtCurrency;
     	TextView txtDetails;
     	ImageView imgEditPerson;
+    	ImageView imgRemovePerson;
     }
 }
