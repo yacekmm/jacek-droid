@@ -1,6 +1,7 @@
 package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -60,9 +60,9 @@ public class AddNewPerson extends ColCalcActivity {
 	private static final int MENU_DELETE = MENU_EDIT+1;
 	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
 	protected static final int PICK_CONTACT = 0;
-	private String email = "";
+	private HashSet<String> emails = new HashSet<String>();
 	
-//	private AddPersonUtils utils = new AddPersonUtils(getApplicationContext());
+	private AddPersonUtils utils = new AddPersonUtils();
 	
     /** Called when the activity is first created. */
     @Override
@@ -248,16 +248,7 @@ public class AddNewPerson extends ColCalcActivity {
 	          String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
 	          mNewPersonNameInput.setText(name);
 	          
-//	          email  = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-//	          Cursor emailCur = managedQuery( 
-//	      			Contacts.ContactMethods.CONTENT_EMAIL_URI, 
-//	      			null,
-//	      			Contacts.ContactMethods.PERSON_ID + " = ?", 
-//	      			new String[]{id}, null); 
-//	      	while (emailCur.moveToNext()) { 
-//	      	    // This would allow you get several email addresses
-//	      	} 
-//	      	emailCur.close();
+	          emails = utils.getPersonEmailsSet(id, AddNewPerson.this);
 	        }
 	      }
 	      break;
@@ -292,9 +283,9 @@ public class AddNewPerson extends ColCalcActivity {
         		throw new BadInputDataException();
         	
         	if(calc.isEqualPayments())
-        		return new PersonData(name, payDouble, email);
+        		return new PersonData(name, payDouble, emails);
         	else
-        		return new PersonData(name, payDouble, shouldPayDouble, email);
+        		return new PersonData(name, payDouble, shouldPayDouble, emails);
 		}
     };
     

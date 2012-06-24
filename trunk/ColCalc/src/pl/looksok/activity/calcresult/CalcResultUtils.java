@@ -1,5 +1,6 @@
 package pl.looksok.activity.calcresult;
 
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -19,8 +20,14 @@ public class CalcResultUtils {
 		int i = 0;
 		while (it.hasNext()){
 			String key = it.next();
-			String email = calcResult.get(key).getEmail();
-			emails[i++] = email; 
+			HashSet<String> emailsSet = calcResult.get(key).getEmails();
+			Iterator<String> it2 = emailsSet.iterator();
+			while (it2.hasNext()){
+				String email = it2.next();
+				emails[i] = email; 
+				break;
+			}
+			i++;
 		}
 		
 		return emails;

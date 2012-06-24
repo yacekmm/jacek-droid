@@ -2,6 +2,7 @@ package pl.looksok.logic;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class PersonData implements Serializable{
 
 	private static final long serialVersionUID = 4909331903428866567L;
 	private String name;
-	private String email = "";
+	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
 	private double howMuchIShouldPay;
 	private double toReturn;
@@ -25,21 +26,23 @@ public class PersonData implements Serializable{
 	private double alreadyRefunded = 0.0;
 	
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
-		setPersonName(_personName);
-		setPayMadeByPerson(inputPays.get(getName()).getPayMadeByPerson());
+		PersonData pd = inputPays.get(_personName);
+		setPersonName(pd.getName());
+		setPayMadeByPerson(pd.getPayMadeByPerson());
+		setEmails(pd.getEmails());
 		
 		otherPeoplePayments = inputPays;
 		refundForOtherPeople = new HashMap<String, Double>();
 	}
 
-	public PersonData(String name, double payDouble, String email) {
+	public PersonData(String name, double payDouble, HashSet<String> emails) {
 		this.name = name;
 		this.setPayMadeByPerson(payDouble);
-		this.email = email;
+		this.emails = emails;
 	}
 
-	public PersonData(String name, double payDouble, double shouldPayDouble, String email) {
-		this(name, payDouble, email);
+	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
+		this(name, payDouble, emails);
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
 
@@ -222,11 +225,11 @@ public class PersonData implements Serializable{
 		return sb.toString();
 	}
 
-	public String getEmail() {
-		return email;
+	public HashSet<String> getEmails() {
+		return emails;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmails(HashSet<String> emails) {
+		this.emails = emails;
 	}
 }
