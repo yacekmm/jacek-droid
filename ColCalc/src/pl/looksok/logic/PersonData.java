@@ -104,7 +104,7 @@ public class PersonData implements Serializable{
 		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
 		
 		calculateHowMuchIShouldReturn();
-		calculateHowMuchRefundIShouldHave();
+		calculateHowMuchRefundIShouldReceive();
 	}
 
 	public void calculateRefundToOthers(Hashtable<String, PersonData> calculationResult) {
@@ -136,7 +136,7 @@ public class PersonData implements Serializable{
 			toReturn = 0.0;
 	}
 
-	private void calculateHowMuchRefundIShouldHave() {
+	private void calculateHowMuchRefundIShouldReceive() {
 		totalRefundForThisPerson = howMuchIPaid - howMuchIShouldPay;
 		if(totalRefundForThisPerson < 0.0)
 			totalRefundForThisPerson = 0.0;

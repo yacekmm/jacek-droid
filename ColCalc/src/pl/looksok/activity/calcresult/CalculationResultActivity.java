@@ -1,6 +1,7 @@
 package pl.looksok.activity.calcresult;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -108,8 +109,20 @@ public class CalculationResultActivity extends ColCalcActivity {
 	public void removePerson(View v){
 		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
 		calc.removePerson(pd);
-		calc.calculate(calc.getInputPaysList());
+		calc.setCalculationResult(new Hashtable<String, PersonData>());
+		for (PersonData data : calc.getInputPaysList()) {
+			data.setAlreadyRefunded(0.0);
+		}
+//		calc.getCalculationResult().remove(pd.getName());
+//		calc.recalculate(calc.getInputPaysList());
+		calc.recalculate();
 		populateListArray();
+
+		//FIXME: activity is now restarted - ugly
+//		Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
+//    	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+//    	startActivity(intent);
+//    	finish();
 	}
 	
 	@Override
