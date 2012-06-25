@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.BadInputDataException;
@@ -40,6 +39,12 @@ public class CalculationLogic implements Serializable {
 
 	public Hashtable<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
+		HashMap<String, PersonData> inputPays = convertAndValidateInput();
+		
+		return calculate(inputPays);
+	}
+
+	private HashMap<String, PersonData> convertAndValidateInput() {
 		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
 		double sumOfAllPays = 0.0;
 		double sumOfAllShouldPays = 0.0;
@@ -59,46 +64,53 @@ public class CalculationLogic implements Serializable {
 				throw new BadInputDataException("Sum of all Pays made by persons is not equal to sum of amount that they should pay");
 			}
 		}
-		
+		return inputPays;
+	}
+	
+
+	public Hashtable<String, PersonData> recalculate() {
+		resetInputData();
+		HashMap<String, PersonData> inputPays = convertAndValidateInput();
 		return calculate(inputPays);
+	}
+
+	private void resetInputData() {
+		setCalculationResult(new Hashtable<String, PersonData>());
+		for (PersonData data : getInputPaysList()) {
+			data.setAlreadyRefunded(0.0);
+		}
 	}
 	
 	private Hashtable<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
 		Double totalPay = calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
-		if(equalPayments)
-			howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
 		
-		prepareCalculationObject(inputPays, howMuchPersonShouldPay);
-		
-		performCalculation();
-		
-		return calculationResult;
-	}
-
-	private void prepareCalculationObject(HashMap<String, PersonData> inputPays,
-			double howMuchPersonShouldPay) {
 		Collection<String> c = inputPays.keySet();
 		Iterator<String> itr = c.iterator();
 		while (itr.hasNext()){
 			String key = itr.next();
 			if(!equalPayments)
 				howMuchPersonShouldPay = inputPays.get(key).getHowMuchPersonShouldPay();
-			inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
+			else{
+				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
+				inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
+			}
 			
 			PersonData p = new PersonData(key, inputPays);
 			p.prepareCalculationData(howMuchPersonShouldPay);
 			calculationResult.put(p.getName(), p);
 		}
+		
+		performCalculation();
+		
+		return calculationResult;
 	}
 
 	private void performCalculation() {
-		Set<String> c2 = calculationResult.keySet();
-		Iterator<String> it = c2.iterator();
-		
 		Hashtable<String, PersonData> newCalculationResult = new Hashtable<String, PersonData>();
 		
+		Iterator<String> it = calculationResult.keySet().iterator();
 		while (it.hasNext()){
 			PersonData pp = calculationResult.get(it.next());
 			pp.calculateRefundToOthers(calculationResult);
@@ -189,11 +201,6 @@ public class CalculationLogic implements Serializable {
 	public void removePerson(PersonData pd) {
 		inputPaysList.remove(pd);
 		getCalculationResult().remove(pd.getName());
-		
-//		Iterator<String> it = getCalculationResult().keySet().iterator();
-//		while (it.hasNext()) {
-//			String key = it.next();
-//			getCalculationResult().get(key).getOtherPeoplePayments().remove(pd.getName());
-//		}
 	}
+
 }
