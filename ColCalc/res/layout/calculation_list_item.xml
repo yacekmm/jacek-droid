@@ -63,33 +63,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6" >
         </TextView>
-
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4" >
-
+            android:layout_weight="0.4"
+            android:gravity="right" >
+
             <TextView
                 android:id="@+id/calcItem_textView_personPay"
                 style="@style/balancePositiveText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/calcItem_textView_currency"
-                android:text="@string/calculation_TextView_personPay" />
-
-            <TextView
-                android:id="@+id/calcItem_textView_currency"
-                style="@style/balancePositiveText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_micro"
                 android:layout_marginRight="@dimen/margin_micro"
-                android:layout_marginBottom="@dimen/margin_micro"
-                android:text="@string/calculation_TextView_currency"
-                />
+                android:gravity="right"
+                android:text="@string/calculation_TextView_personPay"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                 />
+
         </RelativeLayout>
     </LinearLayout>
 
