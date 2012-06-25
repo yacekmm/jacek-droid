@@ -41,7 +41,6 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder = new ResultHolder();
             holder.txtName = (TextView)row.findViewById(R.id.calcItem_textView_name);
             holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_personPay);
-            holder.txtCurrency = (TextView)row.findViewById(R.id.calcItem_textView_currency);
             holder.txtDetails = (TextView)row.findViewById(R.id.calcItem_details_text);
             holder.imgEditPerson = (ImageView)row.findViewById(R.id.calcItem_image_edit);
             holder.imgEditPerson.setTag(items.get(position));
@@ -62,30 +61,26 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		PersonData pp = items.get(position);
         holder.txtName.setText(pp.getName());
         setBalance(holder, pp);
-        holder.txtCurrency.setText(Currency.getInstance(Locale.getDefault()).getSymbol());
         holder.txtDetails.setText(pp.printPersonReturnsToOthers(context.getString(R.string.calculation_printText_return),
         		context.getString(R.string.calculation_printText_for)));
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
-		double refund = pp.getTotalRefundForThisPerson();
-		double toReturn = pp.getToReturn();
 		
-		if(refund > toReturn){
-			holder.txtBalance.setText("+" + FormatterHelper.roundDouble(refund,2));
+		if(pp.getPayMadeByPerson() > pp.getHowMuchPersonShouldPay()){
 			holder.txtBalance.setTextAppearance(context, R.style.balancePositiveText);
-			holder.txtCurrency.setTextAppearance(context, R.style.balancePositiveText);
 		}else{
-			holder.txtBalance.setText("-" +  FormatterHelper.roundDouble(toReturn, 2));
 			holder.txtBalance.setTextAppearance(context, R.style.balanceNegativeText);
-			holder.txtCurrency.setTextAppearance(context, R.style.balanceNegativeText);
 		}
+		
+		holder.txtBalance.setText(context.getString(R.string.calculation_TextView_personPaid_text) + "\n" + 
+				FormatterHelper.roundDouble(pp.getPayMadeByPerson(),2) + 
+				Currency.getInstance(Locale.getDefault()).getSymbol());
 	}
 	
     public static class ResultHolder {
     	TextView txtName;
     	TextView txtBalance;
-    	TextView txtCurrency;
     	TextView txtDetails;
     	ImageView imgEditPerson;
     	ImageView imgRemovePerson;
