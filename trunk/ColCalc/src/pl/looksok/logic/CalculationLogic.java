@@ -131,17 +131,32 @@ public class CalculationLogic implements Serializable {
 	
 	@Override
 	public String toString(){
-		StringBuilder sb = new StringBuilder("Calculation results: \n");
+		StringBuilder sb = new StringBuilder();
+		sb.append(printCalcResultForSharing("Calculation results", "should return", "for"));
+		return sb.toString();
+	}
+	
+	/**
+	 * returns String with calculation result like:
+	 * [titleText]:
+	 * [personName] [returnToText]:
+	 * [calculatedReturnValue] [forText] [otherPersonName] 
+	 * @param titleText
+	 * @param returnToText
+	 * @return
+	 */
+	public String printCalcResultForSharing(String titleText, String returnToText, String forText){
+		StringBuilder sb = new StringBuilder(titleText).append(":\n");
 		
 		if(calculationResult != null){
-			Set<String> c = calculationResult.keySet();
-			Iterator<String> it = c.iterator();
+			Iterator<String> it = calculationResult.keySet().iterator();
 			
 			while (it.hasNext()){
 				PersonData pp = calculationResult.get(it.next());
-				sb.append(pp.printPersonReturnsToOthers()).append("\n");
+				sb.append(pp.printPersonReturnsToOthers(returnToText, forText)).append("\n");
 			}
 		}
+		
 		return sb.toString();
 	}
 

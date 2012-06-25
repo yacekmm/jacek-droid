@@ -63,7 +63,8 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         holder.txtName.setText(pp.getName());
         setBalance(holder, pp);
         holder.txtCurrency.setText(Currency.getInstance(Locale.getDefault()).getSymbol());
-        holder.txtDetails.setText(pp.printPersonReturnsToOthers());
+        holder.txtDetails.setText(pp.printPersonReturnsToOthers(context.getString(R.string.calculation_printText_return),
+        		context.getString(R.string.calculation_printText_for)));
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {

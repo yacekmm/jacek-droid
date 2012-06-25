@@ -1,10 +1,12 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 
 import pl.looksok.utils.FormatterHelper;
@@ -200,21 +202,26 @@ public class PersonData implements Serializable{
 		return tmpToReturn;
 	}
 
-	public String printPersonReturnsToOthers(){
+	public String printPersonReturnsToOthers(String returnToText, String forText){
 		StringBuilder sb = new StringBuilder(getName());
-		sb.append(" should return to:\n");
+		sb.append(" ").append(returnToText).append(":\n");
+		boolean isThereAnyPersonOnReturnList = false;
 		
-		Set<String> c = getRefundForOtherPeople().keySet();
-		Iterator<String> it = c.iterator();
-		
+		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
 		while(it.hasNext()) {
 			String key = it.next();
 			double result = getRefundForOtherPeople().get(key);
-			if(result >0)
-			sb.append(key).append(": ").append(result).append("\n");
+			if(result >0){
+				isThereAnyPersonOnReturnList = true;
+				sb.append(result).append(" ").append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ");
+				sb.append(forText).append(": ").append(key).append("\n");
+			}
 		}
 		
-		return sb.toString();
+		if(isThereAnyPersonOnReturnList)
+			return sb.toString();
+		else
+			return "";
 	}
 
 	@Override
