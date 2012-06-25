@@ -1,10 +1,12 @@
 package pl.looksok.activity.calcresult;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,7 +18,7 @@ public class CalcResultUtils {
 
 	private static final String LOG_TAG = CalcResultUtils.class.getSimpleName();
 
-	public String[] getEmailsArray(Context context, CalculationLogic calc) {
+	private String[] getEmailsArray(Context context, CalculationLogic calc) {
 		Hashtable<String, PersonData> calcResult = calc.getCalculationResult();
 		String [] emails = new String[calcResult.size()];
 		boolean noEmailsProvidedInfoShown = false;
@@ -53,7 +55,7 @@ public class CalcResultUtils {
 		return emails;
 	}
 
-	public String buildEmailMessage(Context context, CalculationLogic calc) {
+	private String buildEmailMessage(Context context, CalculationLogic calc) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(context.getString(R.string.email_content_welcome)).append("\n\n");
 		sb.append(context.getString(R.string.email_content_text)).append("\n\n");
@@ -66,6 +68,28 @@ public class CalcResultUtils {
 				));
 		
 		return sb.toString();
+	}
+	
+	public ArrayList<PersonData> readCalcPeopleToListArray(CalculationLogic calc){
+		ArrayList<PersonData> listArray = new ArrayList<PersonData>();
+		
+		Iterator<String> it = calc.getCalculationResult().keySet().iterator();
+		while (it.hasNext()){
+			listArray.add(calc.getCalculationResult().get(it.next()));
+		}
+		
+		return listArray;
+	}
+
+	public Intent prepareEmailIntent(Context context,
+			CalculationLogic calc) {
+		Intent emailIntent = new Intent(Intent.ACTION_SEND);
+		emailIntent.putExtra(Intent.EXTRA_EMAIL, getEmailsArray(context, calc));		  
+		emailIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.email_subject));
+		emailIntent.putExtra(Intent.EXTRA_TEXT, buildEmailMessage(context, calc));
+		emailIntent.setType("message/rfc822");
+		
+		return emailIntent;
 	}
 
 }
