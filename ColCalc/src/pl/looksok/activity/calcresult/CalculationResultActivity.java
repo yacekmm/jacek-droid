@@ -1,10 +1,6 @@
 package pl.looksok.activity.calcresult;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
@@ -24,11 +20,10 @@ import android.widget.Toast;
 
 public class CalculationResultActivity extends ColCalcActivity {
 	protected static final String LOG_TAG = CalculationResultActivity.class.getSimpleName();
+	
 	private CalculationLogic calc = null;
 	private ListView resultList;
 	private List<PersonData> listArray;
-	private Button saveCalculationButton;
-	private Button shareCalculationButton;
 	private ResultsListAdapter adapter;
 	
 	private CalcResultUtils utils = new CalcResultUtils();
@@ -41,26 +36,16 @@ public class CalculationResultActivity extends ColCalcActivity {
         readInputBundle();
         resultList = (ListView)findViewById(R.id.calc_listView_list);
         populateListArray();
-        initViews();
+        initButtons();
     }
 
-	private void initViews() {
-		saveCalculationButton = (Button)findViewById(R.id.calc_button_saveCalculation);
-        saveCalculationButton.setOnClickListener(saveCalculationButtonClickListener);
-        
-        shareCalculationButton = (Button)findViewById(R.id.calc_button_sendCalculation);
-        shareCalculationButton.setOnClickListener(shareCalculationButtonClickListener);
+	private void initButtons() {
+		((Button)findViewById(R.id.calc_button_saveCalculation)).setOnClickListener(saveCalculationButtonClickListener);
+        ((Button)findViewById(R.id.calc_button_sendCalculation)).setOnClickListener(shareCalculationButtonClickListener);
 	}
 
 	private void populateListArray() {
-		listArray = new ArrayList<PersonData>();
-		
-		Set<String> c = calc.getCalculationResult().keySet();
-		Iterator<String> it = c.iterator();
-		while (it.hasNext()){
-			listArray.add(calc.getCalculationResult().get(it.next()));
-		}
-		
+		listArray = utils.readCalcPeopleToListArray(calc);
 		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 	}
@@ -82,15 +67,10 @@ public class CalculationResultActivity extends ColCalcActivity {
     OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
     	public void onClick(View v) {
     		try{
-    			Intent emailIntent = new Intent(Intent.ACTION_SEND);
-    			emailIntent.putExtra(Intent.EXTRA_EMAIL, utils.getEmailsArray(getApplicationContext(), calc));		  
-    			emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
-    			emailIntent.putExtra(Intent.EXTRA_TEXT, utils.buildEmailMessage(getApplicationContext(), calc));
-    			emailIntent.setType("message/rfc822");
+    			Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calc);
     			startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
     		}catch(NullPointerException e){
     			Log.e(LOG_TAG, "Error while preparing email. there is no email Addresses probably: " + e.getMessage());
-    			
     		}
     	}
     };
@@ -109,20 +89,8 @@ public class CalculationResultActivity extends ColCalcActivity {
 	public void removePerson(View v){
 		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
 		calc.removePerson(pd);
-		calc.setCalculationResult(new Hashtable<String, PersonData>());
-		for (PersonData data : calc.getInputPaysList()) {
-			data.setAlreadyRefunded(0.0);
-		}
-//		calc.getCalculationResult().remove(pd.getName());
-//		calc.recalculate(calc.getInputPaysList());
 		calc.recalculate();
 		populateListArray();
-
-		//FIXME: activity is now restarted - ugly
-//		Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
-//    	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-//    	startActivity(intent);
-//    	finish();
 	}
 	
 	@Override
