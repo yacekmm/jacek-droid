@@ -42,10 +42,15 @@
 
     <string name="email_subject">Rozliczenie naszych składek</string>
     <string name="email_content_welcome">Hej!</string>
-    <string name="email_content_text">Przesyłam rozliczenie po naszych składkach. Poniżej znajdziecie informacje kto komu ile powinien oddać.</string>
-    <string name="email_content_madeBy">Obliczyła to wszystko aplikacja</string>
-    <string name="email_content_greetings">Pozdrawiam!</string>
+    <string name="email_content_text">Przesyłam rozliczenie po naszych składkach. Info kto komu ile powinien oddać jest niżej.</string>
+    <string name="email_content_madeBy">Aha&#8230; a obliczyła to wszystko aplikacja</string>
     <string name="email_utils_chooseEmailClient">Wybierz program pocztowy:</string>
+    <string name="email_utils_error_noEmailProvided">Uwaga! Nie znam adresu email do wszystkich osób. Dodaj je ręcznie.</string>
+    <string name="email_utils_error_mockEmailAddress">[nieznane maile]</string>
+    
+    <string name="calculation_printText_return">musi oddać</string>
+    <string name="calculation_printText_for">dla</string>
+    <string name="calculation_printText_titleText">Podsumowanie rozliczeń</string>
     
     
 </resources>

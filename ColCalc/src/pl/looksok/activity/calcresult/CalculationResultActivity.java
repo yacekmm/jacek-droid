@@ -15,6 +15,7 @@ import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class CalculationResultActivity extends ColCalcActivity {
+	protected static final String LOG_TAG = CalculationResultActivity.class.getSimpleName();
 	private CalculationLogic calc = null;
 	private ListView resultList;
 	private List<PersonData> listArray;
@@ -79,12 +81,17 @@ public class CalculationResultActivity extends ColCalcActivity {
     
     OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
     	public void onClick(View v) {
-    		Intent emailIntent = new Intent(Intent.ACTION_SEND);
-    		emailIntent.putExtra(Intent.EXTRA_EMAIL, utils.getEmailsArray(calc));		  
-    		emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
-    		emailIntent.putExtra(Intent.EXTRA_TEXT, utils.buildEmailMessage(getApplicationContext()));
-    		emailIntent.setType("message/rfc822");
-    		startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
+    		try{
+    			Intent emailIntent = new Intent(Intent.ACTION_SEND);
+    			emailIntent.putExtra(Intent.EXTRA_EMAIL, utils.getEmailsArray(getApplicationContext(), calc));		  
+    			emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
+    			emailIntent.putExtra(Intent.EXTRA_TEXT, utils.buildEmailMessage(getApplicationContext(), calc));
+    			emailIntent.setType("message/rfc822");
+    			startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
+    		}catch(NullPointerException e){
+    			Log.e(LOG_TAG, "Error while preparing email. there is no email Addresses probably: " + e.getMessage());
+    			
+    		}
     	}
     };
 
