@@ -1,4 +1,4 @@
-package pl.looksok.customviews;
+package pl.looksok.activity.calcresult;
 
 import java.util.Currency;
 import java.util.List;

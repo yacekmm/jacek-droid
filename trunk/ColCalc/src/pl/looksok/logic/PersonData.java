@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
+import android.util.Log;
+
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
@@ -16,6 +18,7 @@ import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 public class PersonData implements Serializable{
 
 	private static final long serialVersionUID = 4909331903428866567L;
+	private static final String LOG_TAG = PersonData.class.getSimpleName();
 	private String name;
 	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
@@ -113,6 +116,7 @@ public class PersonData implements Serializable{
 			if(this.getName() != pp2.getName()){
 				double returnValue = howMuchIGiveBackToPersonB(pp2);
 				getRefundForOtherPeople().put(pp2.getName(), returnValue);
+				Log.d(LOG_TAG, "----------Adding new person to calculated refunds: " + pp2.getName() + ", value: " + returnValue);
 			}
 		}
 	}
@@ -238,5 +242,14 @@ public class PersonData implements Serializable{
 
 	public void setEmails(HashSet<String> emails) {
 		this.emails = emails;
+	}
+
+	public HashMap<String, PersonData> getOtherPeoplePayments() {
+		return otherPeoplePayments;
+	}
+
+	public void setOtherPeoplePayments(
+			HashMap<String, PersonData> otherPeoplePayments) {
+		this.otherPeoplePayments = otherPeoplePayments;
 	}
 }

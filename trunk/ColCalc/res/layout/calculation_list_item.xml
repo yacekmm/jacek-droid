@@ -22,6 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_toLeftOf="@+id/calcItem_image_edit"
+            android:layout_marginLeft="@dimen/margin_micro"
             android:gravity="center_vertical"
             android:text="@string/calculation_TextView_name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -65,7 +66,7 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.4" >
 
             <TextView
@@ -86,6 +87,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_micro"
                 android:layout_marginRight="@dimen/margin_micro"
+                android:layout_marginBottom="@dimen/margin_micro"
                 android:text="@string/calculation_TextView_currency"
                 />
         </RelativeLayout>

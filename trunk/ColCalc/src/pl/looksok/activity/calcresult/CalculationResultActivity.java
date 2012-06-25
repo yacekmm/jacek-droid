@@ -8,7 +8,6 @@ import java.util.Set;
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.addperson.AddNewPerson;
-import pl.looksok.customviews.ResultsListAdapter;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.CalcPersistence;
@@ -39,6 +38,7 @@ public class CalculationResultActivity extends ColCalcActivity {
         setContentView(R.layout.calculation);
         
         readInputBundle();
+        resultList = (ListView)findViewById(R.id.calc_listView_list);
         populateListArray();
         initViews();
     }
@@ -60,7 +60,6 @@ public class CalculationResultActivity extends ColCalcActivity {
 			listArray.add(calc.getCalculationResult().get(it.next()));
 		}
 		
-		resultList = (ListView)findViewById(R.id.calc_listView_list);
 		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 	}

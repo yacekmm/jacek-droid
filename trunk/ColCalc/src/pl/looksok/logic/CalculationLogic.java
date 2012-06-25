@@ -189,5 +189,11 @@ public class CalculationLogic implements Serializable {
 	public void removePerson(PersonData pd) {
 		inputPaysList.remove(pd);
 		getCalculationResult().remove(pd.getName());
+		
+//		Iterator<String> it = getCalculationResult().keySet().iterator();
+//		while (it.hasNext()) {
+//			String key = it.next();
+//			getCalculationResult().get(key).getOtherPeoplePayments().remove(pd.getName());
+//		}
 	}
 }
