@@ -33,8 +33,9 @@
     <string name="EnterPays_Menu_Edit">Edytuj</string>
     <string name="EnterPays_Menu_Remove">Usuń</string>
     
-    <string name="calculation_button_save_text">Zapisz rozliczenie</string>
-    <string name="calculation_button_sendCalculation_text">Wyślij rozliczenie</string>
+    <string name="calculation_button_save_text">Zachowaj</string>
+    <string name="calculation_button_sendCalculation_text">Wyślij</string>
+    <string name="calculation_button_addPerson_text">Dodaj osobę</string>
     <string name="calculation_saved_text">Zapisano!</string>
     
     <string name="table_column0_weight">2</string>
