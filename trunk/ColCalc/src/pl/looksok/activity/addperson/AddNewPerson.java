@@ -7,7 +7,6 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.WelcomeActivity;
 import pl.looksok.activity.calcresult.CalculationResultActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
@@ -291,19 +290,25 @@ public class AddNewPerson extends ColCalcActivity {
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-    		try{
-    			calc.calculate(inputPaysList);
-    			
-    			Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
-            	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-            	startActivity(intent);
-            	finish();
-    		}catch(BadInputDataException e){
-    			Log.d(LOG_TAG, "Bad input provided: " + e.getMessage());
-    			Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
-    		}
+    		calculateAndShowResults();
         }
+
     };
+
+    private void calculateAndShowResults() {
+    	try{
+    		calc.calculate(inputPaysList);
+    		
+    		Intent intent = new Intent(this.getApplicationContext(), CalculationResultActivity.class) ;
+    		intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+    		startActivity(intent);
+    		finish();
+    		overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    	}catch(BadInputDataException e){
+    		Log.d(LOG_TAG, "Bad input provided: " + e.getMessage());
+    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
+    	}
+    }
     
     OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
 		public void onFocusChange(View v, boolean hasFocus) {
@@ -331,8 +336,6 @@ public class AddNewPerson extends ColCalcActivity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
-    	startActivity(intent);
-    	finish();
+		calculateAndShowResults();
 	}
 }

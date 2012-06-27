@@ -1,6 +1,6 @@
 package pl.looksok.test.activity;
 
-import pl.looksok.activity.EnterPaysActivity;
+import pl.looksok.activity.addperson.AddNewPerson;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.test.ViewAsserts;
@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class EnterPaysActivityTest extends
-		ActivityUnitTestCase<EnterPaysActivity> {
+		ActivityUnitTestCase<AddNewPerson> {
 	
-	private EnterPaysActivity mActivity;
+	private AddNewPerson mActivity;
 	private View origin;
 	
 	private TextView mTitileText;
@@ -22,7 +22,7 @@ public class EnterPaysActivityTest extends
 	private Button mAddPErsonButton;
 
 	public EnterPaysActivityTest() {
-		super(EnterPaysActivity.class);
+		super(AddNewPerson.class);
 	}
 
 	protected void setUp() throws Exception {
