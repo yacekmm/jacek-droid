@@ -82,6 +82,7 @@ public class CalculationResultActivity extends ColCalcActivity {
         	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
+        	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
         	finish();
     	}
     };
