@@ -4,6 +4,7 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.WelcomeActivity;
 import pl.looksok.activity.addperson.AddNewPerson;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
@@ -42,6 +43,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	private void initButtons() {
 		((Button)findViewById(R.id.calc_button_saveCalculation)).setOnClickListener(saveCalculationButtonClickListener);
         ((Button)findViewById(R.id.calc_button_sendCalculation)).setOnClickListener(shareCalculationButtonClickListener);
+        ((Button)findViewById(R.id.calc_button_addPerson)).setOnClickListener(addPersonButtonClickListener);
 	}
 
 	private void populateListArray() {
@@ -75,6 +77,15 @@ public class CalculationResultActivity extends ColCalcActivity {
     	}
     };
 
+    OnClickListener addPersonButtonClickListener = new OnClickListener() {
+    	public void onClick(View v) {
+        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+        	startActivity(intent);
+        	finish();
+    	}
+    };
+
 	public void editPerson(View v) {
 		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
 		calc.getInputPaysList().remove(pd);
@@ -95,8 +106,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	
 	@Override
 	public void onBackPressed() {
-    	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
-    	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+    	Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
     	startActivity(intent);
     	finish();
 	}

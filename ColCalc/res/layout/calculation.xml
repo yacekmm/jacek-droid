@@ -51,4 +51,12 @@
         android:layout_toRightOf="@+id/calc_button_saveCalculation"
         android:text="@string/calculation_button_sendCalculation_text" />
 
+    <Button
+        android:id="@+id/calc_button_addPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/calc_button_sendCalculation"
+        android:text="@string/calculation_button_addPerson_text" />
+
 </RelativeLayout>
