@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item type="integer" name="animationTime">300</item>
-    
+    <item type="integer" name="animationTimeShort">100</item>
 </resources>

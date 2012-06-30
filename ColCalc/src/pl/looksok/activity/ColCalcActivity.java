@@ -1,5 +1,6 @@
 package pl.looksok.activity;
 
+import pl.looksok.R;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -8,6 +9,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class ColCalcActivity extends Activity {
+	
+	protected static final int DEFAULT_TRANSITION_ANIMATION_ENTER = R.anim.fade;
+	protected static final int DEFAULT_TRANSITION_ANIMATION_EXIT = R.anim.hold;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

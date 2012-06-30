@@ -34,6 +34,7 @@ public class WelcomeActivity extends ColCalcActivity {
         public void onClick(View v) {
         	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	startActivity(intent);
+        	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();
         }
     };
@@ -45,6 +46,7 @@ public class WelcomeActivity extends ColCalcActivity {
         	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
+        	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();
         }
     };
