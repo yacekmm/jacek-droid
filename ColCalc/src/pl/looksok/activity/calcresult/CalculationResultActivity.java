@@ -31,6 +31,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	protected static final String LOG_TAG = CalculationResultActivity.class.getSimpleName();
 	
 	private static final int DIALOG_INCREASE_PERSON_PAY = 0;
+	private static final int DIALOG_REMOVE_PERSON = 1;
 	
 	private CalculationLogic calc = null;
 	private ListView resultList;
@@ -112,10 +113,8 @@ public class CalculationResultActivity extends ColCalcActivity {
 	}
 
 	public void removePerson(View v){
-		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
-		calc.removePerson(pd);
-		calc.recalculate();
-		populateListArray();
+		personDataHolder = calc.findPersonInList((PersonData)v.getTag());
+		showDialog(DIALOG_REMOVE_PERSON);
 	}
 
 	public void increasePersonPay(View v){
@@ -127,12 +126,29 @@ public class CalculationResultActivity extends ColCalcActivity {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case DIALOG_INCREASE_PERSON_PAY:
-            return createIncreasePayDialog();
+            return createDialogIncreasePay();
+        case DIALOG_REMOVE_PERSON:
+        	return createDialogRemovePerson();
         }
         return null;
 	}
 
-	private Dialog createIncreasePayDialog() {
+	private Dialog createDialogRemovePerson() {
+		return new AlertDialog.Builder(CalculationResultActivity.this)
+		.setIcon(R.drawable.content_discard)
+		.setTitle(R.string.calculation_dialog_remove_text_removePerson)
+		.setPositiveButton(R.string.calculation_dialog_button_ok, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int whichButton) {
+		    	calc.removePerson(personDataHolder);
+		    	calc.recalculate();
+		    	populateListArray();
+		    }
+		})
+		.setNegativeButton(R.string.calculation_dialog_button_cancel, null)
+		.create();
+	}
+
+	private Dialog createDialogIncreasePay() {
 		LayoutInflater factory = LayoutInflater.from(this);
 		final View textEntryView = factory.inflate(R.layout.alert_dialog_increase_pay, null);
 		((TextView)textEntryView.findViewById(R.id.textCurrency)).setText(Currency.getInstance(Locale.getDefault()).getSymbol());
