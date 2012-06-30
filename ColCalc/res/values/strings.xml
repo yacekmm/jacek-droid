@@ -18,7 +18,7 @@
     <string name="welcome_Button_newCalculation">Nowe rozliczenie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
     
-    <string name="EnterPays_TextView_EnterPayPerEachPerson">Wpisz składki wszystkich osób</string>
+    <string name="EnterPays_TextView_EnterPayPerEachPerson">Dodaj nową osobę</string>
     <string name="EnterPays_CheckBox_EqualPays">Wszyscy składają się po równo</string>
     <string name="EnterPays_TextView_Name">Imię:</string>
     <string name="EnterPays_button_getContact">z kontaktów</string>

@@ -123,6 +123,7 @@ public class AddNewPerson extends ColCalcActivity {
         registerForContextMenu(mPeopleList);
         mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
         mCalculateButton.setOnClickListener(calculateButtonClickListener);
+        mCalculateButton.setVisibility(View.GONE);
       
         setHowMuchShouldPayFieldsVisibility();
 	}
@@ -175,10 +176,10 @@ public class AddNewPerson extends ColCalcActivity {
 
 	private void updateFieldsDependantOnPeopleListSizeVisibility() {
 		if(inputPaysList.size()==0){
-			mCalculateButton.setVisibility(View.GONE);
+//			mCalculateButton.setVisibility(View.GONE);
             mEqualPaymentsBox.setEnabled(true);
 		}else{
-			mCalculateButton.setVisibility(View.VISIBLE);
+//			mCalculateButton.setVisibility(View.VISIBLE);
             mEqualPaymentsBox.setEnabled(false);
 		}
 	}
@@ -259,7 +260,7 @@ public class AddNewPerson extends ColCalcActivity {
         	try{
         		adapter.add(getNewInputDataToAdd());
         		clearInputFieldsToDefaults();
-        		Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_PersonAdded), Toast.LENGTH_SHORT).show();
+        		calculateAndShowResults();
         	}catch(BadInputDataException e){
         		Log.d(LOG_TAG, "Input data was not valid");
         	}
