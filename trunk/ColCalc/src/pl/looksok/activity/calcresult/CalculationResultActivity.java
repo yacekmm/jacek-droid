@@ -107,6 +107,7 @@ public class CalculationResultActivity extends ColCalcActivity {
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
     	startActivity(intent);
+    	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
     	finish();
 	}
 
@@ -158,6 +159,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	public void onBackPressed() {
     	Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
     	startActivity(intent);
+    	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
     	finish();
 	}
 }
