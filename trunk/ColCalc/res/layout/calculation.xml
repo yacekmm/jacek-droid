@@ -36,27 +36,31 @@
         
     </ListView>
 
-    <Button
+    <ImageButton
         android:id="@+id/calc_button_saveCalculation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/calculation_button_save_text" />
+        android:src="@drawable/save"
+        android:contentDescription="@string/calculation_button_save_text" />
 
-    <Button
+    <ImageButton
         android:id="@+id/calc_button_sendCalculation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/calc_button_saveCalculation"
-        android:text="@string/calculation_button_sendCalculation_text" />
+        android:src="@drawable/share"
+        android:contentDescription="@string/calculation_button_sendCalculation_text" />
 
-    <Button
+    <ImageButton
         android:id="@+id/calc_button_addPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/calc_button_sendCalculation"
-        android:text="@string/calculation_button_addPerson_text" />
+        android:src="@drawable/add_person"
+        android:contentDescription="@string/calculation_button_addPerson_text"
+        />
 
 </RelativeLayout>
