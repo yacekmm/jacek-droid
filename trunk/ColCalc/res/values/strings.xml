@@ -56,7 +56,7 @@
     <string name="email_utils_error_mockEmailAddress">[nieznane maile]</string>
     
     <string name="calculation_printText_howMuchPaid">zapłacone</string>
-    <string name="calculation_printText_howMuchShouldPay">powinien zapłacić</string>
+    <string name="calculation_printText_howMuchShouldPay">powinno być zapłacone</string>
     <string name="calculation_printText_return">musi oddać</string>
     <string name="calculation_printText_for">dla</string>
     <string name="calculation_printText_titleText">Podsumowanie rozliczeń</string>

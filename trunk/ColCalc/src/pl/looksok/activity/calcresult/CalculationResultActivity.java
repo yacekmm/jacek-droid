@@ -21,8 +21,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,9 +54,9 @@ public class CalculationResultActivity extends ColCalcActivity {
     }
 
 	private void initButtons() {
-		((Button)findViewById(R.id.calc_button_saveCalculation)).setOnClickListener(saveCalculationButtonClickListener);
-        ((Button)findViewById(R.id.calc_button_sendCalculation)).setOnClickListener(shareCalculationButtonClickListener);
-        ((Button)findViewById(R.id.calc_button_addPerson)).setOnClickListener(addPersonButtonClickListener);
+		((ImageButton)findViewById(R.id.calc_button_saveCalculation)).setOnClickListener(saveCalculationButtonClickListener);
+        ((ImageButton)findViewById(R.id.calc_button_sendCalculation)).setOnClickListener(shareCalculationButtonClickListener);
+        ((ImageButton)findViewById(R.id.calc_button_addPerson)).setOnClickListener(addPersonButtonClickListener);
 	}
 
 	private void populateListArray() {
