@@ -228,6 +228,34 @@ public class PersonData implements Serializable{
 			return "";
 	}
 
+	public String printPersonReturnsToOthersDetails(String howMuchPaidText, String howMuchShouldPayText, String returnToText, String forText){
+		String currency = Currency.getInstance(Locale.getDefault()).getSymbol();
+
+		StringBuilder sb = new StringBuilder(getName()).append(" - ").append(howMuchPaidText).append(": ").append(getPayMadeByPerson()).append(currency).append(" ");
+		sb.append("(").append(howMuchShouldPayText).append(": ").append(getHowMuchPersonShouldPay()).append(currency).append(")");
+		
+		String messageIfNoReturnNeeded = sb.toString() + "\n";
+		
+		sb.append(", ").append(returnToText).append(":\n");
+		boolean isThereAnyPersonOnReturnList = false;
+		
+		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
+		while(it.hasNext()) {
+			String key = it.next();
+			double result = getRefundForOtherPeople().get(key);
+			if(result >0){
+				isThereAnyPersonOnReturnList = true;
+				sb.append(result).append(" ").append(currency).append(" ");
+				sb.append(forText).append(": ").append(key).append("\n");
+			}
+		}
+		
+		if(isThereAnyPersonOnReturnList)
+			return sb.toString();
+		else
+			return messageIfNoReturnNeeded;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
