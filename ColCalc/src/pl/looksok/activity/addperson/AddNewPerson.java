@@ -38,6 +38,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,6 @@ public class AddNewPerson extends ColCalcActivity {
 	private EditText mNewPersonShouldPayInput;
 	private TextView mNewPersonShouldPayText;
 	private ListView mPeopleList;
-	private Button mCalculateButton;
 	
 	private static final int MENU_EDIT = Menu.FIRST;
 	private static final int MENU_DELETE = MENU_EDIT+1;
@@ -107,7 +107,7 @@ public class AddNewPerson extends ColCalcActivity {
 
 	private void initActivityViews() {
 		((Button)findViewById(R.id.EnterPays_Button_AddPerson)).setOnClickListener(addPersonClickListener);
-        ((Button)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
+        ((ImageButton)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
         mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
         mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
         mEqualPaymentsBox.setChecked(calc.isEqualPayments());
@@ -121,9 +121,6 @@ public class AddNewPerson extends ColCalcActivity {
         mNewPersonShouldPayInput.addTextChangedListener(payTextChangedListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         registerForContextMenu(mPeopleList);
-        mCalculateButton = (Button)findViewById(R.id.enterPays_Button_Calculate);
-        mCalculateButton.setOnClickListener(calculateButtonClickListener);
-        mCalculateButton.setVisibility(View.GONE);
       
         setHowMuchShouldPayFieldsVisibility();
 	}
@@ -176,10 +173,8 @@ public class AddNewPerson extends ColCalcActivity {
 
 	private void updateFieldsDependantOnPeopleListSizeVisibility() {
 		if(inputPaysList.size()==0){
-//			mCalculateButton.setVisibility(View.GONE);
             mEqualPaymentsBox.setEnabled(true);
 		}else{
-//			mCalculateButton.setVisibility(View.VISIBLE);
             mEqualPaymentsBox.setEnabled(false);
 		}
 	}
