@@ -144,7 +144,7 @@ public class CalculationLogic implements Serializable {
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(printCalcResultForSharing("Calculation results", "should return", "for"));
+		sb.append(printCalcResultForResultsList("Calculation results", "should return", "for"));
 		return sb.toString();
 	}
 	
@@ -157,7 +157,7 @@ public class CalculationLogic implements Serializable {
 	 * @param returnToText
 	 * @return
 	 */
-	public String printCalcResultForSharing(String titleText, String returnToText, String forText){
+	public String printCalcResultForResultsList(String titleText, String returnToText, String forText){
 		StringBuilder sb = new StringBuilder(titleText).append(":\n");
 		
 		if(calculationResult != null){
@@ -166,6 +166,36 @@ public class CalculationLogic implements Serializable {
 			while (it.hasNext()){
 				PersonData pp = calculationResult.get(it.next());
 				sb.append(pp.printPersonReturnsToOthers(returnToText, forText)).append("\n");
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	/**
+	 * returns String with calculation result like:
+	 * [titleText]:
+	 * [personName] [howMuchPaidText]: [paidValue] ([howMuchShouldPayText]: [shouldPayValue]) [returnToText]:
+	 * [calculatedReturnValue] [forText] [otherPersonName] 
+	 * 
+	 * example: 
+	 * Calculation Result:
+	 * person A paid: $20 (but should pay: $30) and has to return money to:
+	 * $10 to personB
+	 * @param titleText
+	 * @param returnToText
+	 * @return
+	 */
+	public String printCalcResultForEmail(String titleText, String howMuchPaidText, 
+			String howMuchShouldPayText, String returnToText, String forText){
+		StringBuilder sb = new StringBuilder(titleText).append(":\n");
+		
+		if(calculationResult != null){
+			Iterator<String> it = calculationResult.keySet().iterator();
+			
+			while (it.hasNext()){
+				PersonData pp = calculationResult.get(it.next());
+				sb.append(pp.printPersonReturnsToOthersDetails(howMuchPaidText, howMuchShouldPayText, returnToText, forText)).append("\n");
 			}
 		}
 		

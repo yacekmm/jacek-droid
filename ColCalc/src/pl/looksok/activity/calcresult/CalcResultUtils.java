@@ -61,8 +61,10 @@ public class CalcResultUtils {
 		sb.append(context.getString(R.string.email_content_text)).append("\n\n");
 		sb.append(context.getString(R.string.email_content_madeBy)).append(" ");
 		sb.append(context.getString(R.string.app_name)).append("!\n\n");
-		sb.append(calc.printCalcResultForSharing(
+		sb.append(calc.printCalcResultForEmail(
 				context.getString(R.string.calculation_printText_titleText),
+				context.getString(R.string.calculation_printText_howMuchPaid),
+				context.getString(R.string.calculation_printText_howMuchShouldPay),
 				context.getString(R.string.calculation_printText_return),
 				context.getString(R.string.calculation_printText_for)
 				));
