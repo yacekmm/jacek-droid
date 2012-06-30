@@ -11,7 +11,9 @@
     <string name="calculation_dialog_text_increasePayment">Zwiększ składkę dla tej osoby o:</string>
     <string name="calculation_dialog_title_increasePAyment">Zwiększanie składki</string>
     <string name="calculation_dialog_button_ok">OK</string>
+    <string name="calculation_dialog_button_deletePerson">Usuń</string>
     <string name="calculation_dialog_button_cancel">Anuluj</string>
+    <string name="calculation_dialog_remove_text_removePerson">Czy na pewno chcesz usunąć tę osobę z listy?</string>
     
     <string name="welcome_Button_newCalculation">Nowe rozliczenie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
