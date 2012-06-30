@@ -46,6 +46,18 @@
             android:src="@drawable/content_discard"
             android:onClick="removePerson"
             />
+
+        <ImageView
+            android:id="@+id/calcItem_image_increasePay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/calcItem_image_edit"
+            android:src="@drawable/increase_pay"
+            android:contentDescription="@string/app_name" 
+            android:onClick="increasePersonPay"
+            />
+
     </RelativeLayout>
 
     <LinearLayout
