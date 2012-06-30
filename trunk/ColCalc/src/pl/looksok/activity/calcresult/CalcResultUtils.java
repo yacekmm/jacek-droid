@@ -7,12 +7,14 @@ import java.util.Iterator;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
+import pl.looksok.utils.Constants;
 
 public class CalcResultUtils {
 
@@ -55,20 +57,31 @@ public class CalcResultUtils {
 		return emails;
 	}
 
-	private String buildEmailMessage(Context context, CalculationLogic calc) {
+	private String buildEmailMessage(Context context, CalculationLogic calc, String endOfLine) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(context.getString(R.string.email_content_welcome)).append("\n\n");
-		sb.append(context.getString(R.string.email_content_text)).append("\n\n");
+		sb.append(context.getString(R.string.email_content_welcome)).append(endOfLine).append(endOfLine);
+		sb.append(context.getString(R.string.email_content_text)).append(endOfLine).append(endOfLine);
 		sb.append(context.getString(R.string.email_content_madeBy)).append(" ");
-		sb.append(context.getString(R.string.app_name)).append("!\n\n");
+		sb.append(getAppUrl(context)).append("!").append(endOfLine).append(endOfLine);
 		sb.append(calc.printCalcResultForEmail(
 				context.getString(R.string.calculation_printText_titleText),
 				context.getString(R.string.calculation_printText_howMuchPaid),
 				context.getString(R.string.calculation_printText_howMuchShouldPay),
 				context.getString(R.string.calculation_printText_return),
-				context.getString(R.string.calculation_printText_for)
+				context.getString(R.string.calculation_printText_for),
+				endOfLine
 				));
 		
+		return sb.toString();
+	}
+
+	private String getAppUrl(Context context) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<a href=\"");
+		sb.append(Constants.APPLICATION_WEBSITE_URL);
+		sb.append("\">");
+		sb.append(context.getString(R.string.app_name));
+		sb.append("</a>");
 		return sb.toString();
 	}
 	
@@ -88,8 +101,8 @@ public class CalcResultUtils {
 		Intent emailIntent = new Intent(Intent.ACTION_SEND);
 		emailIntent.putExtra(Intent.EXTRA_EMAIL, getEmailsArray(context, calc));		  
 		emailIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.email_subject));
-		emailIntent.putExtra(Intent.EXTRA_TEXT, buildEmailMessage(context, calc));
-		emailIntent.setType("message/rfc822");
+		emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(buildEmailMessage(context, calc, "<br/>")));
+		emailIntent.setType("text/html");
 		
 		return emailIntent;
 	}

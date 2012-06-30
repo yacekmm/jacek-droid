@@ -228,15 +228,15 @@ public class PersonData implements Serializable{
 			return "";
 	}
 
-	public String printPersonReturnsToOthersDetails(String howMuchPaidText, String howMuchShouldPayText, String returnToText, String forText){
+	public String printPersonReturnsToOthersDetails(String howMuchPaidText, String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
 		String currency = Currency.getInstance(Locale.getDefault()).getSymbol();
 
 		StringBuilder sb = new StringBuilder(getName()).append(" - ").append(howMuchPaidText).append(": ").append(getPayMadeByPerson()).append(currency).append(" ");
 		sb.append("(").append(howMuchShouldPayText).append(": ").append(getHowMuchPersonShouldPay()).append(currency).append(")");
 		
-		String messageIfNoReturnNeeded = sb.toString() + "\n";
+		String messageIfNoReturnNeeded = sb.toString() + endOfLine;
 		
-		sb.append(", ").append(returnToText).append(":\n");
+		sb.append(", ").append(returnToText).append(":").append(endOfLine);
 		boolean isThereAnyPersonOnReturnList = false;
 		
 		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
@@ -246,7 +246,7 @@ public class PersonData implements Serializable{
 			if(result >0){
 				isThereAnyPersonOnReturnList = true;
 				sb.append(result).append(" ").append(currency).append(" ");
-				sb.append(forText).append(": ").append(key).append("\n");
+				sb.append(forText).append(": ").append(key).append(endOfLine);
 			}
 		}
 		

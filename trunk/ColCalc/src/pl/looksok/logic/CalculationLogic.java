@@ -184,18 +184,19 @@ public class CalculationLogic implements Serializable {
 	 * $10 to personB
 	 * @param titleText
 	 * @param returnToText
+	 * @param endOfLine 
 	 * @return
 	 */
 	public String printCalcResultForEmail(String titleText, String howMuchPaidText, 
-			String howMuchShouldPayText, String returnToText, String forText){
-		StringBuilder sb = new StringBuilder(titleText).append(":\n");
+			String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
+		StringBuilder sb = new StringBuilder(titleText).append(":").append(endOfLine);
 		
 		if(calculationResult != null){
 			Iterator<String> it = calculationResult.keySet().iterator();
 			
 			while (it.hasNext()){
 				PersonData pp = calculationResult.get(it.next());
-				sb.append(pp.printPersonReturnsToOthersDetails(howMuchPaidText, howMuchShouldPayText, returnToText, forText)).append("\n");
+				sb.append(pp.printPersonReturnsToOthersDetails(howMuchPaidText, howMuchShouldPayText, returnToText, forText, endOfLine)).append(endOfLine);
 			}
 		}
 		
