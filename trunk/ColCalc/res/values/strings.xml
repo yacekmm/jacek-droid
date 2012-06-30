@@ -8,6 +8,10 @@
     <string name="calculation_TextView_personPaid_text">składka:</string>
     <string name="calculation_TextView_personPay">0,00</string>
     <string name="calculation_TextView_currency">zł</string>
+    <string name="calculation_dialog_text_increasePayment">Zwiększ składkę dla tej osoby o:</string>
+    <string name="calculation_dialog_title_increasePAyment">Zwiększanie składki</string>
+    <string name="calculation_dialog_button_ok">OK</string>
+    <string name="calculation_dialog_button_cancel">Anuluj</string>
     
     <string name="welcome_Button_newCalculation">Nowe rozliczenie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
