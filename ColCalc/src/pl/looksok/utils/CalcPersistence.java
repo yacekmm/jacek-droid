@@ -18,49 +18,6 @@ import android.util.Log;
 public class CalcPersistence {
 	private static final String LOG_TAG = CalcPersistence.class.getSimpleName();
 
-	public static CalculationLogic readStoredCalculation(Context context, String filename) {
-		
-		CalculationLogic calc = null;
-    	
-    	FileInputStream fis = null;
-    	ObjectInputStream in = null;
-    	try {
-    		fis = context.openFileInput(filename);
-    		in = new ObjectInputStream(fis);
-    		calc = (CalculationLogic) in.readObject();
-    		in.close();
-    		fis.close();
-    	}catch (ClassNotFoundException e) {
-    		e.printStackTrace();
-    		
-    	} catch (FileNotFoundException e) {
-    		e.printStackTrace();
-    	} catch (StreamCorruptedException e) {
-    		
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
-    	
-    	Log.v(LOG_TAG, "open calcs: success");
-		return calc;
-	}
-	
-	public static void saveCalculation(Context context, String filename, CalculationLogic calc) {
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-		try {
-		fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
-		out = new ObjectOutputStream(fos);
-		out.writeObject(calc);
-		out.close();
-		fos.close();
-		
-		Log.v(LOG_TAG, "Successful Save");
-		} catch (IOException ex) {
-		ex.printStackTrace();
-		}
-	}
-
 	public static void saveCalculationList(Context context, String filename, List<CalculationLogic> calcList) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
@@ -111,6 +68,7 @@ public class CalcPersistence {
 			Log.d(LOG_TAG, "Stored Calculation List was empty. creating new");
 			calcList = new ArrayList<CalculationLogic>();
 		}
+		
 		calc.setDateSaved(Calendar.getInstance());
 		calcList.add(0, calc);
 		while(calcList.size() > Constants.PERSISTENCE_MAX_STORED_CALCS){
