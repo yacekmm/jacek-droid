@@ -30,6 +30,10 @@ public class PersonData implements Serializable{
 	private double alreadyReturned;
 	private double alreadyRefunded = 0.0;
 	
+	//gift
+	private boolean receivesGift = false;
+	private double giftValue = 0.0;
+	
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
 		setPersonName(pd.getName());
@@ -46,10 +50,17 @@ public class PersonData implements Serializable{
 		this.emails = emails;
 	}
 
+	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftValue) {
+		this(name, payDouble, emails);
+		setReceivesGift(receivesGift);
+		setGiftValue(giftValue);
+	}
+
 	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
 		this(name, payDouble, emails);
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
+
 
 	public String getName() {
 		return name;
@@ -279,5 +290,21 @@ public class PersonData implements Serializable{
 	public void setOtherPeoplePayments(
 			HashMap<String, PersonData> otherPeoplePayments) {
 		this.otherPeoplePayments = otherPeoplePayments;
+	}
+
+	public boolean isReceivesGift() {
+		return receivesGift;
+	}
+
+	public void setReceivesGift(boolean receivesGift) {
+		this.receivesGift = receivesGift;
+	}
+
+	public double getGiftValue() {
+		return giftValue;
+	}
+
+	public void setGiftValue(double giftValue) {
+		this.giftValue = giftValue;
 	}
 }
