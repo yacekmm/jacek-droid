@@ -13,14 +13,14 @@ public class GiftTestScenarioBuilder extends TestScenarioBuilder{
 		return inputPaysList;
 	}
 
-/*	public static List<PersonData> buildTestCaseTwoPeople(double paymentA, double paymentB) {
+	public static List<PersonData> buildTestCaseTwoPeopleGift(double paymentA, double paymentB, HashSet<String> giftReceivers, double giftValue) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
-		inputPaysList = buildTestCaseOnePerson(paymentA);
-		inputPaysList.add(new PersonData(Constants.personBName, paymentB, new HashSet<String>()));
+		inputPaysList = buildTestCaseOnePersonGift(paymentA, giftReceivers, giftValue);
+		inputPaysList.add(new PersonData(Constants.personBName, paymentB, new HashSet<String>(), giftReceivers.contains(Constants.personBName), giftValue));
 		return inputPaysList;
 	}
 	
-	public static List<PersonData> buildTestCaseTwoPeopleVariousPays(double paymentA, double howMuchAShouldPay,
+/*	public static List<PersonData> buildTestCaseTwoPeopleVariousPays(double paymentA, double howMuchAShouldPay,
 			double paymentB, double howMuchBShouldPay) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
 		inputPaysList.add(new PersonData(Constants.personAName, paymentA, howMuchAShouldPay, new HashSet<String>()));

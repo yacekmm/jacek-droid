@@ -80,15 +80,24 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
-/*	public void testRefundOfZeroPayTwoPeople(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(0.0, 0.0);
+	public void testRefundOfZeroPayTwoPeopleNoGift(){
+		inputPaysList = GiftTestScenarioBuilder.buildTestCaseTwoPeopleGift(0.0, 0.0, giftReceivers, 0.0);
 		
 		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
 	
-	public void testReturnOfNonZeroPayFewPeopleOnePaid(){
+	public void testRefundOfZeroPayTwoPeopleGetsGift(){
+		giftReceivers.add(Constants.personAName);
+		inputPaysList = GiftTestScenarioBuilder.buildTestCaseTwoPeopleGift(0.0, 10.0, giftReceivers, 10.0);
+		
+		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
+		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
+	}
+	
+/*	public void testReturnOfNonZeroPayFewPeopleOnePaid(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 0.0);
 		
 		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
