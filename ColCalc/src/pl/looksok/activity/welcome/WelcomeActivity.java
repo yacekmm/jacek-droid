@@ -14,9 +14,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class WelcomeActivity extends ColCalcActivity {
 
@@ -33,37 +34,34 @@ public class WelcomeActivity extends ColCalcActivity {
 		setContentView(R.layout.welcome);
 		
 		((Button)findViewById(R.id.welcome_Button_newCalculation)).setOnClickListener(newCalculationButtonClickListener);
-		((Button)findViewById(R.id.welcome_Button_loadCalculation)).setOnClickListener(loadCalculationButtonClickListener);
 		
 		storedCalcs = CalcPersistence.readStoredCalculationList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE);
 		if(storedCalcs!=null){
 			Log.d(LOG_TAG, "Stored calcs size: " + storedCalcs.size());
 			adapter = new StoredCalcsListAdapter(WelcomeActivity.this, R.layout.stored_calcs_list_item, storedCalcs);
 			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setAdapter(adapter);
+			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setOnItemClickListener(storedCalcClickListener);
 		} else{
 			Log.d(LOG_TAG, "Stored calcs size: null");
 		}
 	}
 	
-	OnClickListener newCalculationButtonClickListener = new OnClickListener() {
-        public void onClick(View v) {
-        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+	OnItemClickListener storedCalcClickListener = new OnItemClickListener() {
+
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			CalculationLogic calc = adapter.getItem(arg2);
+        	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
+        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
         	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();
-        }
-    };
-    
-	OnClickListener loadCalculationButtonClickListener = new OnClickListener() {
+		}
+	};
+	
+	OnClickListener newCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	CalculationLogic calc = CalcPersistence.readStoredCalculation(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE);
-        	if(calc==null){
-        		Toast.makeText(getApplicationContext(), R.string.calculation_load_error_text, Toast.LENGTH_SHORT).show();
-        		return;
-        	}
-        	
-        	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
-        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	startActivity(intent);
         	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();

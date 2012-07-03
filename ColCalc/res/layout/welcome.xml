@@ -15,26 +15,16 @@
         android:layout_marginRight="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_big"
         android:text="@string/calculation_TextView_title" />
-    
+
     <Button
         android:id="@+id/welcome_Button_newCalculation"
         android:layout_width="wrap_content"
-        android:minWidth="@dimen/button_minWidth"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/welcome_Button_loadCalculation"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_small"
-        android:text="@string/welcome_Button_newCalculation" />
-
-    <Button
-        android:id="@+id/welcome_Button_loadCalculation"
-        android:layout_width="wrap_content"
-        android:minWidth="@dimen/button_minWidth"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/welcome_savedCalcs_list"
-        android:layout_marginBottom="@dimen/margin_big"
-        android:text="@string/welcome_Button_loadCalculation" />
+        android:minWidth="@dimen/button_minWidth"
+        android:text="@string/welcome_Button_newCalculation" />
 
     <ListView
         android:id="@+id/welcome_savedCalcs_list"
