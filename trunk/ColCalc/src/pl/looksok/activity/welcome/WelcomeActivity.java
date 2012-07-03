@@ -33,23 +33,24 @@ public class WelcomeActivity extends ColCalcActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
 		
-		((Button)findViewById(R.id.welcome_Button_newCalculation)).setOnClickListener(newCalculationButtonClickListener);
-		
+		((Button)findViewById(R.id.welcome_mode_newCalculation)).setOnClickListener(newCalculationButtonClickListener);
+		populateStoredCalcsList();
+	}
+
+	private void populateStoredCalcsList() {
 		storedCalcs = CalcPersistence.readStoredCalculationList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE);
 		if(storedCalcs!=null){
-			Log.d(LOG_TAG, "Stored calcs size: " + storedCalcs.size());
 			adapter = new StoredCalcsListAdapter(WelcomeActivity.this, R.layout.stored_calcs_list_item, storedCalcs);
 			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setAdapter(adapter);
 			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setOnItemClickListener(storedCalcClickListener);
 		} else{
-			Log.d(LOG_TAG, "Stored calcs size: null");
+			Log.d(LOG_TAG, "Stored calcs is null. no items were saved until now");
 		}
 	}
 	
 	OnItemClickListener storedCalcClickListener = new OnItemClickListener() {
 
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			CalculationLogic calc = adapter.getItem(arg2);
         	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
