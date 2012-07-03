@@ -31,11 +31,11 @@
              >
 
             <Button
-                android:id="@+id/welcome_mode_newCalculation"
+                android:id="@+id/welcome_mode_potluckParty"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/mode_height"
                 android:layout_margin="@dimen/margin_small"
-                android:text="@string/welcome_mode_newCalculation" />
+                android:text="@string/welcome_mode_potluckParty" />
 
             <Button
                 android:id="@+id/welcome_mode_restaurant"
@@ -45,6 +45,27 @@
                 android:text="@string/welcome_mode_restaurant"
                  />
         </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             >
+
+            <Button
+                android:id="@+id/welcome_mode_holidays"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/mode_height"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@string/welcome_mode_holidays" />
+
+            <Button
+                android:id="@+id/welcome_mode_equealPays"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/mode_height"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@string/welcome_mode_equalPays"
+                 />
+        </TableRow>
     </TableLayout>
 
     <ListView
@@ -52,7 +73,8 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/welcome_savedCalcs_List_height"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true" 
+        >
     </ListView>
 
 </RelativeLayout>
