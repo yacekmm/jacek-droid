@@ -1,8 +1,9 @@
-package pl.looksok.activity;
+package pl.looksok.activity.welcome;
 
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.addperson.AddNewPerson;
 import pl.looksok.activity.calcresult.CalculationResultActivity;
 import pl.looksok.logic.CalculationLogic;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class WelcomeActivity extends ColCalcActivity {
@@ -21,6 +23,9 @@ public class WelcomeActivity extends ColCalcActivity {
 	private static final String LOG_TAG = WelcomeActivity.class.getSimpleName();
 
 	private List<CalculationLogic> storedCalcs;
+
+	private StoredCalcsListAdapter adapter;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +36,11 @@ public class WelcomeActivity extends ColCalcActivity {
 		((Button)findViewById(R.id.welcome_Button_loadCalculation)).setOnClickListener(loadCalculationButtonClickListener);
 		
 		storedCalcs = CalcPersistence.readStoredCalculationList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE);
-		if(storedCalcs!=null)
+		if(storedCalcs!=null){
 			Log.d(LOG_TAG, "Stored calcs size: " + storedCalcs.size());
-		else{
+			adapter = new StoredCalcsListAdapter(WelcomeActivity.this, R.layout.stored_calcs_list_item, storedCalcs);
+			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setAdapter(adapter);
+		} else{
 			Log.d(LOG_TAG, "Stored calcs size: null");
 		}
 	}

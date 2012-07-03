@@ -47,7 +47,7 @@ import android.widget.Toast;
 public class AddNewPerson extends ColCalcActivity {
 	private List<PersonData> inputPaysList = new ArrayList<PersonData>();
 	private ArrayAdapter<PersonData> adapter;
-	private CalculationLogic calc = new CalculationLogic(getString(R.string.calculation_default_title_text) + Calendar.getInstance().getTime().toLocaleString());
+	private CalculationLogic calc;
 	
 	private CheckBox mEqualPaymentsBox;
 	private EditText mNewPersonNameInput;
@@ -69,6 +69,8 @@ public class AddNewPerson extends ColCalcActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enter_pays);
+        
+        calc = new CalculationLogic(getString(R.string.calculation_default_title_text) + " " + Calendar.getInstance().getTime().toLocaleString());
         
         initActivityViews();
         
