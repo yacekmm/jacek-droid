@@ -57,7 +57,8 @@
 	        android:layout_toLeftOf="@+id/textCurrency"
 	        android:scrollHorizontally="true"
 	        android:gravity="fill_horizontal"
-	        android:textAppearance="?android:attr/textAppearanceMedium" 
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:text="@string/emptyText" 
 	        android:inputType="numberDecimal">
 	
 	        <requestFocus />

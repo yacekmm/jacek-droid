@@ -33,7 +33,7 @@ public class WelcomeActivity extends ColCalcActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
 		
-		((Button)findViewById(R.id.welcome_mode_newCalculation)).setOnClickListener(newCalculationButtonClickListener);
+		((Button)findViewById(R.id.welcome_mode_potluckParty)).setOnClickListener(modePotluckPartyClickListener);
 		populateStoredCalcsList();
 	}
 
@@ -60,7 +60,7 @@ public class WelcomeActivity extends ColCalcActivity {
 		}
 	};
 	
-	OnClickListener newCalculationButtonClickListener = new OnClickListener() {
+	OnClickListener modePotluckPartyClickListener = new OnClickListener() {
         public void onClick(View v) {
         	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	startActivity(intent);

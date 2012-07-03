@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Kalkulator rozliczeń</string>
+    <string name="emptyText"></string>
     
     <string name="calculation_TextView_title">Rozlicz się z imprezy składkowej!</string>
     <string name="calculation_TextView_name">Imię</string>
@@ -16,8 +17,10 @@
     <string name="calculation_dialog_remove_text_removePerson">Czy na pewno chcesz usunąć tę osobę z listy?</string>
     <string name="calculation_default_title_text">Rozliczenie z dnia </string>
     
-    <string name="welcome_mode_newCalculation">Impreza składkowa</string>
+    <string name="welcome_mode_potluckParty">Impreza składkowa</string>
     <string name="welcome_mode_restaurant">Restauracja</string>
+    <string name="welcome_mode_holidays">Wakacje</string>
+    <string name="welcome_mode_equalPays">Zrzutka po równo</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
     
     <string name="EnterPays_TextView_EnterPayPerEachPerson">Dodaj nową osobę</string>
