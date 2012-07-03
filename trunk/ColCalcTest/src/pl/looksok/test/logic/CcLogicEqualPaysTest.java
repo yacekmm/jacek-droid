@@ -6,6 +6,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import pl.looksok.logic.CalculationLogic;
+import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 import pl.looksok.test.utils.Constants;
 import pl.looksok.test.utils.TestScenarioBuilder;
@@ -26,6 +27,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic("SampleTitle");
 		calc.setEqualPayments(equalPayments);
+		calc.setCalculationType(CalculationType.POTLUCK_PARTY);
 		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
 	}

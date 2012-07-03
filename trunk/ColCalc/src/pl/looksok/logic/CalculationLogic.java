@@ -1,8 +1,8 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -21,8 +21,9 @@ public class CalculationLogic implements Serializable {
 	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
 	private Calendar dateSaved;
-	private CalculationType calculationType;
+	private CalculationType calculationType = CalculationType.DEFAULT;
 	private String calcTitle = "";
+	private CalculationLogic giftCalc = null;
 	
 	public Hashtable<String, PersonData> getCalculationResult() {
 		return calculationResult;
@@ -45,6 +46,22 @@ public class CalculationLogic implements Serializable {
 	public Hashtable<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
+		
+		if(calculationType.equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
+			giftCalc = new CalculationLogic("giftCalc");
+			giftCalc.setCalculationType(CalculationType.EQUAL_PAYMENTS);
+			List<PersonData> giftGivers = new ArrayList<PersonData>();
+			
+			for(PersonData pd :inputPaysList){
+				if(!pd.receivesGift()){
+					giftGivers.add(new PersonData(pd.getName(), pd.getHowMuchIPaidForGift(), null));
+				}
+			}
+			
+			if(giftGivers.size()>0){
+				giftCalc.calculate(giftGivers);
+			}
+		}
 		
 		return calculate(inputPays);
 	}
@@ -75,6 +92,7 @@ public class CalculationLogic implements Serializable {
 
 	public Hashtable<String, PersonData> recalculate() {
 		resetInputData();
+		giftCalc.resetInputData();
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
 		return calculate(inputPays);
 	}
@@ -87,12 +105,11 @@ public class CalculationLogic implements Serializable {
 	}
 	
 	private Hashtable<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
-		Double totalPay = calculateTotalPayValue(inputPays);
+		double totalPay = calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
 		
-		Collection<String> c = inputPays.keySet();
-		Iterator<String> itr = c.iterator();
+		Iterator<String> itr = inputPays.keySet().iterator();
 		while (itr.hasNext()){
 			String key = itr.next();
 			if(!equalPayments)
@@ -122,14 +139,32 @@ public class CalculationLogic implements Serializable {
 			newCalculationResult.put(pp.getName(), pp);
 		}
 		
+		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
+			Hashtable<String, PersonData> giftCalcResult = giftCalc.getCalculationResult();
+			Iterator<String> giftIt = giftCalcResult.keySet().iterator();
+			while(giftIt.hasNext()){
+				PersonData giftGiverPerson = giftCalcResult.get(giftIt.next());
+				PersonData giverInMainCalc = newCalculationResult.get(giftGiverPerson.getName());
+				
+				HashMap<String, Double> giftGiverRefund = giftGiverPerson.getRefundForOtherPeople();
+				Iterator<String> giftGiverIter = giftGiverRefund.keySet().iterator();
+				while(giftGiverIter.hasNext()){
+					String key = giftGiverIter.next();
+					double value = giftGiverRefund.get(key);
+					
+					//increase main refund
+					giverInMainCalc.increaseRefund(key, value);
+				}
+			}
+		}
+
 		calculationResult = newCalculationResult;
 	}
 
 	private Double calculateTotalPayValue(HashMap<String, PersonData> inputPays) {
 		Double totalPay = 0.0;
 		
-		Collection<PersonData> c = inputPays.values();
-		Iterator<PersonData> itr = c.iterator();
+		Iterator<PersonData> itr = inputPays.values().iterator();
 
 		while (itr.hasNext()){
 			totalPay += itr.next().getPayMadeByPerson();
@@ -261,5 +296,13 @@ public class CalculationLogic implements Serializable {
 
 	public void setCalcTitle(String calcTitle) {
 		this.calcTitle = calcTitle;
+	}
+
+	public CalculationLogic getGiftCalc() {
+		return giftCalc;
+	}
+
+	public void setGiftCalc(CalculationLogic giftCalc) {
+		this.giftCalc = giftCalc;
 	}
 }
