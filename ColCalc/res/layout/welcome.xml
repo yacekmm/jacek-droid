@@ -31,9 +31,18 @@
         android:layout_width="wrap_content"
         android:minWidth="@dimen/button_minWidth"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_above="@+id/welcome_savedCalcs_list"
         android:layout_marginBottom="@dimen/margin_big"
         android:text="@string/welcome_Button_loadCalculation" />
+
+    <ListView
+        android:id="@+id/welcome_savedCalcs_list"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/welcome_savedCalcs_List_height"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+         >
+    </ListView>
 
 </RelativeLayout>

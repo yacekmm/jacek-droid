@@ -74,7 +74,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	CalcPersistence.saveCalculation(getApplicationContext(), "installedapplist.txt", calc);
+        	CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
         	Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
         }
     };

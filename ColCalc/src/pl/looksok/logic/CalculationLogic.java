@@ -1,6 +1,7 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -19,13 +20,17 @@ public class CalculationLogic implements Serializable {
 	private Hashtable<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
+	private Calendar dateSaved;
+	private CalculationType calculationType;
+	private String calcTitle = "";
 	
 	public Hashtable<String, PersonData> getCalculationResult() {
 		return calculationResult;
 	}
 
-	public CalculationLogic(){
+	public CalculationLogic(String title){
 		calculationResult = new Hashtable<String, PersonData>();
+		setCalcTitle(title);
 	}
 
 	private double howMuchPerPerson(double totalPay, int peopleCount) {
@@ -234,4 +239,27 @@ public class CalculationLogic implements Serializable {
 		getCalculationResult().remove(pd.getName());
 	}
 
+	public Calendar getDateSaved() {
+		return dateSaved;
+	}
+
+	public void setDateSaved(Calendar dateSaved) {
+		this.dateSaved = dateSaved;
+	}
+
+	public CalculationType getCalculationType() {
+		return calculationType;
+	}
+
+	public void setCalculationType(CalculationType calculationType) {
+		this.calculationType = calculationType;
+	}
+
+	public String getCalcTitle() {
+		return calcTitle;
+	}
+
+	public void setCalcTitle(String calcTitle) {
+		this.calcTitle = calcTitle;
+	}
 }

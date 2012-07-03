@@ -14,6 +14,7 @@
     <string name="calculation_dialog_button_deletePerson">Usuń</string>
     <string name="calculation_dialog_button_cancel">Anuluj</string>
     <string name="calculation_dialog_remove_text_removePerson">Czy na pewno chcesz usunąć tę osobę z listy?</string>
+    <string name="calculation_default_title_text">Rozliczenie z dnia </string>
     
     <string name="welcome_Button_newCalculation">Nowe rozliczenie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
@@ -43,6 +44,7 @@
     <string name="calculation_button_sendCalculation_text">Wyślij</string>
     <string name="calculation_button_addPerson_text">Dodaj osobę</string>
     <string name="calculation_saved_text">Zapisano!</string>
+    <string name="calculation_load_error_text">Nie znaleziono żadnych zapisanych rozliczeń</string>
     
     <string name="table_column0_weight">2</string>
     <string name="table_column1_weight">1</string>

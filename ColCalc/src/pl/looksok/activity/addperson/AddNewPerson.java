@@ -1,6 +1,7 @@
 package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -46,7 +47,7 @@ import android.widget.Toast;
 public class AddNewPerson extends ColCalcActivity {
 	private List<PersonData> inputPaysList = new ArrayList<PersonData>();
 	private ArrayAdapter<PersonData> adapter;
-	private CalculationLogic calc = new CalculationLogic();
+	private CalculationLogic calc = new CalculationLogic(getString(R.string.calculation_default_title_text) + Calendar.getInstance().getTime().toLocaleString());
 	
 	private CheckBox mEqualPaymentsBox;
 	private EditText mNewPersonNameInput;

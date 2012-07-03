@@ -7,5 +7,7 @@ public class Constants {
 	
 	public static final String SHARED_PREFS_NAME = "PayCalc";
 	
+	public static final String PERSISTENCE_SAVED_CALCS_FILE = "StoredCalculations";
+	
 	public static final String APPLICATION_WEBSITE_URL = "http://looksok.wordpress.com/";
 }
