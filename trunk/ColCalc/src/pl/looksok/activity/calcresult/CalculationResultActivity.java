@@ -6,8 +6,8 @@ import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.WelcomeActivity;
 import pl.looksok.activity.addperson.AddNewPerson;
+import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.CalcPersistence;

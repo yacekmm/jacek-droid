@@ -112,7 +112,11 @@ public class CalcPersistence {
 			calcList = new ArrayList<CalculationLogic>();
 		}
 		calc.setDateSaved(Calendar.getInstance());
-		calcList.add(calc);
+		calcList.add(0, calc);
+		while(calcList.size() > Constants.PERSISTENCE_MAX_STORED_CALCS){
+			CalculationLogic tmp = calcList.remove(calcList.size()-1);
+			Log.d(LOG_TAG, "storedCalcsList reached maxSize limit. Removing item titled: " + tmp.getCalcTitle());
+		}
 		
 		saveCalculationList(context, filename, calcList);
 	}
