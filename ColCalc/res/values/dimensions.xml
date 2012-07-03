@@ -4,7 +4,7 @@
     <dimen name="margin_small">10sp</dimen>
     <dimen name="margin_big">15sp</dimen>
     
-    <dimen name="button_minWidth">120sp</dimen>
+    <dimen name="mode_height">110sp</dimen>
     
     <dimen name="calc_listItem_height">110sp</dimen>
     <dimen name="calc_listItem_borderSize">2sp</dimen>

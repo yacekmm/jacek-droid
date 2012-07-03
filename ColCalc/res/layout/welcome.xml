@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" >
 
     <TextView
         android:id="@+id/welcome_TextView_Title"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
+        android:layout_alignParentTop="true"
         android:layout_marginBottom="@dimen/margin_big"
-        android:text="@string/calculation_TextView_title" />
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="center_horizontal"
+        android:text="@string/calculation_TextView_title"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/welcome_Button_newCalculation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_small"
+    <TableLayout
+        android:id="@+id/welcome_modesTable"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_above="@+id/welcome_savedCalcs_list"
-        android:minWidth="@dimen/button_minWidth"
-        android:text="@string/welcome_Button_newCalculation" />
+        android:layout_below="@+id/welcome_TextView_Title" 
+        android:stretchColumns="1"
+        >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             >
+
+            <Button
+                android:id="@+id/welcome_mode_newCalculation"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/mode_height"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@string/welcome_mode_newCalculation" />
+
+            <Button
+                android:id="@+id/welcome_mode_restaurant"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/mode_height"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@string/welcome_mode_restaurant"
+                 />
+        </TableRow>
+    </TableLayout>
 
     <ListView
         android:id="@+id/welcome_savedCalcs_list"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/welcome_savedCalcs_List_height"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-         >
+        android:layout_centerHorizontal="true" >
     </ListView>
 
 </RelativeLayout>
