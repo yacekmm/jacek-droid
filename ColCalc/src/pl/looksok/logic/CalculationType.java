@@ -1,5 +1,9 @@
 package pl.looksok.logic;
 
 public enum CalculationType {
-	IMPREZA_SKLADKOWA
+	POTLUCK_PARTY,
+	POTLUCK_PARTY_WITH_GIFT,
+	RESTAURANT,
+	EQUAL_PAYMENTS, 
+	DEFAULT
 }

@@ -22,7 +22,9 @@ public class PersonData implements Serializable{
 	private String name;
 	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
+	private double howMuchIPaidForGift;
 	private double howMuchIShouldPay;
+	private double howMuchIShouldPayForGift;
 	private double toReturn;
 	private double totalRefundForThisPerson;
 	private HashMap<String, PersonData> otherPeoplePayments;
@@ -32,7 +34,6 @@ public class PersonData implements Serializable{
 	
 	//gift
 	private boolean receivesGift = false;
-	private double giftValue = 0.0;
 	
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
@@ -50,10 +51,10 @@ public class PersonData implements Serializable{
 		this.emails = emails;
 	}
 
-	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftValue) {
+	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftPayment) {
 		this(name, payDouble, emails);
 		setReceivesGift(receivesGift);
-		setGiftValue(giftValue);
+		setHowMuchIPaidForGift(giftPayment);
 	}
 
 	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
@@ -292,7 +293,7 @@ public class PersonData implements Serializable{
 		this.otherPeoplePayments = otherPeoplePayments;
 	}
 
-	public boolean isReceivesGift() {
+	public boolean receivesGift() {
 		return receivesGift;
 	}
 
@@ -300,11 +301,25 @@ public class PersonData implements Serializable{
 		this.receivesGift = receivesGift;
 	}
 
-	public double getGiftValue() {
-		return giftValue;
+	public double getHowMuchIShouldPayForGift() {
+		return howMuchIShouldPayForGift;
 	}
 
-	public void setGiftValue(double giftValue) {
-		this.giftValue = giftValue;
+	public void setHowMuchIShouldPayForGift(double howMuchIShouldPayForGift) {
+		this.howMuchIShouldPayForGift = howMuchIShouldPayForGift;
+	}
+
+	public double getHowMuchIPaidForGift() {
+		return howMuchIPaidForGift;
+	}
+
+	public void setHowMuchIPaidForGift(double howMuchIPaidForGift) {
+		this.howMuchIPaidForGift = howMuchIPaidForGift;
+	}
+
+	public void increaseRefund(String forWhichPerson, double payValueToAdd) {
+		double currentValue = getRefundForOtherPeople().remove(forWhichPerson);
+		getRefundForOtherPeople().put(forWhichPerson, currentValue + payValueToAdd);
+		
 	}
 }
