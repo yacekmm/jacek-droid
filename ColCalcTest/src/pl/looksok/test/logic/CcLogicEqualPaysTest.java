@@ -24,7 +24,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		calc = new CalculationLogic();
+		calc = new CalculationLogic("SampleTitle");
 		calc.setEqualPayments(equalPayments);
 		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
