@@ -52,13 +52,41 @@ public class CalculationLogic implements Serializable {
 			giftCalc.setCalculationType(CalculationType.EQUAL_PAYMENTS);
 			List<PersonData> giftGivers = new ArrayList<PersonData>();
 			
-			for(PersonData pd :inputPaysList){
-				if(!pd.receivesGift()){
-					giftGivers.add(new PersonData(pd.getName(), pd.getHowMuchIPaidForGift(), null));
-				}
+			double giftValue = 0.0;
+			int giftGiversCount = 0;
+			for(PersonData pd: inputPaysList){
+				giftValue += pd.getHowMuchIPaidForGift();
+				if(!pd.receivesGift())
+					giftGiversCount++;
 			}
 			
-			if(giftGivers.size()>0){
+			if(giftGiversCount == 0)
+				giftValue = 0.0;
+					
+					
+			for(PersonData pd :inputPaysList){
+					
+				double shouldPayForGift = giftValue/giftGiversCount;
+				if(pd.receivesGift())
+					shouldPayForGift = 0.0;
+				double howMuchPersonPaidForGift = pd.getHowMuchIPaidForGift();
+				if(howMuchPersonPaidForGift !=0 || shouldPayForGift !=0){
+					PersonData giverPersonData = new PersonData(pd.getName(), howMuchPersonPaidForGift, shouldPayForGift, null);
+					giftGivers.add(giverPersonData);
+				}
+					
+					
+//				if(pd.getHowMuchIPaidForGift()>0){
+//					PersonData giverPersonData = new PersonData(pd.getName(), pd.getHowMuchIPaidForGift(), null);
+//					if(pd.receivesGift()){
+//						giverPersonData.setHowMuchPersonShouldPay(0);
+//					}
+//					giftGivers.add(giverPersonData);
+//				}
+			}
+			
+			if(giftGivers.size()>1){
+				giftCalc.setEqualPayments(false);
 				giftCalc.calculate(giftGivers);
 			}
 		}
@@ -83,7 +111,7 @@ public class CalculationLogic implements Serializable {
 		
 		if(!equalPayments){
 			if(sumOfAllPays != sumOfAllShouldPays){
-				throw new BadInputDataException("Sum of all Pays made by persons is not equal to sum of amount that they should pay");
+				throw new BadInputDataException("Sum of all Pays made by persons ("+sumOfAllPays+") is not equal to sum of amount that they should pay(" +sumOfAllShouldPays+")");
 			}
 		}
 		return inputPays;
@@ -112,12 +140,13 @@ public class CalculationLogic implements Serializable {
 		Iterator<String> itr = inputPays.keySet().iterator();
 		while (itr.hasNext()){
 			String key = itr.next();
-			if(!equalPayments)
+//			if(!equalPayments)
 				howMuchPersonShouldPay = inputPays.get(key).getHowMuchPersonShouldPay();
-			else{
-				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
+//			else{
+				if(howMuchPersonShouldPay<0)
+					howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
 				inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
-			}
+//			}
 			
 			PersonData p = new PersonData(key, inputPays);
 			p.prepareCalculationData(howMuchPersonShouldPay);
