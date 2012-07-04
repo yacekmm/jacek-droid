@@ -23,8 +23,7 @@ public class PersonData implements Serializable{
 	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
 	private double howMuchIPaidForGift;
-	private double howMuchIShouldPay;
-	private double howMuchIShouldPayForGift;
+	private double howMuchIShouldPay =-1;
 	private double toReturn;
 	private double totalRefundForThisPerson;
 	private HashMap<String, PersonData> otherPeoplePayments;
@@ -143,13 +142,13 @@ public class PersonData implements Serializable{
 	}
 
 	private void calculateHowMuchIShouldReturn() {
-		toReturn = howMuchIShouldPay - howMuchIPaid;
+		toReturn = getHowMuchPersonShouldPay() - howMuchIPaid;
 		if(toReturn < 0.0)
 			toReturn = 0.0;
 	}
 
 	private void calculateHowMuchRefundIShouldReceive() {
-		totalRefundForThisPerson = howMuchIPaid - howMuchIShouldPay;
+		totalRefundForThisPerson = howMuchIPaid - getHowMuchPersonShouldPay();
 		if(totalRefundForThisPerson < 0.0)
 			totalRefundForThisPerson = 0.0;
 	}
@@ -169,7 +168,7 @@ public class PersonData implements Serializable{
 		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
 		
 		if(howMuchRefundPersonBNeeds>0){
-			double tmpToReturn = howMuchIShouldPay - howMuchIPaid;
+			double tmpToReturn = getHowMuchPersonShouldPay() - howMuchIPaid;
 			
 			if(personBNeedsMoreThanIShouldGive(tmpToReturn)){
 				tmpToReturn = splitMyReturnAmount();
@@ -201,7 +200,7 @@ public class PersonData implements Serializable{
 		if(refundForPersonBNeeded<0)
 			tmpToReturn = 0.0;
 		
-		tmpToReturn = howMuchPersonBPaid - howMuchIShouldPay;
+		tmpToReturn = howMuchPersonBPaid - getHowMuchPersonShouldPay();
 		if(tmpToReturn<0)
 			tmpToReturn = 0;
 		return tmpToReturn;
@@ -209,7 +208,7 @@ public class PersonData implements Serializable{
 
 	private boolean personBWantsLessThanIHaveToReturn(
 			double howMuchPersonBPaid, double howMuchPersonBShouldPay, double tmpToReturn, double howMuchRefundPersonBNeeds) {
-		return howMuchRefundPersonBNeeds < howMuchIShouldPay - howMuchIPaid;
+		return howMuchRefundPersonBNeeds < getHowMuchPersonShouldPay() - howMuchIPaid;
 	}
 
 	private double splitMyReturnAmount() {
@@ -299,14 +298,6 @@ public class PersonData implements Serializable{
 
 	public void setReceivesGift(boolean receivesGift) {
 		this.receivesGift = receivesGift;
-	}
-
-	public double getHowMuchIShouldPayForGift() {
-		return howMuchIShouldPayForGift;
-	}
-
-	public void setHowMuchIShouldPayForGift(double howMuchIShouldPayForGift) {
-		this.howMuchIShouldPayForGift = howMuchIShouldPayForGift;
 	}
 
 	public double getHowMuchIPaidForGift() {
