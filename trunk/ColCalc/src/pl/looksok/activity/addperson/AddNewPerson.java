@@ -197,12 +197,8 @@ public class AddNewPerson extends ColCalcActivity {
 					FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput));
 		}
 		
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-		}
-		
-		public void afterTextChanged(Editable s) {
-		}
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+		public void afterTextChanged(Editable s) {}
 	};
 	
 	private void updateShouldPayTextFields(double editedPay, double editedShouldPay) {

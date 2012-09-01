@@ -225,6 +225,15 @@ public class CcLogicEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personCName));
 	}
 	
+	public void testRefundOfZeroPayTwoPeopleOnePaidNotEquallyWhoToWhom(){
+		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(18.9, 0.0);
+		
+		calc.calculate(inputPaysList);
+		
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 9.45, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
+	}
+	
 	public void testRefundOfNonZeroPayFourPeopleThreePaidNotEquallyWhoToWhom(){
 		//each should pay 116/4 = 29.0
 		inputPaysList = TestScenarioBuilder.buildTestCaseFourPeople(55.0, 36.0, 0.0, 25.0);
@@ -253,43 +262,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 		inputPaysList = TestScenarioBuilder.buildTestCaseSixPeople(26.0, 0.0, 15.0, 85.0, 0.0, 0.0);
 		
 		calc.calculate(inputPaysList);
-		
-//		System.out.println("B to C: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personCName));
-//		System.out.println("B to A: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
-//		System.out.println("B to D: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personDName));
-//		System.out.println("B to E: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personEName));
-//		System.out.println("B to F: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personFName));
-//		
-//		System.out.println("C to B: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
-//		System.out.println("C to A: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
-//		System.out.println("C to D: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personDName));
-//		System.out.println("C to E: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personEName));
-//		System.out.println("C to F: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personFName));
-//		
-//		System.out.println("A to B: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
-//		System.out.println("A to C: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personCName));
-//		System.out.println("A to D: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personDName));
-//		System.out.println("A to E: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personEName));
-//		System.out.println("A to F: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personFName));
-//		
-//		System.out.println("D to A: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personAName));
-//		System.out.println("D to B: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personBName));
-//		System.out.println("D to C: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personCName));
-//		System.out.println("D to E: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personEName));
-//		System.out.println("D to F: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personFName));
-//		
-//		System.out.println("E to A: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personAName));
-//		System.out.println("E to B: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personBName));
-//		System.out.println("E to C: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personCName));
-//		System.out.println("E to D: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personDName));
-//		System.out.println("E to F: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personFName));
-//		
-//		System.out.println("F to A: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personAName));
-//		System.out.println("F to B: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personBName));
-//		System.out.println("F to C: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personCName));
-//		System.out.println("F to D: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personDName));
-//		System.out.println("F to E: " + calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personEName));
-//		
+
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personCName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 21.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personDName));
