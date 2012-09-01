@@ -131,13 +131,13 @@ public class CalculationLogic implements Serializable {
 		Iterator<String> itr = inputPays.keySet().iterator();
 		while (itr.hasNext()){
 			String key = itr.next();
-//			if(!equalPayments)
+			if(!equalPayments)
 				howMuchPersonShouldPay = inputPays.get(key).getHowMuchPersonShouldPay();
-//			else{
-				if(howMuchPersonShouldPay<0)
+			else{
+//				if(howMuchPersonShouldPay<0)
 					howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
 				inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
-//			}
+			}
 			
 			PersonData p = new PersonData(key, inputPays);
 			p.prepareCalculationData(howMuchPersonShouldPay);
