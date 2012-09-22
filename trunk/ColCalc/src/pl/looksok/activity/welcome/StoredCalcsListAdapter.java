@@ -49,7 +49,7 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
 
 	private void setupItem(int position, ResultHolder holder) {
 		CalculationLogic calc = items.get(position);
-        holder.txtCalcTitle.setText(calc.getCalcTitle());
+        holder.txtCalcTitle.setText(calc.getCalcName());
 	}
 
 	

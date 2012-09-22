@@ -8,7 +8,7 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.calcresult.CalculationResultActivity;
+import pl.looksok.activity.calcresult.CalculationActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.Constants;
@@ -294,7 +294,7 @@ public class AddNewPerson extends ColCalcActivity {
     	try{
     		calc.calculate(inputPaysList);
     		
-    		Intent intent = new Intent(this.getApplicationContext(), CalculationResultActivity.class) ;
+    		Intent intent = new Intent(this.getApplicationContext(), CalculationActivity.class) ;
     		intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
     		startActivity(intent);
     		finish();

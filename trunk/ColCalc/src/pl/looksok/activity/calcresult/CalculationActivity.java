@@ -21,14 +21,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CalculationResultActivity extends ColCalcActivity {
-	protected static final String LOG_TAG = CalculationResultActivity.class.getSimpleName();
+public class CalculationActivity extends ColCalcActivity {
+	protected static final String LOG_TAG = CalculationActivity.class.getSimpleName();
 	
 	private static final int DIALOG_INCREASE_PERSON_PAY = 0;
 	private static final int DIALOG_REMOVE_PERSON = 1;
@@ -54,14 +55,15 @@ public class CalculationResultActivity extends ColCalcActivity {
     }
 
 	private void initButtons() {
-		((ImageButton)findViewById(R.id.calc_button_saveCalculation)).setOnClickListener(saveCalculationButtonClickListener);
-        ((ImageButton)findViewById(R.id.calc_button_sendCalculation)).setOnClickListener(shareCalculationButtonClickListener);
-        ((ImageButton)findViewById(R.id.calc_button_addPerson)).setOnClickListener(addPersonButtonClickListener);
+		((Button)findViewById(R.id.calc_saveCalculation_button)).setOnClickListener(saveCalculationButtonClickListener);
+        ((ImageButton)findViewById(R.id.calc_sendCalculation_button)).setOnClickListener(shareCalculationButtonClickListener);
+        ((ImageButton)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
+        ((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
 	}
 
 	private void populateListArray() {
 		listArray = utils.readCalcPeopleToListArray(calc);
-		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
+		adapter = new ResultsListAdapter(CalculationActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 	}
 
@@ -69,13 +71,19 @@ public class CalculationResultActivity extends ColCalcActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-		}
+			((EditText)findViewById(R.id.calc_calcName_edit)).setText(calc.getCalcName());
+		}else
+			calc = new CalculationLogic();
 	}
 	
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
+        	String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
+        	calc.setCalcName(calcName);
         	CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
         	Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
+
+        	goToWelcomeScreen();
         }
     };
     
@@ -99,6 +107,21 @@ public class CalculationResultActivity extends ColCalcActivity {
         	finish();
     	}
     };
+    
+    OnClickListener removeCalcButtonClickListener = new OnClickListener() {
+    	public void onClick(View v) {
+    		CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+    		goToWelcomeScreen();
+    	}
+
+    };
+
+    private void goToWelcomeScreen() {
+    	Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
+    	startActivity(intent);
+    	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
+    	finish();
+    }
 
 	public void editPerson(View v) {
 		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
@@ -134,7 +157,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 	}
 
 	private Dialog createDialogRemovePerson() {
-		return new AlertDialog.Builder(CalculationResultActivity.this)
+		return new AlertDialog.Builder(CalculationActivity.this)
 		.setIcon(R.drawable.content_discard)
 		.setTitle(R.string.calculation_dialog_remove_text_removePerson)
 		.setPositiveButton(R.string.calculation_dialog_button_ok, new DialogInterface.OnClickListener() {
@@ -152,7 +175,7 @@ public class CalculationResultActivity extends ColCalcActivity {
 		LayoutInflater factory = LayoutInflater.from(this);
 		final View textEntryView = factory.inflate(R.layout.alert_dialog_increase_pay, null);
 		((TextView)textEntryView.findViewById(R.id.textCurrency)).setText(Currency.getInstance(Locale.getDefault()).getSymbol());
-		return new AlertDialog.Builder(CalculationResultActivity.this)
+		return new AlertDialog.Builder(CalculationActivity.this)
 		    .setIcon(R.drawable.increase_pay)
 		    .setTitle(personDataHolder.getName() + " - " + getString(R.string.calculation_dialog_title_increasePAyment))
 		    .setView(textEntryView)

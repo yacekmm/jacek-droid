@@ -8,6 +8,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.BadInputDataException;
 import pl.looksok.utils.exceptions.BadPayException;
@@ -22,16 +24,21 @@ public class CalculationLogic implements Serializable {
 	private boolean equalPayments = true;
 	private Calendar dateSaved;
 	private CalculationType calculationType = CalculationType.DEFAULT;
-	private String calcTitle = "";
+	private String calcName = "";
 	private CalculationLogic giftCalc = null;
 	
 	public Hashtable<String, PersonData> getCalculationResult() {
 		return calculationResult;
 	}
 
-	public CalculationLogic(String title){
+	public CalculationLogic(){
 		calculationResult = new Hashtable<String, PersonData>();
-		setCalcTitle(title);
+		inputPaysList = new ArrayList<PersonData>();
+	}
+	
+	public CalculationLogic(String title){
+		this();
+		setCalcName(title);
 	}
 
 	private double howMuchPerPerson(double totalPay, int peopleCount) {
@@ -310,12 +317,14 @@ public class CalculationLogic implements Serializable {
 		this.calculationType = calculationType;
 	}
 
-	public String getCalcTitle() {
-		return calcTitle;
+	public String getCalcName() {
+		return calcName;
 	}
 
-	public void setCalcTitle(String calcTitle) {
-		this.calcTitle = calcTitle;
+	public void setCalcName(String calcName) {
+		if(calcName.length() == 0)
+			calcName = DateTime.now().toString();
+		this.calcName = calcName;
 	}
 
 	public CalculationLogic getGiftCalc() {

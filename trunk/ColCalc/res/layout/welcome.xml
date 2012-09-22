@@ -4,77 +4,32 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/welcome_TextView_Title"
-        android:layout_width="fill_parent"
+        android:id="@+id/welcome_appName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@id/welcome_mode_potluckParty"
         android:layout_marginBottom="@dimen/margin_big"
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_marginRight="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_small"
-        android:gravity="center_horizontal"
-        android:text="@string/calculation_TextView_title"
+        android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TableLayout
-        android:id="@+id/welcome_modesTable"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/welcome_savedCalcs_list"
-        android:layout_below="@+id/welcome_TextView_Title" 
-        android:stretchColumns="1"
-        >
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-             >
-
-            <Button
-                android:id="@+id/welcome_mode_potluckParty"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/mode_height"
-                android:layout_margin="@dimen/margin_small"
-                android:text="@string/welcome_mode_potluckParty" />
-
-            <Button
-                android:id="@+id/welcome_mode_restaurant"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/mode_height"
-                android:layout_margin="@dimen/margin_small"
-                android:text="@string/welcome_mode_restaurant"
-                 />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-             >
-
-            <Button
-                android:id="@+id/welcome_mode_holidays"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/mode_height"
-                android:layout_margin="@dimen/margin_small"
-                android:text="@string/welcome_mode_holidays" />
-
-            <Button
-                android:id="@+id/welcome_mode_equealPays"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/mode_height"
-                android:layout_margin="@dimen/margin_small"
-                android:text="@string/welcome_mode_equalPays"
-                 />
-        </TableRow>
-    </TableLayout>
+    <Button
+        android:id="@+id/welcome_mode_potluckParty"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_button"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_toRightOf="@id/welcome_appName"
+        android:layout_alignParentRight="true"
+        android:text="@string/welcome_mode_potluckParty" />
 
     <ListView
         android:id="@+id/welcome_savedCalcs_list"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/welcome_savedCalcs_List_height"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" 
-        >
+        android:layout_centerHorizontal="true" >
     </ListView>
 
 </RelativeLayout>
