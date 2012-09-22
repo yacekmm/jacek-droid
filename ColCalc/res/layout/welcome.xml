@@ -7,7 +7,7 @@
         android:id="@+id/welcome_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/welcome_mode_potluckParty"
+        android:layout_alignBaseline="@+id/welcome_mode_potluckParty"
         android:layout_marginBottom="@dimen/margin_big"
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_marginRight="@dimen/margin_small"

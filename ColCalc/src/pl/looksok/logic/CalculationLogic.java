@@ -1,8 +1,8 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -17,12 +17,14 @@ import pl.looksok.utils.exceptions.BadPeopleCountException;
 import pl.looksok.utils.exceptions.DuplicatePersonNameException;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
+import com.google.common.math.DoubleMath;
+
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
 	private Hashtable<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
-	private Calendar dateSaved;
+	private DateTime dateSaved;
 	private CalculationType calculationType = CalculationType.DEFAULT;
 	private String calcName = "";
 	private CalculationLogic giftCalc = null;
@@ -301,11 +303,11 @@ public class CalculationLogic implements Serializable {
 		getCalculationResult().remove(pd.getName());
 	}
 
-	public Calendar getDateSaved() {
+	public DateTime getDateSaved() {
 		return dateSaved;
 	}
 
-	public void setDateSaved(Calendar dateSaved) {
+	public void setDateSaved(DateTime dateSaved) {
 		this.dateSaved = dateSaved;
 	}
 
@@ -333,5 +335,17 @@ public class CalculationLogic implements Serializable {
 
 	public void setGiftCalc(CalculationLogic giftCalc) {
 		this.giftCalc = giftCalc;
+	}
+
+	public int getTotalPay() {
+		double total = 0;
+		for (PersonData data : getInputPaysList()) {
+			total += data.getPayMadeByPerson();
+		}
+		return DoubleMath.roundToInt(total, RoundingMode.HALF_UP);
+	}
+
+	public int getTotalPersons() {
+		return getInputPaysList().size();
 	}
 }
