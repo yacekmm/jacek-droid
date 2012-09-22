@@ -58,8 +58,16 @@ public class CalculationActivity extends ColCalcActivity {
     }
 
 	private void initButtons() {
-		((Button)findViewById(R.id.calc_saveCalculation_button)).setOnClickListener(saveCalculationButtonClickListener);
-        ((ImageButton)findViewById(R.id.calc_sendCalculation_button)).setOnClickListener(shareCalculationButtonClickListener);
+		boolean isAnyPersonOnList = calc.getTotalPersons() > 0;
+
+		Button saveCalcBtn = (Button)findViewById(R.id.calc_saveCalculation_button);
+		saveCalcBtn.setOnClickListener(saveCalculationButtonClickListener);
+		saveCalcBtn.setEnabled(isAnyPersonOnList);
+		
+        ImageButton shareCalcBtn = (ImageButton)findViewById(R.id.calc_sendCalculation_button);
+        shareCalcBtn.setOnClickListener(shareCalculationButtonClickListener);
+        shareCalcBtn.setEnabled(isAnyPersonOnList);
+        
         ((ImageButton)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
         ((ImageButton)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
         ((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
@@ -90,7 +98,7 @@ public class CalculationActivity extends ColCalcActivity {
         public void onClick(View v) {
         	String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
         	if(calcName.length() == 0)
-        		calcName = R.string.calculation_default_name_text + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT);
+        		calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT);
         	
         	calc.setCalcName( calcName );
         	calc.setDateSaved(DateTime.now());

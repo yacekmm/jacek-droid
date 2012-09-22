@@ -326,8 +326,6 @@ public class CalculationLogic implements Serializable {
 	}
 
 	public void setCalcName(String calcName) {
-		if(calcName.length() == 0)
-			calcName = DateTime.now().toString();
 		this.calcName = calcName;
 	}
 
