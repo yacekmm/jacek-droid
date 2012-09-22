@@ -2,65 +2,75 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background_moonage_daydream"
-    >
+    android:background="@color/background_moonage_daydream" >
 
-    <TextView
-        android:id="@+id/calc_textView_title"
+    <EditText
+        android:id="@+id/calc_calcName_edit"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_button"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_big"
-        android:layout_marginBottom="@dimen/margin_big"
-        android:gravity="center"
-        android:text="@string/calculation_TextView_title"
-        android:textColor="@color/text_grr_ey"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+        android:layout_toLeftOf="@+id/calc_removeCalc_button"
+        android:hint="@string/calculation_calcName_hint"
+        android:singleLine="true" />
+
+    <ImageButton
+        android:id="@+id/calc_removeCalc_button"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@android:string/cancel"
+        android:src="@android:drawable/ic_menu_delete" />
+
+    <ImageButton
+        android:id="@+id/calc_addPerson_button"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_below="@id/calc_calcName_edit"
+        android:contentDescription="@string/calculation_button_addPerson_text"
+        android:src="@drawable/add_person" />
+
+    <ImageButton
+        android:id="@+id/calc_addMultiPerson_button"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_below="@id/calc_calcName_edit"
+        android:layout_toRightOf="@id/calc_addPerson_button"
+        android:contentDescription="@string/emptyText"
+        android:src="@drawable/add_multi_person" 
+        android:clickable="false" />
+
+    <ImageButton
+        android:id="@+id/calc_sendCalculation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/calc_calcName_edit"
+        android:layout_toRightOf="@id/calc_addMultiPerson_button"
+        android:contentDescription="@string/calculation_button_sendCalculation_text"
+        android:src="@drawable/share" />
+
+    <Button
+        android:id="@+id/calc_saveCalculation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calc_calcName_edit"
+        android:layout_toRightOf="@id/calc_sendCalculation_button"
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/save"
+        android:text="@string/calculation_button_save_text"
+        />
+
     <ListView
-        android:id="@+id/calc_listView_list" 
+        android:id="@+id/calc_listView_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/calc_textView_title"
-        android:layout_above="@+id/calc_button_saveCalculation"
+        android:layout_below="@id/calc_addPerson_button"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginLeft="@dimen/margin_small"
-    	android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         android:cacheColorHint="@color/transparent"
-    	android:divider="@null"
-		android:dividerHeight="@dimen/margin_small"
-        >
-        
+        android:divider="@null"
+        android:dividerHeight="@dimen/margin_small" >
     </ListView>
-
-    <ImageButton
-        android:id="@+id/calc_button_saveCalculation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/save"
-        android:contentDescription="@string/calculation_button_save_text" />
-
-    <ImageButton
-        android:id="@+id/calc_button_sendCalculation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/calc_button_saveCalculation"
-        android:src="@drawable/share"
-        android:contentDescription="@string/calculation_button_sendCalculation_text" />
-
-    <ImageButton
-        android:id="@+id/calc_button_addPerson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/calc_button_sendCalculation"
-        android:src="@drawable/add_person"
-        android:contentDescription="@string/calculation_button_addPerson_text"
-        />
 
 </RelativeLayout>

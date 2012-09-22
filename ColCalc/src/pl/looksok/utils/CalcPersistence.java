@@ -27,7 +27,7 @@ public class CalcPersistence {
 			out.writeObject(calcList);
 			out.close();
 			fos.close();
-			
+
 			Log.v(LOG_TAG, "Successful Save List");
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -37,28 +37,28 @@ public class CalcPersistence {
 	@SuppressWarnings("unchecked")
 	public static List<CalculationLogic> readStoredCalculationList(Context context, String filename) {
 		List<CalculationLogic> calcList = null;
-    	
-    	FileInputStream fis = null;
-    	ObjectInputStream in = null;
-    	try {
-    		fis = context.openFileInput(filename);
-    		in = new ObjectInputStream(fis);
+
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = context.openFileInput(filename);
+			in = new ObjectInputStream(fis);
 			calcList = (List<CalculationLogic>) in.readObject();
-    		in.close();
-    		fis.close();
-    		Log.v(LOG_TAG, "open calcs list: success");
-    	}catch (ClassNotFoundException e) {
-    		e.printStackTrace();
-    	} catch (FileNotFoundException e) {
-    		e.printStackTrace();
-    	} catch (StreamCorruptedException e) {
-    		
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	} catch(ClassCastException e){
-    		Log.e(LOG_TAG, "Error casting stored Calcs: " + e.getMessage());
-    	}
-    	
+			in.close();
+			fis.close();
+			Log.v(LOG_TAG, "open calcs list: success");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (StreamCorruptedException e) {
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch(ClassCastException e){
+			Log.e(LOG_TAG, "Error casting stored Calcs: " + e.getMessage());
+		}
+
 		return calcList;
 	}
 
@@ -68,14 +68,33 @@ public class CalcPersistence {
 			Log.d(LOG_TAG, "Stored Calculation List was empty. creating new");
 			calcList = new ArrayList<CalculationLogic>();
 		}
-		
+
 		calc.setDateSaved(Calendar.getInstance());
 		calcList.add(0, calc);
-		while(calcList.size() > Constants.PERSISTENCE_MAX_STORED_CALCS){
-			CalculationLogic tmp = calcList.remove(calcList.size()-1);
-			Log.d(LOG_TAG, "storedCalcsList reached maxSize limit. Removing item titled: " + tmp.getCalcTitle());
-		}
-		
+		//		while(calcList.size() > Constants.PERSISTENCE_MAX_STORED_CALCS){
+		//			CalculationLogic tmp = calcList.remove(calcList.size()-1);
+		//			Log.d(LOG_TAG, "storedCalcsList reached maxSize limit. Removing item titled: " + tmp.getCalcName());
+		//		}
+
 		saveCalculationList(context, filename, calcList);
+	}
+
+	public static void removeCalculationFromList(Context context,
+			String filename, CalculationLogic calc) {
+		List<CalculationLogic> calcList = readStoredCalculationList(context, filename);
+		if(calcList!=null){
+			CalculationLogic calcToRemove = new CalculationLogic();
+			for (CalculationLogic storedCalc : calcList) {
+				if(storedCalc.getCalcName().equals(calc.getCalcName())){
+					calcToRemove = storedCalc;
+					break;
+				}
+			}
+			if(calcToRemove.getCalcName().length() !=0){
+				calcList.remove(calcToRemove);
+				saveCalculationList(context, filename, calcList);
+			}
+		}
+
 	}
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Kalkulator rozliczeń</string>
+    <string name="app_name">Potluck</string>
     <string name="emptyText"></string>
     
-    <string name="calculation_TextView_title">Rozlicz się z imprezy składkowej!</string>
+    <string name="calculation_calcName_hint">Tu wpisz nazwę imprezy</string>
     <string name="calculation_TextView_name">Imię</string>
     <string name="calculation_TextView_personPaid_text">składka:</string>
     <string name="calculation_TextView_personPay">0,00</string>
@@ -17,7 +17,7 @@
     <string name="calculation_dialog_remove_text_removePerson">Czy na pewno chcesz usunąć tę osobę z listy?</string>
     <string name="calculation_default_title_text">Rozliczenie z dnia </string>
     
-    <string name="welcome_mode_potluckParty">Impreza składkowa</string>
+    <string name="welcome_mode_potluckParty">nowa impreza składkowa</string>
     <string name="welcome_mode_restaurant">Restauracja</string>
     <string name="welcome_mode_holidays">Wakacje</string>
     <string name="welcome_mode_equalPays">Zrzutka po równo</string>
@@ -44,7 +44,7 @@
     <string name="EnterPays_Menu_Edit">Edytuj</string>
     <string name="EnterPays_Menu_Remove">Usuń</string>
     
-    <string name="calculation_button_save_text">Zachowaj</string>
+    <string name="calculation_button_save_text">Zapisz i wyjdź</string>
     <string name="calculation_button_sendCalculation_text">Wyślij</string>
     <string name="calculation_button_addPerson_text">Dodaj osobę</string>
     <string name="calculation_saved_text">Zapisano!</string>

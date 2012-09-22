@@ -4,8 +4,7 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.addperson.AddNewPerson;
-import pl.looksok.activity.calcresult.CalculationResultActivity;
+import pl.looksok.activity.calcresult.CalculationActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
@@ -24,9 +23,7 @@ public class WelcomeActivity extends ColCalcActivity {
 	private static final String LOG_TAG = WelcomeActivity.class.getSimpleName();
 
 	private List<CalculationLogic> storedCalcs;
-
 	private StoredCalcsListAdapter adapter;
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +49,7 @@ public class WelcomeActivity extends ColCalcActivity {
 
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			CalculationLogic calc = adapter.getItem(arg2);
-        	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
+        	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
         	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
@@ -62,7 +59,7 @@ public class WelcomeActivity extends ColCalcActivity {
 	
 	OnClickListener modePotluckPartyClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+        	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
         	startActivity(intent);
         	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();
