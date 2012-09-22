@@ -3,12 +3,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/background_moonage_daydream" >
+
+    <TextView
+        android:id="@+id/calc_appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/app_name"/>
+
+    <include
+        android:id="@+id/calc_calcDetailsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_micro"
+        android:layout_alignParentRight="true"
+        layout="@layout/calc_details_header" />
 
     <EditText
         android:id="@+id/calc_calcName_edit"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/calc_calcDetailsHeader"
         android:layout_toLeftOf="@+id/calc_removeCalc_button"
         android:hint="@string/calculation_calcName_hint"
         android:singleLine="true" />
@@ -17,7 +31,8 @@
         android:id="@+id/calc_removeCalc_button"
         android:layout_width="@dimen/height_button"
         android:layout_height="@dimen/height_button"
-        android:layout_alignParentRight="true"
+		android:layout_below="@id/calc_calcDetailsHeader"
+		android:layout_alignParentRight="true"
         android:contentDescription="@android:string/cancel"
         android:src="@android:drawable/ic_menu_delete" />
 
@@ -35,15 +50,15 @@
         android:layout_height="@dimen/height_button"
         android:layout_below="@id/calc_calcName_edit"
         android:layout_toRightOf="@id/calc_addPerson_button"
+        android:clickable="false"
         android:contentDescription="@string/emptyText"
-        android:src="@drawable/add_multi_person" 
-        android:clickable="false" />
+        android:src="@drawable/add_multi_person" />
 
     <ImageButton
         android:id="@+id/calc_sendCalculation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_below="@id/calc_calcName_edit"
+        android:layout_below="@id/calc_calcName_edit"
         android:layout_toRightOf="@id/calc_addMultiPerson_button"
         android:contentDescription="@string/calculation_button_sendCalculation_text"
         android:src="@drawable/share" />
@@ -52,19 +67,18 @@
         android:id="@+id/calc_saveCalculation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_below="@id/calc_calcName_edit"
         android:layout_toRightOf="@id/calc_sendCalculation_button"
-        android:layout_alignParentRight="true"
         android:drawableLeft="@drawable/save"
-        android:text="@string/calculation_button_save_text"
-        />
+        android:text="@string/calculation_button_save_text" />
 
     <ListView
         android:id="@+id/calc_listView_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/calc_addPerson_button"
         android:layout_alignParentBottom="true"
+        android:layout_below="@id/calc_addPerson_button"
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_marginRight="@dimen/margin_small"

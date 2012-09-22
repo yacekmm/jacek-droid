@@ -1,7 +1,6 @@
 package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -70,8 +69,7 @@ public class AddNewPerson extends ColCalcActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enter_pays);
         
-        calc = new CalculationLogic(getString(R.string.calculation_default_title_text) + " " + Calendar.getInstance().getTime().toLocaleString());
-        
+        calc = new CalculationLogic();
         initActivityViews();
         
         adapter = new ArrayAdapter<PersonData>(this, android.R.layout.simple_expandable_list_item_1,

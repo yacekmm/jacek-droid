@@ -54,13 +54,21 @@ public class CalculationActivity extends ColCalcActivity {
         resultList = (ListView)findViewById(R.id.calc_listView_list);
         populateListArray();
         initButtons();
+        initCalculationDetails();
     }
 
 	private void initButtons() {
 		((Button)findViewById(R.id.calc_saveCalculation_button)).setOnClickListener(saveCalculationButtonClickListener);
         ((ImageButton)findViewById(R.id.calc_sendCalculation_button)).setOnClickListener(shareCalculationButtonClickListener);
         ((ImageButton)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
+        ((ImageButton)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
         ((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
+	}
+	
+	private void initCalculationDetails() {
+		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setText(calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
+        ((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(String.valueOf(calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
+        ((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));
 	}
 
 	private void populateListArray() {
@@ -80,7 +88,13 @@ public class CalculationActivity extends ColCalcActivity {
 	
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	calc.setCalcName( ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString() );
+        	String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
+        	if(calcName.length() == 0)
+        		calcName = new StringBuilder(R.string.calculation_default_name_text)
+        						.append(" ")
+        						.append(DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT)).toString();
+        	
+        	calc.setCalcName( calcName );
         	calc.setDateSaved(DateTime.now());
         	CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
         	Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
@@ -102,11 +116,18 @@ public class CalculationActivity extends ColCalcActivity {
 
     OnClickListener addPersonButtonClickListener = new OnClickListener() {
     	public void onClick(View v) {
+    		calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
         	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
         	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
         	startActivity(intent);
         	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
         	finish();
+    	}
+    };
+
+    OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
+    	public void onClick(View v) {
+    		calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
     	}
     };
     
