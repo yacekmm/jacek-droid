@@ -304,6 +304,8 @@ public class CalculationLogic implements Serializable {
 	}
 
 	public DateTime getDateSaved() {
+		if(dateSaved == null)
+			dateSaved = DateTime.now();
 		return dateSaved;
 	}
 

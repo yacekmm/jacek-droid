@@ -4,11 +4,9 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
+import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,9 +49,9 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
             holder.calcDetailsLayout = (RelativeLayout)row.findViewById(R.id.storedCalc_calcDetails);
             holder.calcDetailsLayout.setTag(holder.calc);
             holder.txtCalcName = (TextView)row.findViewById(R.id.storedCalc_calcName);
-            holder.txtCalcDate = (TextView)row.findViewById(R.id.storedCalc_calcDate);
-            holder.txtCalcTotal = (TextView)row.findViewById(R.id.storedCalc_calcTotal);
-            holder.txtCalcPersons = (TextView)row.findViewById(R.id.storedCalc_calcPersons);
+            holder.txtCalcDate = (TextView)row.findViewById(R.id.calcDetailsHeader_calcDate);
+            holder.txtCalcTotal = (TextView)row.findViewById(R.id.calcDetailsHeader_calcTotal);
+            holder.txtCalcPersons = (TextView)row.findViewById(R.id.calcDetailsHeader_calcPersons);
 
             row.setTag(holder);
 
@@ -66,10 +64,8 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
     }
 
 	private void setupItem(ResultHolder holder) {
-		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM.yyyy");
-		
         holder.txtCalcName.setText(holder.calc.getCalcName());
-        holder.txtCalcDate.setText(holder.calc.getDateSaved().toString(fmt));
+        holder.txtCalcDate.setText(holder.calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
         holder.txtCalcTotal.setText(String.valueOf(holder.calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
         holder.txtCalcPersons.setText(String.valueOf(holder.calc.getTotalPersons()));
 	}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/calcDetailsHeader_calcDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:drawableLeft="@drawable/calendar" />
+
+    <TextView
+        android:id="@+id/calcDetailsHeader_calcTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_micro"
+        android:layout_toRightOf="@+id/calcDetailsHeader_calcDate"
+        android:contentDescription="@string/app_name"
+        android:drawableLeft="@drawable/sum" />
+
+    <TextView
+        android:id="@+id/calcDetailsHeader_calcPersons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_micro"
+        android:layout_toRightOf="@id/calcDetailsHeader_calcTotal"
+        android:contentDescription="@string/app_name"
+        android:drawableLeft="@drawable/person" />
+
+</RelativeLayout>
