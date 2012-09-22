@@ -90,9 +90,7 @@ public class CalculationActivity extends ColCalcActivity {
         public void onClick(View v) {
         	String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
         	if(calcName.length() == 0)
-        		calcName = new StringBuilder(R.string.calculation_default_name_text)
-        						.append(" ")
-        						.append(DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT)).toString();
+        		calcName = R.string.calculation_default_name_text + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT);
         	
         	calc.setCalcName( calcName );
         	calc.setDateSaved(DateTime.now());
