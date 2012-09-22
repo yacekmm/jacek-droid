@@ -1,6 +1,11 @@
 package pl.looksok.activity.welcome;
 
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
+
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
@@ -10,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
@@ -35,11 +42,22 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new ResultHolder();
-            holder.txtCalcTitle = (TextView)row.findViewById(R.id.storedCalc_title);
+            holder.calc = items.get(position);
+            holder.removeCalcButton = (ImageButton)row.findViewById(R.id.storedCalc_removeCalc);
+            holder.removeCalcButton.setTag(holder.calc);
+            holder.shareCalcButton = (ImageButton)row.findViewById(R.id.storedCalc_shareCalc);
+            holder.shareCalcButton.setTag(holder.calc);
+
+            holder.calcDetailsLayout = (RelativeLayout)row.findViewById(R.id.storedCalc_calcDetails);
+            holder.calcDetailsLayout.setTag(holder.calc);
+            holder.txtCalcName = (TextView)row.findViewById(R.id.storedCalc_calcName);
+            holder.txtCalcDate = (TextView)row.findViewById(R.id.storedCalc_calcDate);
+            holder.txtCalcTotal = (TextView)row.findViewById(R.id.storedCalc_calcTotal);
+            holder.txtCalcPersons = (TextView)row.findViewById(R.id.storedCalc_calcPersons);
 
             row.setTag(holder);
 
-            setupItem(position, holder);
+            setupItem(holder);
         } else {
             holder = (ResultHolder)row.getTag();
         }
@@ -47,13 +65,24 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
         return row;
     }
 
-	private void setupItem(int position, ResultHolder holder) {
-		CalculationLogic calc = items.get(position);
-        holder.txtCalcTitle.setText(calc.getCalcName());
+	private void setupItem(ResultHolder holder) {
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM.yyyy");
+		
+        holder.txtCalcName.setText(holder.calc.getCalcName());
+        holder.txtCalcDate.setText(holder.calc.getDateSaved().toString(fmt));
+        holder.txtCalcTotal.setText(String.valueOf(holder.calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
+        holder.txtCalcPersons.setText(String.valueOf(holder.calc.getTotalPersons()));
 	}
 
 	
     public static class ResultHolder {
-    	TextView txtCalcTitle;
+		CalculationLogic calc;
+    	TextView txtCalcName;
+    	ImageButton removeCalcButton;
+    	ImageButton shareCalcButton;
+    	RelativeLayout calcDetailsLayout;
+    	TextView txtCalcDate;
+    	TextView txtCalcTotal;
+    	TextView txtCalcPersons;
     }
 }

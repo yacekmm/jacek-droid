@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import pl.looksok.logic.CalculationLogic;
@@ -68,14 +67,21 @@ public class CalcPersistence {
 			Log.d(LOG_TAG, "Stored Calculation List was empty. creating new");
 			calcList = new ArrayList<CalculationLogic>();
 		}
+		
+		boolean exist = false;
+		int index = 0;
+		for (CalculationLogic calcItem : calcList) {
+			if(calcItem.getCalcName().equals(calc.getCalcName())){
+				index = calcList.indexOf(calcItem);
+				exist = true;
+				break;
+			}
+		}
+		
+		if(exist)
+			calcList.remove(index);
 
-		calc.setDateSaved(Calendar.getInstance());
 		calcList.add(0, calc);
-		//		while(calcList.size() > Constants.PERSISTENCE_MAX_STORED_CALCS){
-		//			CalculationLogic tmp = calcList.remove(calcList.size()-1);
-		//			Log.d(LOG_TAG, "storedCalcsList reached maxSize limit. Removing item titled: " + tmp.getCalcName());
-		//		}
-
 		saveCalculationList(context, filename, calcList);
 	}
 

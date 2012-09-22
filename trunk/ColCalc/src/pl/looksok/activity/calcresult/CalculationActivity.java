@@ -4,6 +4,8 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
+import org.joda.time.DateTime;
+
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.addperson.AddNewPerson;
@@ -78,8 +80,8 @@ public class CalculationActivity extends ColCalcActivity {
 	
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
-        	calc.setCalcName(calcName);
+        	calc.setCalcName( ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString() );
+        	calc.setDateSaved(DateTime.now());
         	CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
         	Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
 

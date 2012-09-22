@@ -2,15 +2,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    >
+    android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/storedCalc_title"
+    <RelativeLayout
+        android:id="@+id/storedCalc_calcDetails"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_micro"
-        android:gravity="center_vertical"
-        android:text="@string/calculation_default_title_text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_height="@dimen/height_button"
+        android:layout_toLeftOf="@+id/storedCalc_removeCalc"
+        android:onClick="editCalcOnClickHandler" >
+
+        <TextView 
+            android:id="@+id/storedCalc_calcDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_micro"
+            android:drawableLeft="@drawable/calendar"
+            android:contentDescription="@string/app_name"
+            />
+
+        <TextView 
+            android:id="@+id/storedCalc_calcTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_micro"
+            android:layout_toRightOf="@id/storedCalc_calcDate"
+            android:drawableLeft="@drawable/sum"
+            android:contentDescription="@string/app_name"
+            />
+
+        <TextView 
+            android:id="@+id/storedCalc_calcPersons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_micro"
+            android:layout_toRightOf="@id/storedCalc_calcTotal"
+            android:drawableLeft="@drawable/person"
+            android:contentDescription="@string/app_name"
+            />
+        
+        <TextView
+            android:id="@+id/storedCalc_calcName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_micro"
+            android:layout_below="@id/storedCalc_calcDate"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/storedCalc_removeCalc"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_toLeftOf="@+id/storedCalc_shareCalc"
+        android:contentDescription="@string/emptyText"
+        android:onClick="removeCalcOnClickHandler"
+        android:src="@android:drawable/ic_menu_delete" />
+
+    <ImageButton
+        android:id="@+id/storedCalc_shareCalc"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/emptyText"
+        android:onClick="shareCalcOnClickHandler"
+        android:src="@drawable/share" />
 
 </RelativeLayout>
