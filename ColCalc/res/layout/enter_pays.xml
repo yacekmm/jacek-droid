@@ -3,119 +3,93 @@
     android:id="@+id/EnterPays_mainLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/EnterPays_TextView_Title"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+    <include
         android:layout_width="fill_parent"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
         android:layout_height="wrap_content"
-        android:text="@string/EnterPays_TextView_EnterPayPerEachPerson" />
-    
+        layout="@layout/add_person_header" />
+
     <CheckBox
         android:id="@+id/EnterPays_CheckBox_EverybodyPaysEqually"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_big"
         android:layout_marginRight="@dimen/margin_big"
-        android:text="@string/EnterPays_CheckBox_EqualPays" />
+        android:text="@string/EnterPays_CheckBox_EqualPays"
+        android:visibility="gone" />
 
-    <TableLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="@dimen/margin_big"
-        android:layout_marginRight="@dimen/margin_big" >
-        
-        <TableRow
-            android:id="@+id/EnterPays_Row_Name"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/EnterPays_EditText_Name"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="@dimen/height_button"
+            android:layout_toLeftOf="@+id/EnterPays_button_getPersonFromContacts"
+            android:hint="@string/EnterPays_TextView_Name"
+            android:inputType="text" />
 
-            <TextView
-                android:id="@+id/EnterPays_TextView_Name"
-                android:layout_width="0dip"
-				android:layout_weight="@string/table_column0_weight"
-                android:layout_column="0"
-                android:text="@string/EnterPays_TextView_Name" />
+        <ImageButton
+            android:id="@+id/EnterPays_button_getPersonFromContacts"
+            android:layout_width="@dimen/height_button"
+            android:layout_height="@dimen/height_button"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/EnterPays_button_getContact"
+            android:src="@drawable/address_book" />
+    </RelativeLayout>
 
-            <EditText
-                android:id="@+id/EnterPays_EditText_Name"
-                android:layout_width="0dip"
-				android:layout_weight="@string/table_column1_weight"
-                android:layout_column="1"
-                android:inputType="text" />
-
-            <ImageButton
-                android:id="@+id/EnterPays_button_getPersonFromContacts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:contentDescription="@string/EnterPays_button_getContact"
-                android:src="@drawable/address_book" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/EnterPays_Row_Pay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/EnterPays_TextView_Pay"
-                android:layout_width="0dip"
-				android:layout_weight="@string/table_column0_weight"
-                android:layout_column="0"
-                android:text="@string/EnterPays_TextView_Pay" />
-
-            <EditText
-                android:id="@+id/EnterPays_EditText_Pay"
-                android:layout_width="0dip"
-				android:layout_weight="@string/table_column1_weight"
-                android:layout_column="1"
-                android:inputType="numberDecimal"
-                android:text="@string/EnterPays_TextView_ZeroValue" />
-        </TableRow>
-        
-        <TableRow
-            android:id="@+id/EnterPays_Row_ShouldPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/EnterPays_TextView_ShouldPay"
-                android:layout_width="0dip"
-				android:layout_weight="@string/table_column0_weight"
-                android:layout_column="0"
-                android:text="@string/EnterPays_TextView_ShouldPay" />
-
-            <EditText
-                android:id="@+id/EnterPays_EditText_ShouldPay"
-                android:layout_width="0dip"
-				android:layout_weight="@string/table_column1_weight"
-                android:layout_column="1"
-                android:inputType="numberDecimal"
-                android:text="@string/EnterPays_TextView_ZeroValue" />
-        </TableRow>
-    </TableLayout>
-    
-    <Button
-        android:id="@+id/EnterPays_Button_AddPerson"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/EnterPays_Button_AddToList" />
+        android:layout_height="wrap_content" >
 
-   	<ListView
-	    android:id="@+id/EnterPays_List_People"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:layout_marginBottom="@dimen/margin_small"
-	    android:layout_marginLeft="@dimen/margin_big"
-	    android:layout_marginRight="@dimen/margin_big"
-	    >
-        
-	</ListView>
-</LinearLayout>
+        <TextView
+            android:id="@+id/EnterPays_TextView_Pay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/EnterPays_EditText_Pay"
+            android:text="@string/EnterPays_TextView_Pay" />
+
+        <EditText
+            android:id="@+id/EnterPays_EditText_Pay"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="numberDecimal"
+            android:text="@string/EnterPays_TextView_ZeroValue" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/EnterPays_TextView_ShouldPay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/EnterPays_EditText_ShouldPay"
+            android:text="@string/EnterPays_TextView_ShouldPay" />
+
+        <EditText
+            android:id="@+id/EnterPays_EditText_ShouldPay"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="numberDecimal"
+            android:text="@string/EnterPays_TextView_ZeroValue" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/EnterPays_List_People"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big" 
+        android:visibility="gone">
+    </ListView>
+
+</LinearLayout>
