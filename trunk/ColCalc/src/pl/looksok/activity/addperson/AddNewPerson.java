@@ -107,7 +107,8 @@ public class AddNewPerson extends ColCalcActivity {
 	}
 
 	private void initActivityViews() {
-		((Button)findViewById(R.id.EnterPays_Button_AddPerson)).setOnClickListener(addPersonClickListener);
+		((Button)findViewById(R.id.addPersonHeader_saveCalculation_btn)).setOnClickListener(addPersonClickListener);
+		((ImageButton)findViewById(R.id.addPersonHeader_addPerson_btn)).setOnClickListener(saveAndAddNextPersonClickListener);
         ((ImageButton)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
         mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
         mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
@@ -257,29 +258,41 @@ public class AddNewPerson extends ColCalcActivity {
         		Log.d(LOG_TAG, "Input data was not valid");
         	}
         }
-
-		private void clearInputFieldsToDefaults() {
-			mNewPersonNameInput.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
-            mNewPersonNameInput.requestFocus();
-            mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-            mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-            updateFieldsDependantOnPeopleListSizeVisibility();
-		}
-
-		private PersonData getNewInputDataToAdd() throws BadInputDataException{
-			String name = mNewPersonNameInput.getText().toString();
-        	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
-        	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
-        	
-        	if(!InputValidator.inputIsValid(getApplicationContext(), name, payDouble, shouldPayDouble, calc.isEqualPayments(), inputPaysList))
-        		throw new BadInputDataException();
-        	
-        	if(calc.isEqualPayments())
-        		return new PersonData(name, payDouble, emails);
-        	else
-        		return new PersonData(name, payDouble, shouldPayDouble, emails);
-		}
     };
+    
+    OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
+        public void onClick(View v) {
+        	try{
+        		adapter.add(getNewInputDataToAdd());
+        		clearInputFieldsToDefaults();
+        		calc.calculate(inputPaysList);
+        	}catch(BadInputDataException e){
+        		Log.d(LOG_TAG, "Input data was not valid");
+        	}
+        }
+    };
+    
+	private void clearInputFieldsToDefaults() {
+		mNewPersonNameInput.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
+        mNewPersonNameInput.requestFocus();
+        mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+        mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+        updateFieldsDependantOnPeopleListSizeVisibility();
+	}
+
+	private PersonData getNewInputDataToAdd() throws BadInputDataException{
+		String name = mNewPersonNameInput.getText().toString();
+    	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
+    	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
+    	
+    	if(!InputValidator.inputIsValid(getApplicationContext(), name, payDouble, shouldPayDouble, calc.isEqualPayments(), inputPaysList))
+    		throw new BadInputDataException();
+    	
+    	if(calc.isEqualPayments())
+    		return new PersonData(name, payDouble, emails);
+    	else
+    		return new PersonData(name, payDouble, shouldPayDouble, emails);
+	}
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
         public void onClick(View v) {

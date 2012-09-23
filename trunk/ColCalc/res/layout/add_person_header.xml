@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageButton
+        android:id="@+id/addPersonHeader_addPerson_btn"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:contentDescription="@string/calculation_button_addPerson_text"
+        android:src="@drawable/add_person" />
+
+    <ImageButton
+        android:id="@+id/addPersonHeader_addMultiPerson_btn"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_toRightOf="@id/addPersonHeader_addPerson_btn"
+        android:clickable="false"
+        android:contentDescription="@string/emptyText"
+        android:src="@drawable/add_multi_person" />
+
+    <Button
+        android:id="@+id/addPersonHeader_saveCalculation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/addPersonHeader_addMultiPerson_btn"
+        android:drawableLeft="@drawable/save"
+        android:text="@string/EnterPays_saveAndExit_text" />
+
+</RelativeLayout>
