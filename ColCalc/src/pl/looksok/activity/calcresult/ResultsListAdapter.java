@@ -9,6 +9,7 @@ import pl.looksok.logic.PersonData;
 import pl.looksok.utils.FormatterHelper;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 
+	private static final String LOG_TAG = ResultsListAdapter.class.getSimpleName();
 	private List<PersonData> items;
 	private int layoutResourceId;
 	private Context context;
@@ -48,6 +50,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.imgRemovePerson.setTag(items.get(position));
             holder.imgIncreasePersonPay = (ImageView)row.findViewById(R.id.calcItem_image_increasePay);
             holder.imgIncreasePersonPay.setTag(items.get(position));
+            holder.imgReceivesGift = (ImageView)row.findViewById(R.id.calcItem_image_receivesGift);
             
             row.setTag(holder);
 
@@ -65,6 +68,9 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         setBalance(holder, pp);
         holder.txtDetails.setText(pp.printPersonReturnsToOthers(context.getString(R.string.calculation_printText_return),
         		context.getString(R.string.calculation_printText_for)));
+        if(!pp.receivesGift())
+        	holder.imgReceivesGift.setVisibility(View.GONE);
+        Log.d(LOG_TAG, pp.getName() + " receives gift: " + pp.receivesGift());
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
@@ -87,5 +93,6 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     	ImageView imgEditPerson;
     	ImageView imgRemovePerson;
     	ImageView imgIncreasePersonPay;
+    	ImageView imgReceivesGift;
     }
 }

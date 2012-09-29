@@ -21,7 +21,7 @@
             android:id="@+id/calcItem_textView_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_toLeftOf="@+id/calcItem_image_edit"
+            android:layout_toLeftOf="@+id/calcItem_image_receivesGift"
             android:layout_marginLeft="@dimen/margin_micro"
             android:gravity="center_vertical"
             android:text="@string/calculation_TextView_name"
@@ -56,6 +56,17 @@
             android:src="@drawable/increase_pay"
             android:contentDescription="@string/app_name" 
             android:onClick="increasePersonPay"
+            />
+        
+		<ImageView
+            android:id="@+id/calcItem_image_receivesGift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/calcItem_image_increasePay"
+            android:src="@drawable/gift"
+            android:contentDescription="@string/app_name" 
+            android:scaleType="centerCrop"
             />
 
     </RelativeLayout>

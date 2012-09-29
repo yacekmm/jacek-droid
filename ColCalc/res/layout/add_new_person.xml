@@ -82,6 +82,35 @@
             android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
 
+    
+    <CheckBox
+            android:id="@+id/EnterPays_gotGift_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/EnterPays_gotGift_text" />
+            
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+    <CheckBox
+            android:id="@+id/EnterPays_buysGift_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/EnterPays_EditText_giftValue"
+            android:text="@string/EnterPays_buysGift_text" />
+
+        <EditText
+            android:id="@+id/EnterPays_EditText_giftValue"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="numberDecimal"
+            android:hint="@string/EnterPays_boughtGiftValue_hint"
+            android:enabled="false" />
+    </RelativeLayout>
+    
     <ListView
         android:id="@+id/EnterPays_List_People"
         android:layout_width="fill_parent"
@@ -92,26 +121,5 @@
         android:visibility="gone">
     </ListView>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <CheckBox
-            android:id="@+id/EnterPays_gotGift_checkbox"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/EnterPays_EditText_giftValue"
-            android:text="@string/EnterPays_gotGift_text" />
-
-        <EditText
-            android:id="@+id/EnterPays_EditText_giftValue"
-            android:layout_width="140sp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:inputType="numberDecimal"
-            android:hint="@string/EnterPays_gotGift_hint"
-            android:enabled="false" />
-    </RelativeLayout>
 
 </LinearLayout>
