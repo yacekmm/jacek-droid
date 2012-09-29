@@ -54,7 +54,8 @@ public class AddNewPerson extends ColCalcActivity {
 	private EditText mNewPersonShouldPayInput;
 	private TextView mNewPersonShouldPayText;
 	private ListView mPeopleList;
-	private CheckBox mReceivedGiftCheckBox;
+	private CheckBox mReceivesGiftCheckBox;
+	private CheckBox mBuysGiftCheckBox;
 	private EditText mGiftValueInput;
 	
 	private static final int MENU_EDIT = Menu.FIRST;
@@ -125,8 +126,10 @@ public class AddNewPerson extends ColCalcActivity {
         mNewPersonShouldPayInput.addTextChangedListener(payTextChangedListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         registerForContextMenu(mPeopleList);
-        mReceivedGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
-        mReceivedGiftCheckBox.setOnCheckedChangeListener(gotGiftChangeListener);
+        mReceivesGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
+        mReceivesGiftCheckBox.setOnCheckedChangeListener(receivesGiftChangeListener);
+        mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
+        mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
         mGiftValueInput = (EditText)findViewById(R.id.EnterPays_EditText_giftValue);
       
         setHowMuchShouldPayFieldsVisibility();
@@ -222,6 +225,10 @@ public class AddNewPerson extends ColCalcActivity {
 			}else {
 				mNewPersonShouldPayText.setText(getResources().getString(R.string.EnterPays_TextView_ShouldPay));
 			}
+			
+			mGiftValueInput.setVisibility(View.GONE);
+			mBuysGiftCheckBox.setVisibility(View.GONE);
+			mReceivesGiftCheckBox.setVisibility(View.GONE);
 		}
 	}
 	
@@ -270,7 +277,7 @@ public class AddNewPerson extends ColCalcActivity {
         	try{
         		adapter.add(getNewInputDataToAdd());
         		clearInputFieldsToDefaults();
-        		calc.calculate(inputPaysList);
+//        		calc.calculate(inputPaysList);
         	}catch(BadInputDataException e){
         		Log.d(LOG_TAG, "Input data was not valid");
         	}
@@ -282,6 +289,9 @@ public class AddNewPerson extends ColCalcActivity {
         mNewPersonNameInput.requestFocus();
         mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
         mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+        mReceivesGiftCheckBox.setChecked(false);
+        mBuysGiftCheckBox.setChecked(false);
+        mGiftValueInput.setText("");
         updateFieldsDependantOnPeopleListSizeVisibility();
 	}
 
@@ -289,19 +299,22 @@ public class AddNewPerson extends ColCalcActivity {
 		String name = mNewPersonNameInput.getText().toString();
     	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
     	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
-    	boolean gotGift = mReceivedGiftCheckBox.isChecked();
-    	double giftValue = FormatterHelper.readDoubleFromEditText(mGiftValueInput);
+    	boolean receivesGift = mReceivesGiftCheckBox.isChecked();
+    	boolean buysGift = mBuysGiftCheckBox.isChecked();
+    	double giftPayment = FormatterHelper.readDoubleFromEditText(mGiftValueInput);
+    	
+    	if(!buysGift)
+    		giftPayment = 0;
     	
     	if(!InputValidator.inputIsValid(getApplicationContext(), name, payDouble, shouldPayDouble, calc.isEqualPayments(), inputPaysList))
     		throw new BadInputDataException();
     	
-    	if(gotGift)
-    		calc.setGiftValue(giftValue);
-    	
     	if(calc.isEqualPayments())
-    		return new PersonData(name, payDouble, emails, gotGift, 0);
-    	else
-    		return new PersonData(name, payDouble, shouldPayDouble, emails);
+    		return new PersonData(name, payDouble, emails, receivesGift, giftPayment);
+    	else{
+    		throw new BadInputDataException("should not reach here!");
+//    		return new PersonData(name, payDouble, shouldPayDouble, emails);
+    	}
 	}
     
 	OnClickListener calculateButtonClickListener = new OnClickListener() {
@@ -350,17 +363,24 @@ public class AddNewPerson extends ColCalcActivity {
 	    }
 	};
 	
-	private OnCheckedChangeListener gotGiftChangeListener = new OnCheckedChangeListener() {
+	private OnCheckedChangeListener buysGiftChangeListener = new OnCheckedChangeListener() {
+		
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			mGiftValueInput.setEnabled(isChecked);
+			if(isChecked){
+				mReceivesGiftCheckBox.setChecked(false);
+			}
+		}
+	};
+
+	private OnCheckedChangeListener receivesGiftChangeListener = new OnCheckedChangeListener() {
 		
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if(isChecked){
-				mGiftValueInput.setEnabled(true);
+				mBuysGiftCheckBox.setChecked(false);
 			}
-			else{
-				mGiftValueInput.setEnabled(false);
-			}
-			
 		}
 	};
 	

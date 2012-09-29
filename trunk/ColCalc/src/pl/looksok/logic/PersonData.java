@@ -9,14 +9,16 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
+import android.util.Log;
+
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 
 public class PersonData implements Serializable{
 
+	private static final String LOG_TAG = "PERSONDATA";
 	private static final long serialVersionUID = 4909331903428866567L;
-	private static final String LOG_TAG = PersonData.class.getSimpleName();
 	private String name;
 	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
@@ -37,6 +39,7 @@ public class PersonData implements Serializable{
 		setPersonName(pd.getName());
 		setPayMadeByPerson(pd.getPayMadeByPerson());
 		setEmails(pd.getEmails());
+		setReceivesGift(pd.receivesGift);
 		
 		otherPeoplePayments = inputPays;
 		refundForOtherPeople = new HashMap<String, Double>();
@@ -291,11 +294,13 @@ public class PersonData implements Serializable{
 	}
 
 	public boolean receivesGift() {
+		Log.d(LOG_TAG, "returning ReceivesGift: " + receivesGift);
 		return receivesGift;
 	}
 
 	public void setReceivesGift(boolean receivesGift) {
 		this.receivesGift = receivesGift;
+		Log.d(LOG_TAG, "setting ReceivesGift to: " + receivesGift);
 	}
 
 	public double getHowMuchIPaidForGift() {

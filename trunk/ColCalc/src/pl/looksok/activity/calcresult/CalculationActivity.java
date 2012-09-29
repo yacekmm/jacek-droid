@@ -11,6 +11,7 @@ import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.addperson.AddNewPerson;
 import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
+import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
@@ -90,8 +91,11 @@ public class CalculationActivity extends ColCalcActivity {
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 			((EditText)findViewById(R.id.calc_calcName_edit)).setText(calc.getCalcName());
-		}else
+		}else{
 			calc = new CalculationLogic();
+			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
+		}
+		
 	}
 	
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
