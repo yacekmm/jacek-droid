@@ -31,6 +31,14 @@ public class CcLogicEqualPaysTest extends TestCase {
 		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
 	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		calc = null;
+		inputPaysList = null;
+		super.tearDown();
+	}
+	
 	
 	public void testConstructor(){
 		assertNotNull(calc);
@@ -244,16 +252,16 @@ public class CcLogicEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personDName));
 		
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 3.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 26.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 7.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 22.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personDName));
 		
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personCName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personDName));
 		
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personAName));
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 4.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personBName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 4.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personAName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personBName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personDName, Constants.personCName));
 	}
 	
@@ -270,8 +278,8 @@ public class CcLogicEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personFName));
 		
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 6.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personDName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 1.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personDName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personEName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personFName));
 		
@@ -293,10 +301,10 @@ public class CcLogicEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 21.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personDName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personEName, Constants.personFName));
 		
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personAName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personAName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personBName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personCName));
-		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 16.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personDName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 21.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personDName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_SIX, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personFName, Constants.personEName));
 	}
 	
@@ -318,4 +326,5 @@ public class CcLogicEqualPaysTest extends TestCase {
 			fail(Constants.SHOULD_THROW_EXCEPTION + DuplicatePersonNameException.class.getSimpleName());
 		}catch (DuplicatePersonNameException e){}
 	}
+
 }

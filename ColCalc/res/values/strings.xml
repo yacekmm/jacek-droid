@@ -31,6 +31,8 @@
     <string name="EnterPays_TextView_ZeroValue">0</string>
     <string name="EnterPays_TextView_EmptyText"></string>
     <string name="EnterPays_TextView_ShouldPay">Ile powinien zapłacić:</string>
+    <string name="EnterPays_gotGift_text">Dostał prezent</string>
+    <string name="EnterPays_gotGift_hint">wpisz wartość prezentu</string>
     <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_Start">(Wciąż brakuje</string>
     <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_TooMuch_Start">(Za dużo o</string>
     <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_End">zł)</string>

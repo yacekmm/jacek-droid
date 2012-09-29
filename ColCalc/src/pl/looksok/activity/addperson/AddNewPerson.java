@@ -54,6 +54,8 @@ public class AddNewPerson extends ColCalcActivity {
 	private EditText mNewPersonShouldPayInput;
 	private TextView mNewPersonShouldPayText;
 	private ListView mPeopleList;
+	private CheckBox mReceivedGiftCheckBox;
+	private EditText mGiftValueInput;
 	
 	private static final int MENU_EDIT = Menu.FIRST;
 	private static final int MENU_DELETE = MENU_EDIT+1;
@@ -67,7 +69,7 @@ public class AddNewPerson extends ColCalcActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.enter_pays);
+        setContentView(R.layout.add_new_person);
         
         calc = new CalculationLogic();
         initActivityViews();
@@ -123,6 +125,9 @@ public class AddNewPerson extends ColCalcActivity {
         mNewPersonShouldPayInput.addTextChangedListener(payTextChangedListener);
         mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
         registerForContextMenu(mPeopleList);
+        mReceivedGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
+        mReceivedGiftCheckBox.setOnCheckedChangeListener(gotGiftChangeListener);
+        mGiftValueInput = (EditText)findViewById(R.id.EnterPays_EditText_giftValue);
       
         setHowMuchShouldPayFieldsVisibility();
 	}
@@ -284,12 +289,17 @@ public class AddNewPerson extends ColCalcActivity {
 		String name = mNewPersonNameInput.getText().toString();
     	double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
     	double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
+    	boolean gotGift = mReceivedGiftCheckBox.isChecked();
+    	double giftValue = FormatterHelper.readDoubleFromEditText(mGiftValueInput);
     	
     	if(!InputValidator.inputIsValid(getApplicationContext(), name, payDouble, shouldPayDouble, calc.isEqualPayments(), inputPaysList))
     		throw new BadInputDataException();
     	
+    	if(gotGift)
+    		calc.setGiftValue(giftValue);
+    	
     	if(calc.isEqualPayments())
-    		return new PersonData(name, payDouble, emails);
+    		return new PersonData(name, payDouble, emails, gotGift, 0);
     	else
     		return new PersonData(name, payDouble, shouldPayDouble, emails);
 	}
@@ -338,6 +348,20 @@ public class AddNewPerson extends ColCalcActivity {
 	    	calc.setEqualPayments(isChecked);
 	        setHowMuchShouldPayFieldsVisibility();
 	    }
+	};
+	
+	private OnCheckedChangeListener gotGiftChangeListener = new OnCheckedChangeListener() {
+		
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if(isChecked){
+				mGiftValueInput.setEnabled(true);
+			}
+			else{
+				mGiftValueInput.setEnabled(false);
+			}
+			
+		}
 	};
 	
 	@Override
