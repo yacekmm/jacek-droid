@@ -21,6 +21,7 @@ import com.google.common.math.DoubleMath;
 
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
+	private static final String LOG_TAG = CalculationLogic.class.getSimpleName();
 	private Hashtable<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
@@ -58,41 +59,45 @@ public class CalculationLogic implements Serializable {
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
 		
 		if(calculationType.equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
-			giftCalc = new CalculationLogic("giftCalc");
-			giftCalc.setCalculationType(CalculationType.EQUAL_PAYMENTS);
-			List<PersonData> giftGivers = new ArrayList<PersonData>();
-			
-			double giftValue = 0.0;
-			int giftGiversCount = 0;
-			for(PersonData pd: inputPaysList){
-				giftValue += pd.getHowMuchIPaidForGift();
-				if(!pd.receivesGift())
-					giftGiversCount++;
-			}
-			
-			if(giftGiversCount == 0)
-				giftValue = 0.0;
-					
-					
-			for(PersonData pd :inputPaysList){
-					
-				double shouldPayForGift = giftValue/giftGiversCount;
-				if(pd.receivesGift())
-					shouldPayForGift = 0.0;
-				double howMuchPersonPaidForGift = pd.getHowMuchIPaidForGift();
-				if(howMuchPersonPaidForGift !=0 || shouldPayForGift !=0){
-					PersonData giverPersonData = new PersonData(pd.getName(), howMuchPersonPaidForGift, shouldPayForGift, null);
-					giftGivers.add(giverPersonData);
-				}
-			}
-			
-			if(giftGivers.size()>1){
-				giftCalc.setEqualPayments(false);
-				giftCalc.calculate(giftGivers);
-			}
+			calculateGiftsRefunds(inputPaysList);
 		}
 		
 		return calculate(inputPays);
+	}
+
+	private void calculateGiftsRefunds(List<PersonData> inputPaysList) {
+		giftCalc = new CalculationLogic("giftCalc");
+		giftCalc.setCalculationType(CalculationType.EQUAL_PAYMENTS);
+		List<PersonData> giftGivers = new ArrayList<PersonData>();
+		
+		double giftValue = 0.0;
+		int giftGiversCount = 0;
+		for(PersonData pd: inputPaysList){
+			giftValue += pd.getHowMuchIPaidForGift();
+			if(!pd.receivesGift())
+				giftGiversCount++;
+		}
+		
+		if(giftGiversCount == 0)
+			giftValue = 0.0;
+				
+				
+		for(PersonData pd :inputPaysList){
+				
+			double shouldPayForGift = giftValue/giftGiversCount;
+			if(pd.receivesGift())
+				shouldPayForGift = 0.0;
+			double howMuchPersonPaidForGift = pd.getHowMuchIPaidForGift();
+			if(howMuchPersonPaidForGift !=0 || shouldPayForGift !=0){
+				PersonData giverPersonData = new PersonData(pd.getName(), howMuchPersonPaidForGift, shouldPayForGift, null);
+				giftGivers.add(giverPersonData);
+			}
+		}
+		
+		if(giftGivers.size()>1){
+			giftCalc.setEqualPayments(false);
+			giftCalc.calculate(giftGivers);
+		}
 	}
 
 	private HashMap<String, PersonData> convertAndValidateInput() {
@@ -187,9 +192,46 @@ public class CalculationLogic implements Serializable {
 					giverInMainCalc.increaseRefund(key, value);
 				}
 			}
+			
+			
 		}
+		
+		calculationResult = removeLoopRefunds(newCalculationResult);
 
-		calculationResult = newCalculationResult;
+//		calculationResult = newCalculationResult;
+	}
+
+	private Hashtable<String, PersonData> removeLoopRefunds(Hashtable<String, PersonData> newCalculationResult) {
+
+		Iterator<String> itMain = newCalculationResult.keySet().iterator();
+		while(itMain.hasNext()){
+			String personName = itMain.next();
+			HashMap<String, Double> refundForOtherPeople = newCalculationResult.get(personName).getRefundForOtherPeople();
+			Iterator<String> itReturnList = refundForOtherPeople.keySet().iterator();
+			while(itReturnList.hasNext()){
+				String refundPersonName = itReturnList.next();
+				double myRefundForHim = newCalculationResult.get(personName).getRefundForOtherPeople().get(refundPersonName);
+				if(myRefundForHim > 0){
+					double hisRefundToMe = newCalculationResult.get(refundPersonName).getRefundForOtherPeople().get(personName);
+					if(hisRefundToMe > 0){
+//						Log.e(LOG_TAG, "Looped refund detected!");
+						double correctedMyRefundForHim;
+						double correctedHisRefundToMe;
+						if(myRefundForHim > hisRefundToMe){
+							correctedMyRefundForHim = myRefundForHim - hisRefundToMe;
+							correctedHisRefundToMe = 0;
+						}else{
+							correctedMyRefundForHim = 0;
+							correctedHisRefundToMe = hisRefundToMe = myRefundForHim;
+						}
+						newCalculationResult.get(personName).getRefundForOtherPeople().put(refundPersonName, correctedMyRefundForHim);
+						
+						newCalculationResult.get(refundPersonName).getRefundForOtherPeople().put(personName, correctedHisRefundToMe);
+					}
+				}
+			}
+		}
+		return newCalculationResult;
 	}
 
 	private Double calculateTotalPayValue(HashMap<String, PersonData> inputPays) {
