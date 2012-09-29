@@ -21,8 +21,8 @@
             android:id="@+id/calcItem_textView_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_toLeftOf="@+id/calcItem_image_receivesGift"
             android:layout_marginLeft="@dimen/margin_micro"
+            android:layout_toLeftOf="@+id/calcItem_image_receivesGift"
             android:gravity="center_vertical"
             android:text="@string/calculation_TextView_name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -33,9 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/calcItem_image_delete"
             android:contentDescription="@string/EnterPays_Menu_Edit"
-            android:src="@drawable/content_edit" 
             android:onClick="editPerson"
-            />
+            android:src="@drawable/content_edit" />
 
         <ImageView
             android:id="@+id/calcItem_image_delete"
@@ -43,11 +42,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:contentDescription="@string/EnterPays_Menu_Remove"
-            android:src="@drawable/content_discard"
             android:onClick="removePerson"
-            />
+            android:src="@drawable/content_discard" />
 
-        <ImageView
+        <!--
+             <ImageView
             android:id="@+id/calcItem_image_increasePay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,18 +56,17 @@
             android:contentDescription="@string/app_name" 
             android:onClick="increasePersonPay"
             />
-        
-		<ImageView
+        -->
+
+        <ImageView
             android:id="@+id/calcItem_image_receivesGift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/calcItem_image_increasePay"
-            android:src="@drawable/gift"
-            android:contentDescription="@string/app_name" 
+            android:layout_toLeftOf="@+id/calcItem_image_edit"
+            android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
-            />
-
+            android:src="@drawable/gift" />
     </RelativeLayout>
 
     <LinearLayout
@@ -86,25 +84,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6" >
         </TextView>
-
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:gravity="right" >
-
+
             <TextView
                 android:id="@+id/calcItem_textView_personPay"
                 style="@style/balancePositiveText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_micro"
                 android:gravity="right"
                 android:text="@string/calculation_TextView_personPay"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                 />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <TextView
+                android:id="@+id/calcItem_textView_personPayForGift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/calcItem_textView_personPay" />
         </RelativeLayout>
     </LinearLayout>
 
