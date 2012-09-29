@@ -28,6 +28,7 @@ public class CalculationLogic implements Serializable {
 	private CalculationType calculationType = CalculationType.DEFAULT;
 	private String calcName = "";
 	private CalculationLogic giftCalc = null;
+	private double giftValue = 0;
 	
 	public Hashtable<String, PersonData> getCalculationResult() {
 		return calculationResult;
@@ -120,7 +121,8 @@ public class CalculationLogic implements Serializable {
 
 	public Hashtable<String, PersonData> recalculate() {
 		resetInputData();
-		giftCalc.resetInputData();
+		if(giftCalc != null)
+			giftCalc.resetInputData();
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
 		return calculate(inputPays);
 	}
@@ -335,6 +337,14 @@ public class CalculationLogic implements Serializable {
 
 	public void setGiftCalc(CalculationLogic giftCalc) {
 		this.giftCalc = giftCalc;
+	}
+
+	public double getGiftValue() {
+		return giftValue;
+	}
+
+	public void setGiftValue(double giftValue) {
+		this.giftValue = giftValue;
 	}
 
 	public int getTotalPay() {

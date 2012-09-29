@@ -9,8 +9,6 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
-import android.util.Log;
-
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
@@ -127,7 +125,7 @@ public class PersonData implements Serializable{
 			if(this.getName() != pp2.getName()){
 				double returnValue = howMuchIGiveBackToPersonB(pp2);
 				getRefundForOtherPeople().put(pp2.getName(), returnValue);
-				Log.d(LOG_TAG, "----------Adding new person to calculated refunds: " + pp2.getName() + ", value: " + returnValue);
+//				Log.d(LOG_TAG, "----------Adding new person to calculated refunds: " + pp2.getName() + ", value: " + returnValue);
 			}
 		}
 	}

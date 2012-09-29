@@ -92,4 +92,26 @@
         android:visibility="gone">
     </ListView>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <CheckBox
+            android:id="@+id/EnterPays_gotGift_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/EnterPays_EditText_giftValue"
+            android:text="@string/EnterPays_gotGift_text" />
+
+        <EditText
+            android:id="@+id/EnterPays_EditText_giftValue"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="numberDecimal"
+            android:hint="@string/EnterPays_gotGift_hint"
+            android:enabled="false" />
+    </RelativeLayout>
+
 </LinearLayout>
