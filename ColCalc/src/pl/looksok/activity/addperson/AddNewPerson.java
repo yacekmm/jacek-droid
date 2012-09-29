@@ -100,6 +100,9 @@ public class AddNewPerson extends ColCalcActivity {
 			mNewPersonNameInput.setText(pd.getName());
 			mNewPersonPayInput.setText(String.valueOf(pd.getPayMadeByPerson()));
 			mNewPersonShouldPayInput.setText(String.valueOf(pd.getHowMuchPersonShouldPay()));
+			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
+			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
+			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
 		}
 		
 		for (PersonData data : calc.getInputPaysList()) {
@@ -264,7 +267,7 @@ public class AddNewPerson extends ColCalcActivity {
         public void onClick(View v) {
         	try{
         		adapter.add(getNewInputDataToAdd());
-        		clearInputFieldsToDefaults();
+//        		clearInputFieldsToDefaults();
         		calculateAndShowResults();
         	}catch(BadInputDataException e){
         		Log.d(LOG_TAG, "Input data was not valid");

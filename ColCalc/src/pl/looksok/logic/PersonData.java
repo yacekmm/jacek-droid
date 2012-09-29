@@ -22,7 +22,6 @@ public class PersonData implements Serializable{
 	private String name;
 	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
-	private double howMuchIPaidForGift;
 	private double howMuchIShouldPay =-1;
 	private double toReturn;
 	private double totalRefundForThisPerson;
@@ -33,6 +32,7 @@ public class PersonData implements Serializable{
 	
 	//gift
 	private boolean receivesGift = false;
+	private double howMuchIPaidForGift;
 	
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
@@ -40,6 +40,7 @@ public class PersonData implements Serializable{
 		setPayMadeByPerson(pd.getPayMadeByPerson());
 		setEmails(pd.getEmails());
 		setReceivesGift(pd.receivesGift);
+		setHowMuchIPaidForGift(pd.getHowMuchIPaidForGift());
 		
 		otherPeoplePayments = inputPays;
 		refundForOtherPeople = new HashMap<String, Double>();

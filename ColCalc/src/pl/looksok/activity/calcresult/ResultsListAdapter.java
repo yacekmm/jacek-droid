@@ -43,13 +43,14 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder = new ResultHolder();
             holder.txtName = (TextView)row.findViewById(R.id.calcItem_textView_name);
             holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_personPay);
+            holder.txtPaidForGift = (TextView)row.findViewById(R.id.calcItem_textView_personPayForGift);
             holder.txtDetails = (TextView)row.findViewById(R.id.calcItem_details_text);
             holder.imgEditPerson = (ImageView)row.findViewById(R.id.calcItem_image_edit);
             holder.imgEditPerson.setTag(items.get(position));
             holder.imgRemovePerson = (ImageView)row.findViewById(R.id.calcItem_image_delete);
             holder.imgRemovePerson.setTag(items.get(position));
-            holder.imgIncreasePersonPay = (ImageView)row.findViewById(R.id.calcItem_image_increasePay);
-            holder.imgIncreasePersonPay.setTag(items.get(position));
+//            holder.imgIncreasePersonPay = (ImageView)row.findViewById(R.id.calcItem_image_increasePay);
+//            holder.imgIncreasePersonPay.setTag(items.get(position));
             holder.imgReceivesGift = (ImageView)row.findViewById(R.id.calcItem_image_receivesGift);
             
             row.setTag(holder);
@@ -68,8 +69,10 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         setBalance(holder, pp);
         holder.txtDetails.setText(pp.printPersonReturnsToOthers(context.getString(R.string.calculation_printText_return),
         		context.getString(R.string.calculation_printText_for)));
-        if(!pp.receivesGift())
+        if(!pp.receivesGift()){
         	holder.imgReceivesGift.setVisibility(View.GONE);
+	        holder.txtPaidForGift.setText("Zapłacił za prezent: " + pp.getHowMuchIPaidForGift());
+		}
         Log.d(LOG_TAG, pp.getName() + " receives gift: " + pp.receivesGift());
 	}
 
@@ -89,10 +92,11 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     public static class ResultHolder {
     	TextView txtName;
     	TextView txtBalance;
+    	TextView txtPaidForGift;
     	TextView txtDetails;
     	ImageView imgEditPerson;
     	ImageView imgRemovePerson;
-    	ImageView imgIncreasePersonPay;
+//    	ImageView imgIncreasePersonPay;
     	ImageView imgReceivesGift;
     }
 }
