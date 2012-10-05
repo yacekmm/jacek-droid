@@ -13,8 +13,11 @@ import com.google.common.math.DoubleMath;
 
 public class GameProcessor {
 	
-	private static final int MAX_SPEED = 7;
+	private static final int MAX_SPEED = 15;
+	private static final double RESCUE_THRESHOLD = 0.65;
 	private RoundStartInfo roundInfo;
+	
+	private boolean shouldIRescue = false;
 
 	public AccelerationVector getAccVector(PlayingInfo playingInfo) {
 		System.out.println("");
@@ -28,10 +31,21 @@ public class GameProcessor {
 			pointToFollow.y = enemy.y;
 			System.out.println("Chasing enemy!: " + enemy.index + ", " + pointToFollow + ", distance: " + Point2D.distance(pointToFollow.x, pointToFollow.y, me.x, me.y) + ", me: " + new Point(me.x, me.y));
 		}
-//		return attackPoint(new Point(0, 0), me);
-		return attackPoint(pointToFollow, me);
+
+		double distanceFromMiddle = Point.distance(me.x, me.y, 0, 0);
+		shouldIRescue = distanceFromMiddle/playingInfo.getArenaRadius() > RESCUE_THRESHOLD;
+		
+		if(shouldIRescue){
+			return reduceFallOffRisk(me);
+		}else
+			return attackPoint(pointToFollow, me);
 	}
 	
+	private AccelerationVector reduceFallOffRisk(Sphere me) {
+		System.out.println("----Trying to backout!");
+		return attackPoint(new Point(0, 0), me);
+	}
+
 	private AccelerationVector attackPoint(Point pointToStop, Sphere me){
 		int accX = 0;
 		int accY = 0;
@@ -42,13 +56,6 @@ public class GameProcessor {
 		int desiredVY = pointToStop.y - me.y;
 		System.out.println("Desired vector:\t" + desiredVX + ", " + desiredVY);
 		
-		double c = Math.sqrt(Math.pow(desiredVX, 2) + Math.pow(desiredVY, 2));
-		double cosAlpha = Math.cos(desiredVX/c);
-		System.out.println("Desired cos:\t" + cosAlpha);
-		
-		double alpha = Math.toDegrees(Math.acos(cosAlpha));
-		System.out.println("Desired alpha:\t" + alpha);
-		
 		int minusCurX = -me.vx;
 		int minusCurY = -me.vy;
 		
@@ -58,18 +65,19 @@ public class GameProcessor {
 		accY =  desiredVY + minusCurY;
 		
 		
-		return normalize(new AccelerationVector(accX, accY));
+		return normalize(new AccelerationVector(accX, accY), new AccelerationVector(desiredVX, desiredVY), me);
 	}
 
-	private AccelerationVector normalize(AccelerationVector accelerationVector) {
-		if(accelerationVector.getdVx() * accelerationVector.getdVx() 
-    			+ accelerationVector.getdVy() * accelerationVector.getdVy() 
+	private AccelerationVector normalize(AccelerationVector accVec, AccelerationVector desiredAccVec, Sphere me) {
+		double ratio = 1;
+
+		if(accVec.getdVx() * accVec.getdVx() 
+    			+ accVec.getdVy() * accVec.getdVy() 
     			> roundInfo.maxSpeedVariation * roundInfo.maxSpeedVariation)
     	{
-    		int accX = accelerationVector.getdVx();
-    		int accY = accelerationVector.getdVy();
+    		int accX = accVec.getdVx();
+    		int accY = accVec.getdVy();
     		
-    		double ratio = 1;
     		if(Math.abs(accX) >= Math.abs(accY) && Math.abs(accX) > MAX_SPEED){
     			ratio = Math.abs((double)MAX_SPEED / (double)accX);
     			accX = DoubleMath.roundToInt(Math.signum(accX) * MAX_SPEED, RoundingMode.HALF_UP);
@@ -80,11 +88,11 @@ public class GameProcessor {
     			accX = DoubleMath.roundToInt(accX * ratio, RoundingMode.HALF_UP);
     		}
     		
-    		System.out.println("limited X:Y:\t" + accX + ":" + accY + "\t ratio: " + ratio);
-    		
-    		return new AccelerationVector(accX, accY);
+    		accVec.setdVx(accX);
+    		accVec.setdVy(accY);
     	}
-		return accelerationVector;
+		System.out.println("limited X:Y:\t" + accVec.getdVx() + ":" + accVec.getdVy() + "\t ratio: " + ratio + "\tmaxSpeedVar: " + roundInfo.maxSpeedVariation);
+		return accVec;
 	}
 
 	private Sphere findEnemy(Sphere[] spheres) {
