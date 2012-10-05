@@ -47,16 +47,7 @@ public class Player {
         			+ accelerationVector.getdVy() * accelerationVector.getdVy() 
         			> roundInfo.maxSpeedVariation * roundInfo.maxSpeedVariation)
         	{
-        		int accX = accelerationVector.getdVx();
-        		int accY = accelerationVector.getdVy();
-        		
-        		double tgAlpha = accY / accX;
-        		double alpha = Math.atan(tgAlpha);
-        		int normalizedX = (int) (roundInfo.maxSpeedVariation * Math.cos(alpha));
-        		int normalizedY = (int) (roundInfo.maxSpeedVariation * Math.sin(alpha));
-        		
-        		accelerationVector = new AccelerationVector(normalizedX, normalizedY);
-        		System.out.println("Normalized acc Vector");
+        		return null;
         	}
         }
         return accelerationVector;
