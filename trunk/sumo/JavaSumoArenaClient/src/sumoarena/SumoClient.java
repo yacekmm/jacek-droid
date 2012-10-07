@@ -45,7 +45,6 @@ public class SumoClient {
 		GameClient gameClient;
 		while (true) {
 			try {
-				avatar = "https://dl.dropbox.com/u/6503570/av.png";
 				gameClient = new GameClient(hostname, port, name, team, avatar, verbose);
 				JSONObject serverMessage;
 				connected = true;
