@@ -48,46 +48,36 @@ public class MathHelper {
 		return cosAlpha;
 	}
 	
-	public static void quadraticEquationSolver(double a, double b, double c){
+	public static double quadraticEquationSolver(double a, double b, double c){
 		double discr, root1, root2;
-
-	     // Apllying the quadratic formula
-	     // Obtain sides from user
-	     System.out.println("Applying the quadratic formula");
-//	     a = 1d;
-//	     b = 2d;
-//	     c = 3d;
 
 	     // Solve the discriminant (SQRT (b^2 - 4ac)
 	     discr = Math.sqrt((b * b) - (4 * a * c));
-	     System.out.println("Discriminant = " + discr);
-	     // Determine number of roots
-	     // if discr > 0 equation has 2 real roots
-	     // if discr == 0 equation has a repeated real root
-	     // if discr < 0 equation has imaginary roots
-	     // if discr is NaN equation has no roots
+//	     System.out.println("Discriminant = " + discr);
 
-	     // Test for NaN
-	     if(Double.isNaN(discr))
-	        System.out.println("Equation has no roots");
+	     if(Double.isNaN(discr)){
+//	        System.out.println("Equation has no roots");
+	        return -1;
+	     }
 	     
-	     if(discr > 0)
-	     {
-	        System.out.println("\n\nEquation has 2 roots");
+	     if(discr > 0){
 	        root1 = (-b + discr)/2 * a;
 	        root2 = (-b - discr)/2 * a;
-	        System.out.println("First root = " + root1);
-	        System.out.println("Second roor = " + root2);
+//	        System.out.println("\n\nEquation has 2 roots:\t" + root1 + "\t" + root2);
+	        return Math.max(root1, root2);
 	      }
 
-	      if(discr == 0)
-	      {
-	        System.out.println("Equation has 1 root");
+	      if(discr == 0){
 	        root1 = (-b + discr)/2 * a;
-	        System.out.println("Root = " + root1);
+//	        System.out.println("Equation has 1 root:\t" + root1);
+	        return root1;
 	      }
 
-	       if(discr < 0)
-	         System.out.println("Equation has imaginary roots");
+	       if(discr < 0){
+//	         System.out.println("Equation has imaginary roots");
+	         return -1;
+	       }
+	       
+	       return -1;
 	}
 }
