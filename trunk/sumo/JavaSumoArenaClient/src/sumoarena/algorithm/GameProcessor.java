@@ -15,6 +15,7 @@ public class GameProcessor {
 
 	private static final double RESCUE_THRESHOLD = 0.60;
 	private static final int MAX_NORMALIZATION_TRIES = 10;
+	private static final int MAX_DESIRED_SPEED = 100;
 	
 	private RoundStartInfo roundInfo;
 	private PlayingInfo playingInfo;
@@ -44,7 +45,7 @@ public class GameProcessor {
 		if(iAmTooCloseToEdge(playingInfo, distanceFromMiddle) && iAmApproachingToEdge(me)){
 			return reduceFallOffRisk(me, playingInfo);
 		}else{
-			return attackPoint(pointToFollow, me, playingInfo, -1);
+			return attackPoint(pointToFollow, me, playingInfo, MAX_DESIRED_SPEED);
 		}
 	}
 
@@ -78,8 +79,9 @@ public class GameProcessor {
 			double targetDesVecLenth = getTargetDesVecLength(desiredAccVec, accVecLength, curVec, curVecLength);
 			if(targetDesVecLenth > 0 && normalizationCounter < MAX_NORMALIZATION_TRIES){
 				normalizationCounter++;
-				System.out.println("***scaling desiredVector to length:\t" + DoubleMath.roundToInt(targetDesVecLenth, RoundingMode.DOWN));
-				accVec = attackPoint(pointToAttack, me, playingInfo, DoubleMath.roundToInt(targetDesVecLenth, RoundingMode.DOWN));
+				int targetDesVecLenth2 = DoubleMath.roundToInt(targetDesVecLenth, RoundingMode.DOWN) - 1;
+				System.out.println("***scaling desiredVector to length:\t" + targetDesVecLenth2);
+				accVec = attackPoint(pointToAttack, me, playingInfo, targetDesVecLenth2);
 			}
 		}
 		System.out.println("limited X:Y:\t" + accVec.getdVx() + ":" + accVec.getdVy() + "\tmaxSpeedVar: " + roundInfo.maxSpeedVariation);
@@ -112,7 +114,7 @@ public class GameProcessor {
 
 	private AccelerationVector reduceFallOffRisk(Sphere me, PlayingInfo playingInfo) {
 		System.out.println("----Trying to backout! Arena size: " + playingInfo.getArenaRadius());
-		return attackPoint(new Point(0, 0), me, playingInfo, -1);
+		return attackPoint(new Point(0, 0), me, playingInfo, MAX_DESIRED_SPEED*2);
 	}
 
 	private Sphere findEnemy(Sphere[] spheres) {
