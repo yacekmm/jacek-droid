@@ -15,7 +15,7 @@ public class GameProcessor {
 
 	private static final double RESCUE_THRESHOLD = 0.60;
 	private static final int MAX_NORMALIZATION_TRIES = 10;
-	private static final int MAX_DESIRED_SPEED = 100;
+	private static final int MAX_DESIRED_SPEED = 90;
 	
 	private RoundStartInfo roundInfo;
 	private PlayingInfo playingInfo;
