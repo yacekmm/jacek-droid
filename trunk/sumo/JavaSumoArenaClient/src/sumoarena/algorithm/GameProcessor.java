@@ -2,18 +2,14 @@ package sumoarena.algorithm;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.math.RoundingMode;
 
 import valueobjects.AccelerationVector;
 import valueobjects.PlayingInfo;
 import valueobjects.RoundStartInfo;
 import valueobjects.Sphere;
 
-import com.google.common.math.DoubleMath;
-
 public class GameProcessor {
 	
-	private static final int MAX_SPEED = 15;
 	private static final double RESCUE_THRESHOLD = 0.65;
 	private RoundStartInfo roundInfo;
 	
@@ -24,7 +20,7 @@ public class GameProcessor {
 		Sphere me = findMe(playingInfo.getSpheres());
 		Sphere enemy = findEnemy(playingInfo.getSpheres());
 		
-		Point pointToFollow = new Point(100,100);
+		Point pointToFollow = new Point(50,50);
 		
 		if(enemy!=null){
 			pointToFollow.x = enemy.x;
@@ -54,42 +50,26 @@ public class GameProcessor {
 		
 		int desiredVX = pointToStop.x - me.x;
 		int desiredVY = pointToStop.y - me.y;
-		System.out.println("Desired vector:\t" + desiredVX + ", " + desiredVY);
+		AccelerationVector desiredAcc = new AccelerationVector(desiredVX, desiredVY);
+		System.out.println("Desired vector:\t" + desiredAcc.getdVx() + ", " + desiredAcc.getdVy() + "\tlength: " + MathHelper.getVectorLength(desiredAcc));
+//		desiredAcc = MathHelper.scaleVectorToLength(desiredAcc, roundInfo.maxSpeedVariation);
+//		System.out.println("Scaled desired:\t" + desiredAcc.getdVx() + ", " + desiredAcc.getdVy() + "\tlength: " + MathHelper.getVectorLength(desiredAcc));
 		
-		int minusCurX = -me.vx;
-		int minusCurY = -me.vy;
-		
-		//add desired + minusCur
+		//add desired - cur
+		accX =  desiredAcc.getdVx() - me.vx;
+		accY =  desiredAcc.getdVy() - me.vy;
 		System.out.println("calc X:Y:\t" + accX + ":" + accY);
-		accX =  desiredVX + minusCurX;
-		accY =  desiredVY + minusCurY;
 		
-		
-		return normalize(new AccelerationVector(accX, accY), new AccelerationVector(desiredVX, desiredVY), me);
+		return normalize(new AccelerationVector(accX, accY), new AccelerationVector(desiredVX, desiredVY));
 	}
 
-	private AccelerationVector normalize(AccelerationVector accVec, AccelerationVector desiredAccVec, Sphere me) {
+
+
+	private AccelerationVector normalize(AccelerationVector accVec, AccelerationVector desiredAccVec) {
 		double ratio = 1;
 
-		if(accVec.getdVx() * accVec.getdVx() 
-    			+ accVec.getdVy() * accVec.getdVy() 
-    			> roundInfo.maxSpeedVariation * roundInfo.maxSpeedVariation)
-    	{
-    		int accX = accVec.getdVx();
-    		int accY = accVec.getdVy();
-    		
-    		if(Math.abs(accX) >= Math.abs(accY) && Math.abs(accX) > MAX_SPEED){
-    			ratio = Math.abs((double)MAX_SPEED / (double)accX);
-    			accX = DoubleMath.roundToInt(Math.signum(accX) * MAX_SPEED, RoundingMode.HALF_UP);
-    			accY = DoubleMath.roundToInt(accY * ratio, RoundingMode.HALF_UP);
-    		}else if (Math.abs(accX) < Math.abs(accY) && Math.abs(accY) > MAX_SPEED){
-    			ratio = Math.abs((double)MAX_SPEED / (double)accY);
-    			accY = DoubleMath.roundToInt(Math.signum(accY) * MAX_SPEED, RoundingMode.HALF_UP);
-    			accX = DoubleMath.roundToInt(accX * ratio, RoundingMode.HALF_UP);
-    		}
-    		
-    		accVec.setdVx(accX);
-    		accVec.setdVy(accY);
+		if(MathHelper.getVectorLength(accVec) > roundInfo.maxSpeedVariation ){
+			accVec = MathHelper.scaleVectorToLength(accVec, roundInfo.maxSpeedVariation);
     	}
 		System.out.println("limited X:Y:\t" + accVec.getdVx() + ":" + accVec.getdVy() + "\t ratio: " + ratio + "\tmaxSpeedVar: " + roundInfo.maxSpeedVariation);
 		return accVec;
