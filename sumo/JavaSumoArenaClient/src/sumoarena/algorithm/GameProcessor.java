@@ -10,11 +10,9 @@ import valueobjects.Sphere;
 
 public class GameProcessor {
 	
-	private static final double RESCUE_THRESHOLD = 0.65;
+	private double rescueThreshold = 0.65;
 	private RoundStartInfo roundInfo;
 	
-	private boolean shouldIRescue = false;
-
 	public AccelerationVector getAccVector(PlayingInfo playingInfo) {
 		System.out.println("");
 		Sphere me = findMe(playingInfo.getSpheres());
@@ -29,16 +27,31 @@ public class GameProcessor {
 		}
 
 		double distanceFromMiddle = Point.distance(me.x, me.y, 0, 0);
-		shouldIRescue = distanceFromMiddle/playingInfo.getArenaRadius() > RESCUE_THRESHOLD;
 		
-		if(shouldIRescue){
+		if(iAmTooCloseToEdge(playingInfo, distanceFromMiddle) && iAmApproachingToEdge(me)){
+			System.out.println("----Trying to backout! Arena size: " + playingInfo.getArenaRadius());
 			return reduceFallOffRisk(me);
 		}else
 			return attackPoint(pointToFollow, me);
 	}
+
+	private boolean iAmApproachingToEdge(Sphere me) {
+		Point curPos = new Point(me.x, me.y);
+		Point futurePos = new Point(me.x + me.vx, me.y + me.vy);
+		Point center = new Point(0,0);
+		
+		double curDistanceToCenter = curPos.distance(center);
+		double futureDistanceToCenter = futurePos.distance(center);
+		
+		return futureDistanceToCenter > curDistanceToCenter;
+	}
+
+	private boolean iAmTooCloseToEdge(PlayingInfo playingInfo,
+			double distanceFromMiddle) {
+		return distanceFromMiddle/playingInfo.getArenaRadius() > rescueThreshold;
+	}
 	
 	private AccelerationVector reduceFallOffRisk(Sphere me) {
-		System.out.println("----Trying to backout!");
 		return attackPoint(new Point(0, 0), me);
 	}
 
