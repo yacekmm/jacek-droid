@@ -29,6 +29,7 @@
     <string name="enterPaysMulti_boughtGiftValue_hint">ile każdy zapłacił za prezent</string>
     <string name="enterPaysMulti_TextView_peopleCount">Ile osób dodać:</string>
     <string name="enterPaysMulti_EditText_peopleCount">2</string>
+    <string name="enterPaysMulti_personPrefix">Osoba</string>
     
     <string name="EnterPays_TextView_EnterPayPerEachPerson">Dodaj nową osobę</string>
     <string name="EnterPays_CheckBox_EqualPays">Wszyscy składają się po równo</string>
