@@ -97,8 +97,9 @@ public class AddNewPerson extends ColCalcActivity {
 	}
 
 	private void initActivityViews() {
-		((Button)findViewById(R.id.addPersonHeader_saveCalculation_btn)).setOnClickListener(addPersonClickListener);
 		((ImageButton)findViewById(R.id.addPersonHeader_addPerson_btn)).setOnClickListener(saveAndAddNextPersonClickListener);
+		((ImageButton)findViewById(R.id.addPersonHeader_addMultiPerson_btn)).setOnClickListener(saveAndAddNextMultiPersonClickListener);
+		((Button)findViewById(R.id.addPersonHeader_saveCalculation_btn)).setOnClickListener(saveAndShowResultsClickListener);
         ((ImageButton)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
         mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
         mEqualPaymentsBox.setOnCheckedChangeListener(equalPaysChangeListener);
@@ -205,7 +206,7 @@ public class AddNewPerson extends ColCalcActivity {
 	  }
 	}
 	
-	OnClickListener addPersonClickListener = new OnClickListener() {
+	OnClickListener saveAndShowResultsClickListener = new OnClickListener() {
         public void onClick(View v) {
         	try{
         		inputPaysList.add(getNewInputDataToAdd());
@@ -221,24 +222,45 @@ public class AddNewPerson extends ColCalcActivity {
         public void onClick(View v) {
         	try{
         		inputPaysList.add(getNewInputDataToAdd());
-        		clearInputFieldsToDefaults();
-//        		calc.calculate(inputPaysList);
+        		calc.calculate(inputPaysList);
+//        		clearInputFieldsToDefaults();
+        		Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+            	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+            	startActivity(intent);
+            	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+            	finish();
         	}catch(BadInputDataException e){
         		Log.d(LOG_TAG, "Input data was not valid");
         	}
         }
     };
     
-	private void clearInputFieldsToDefaults() {
-		mNewPersonNameInput.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
-        mNewPersonNameInput.requestFocus();
-        mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-        mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-        mReceivesGiftCheckBox.setChecked(false);
-        mBuysGiftCheckBox.setChecked(false);
-        mGiftValueInput.setText("");
-        updateFieldsDependantOnPeopleListSizeVisibility();
-	}
+    OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
+    	public void onClick(View v) {
+    		try{
+    			inputPaysList.add(getNewInputDataToAdd());
+    			calc.calculate(inputPaysList);
+    			Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
+    			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+    			startActivity(intent);
+    			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+    			finish();
+    		}catch(BadInputDataException e){
+    			Log.d(LOG_TAG, "Input data was not valid");
+    		}
+    	}
+    };
+    
+//	private void clearInputFieldsToDefaults() {
+//		mNewPersonNameInput.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
+//        mNewPersonNameInput.requestFocus();
+//        mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+//        mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+//        mReceivesGiftCheckBox.setChecked(false);
+//        mBuysGiftCheckBox.setChecked(false);
+//        mGiftValueInput.setText("");
+//        updateFieldsDependantOnPeopleListSizeVisibility();
+//	}
 
 	private PersonData getNewInputDataToAdd() throws BadInputDataException{
 		String name = mNewPersonNameInput.getText().toString();

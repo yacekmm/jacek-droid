@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.addperson.AddNewPersonMulti;
 import pl.looksok.activity.addperson.AddNewPerson;
 import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
@@ -138,6 +139,11 @@ public class CalculationActivity extends ColCalcActivity {
     OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
     	public void onClick(View v) {
     		calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
+    		Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
+        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+        	startActivity(intent);
+        	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+        	finish();
     	}
     };
     
