@@ -6,8 +6,11 @@ import pl.looksok.R;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.BadInputDataException;
+import android.widget.EditText;
 
 public class AddNewPersonMulti extends AddNewPersonBase {
+
+	private EditText mHowManyPersons;
 
 	@Override
 	protected int getAddPersonContentView() {
@@ -18,12 +21,40 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 	protected int getPayInputResId() {
 		return R.id.enterPaysMulti_EditText_Pay;
 	}
-
+	
 	@Override
-	protected PersonData getNewInputDataToAdd() throws BadInputDataException {
-		double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
-		// TODO Auto-generated method stub
-		return new PersonData("Osoba 1", payDouble, new HashSet<String>());
+	protected void initActivityViews() {
+		super.initActivityViews();
+		mHowManyPersons = (EditText)findViewById(R.id.enterPaysMulti_EditText_peopleCount);
+		mHowManyPersons.setOnFocusChangeListener(editTextFocusListener);
+		
 	}
 
+	@Override
+	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
+		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
+		double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
+		double howManyPersons = FormatterHelper.readDoubleFromEditText(mHowManyPersons);
+		String namePrefix = getString(R.string.enterPaysMulti_personPrefix);
+		
+		int nameOffset = 0;
+		for(int i = 1; i<=howManyPersons; i++){
+			String name = namePrefix + " " + (i + nameOffset);
+			while(inputListContainsPerson(name)){
+				nameOffset++;
+				name = namePrefix + " " + (i + nameOffset);
+			}
+			
+			personDataSet.add(new PersonData(name, payDouble, emails));
+		}
+		return personDataSet;
+	}
+
+	private boolean inputListContainsPerson(String personName){
+		for (PersonData pd : inputPaysList) {
+			if(pd.getName().equals(personName))
+					return true;
+		}
+		return false;
+	}
 }

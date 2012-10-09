@@ -1,5 +1,6 @@
 package pl.looksok.activity.addperson;
 
+
 import java.util.HashSet;
 
 import pl.looksok.R;
@@ -36,8 +37,6 @@ public class AddNewPerson extends AddNewPersonBase {
 	EditText mGiftValueInput;
 
 	protected static final int PICK_CONTACT = 0;
-	HashSet<String> emails = new HashSet<String>();
-
 	@Override
 	protected int getAddPersonContentView() {
 		return R.layout.add_new_person;
@@ -83,15 +82,11 @@ public class AddNewPerson extends AddNewPersonBase {
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
 		}
-		
-		for (PersonData data : calc.getInputPaysList()) {
-			data.setAlreadyRefunded(0.0);
-			inputPaysList.add(data);
-		}
 	};
 	
 	@Override
-	protected PersonData getNewInputDataToAdd() throws BadInputDataException {
+	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
+		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
 		double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
 		String name = mNewPersonNameInput.getText().toString();
 		double shouldPayDouble = FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput);
@@ -106,11 +101,13 @@ public class AddNewPerson extends AddNewPersonBase {
 			throw new BadInputDataException();
 
 		if(calc.isEqualPayments())
-			return new PersonData(name, payDouble, emails, receivesGift, giftPayment);
+			personDataSet.add(new PersonData(name, payDouble, emails, receivesGift, giftPayment));
 		else{
 			throw new BadInputDataException("should not reach here!");
 			//    		return new PersonData(name, payDouble, shouldPayDouble, emails);
 		}
+		
+		return personDataSet;
 	}
 
 

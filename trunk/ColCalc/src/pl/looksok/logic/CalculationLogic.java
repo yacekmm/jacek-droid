@@ -107,7 +107,7 @@ public class CalculationLogic implements Serializable {
 		
 		for (PersonData in : this.inputPaysList) {
 			if(inputPays.containsKey(in.getName()))
-				throw new DuplicatePersonNameException();
+				throw new DuplicatePersonNameException(in.getName());
 			else{
 				inputPays.put(in.getName(), in);
 				sumOfAllPays += in.getPayMadeByPerson();

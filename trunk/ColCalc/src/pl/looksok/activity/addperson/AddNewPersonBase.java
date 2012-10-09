@@ -1,6 +1,7 @@
 package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -55,6 +56,11 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	protected void loadInputDataFromBundle(Bundle extras) {
 		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 		calc.setCalculationResult(new Hashtable<String, PersonData>());
+		
+		for (PersonData data : calc.getInputPaysList()) {
+			data.setAlreadyRefunded(0.0);
+			inputPaysList.add(data);
+		}
 	}
 
 	protected void initActivityViews() {
@@ -75,7 +81,9 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	OnClickListener saveAndShowResultsClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
-				inputPaysList.add(getNewInputDataToAdd());
+				for (PersonData pd : getNewInputDataToAdd()) {
+					inputPaysList.add(pd);
+				}
 				//        		clearInputFieldsToDefaults();
 				calculateAndShowResults();
 			}catch(BadInputDataException e){
@@ -86,7 +94,9 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
-				inputPaysList.add(getNewInputDataToAdd());
+				for (PersonData pd : getNewInputDataToAdd()) {
+					inputPaysList.add(pd);
+				}
 				calc.calculate(inputPaysList);
 				//        		clearInputFieldsToDefaults();
 				Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
@@ -102,7 +112,9 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
-				inputPaysList.add(getNewInputDataToAdd());
+				for (PersonData pd : getNewInputDataToAdd()) {
+					inputPaysList.add(pd);
+				}
 				calc.calculate(inputPaysList);
 				Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
 				intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
@@ -122,11 +134,11 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 //
 //	};
 
-	protected abstract PersonData getNewInputDataToAdd() throws BadInputDataException;
+	protected abstract HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException;
 
 	OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
 		public void onFocusChange(View v, boolean hasFocus) {
-			if(v.getId() == mNewPersonPayInput.getId()){
+//			if(v.getId() == mNewPersonPayInput.getId()){
 				EditText editTextView = (EditText)v;
 				if(hasFocus){
 					double payDouble = FormatterHelper.readDoubleFromEditText(editTextView);
@@ -137,9 +149,10 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 					if(editTextView.getText().length() == 0)
 						editTextView.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
 				}
-			}
+//			}
 		}
 	};
+	HashSet<String> emails = new HashSet<String>();
 
 
 
