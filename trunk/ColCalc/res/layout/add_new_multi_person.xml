@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/enterPaysMulti_mainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/add_person_header" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/enterPaysMulti_TextView_Pay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/enterPaysMulti_TextView_Pay" />
+
+        <EditText
+            android:id="@+id/enterPaysMulti_EditText_Pay"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="numberDecimal"
+            android:text="@string/EnterPays_TextView_ZeroValue" />
+    </RelativeLayout>
+
+    <CheckBox
+            android:id="@+id/enterPaysMulti_gotGift_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enterPaysMulti_gotGift_text"
+            android:enabled="false" />
+            
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+    <CheckBox
+            android:id="@+id/enterPaysMulti_buysGift_checkbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/enterPaysMulti_EditText_giftValue"
+            android:text="@string/enterPaysMulti_buysGift_text"
+            android:enabled="false"/>
+
+        <EditText
+            android:id="@+id/enterPaysMulti_EditText_giftValue"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="numberDecimal"
+            android:hint="@string/enterPaysMulti_boughtGiftValue_hint"
+            android:enabled="false" />
+    </RelativeLayout>
+    
+    <ListView
+        android:id="@+id/enterPaysMulti_List_People"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big" 
+        android:visibility="gone">
+    </ListView>
+
+
+</LinearLayout>
