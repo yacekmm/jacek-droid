@@ -4,7 +4,7 @@ import android.os.Bundle;
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
 
-public class AddNewMultiPerson extends ColCalcActivity {
+public class AddNewPersonMulti extends ColCalcActivity {
 
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {

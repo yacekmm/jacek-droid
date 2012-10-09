@@ -17,6 +17,12 @@
             android:label="@string/app_name" 
             android:windowSoftInputMode="adjustPan">
         </activity>
+
+        <activity
+            android:name=".activity.addperson.AddNewPersonMulti"
+            android:label="@string/app_name" 
+            android:windowSoftInputMode="adjustPan">
+        </activity>
         
         <activity
             android:name=".activity.calcresult.CalculationActivity"
