@@ -23,29 +23,20 @@ import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddNewPerson extends ColCalcActivity {
 	private List<PersonData> inputPaysList = new ArrayList<PersonData>();
-	private ArrayAdapter<PersonData> adapter;
 	private CalculationLogic calc;
 	
 	private CheckBox mEqualPaymentsBox;
@@ -53,13 +44,10 @@ public class AddNewPerson extends ColCalcActivity {
 	private EditText mNewPersonPayInput;
 	private EditText mNewPersonShouldPayInput;
 	private TextView mNewPersonShouldPayText;
-	private ListView mPeopleList;
 	private CheckBox mReceivesGiftCheckBox;
 	private CheckBox mBuysGiftCheckBox;
 	private EditText mGiftValueInput;
 	
-	private static final int MENU_EDIT = Menu.FIRST;
-	private static final int MENU_DELETE = MENU_EDIT+1;
 	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
 	protected static final int PICK_CONTACT = 0;
 	private HashSet<String> emails = new HashSet<String>();
@@ -74,10 +62,6 @@ public class AddNewPerson extends ColCalcActivity {
         
         calc = new CalculationLogic();
         initActivityViews();
-        
-        adapter = new ArrayAdapter<PersonData>(this, android.R.layout.simple_expandable_list_item_1,
-        		android.R.id.text1, inputPaysList);
-        mPeopleList.setAdapter(adapter);
         
         readInputBundleIfNotEmpty();
     }
@@ -107,7 +91,7 @@ public class AddNewPerson extends ColCalcActivity {
 		
 		for (PersonData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);
-			adapter.add(data);
+			inputPaysList.add(data);
 		}
 		
 	}
@@ -127,8 +111,6 @@ public class AddNewPerson extends ColCalcActivity {
         mNewPersonShouldPayInput = (EditText)findViewById(R.id.EnterPays_EditText_ShouldPay);
         mNewPersonShouldPayInput.setOnFocusChangeListener(editTextFocusListener);
         mNewPersonShouldPayInput.addTextChangedListener(payTextChangedListener);
-        mPeopleList = (ListView)findViewById(R.id.EnterPays_List_People);
-        registerForContextMenu(mPeopleList);
         mReceivesGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
         mReceivesGiftCheckBox.setOnCheckedChangeListener(receivesGiftChangeListener);
         mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
@@ -152,38 +134,6 @@ public class AddNewPerson extends ColCalcActivity {
 		}
 	}
 
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-//	  	super.onCreateContextMenu(menu, v, menuInfo);
-//
-//	  	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-//	    menu.setHeaderTitle(adapter.getItem(info.position).getName());
-//	  	menu.add(0, MENU_EDIT, 0, getResources().getString(R.string.EnterPays_Menu_Edit));
-//	  	menu.add(0, MENU_DELETE, 1, getResources().getString(R.string.EnterPays_Menu_Remove));
-	}
-    
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-//	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-//	 
-//	    switch (item.getItemId()) {
-//	    case MENU_EDIT:
-//	    	editPerson(info.position);
-//	    	return true;
-//	    case MENU_DELETE:
-//	    	removePerson(info.position);
-//	    	return true;
-//	    }
-	    return super.onContextItemSelected(item);
-	}
-	
-//	private void removePerson(int position) {
-//		adapter.remove(adapter.getItem(position));
-//		updateFieldsDependantOnPeopleListSizeVisibility();
-//		updateShouldPayTextFields(FormatterHelper.readDoubleFromEditText(mNewPersonPayInput), 
-//				FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput));
-//	}
-
 	private void updateFieldsDependantOnPeopleListSizeVisibility() {
 		if(inputPaysList.size()==0){
             mEqualPaymentsBox.setEnabled(true);
@@ -191,14 +141,6 @@ public class AddNewPerson extends ColCalcActivity {
             mEqualPaymentsBox.setEnabled(false);
 		}
 	}
-
-//	private void editPerson(int position) {
-//		PersonData person = adapter.getItem(position);
-//		mNewPersonNameInput.setText(person.getName());
-//		mNewPersonPayInput.setText(String.valueOf(person.getPayMadeByPerson()));
-//		mNewPersonShouldPayInput.setText(String.valueOf(person.getHowMuchPersonShouldPay()));
-//		removePerson(position);
-//	}
 
 	private TextWatcher payTextChangedListener = new TextWatcher() {
 		
@@ -266,7 +208,7 @@ public class AddNewPerson extends ColCalcActivity {
 	OnClickListener addPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	try{
-        		adapter.add(getNewInputDataToAdd());
+        		inputPaysList.add(getNewInputDataToAdd());
 //        		clearInputFieldsToDefaults();
         		calculateAndShowResults();
         	}catch(BadInputDataException e){
@@ -278,7 +220,7 @@ public class AddNewPerson extends ColCalcActivity {
     OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
         public void onClick(View v) {
         	try{
-        		adapter.add(getNewInputDataToAdd());
+        		inputPaysList.add(getNewInputDataToAdd());
         		clearInputFieldsToDefaults();
 //        		calc.calculate(inputPaysList);
         	}catch(BadInputDataException e){
