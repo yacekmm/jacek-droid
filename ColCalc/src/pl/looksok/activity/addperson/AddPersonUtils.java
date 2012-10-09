@@ -7,7 +7,7 @@ import android.provider.ContactsContract;
 
 public class AddPersonUtils {
 
-	public HashSet<String> getPersonEmailsSet(String id, AddNewPerson addNewPerson){
+	public HashSet<String> getPersonEmailsSet(String id, AddNewPersonBase addNewPerson){
         HashSet<String> emails = new HashSet<String>(); 
 		Cursor emailCur = addNewPerson.managedQuery( 
   		ContactsContract.CommonDataKinds.Email.CONTENT_URI, 
