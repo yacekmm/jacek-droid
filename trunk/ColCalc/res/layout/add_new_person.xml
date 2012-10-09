@@ -110,7 +110,7 @@
             android:hint="@string/EnterPays_boughtGiftValue_hint"
             android:enabled="false" />
     </RelativeLayout>
-    
+<!--     
     <ListView
         android:id="@+id/EnterPays_List_People"
         android:layout_width="fill_parent"
@@ -119,7 +119,7 @@
         android:layout_marginLeft="@dimen/margin_big"
         android:layout_marginRight="@dimen/margin_big" 
         android:visibility="gone">
-    </ListView>
+    </ListView> -->
 
 
 </LinearLayout>
