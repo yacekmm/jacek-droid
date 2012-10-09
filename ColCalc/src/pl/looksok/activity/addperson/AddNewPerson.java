@@ -104,7 +104,6 @@ public class AddNewPerson extends AddNewPersonBase {
 			personDataSet.add(new PersonData(name, payDouble, emails, receivesGift, giftPayment));
 		else{
 			throw new BadInputDataException("should not reach here!");
-			//    		return new PersonData(name, payDouble, shouldPayDouble, emails);
 		}
 		
 		return personDataSet;
@@ -176,19 +175,6 @@ public class AddNewPerson extends AddNewPersonBase {
 		break;
 		}
 	}
-
-
-
-	//	private void clearInputFieldsToDefaults() {
-		//		mNewPersonNameInput.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
-	//        mNewPersonNameInput.requestFocus();
-	//        mNewPersonPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-	//        mNewPersonShouldPayInput.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-	//        mReceivesGiftCheckBox.setChecked(false);
-	//        mBuysGiftCheckBox.setChecked(false);
-	//        mGiftValueInput.setText("");
-	//        updateFieldsDependantOnPeopleListSizeVisibility();
-	//	}
 
 	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener(){
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
