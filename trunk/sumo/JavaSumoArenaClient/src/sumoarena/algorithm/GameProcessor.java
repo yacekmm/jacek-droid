@@ -12,7 +12,8 @@ import com.google.common.math.DoubleMath;
 
 public class GameProcessor {
 
-	private static final double RESCUE_THRESHOLD = 0.60;
+	private static final double RESCUE_THRESHOLD_ON = 0.60;
+	private static final double RESCUE_THRESHOLD_OFF = RESCUE_THRESHOLD_ON;
 	private static final int MAX_NORMALIZATION_TRIES = 10;
 	private static final int MAX_DESIRED_SPEED = 90;
 	private static final Point ARENA_CENTER = new Point(0,0);
@@ -23,6 +24,7 @@ public class GameProcessor {
 	private Sphere me;
 	Point curPos;
 	AccelerationVector curVec;
+	private boolean rescueModeOn = false;
 	
 	private void resetVariables(PlayingInfo _playingInfo) {
 		this.playingInfo = _playingInfo;
@@ -48,7 +50,11 @@ public class GameProcessor {
 
 		double distanceFromMiddle = curPos.distance(ARENA_CENTER);
 
-		if(iAmTooCloseToEdge(distanceFromMiddle) && iAmApproachingToEdge(me)){
+		if(rescueModeOn){
+			rescueModeOn = iAmTooCloseToEdge(distanceFromMiddle, RESCUE_THRESHOLD_OFF);
+		}
+		
+		if(iAmTooCloseToEdge(distanceFromMiddle, RESCUE_THRESHOLD_ON) && iAmApproachingToEdge(me) || rescueModeOn ){
 			return reduceFallOffRisk(me, playingInfo);
 		}else{
 			return attackPoint(pointToFollow, me, playingInfo, MAX_DESIRED_SPEED);
@@ -69,6 +75,11 @@ public class GameProcessor {
 		System.out.println("calc X:Y:\t" + accVec.getdVx() + ":" + accVec.getdVy());
 
 		accVec = normalizeSpeed(accVec, desiredAcc, me, pointToAttack, playingInfo);
+		
+//		double desVecLength = MathHelper.getVectorLength(desiredAcc) - 1;
+//		if(desVecLength < roundInfo.maxSpeedVariation){
+//			System.out.println("\n\nFUCK! desVecLen:\t" + desVecLength + "\n");
+//		}
 
 		return accVec;
 	}
@@ -109,32 +120,34 @@ public class GameProcessor {
 		return futurePos.distance(ARENA_CENTER) > curPos.distance(ARENA_CENTER);
 	}
 
-	private boolean iAmTooCloseToEdge(double distanceFromMiddle) {
-		return distanceFromMiddle/playingInfo.getArenaRadius() > RESCUE_THRESHOLD;
+	private boolean iAmTooCloseToEdge(double distanceFromMiddle, double rescueThreshold) {
+		return distanceFromMiddle/playingInfo.getArenaRadius() > rescueThreshold;
 	}
 
 	private AccelerationVector reduceFallOffRisk(Sphere me, PlayingInfo playingInfo) {
 		System.out.println("----Trying to backout! Arena size: " + playingInfo.getArenaRadius());
+		rescueModeOn = true;
 		return attackPoint(ARENA_CENTER, me, playingInfo, MAX_DESIRED_SPEED);
 	}
 
 	private Sphere findEnemy(Sphere[] spheres) {
 		for (Sphere sphere : spheres) {
-			if(sphere.index != getRoundInfo().myIndex && sphere.inArena && sphere.team != getRoundInfo().myTeamIndex)
+			System.out.println("^^^^^Sphere.team:\t" + sphere.team + ", index:\t" + sphere.index + ", my team:\t" + roundInfo.myTeamIndex + ", myIndex:\t" + roundInfo.myIndex);
+			if(sphere.index != roundInfo.myIndex && sphere.inArena && sphere.team != playingInfo.getSpheres()[roundInfo.myIndex].team){
+				System.out.println("^^^^^Chosen this one!");
 				return sphere;
+			}
 		}
 		return null;
 	}
 
 	private Sphere findMe(Sphere[] spheres) {
-		return spheres[getRoundInfo().myIndex];
+		return spheres[roundInfo.myIndex];
 	}
 
-	public RoundStartInfo getRoundInfo() {
-		return roundInfo;
-	}
-
-	public void setRoundInfo(RoundStartInfo roundInfo) {
-		this.roundInfo = roundInfo;
+	public void setRoundInfo(RoundStartInfo roundStartInfo) {
+		this.roundInfo = roundStartInfo;
+		// TODO Auto-generated method stub
+		
 	}
 }
