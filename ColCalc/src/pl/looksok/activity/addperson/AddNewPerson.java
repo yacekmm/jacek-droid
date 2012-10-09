@@ -154,35 +154,35 @@ public class AddNewPerson extends ColCalcActivity {
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-	  	super.onCreateContextMenu(menu, v, menuInfo);
-
-	  	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-	    menu.setHeaderTitle(adapter.getItem(info.position).getName());
-	  	menu.add(0, MENU_EDIT, 0, getResources().getString(R.string.EnterPays_Menu_Edit));
-	  	menu.add(0, MENU_DELETE, 1, getResources().getString(R.string.EnterPays_Menu_Remove));
+//	  	super.onCreateContextMenu(menu, v, menuInfo);
+//
+//	  	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+//	    menu.setHeaderTitle(adapter.getItem(info.position).getName());
+//	  	menu.add(0, MENU_EDIT, 0, getResources().getString(R.string.EnterPays_Menu_Edit));
+//	  	menu.add(0, MENU_DELETE, 1, getResources().getString(R.string.EnterPays_Menu_Remove));
 	}
     
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	 
-	    switch (item.getItemId()) {
-	    case MENU_EDIT:
-	    	editPerson(info.position);
-	    	return true;
-	    case MENU_DELETE:
-	    	removePerson(info.position);
-	    	return true;
-	    }
+//	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+//	 
+//	    switch (item.getItemId()) {
+//	    case MENU_EDIT:
+//	    	editPerson(info.position);
+//	    	return true;
+//	    case MENU_DELETE:
+//	    	removePerson(info.position);
+//	    	return true;
+//	    }
 	    return super.onContextItemSelected(item);
 	}
 	
-	private void removePerson(int position) {
-		adapter.remove(adapter.getItem(position));
-		updateFieldsDependantOnPeopleListSizeVisibility();
-		updateShouldPayTextFields(FormatterHelper.readDoubleFromEditText(mNewPersonPayInput), 
-				FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput));
-	}
+//	private void removePerson(int position) {
+//		adapter.remove(adapter.getItem(position));
+//		updateFieldsDependantOnPeopleListSizeVisibility();
+//		updateShouldPayTextFields(FormatterHelper.readDoubleFromEditText(mNewPersonPayInput), 
+//				FormatterHelper.readDoubleFromEditText(mNewPersonShouldPayInput));
+//	}
 
 	private void updateFieldsDependantOnPeopleListSizeVisibility() {
 		if(inputPaysList.size()==0){
@@ -192,13 +192,13 @@ public class AddNewPerson extends ColCalcActivity {
 		}
 	}
 
-	private void editPerson(int position) {
-		PersonData person = adapter.getItem(position);
-		mNewPersonNameInput.setText(person.getName());
-		mNewPersonPayInput.setText(String.valueOf(person.getPayMadeByPerson()));
-		mNewPersonShouldPayInput.setText(String.valueOf(person.getHowMuchPersonShouldPay()));
-		removePerson(position);
-	}
+//	private void editPerson(int position) {
+//		PersonData person = adapter.getItem(position);
+//		mNewPersonNameInput.setText(person.getName());
+//		mNewPersonPayInput.setText(String.valueOf(person.getPayMadeByPerson()));
+//		mNewPersonShouldPayInput.setText(String.valueOf(person.getHowMuchPersonShouldPay()));
+//		removePerson(position);
+//	}
 
 	private TextWatcher payTextChangedListener = new TextWatcher() {
 		
