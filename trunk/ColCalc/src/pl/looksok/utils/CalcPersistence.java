@@ -47,15 +47,15 @@ public class CalcPersistence {
 			fis.close();
 			Log.v(LOG_TAG, "open calcs list: success");
 		}catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			Log.d(LOG_TAG, "open calcs list: " + e.getMessage());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Log.d(LOG_TAG, "open calcs list: " + e.getMessage());
 		} catch (StreamCorruptedException e) {
-
+			Log.d(LOG_TAG, "open calcs list: " + e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.d(LOG_TAG, "open calcs list: " + e.getMessage());
 		} catch(ClassCastException e){
-			Log.e(LOG_TAG, "Error casting stored Calcs: " + e.getMessage());
+			Log.d(LOG_TAG, "Error casting stored Calcs: " + e.getMessage());
 		}
 
 		return calcList;
