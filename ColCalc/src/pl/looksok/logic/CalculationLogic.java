@@ -1,7 +1,6 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -17,10 +16,9 @@ import pl.looksok.utils.exceptions.BadPeopleCountException;
 import pl.looksok.utils.exceptions.DuplicatePersonNameException;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
-import com.google.common.math.DoubleMath;
-
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
+	@SuppressWarnings("unused")
 	private static final String LOG_TAG = CalculationLogic.class.getSimpleName();
 	private Hashtable<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
@@ -394,7 +392,7 @@ public class CalculationLogic implements Serializable {
 		for (PersonData data : getInputPaysList()) {
 			total += data.getPayMadeByPerson();
 		}
-		return DoubleMath.roundToInt(total, RoundingMode.HALF_UP);
+		return (int)Math.round(total);
 	}
 
 	public int getTotalPersons() {
