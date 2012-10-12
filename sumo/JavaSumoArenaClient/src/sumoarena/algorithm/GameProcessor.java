@@ -12,11 +12,12 @@ import com.google.common.math.DoubleMath;
 
 public class GameProcessor {
 
-	private static final double RESCUE_THRESHOLD_ON = 0.60;
+	private static final double RESCUE_THRESHOLD_ON = 0.6;
 	private static final double RESCUE_THRESHOLD_OFF = RESCUE_THRESHOLD_ON;
 	private static final int MAX_NORMALIZATION_TRIES = 10;
 	private static final int MAX_DESIRED_SPEED = 90;
 	private static final Point ARENA_CENTER = new Point(0,0);
+	private static final double PREDICTION_FACTOR = 1;
 	
 	private RoundStartInfo roundInfo;
 	private PlayingInfo playingInfo;
@@ -45,6 +46,8 @@ public class GameProcessor {
 
 		if(enemy!=null){
 			pointToFollow = new Point(enemy.x, enemy.y);
+			pointToFollow = new Point(	enemy.x + DoubleMath.roundToInt(enemy.vx * PREDICTION_FACTOR, RoundingMode.DOWN), 
+										enemy.y + DoubleMath.roundToInt(enemy.vy * PREDICTION_FACTOR, RoundingMode.DOWN));
 			System.out.println("Chasing enemy!: " + enemy.index + ", " + pointToFollow + ", distance: " +  curPos.distance(pointToFollow) + ", me: " + curPos);
 		}
 
@@ -132,9 +135,8 @@ public class GameProcessor {
 
 	private Sphere findEnemy(Sphere[] spheres) {
 		for (Sphere sphere : spheres) {
-			System.out.println("^^^^^Sphere.team:\t" + sphere.team + ", index:\t" + sphere.index + ", my team:\t" + roundInfo.myTeamIndex + ", myIndex:\t" + roundInfo.myIndex);
 			if(sphere.index != roundInfo.myIndex && sphere.inArena && sphere.team != playingInfo.getSpheres()[roundInfo.myIndex].team){
-				System.out.println("^^^^^Chosen this one!");
+				System.out.println("^^^^^attacking sphere: team:\t" + sphere.team + ", index:\t" + sphere.index + ", my team:\t" + roundInfo.myTeamIndex + ", myIndex:\t" + roundInfo.myIndex);
 				return sphere;
 			}
 		}
