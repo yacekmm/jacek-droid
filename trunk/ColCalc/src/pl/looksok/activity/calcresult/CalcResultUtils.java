@@ -1,6 +1,7 @@
 package pl.looksok.activity.calcresult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -94,7 +95,7 @@ public class CalcResultUtils {
 		while (it.hasNext()){
 			listArray.add(calc.getCalculationResult().get(it.next()));
 		}
-		
+		Collections.sort(listArray);
 		return listArray;
 	}
 

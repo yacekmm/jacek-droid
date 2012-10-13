@@ -11,7 +11,7 @@ import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 
-public class PersonData implements Serializable{
+public class PersonData implements Serializable, Comparable<PersonData>{
 
 	private static final long serialVersionUID = 4909331903428866567L;
 	private String name;
@@ -259,5 +259,10 @@ public class PersonData implements Serializable{
 		double currentValue = getRefundForOtherPeople().remove(forWhichPerson);
 		getRefundForOtherPeople().put(forWhichPerson, currentValue + payValueToAdd);
 		
+	}
+
+	@Override
+	public int compareTo(PersonData another) {
+		return this.getName().compareToIgnoreCase(another.getName());
 	}
 }
