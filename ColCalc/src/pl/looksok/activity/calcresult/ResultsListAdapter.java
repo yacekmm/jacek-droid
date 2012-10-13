@@ -50,16 +50,14 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.imgEditPerson.setTag(items.get(position));
             holder.imgRemovePerson = (ImageView)row.findViewById(R.id.calcItem_image_delete);
             holder.imgRemovePerson.setTag(items.get(position));
-//            holder.imgIncreasePersonPay = (ImageView)row.findViewById(R.id.calcItem_image_increasePay);
-//            holder.imgIncreasePersonPay.setTag(items.get(position));
             holder.imgReceivesGift = (ImageView)row.findViewById(R.id.calcItem_image_receivesGift);
             
             row.setTag(holder);
 
-            setupItem(position, holder);
         } else {
             holder = (ResultHolder)row.getTag();
         }
+        setupItem(position, holder);
         
         return row;
     }
@@ -97,7 +95,6 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     	TextView txtDetails;
     	ImageView imgEditPerson;
     	ImageView imgRemovePerson;
-//    	ImageView imgIncreasePersonPay;
     	ImageView imgReceivesGift;
     }
 }

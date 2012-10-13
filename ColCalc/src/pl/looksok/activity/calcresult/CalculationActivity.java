@@ -83,8 +83,10 @@ public class CalculationActivity extends ColCalcActivity {
 
 	private void populateListArray() {
 		listArray = utils.readCalcPeopleToListArray(calc);
+		
 		adapter = new ResultsListAdapter(CalculationActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
 	}
 
 	private void readInputBundle() {
