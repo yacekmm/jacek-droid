@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.BadInputDataException;
 import pl.looksok.utils.exceptions.BadPayException;
@@ -190,13 +191,8 @@ public class CalculationLogic implements Serializable {
 					giverInMainCalc.increaseRefund(key, value);
 				}
 			}
-			
-			
 		}
-		
 		calculationResult = removeLoopRefunds(newCalculationResult);
-
-//		calculationResult = newCalculationResult;
 	}
 
 	private Hashtable<String, PersonData> removeLoopRefunds(Hashtable<String, PersonData> newCalculationResult) {
@@ -212,7 +208,6 @@ public class CalculationLogic implements Serializable {
 				if(myRefundForHim > 0){
 					double hisRefundToMe = newCalculationResult.get(refundPersonName).getRefundForOtherPeople().get(personName);
 					if(hisRefundToMe > 0){
-//						Log.e(LOG_TAG, "Looped refund detected!");
 						double correctedMyRefundForHim;
 						double correctedHisRefundToMe;
 						if(myRefundForHim > hisRefundToMe){
@@ -255,65 +250,10 @@ public class CalculationLogic implements Serializable {
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(printCalcResultForResultsList("Calculation results", "should return", "for"));
+		sb.append(CalculationPrinter.printCalcResultForResultsList(calculationResult, "Calculation results", "should return", "for"));
 		return sb.toString();
 	}
 	
-	/**
-	 * returns String with calculation result like:
-	 * [titleText]:
-	 * [personName] [returnToText]:
-	 * [calculatedReturnValue] [forText] [otherPersonName] 
-	 * @param titleText
-	 * @param returnToText
-	 * @return
-	 */
-	public String printCalcResultForResultsList(String titleText, String returnToText, String forText){
-		StringBuilder sb = new StringBuilder(titleText).append(":\n");
-		
-		if(calculationResult != null){
-			Iterator<String> it = calculationResult.keySet().iterator();
-			
-			while (it.hasNext()){
-				PersonData pp = calculationResult.get(it.next());
-				sb.append(pp.printPersonReturnsToOthers(returnToText, forText)).append("\n");
-			}
-		}
-		
-		return sb.toString();
-	}
-	
-	/**
-	 * returns String with calculation result like:
-	 * [titleText]:
-	 * [personName] [howMuchPaidText]: [paidValue] ([howMuchShouldPayText]: [shouldPayValue]) [returnToText]:
-	 * [calculatedReturnValue] [forText] [otherPersonName] 
-	 * 
-	 * example: 
-	 * Calculation Result:
-	 * person A paid: $20 (but should pay: $30) and has to return money to:
-	 * $10 to personB
-	 * @param titleText
-	 * @param returnToText
-	 * @param endOfLine 
-	 * @return
-	 */
-	public String printCalcResultForEmail(String titleText, String howMuchPaidText, 
-			String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
-		StringBuilder sb = new StringBuilder(titleText).append(":").append(endOfLine);
-		
-		if(calculationResult != null){
-			Iterator<String> it = calculationResult.keySet().iterator();
-			
-			while (it.hasNext()){
-				PersonData pp = calculationResult.get(it.next());
-				sb.append(pp.printPersonReturnsToOthersDetails(howMuchPaidText, howMuchShouldPayText, returnToText, forText, endOfLine)).append(endOfLine);
-			}
-		}
-		
-		return sb.toString();
-	}
-
 	public List<PersonData> getInputPaysList() {
 		return inputPaysList;
 	}
@@ -331,13 +271,16 @@ public class CalculationLogic implements Serializable {
 	}
 
 	public PersonData findPersonInList(PersonData pd) {
+		return findPersonInList(pd.getName());
+	}
+
+	public PersonData findPersonInList(String personName) {
 		for (PersonData data : getInputPaysList()) {
-			if(data.getName().equals(pd.getName())){
-				pd = data;
-				break;
+			if(data.getName().equals(personName)){
+				return data;
 			}
 		}
-		return pd;
+		return null;
 	}
 
 	public void removePerson(PersonData pd) {
@@ -397,5 +340,26 @@ public class CalculationLogic implements Serializable {
 
 	public int getTotalPersons() {
 		return getInputPaysList().size();
+	}
+
+	public HashMap<String, Double> getPersonDebts(String personName) {
+		PersonData pd = calculationResult.get(personName);
+//		PersonData pd = findPersonInList(personName);
+		HashMap<String, Double> result = new HashMap<String, Double>();
+		
+		Iterator<String> it = pd.getRefundForOtherPeople().keySet().iterator();
+		while(it.hasNext()){
+			String key = it.next();
+			Double value = pd.getRefundForOtherPeople().get(key);
+			if(value > 0){
+				result.put(key, value);
+			}
+		}
+		return result;
+	}
+
+	public HashMap<String, Double> getPersonRefunds(String personaname) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
