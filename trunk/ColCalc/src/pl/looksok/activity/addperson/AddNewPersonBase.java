@@ -7,6 +7,7 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.addperson.utils.AddPersonUtils;
 import pl.looksok.activity.calcresult.CalculationActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
