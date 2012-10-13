@@ -14,4 +14,5 @@ public class Constants {
 	public static final String SHOULD_THROW_EXCEPTION = "Should throw Exception: ";
 	public static final String INCORRECT_CALC_BETWEEN_THREE = "Incorrect calculation between three people.";
 	public static final String INCORRECT_CALC_BETWEEN_SIX = "Incorrect calculation between six people.";
+	public static final String INCORRECT_RETURN_OBJECT_VALUE = "Incorrect return object value.";
 }

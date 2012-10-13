@@ -14,6 +14,7 @@ import android.widget.Toast;
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.utils.Constants;
 
 public class CalcResultUtils {
@@ -63,7 +64,8 @@ public class CalcResultUtils {
 		sb.append(context.getString(R.string.email_content_text)).append(endOfLine).append(endOfLine);
 		sb.append(context.getString(R.string.email_content_madeBy)).append(" ");
 		sb.append(getAppUrl(context)).append("!").append(endOfLine).append(endOfLine);
-		sb.append(calc.printCalcResultForEmail(
+		sb.append(CalculationPrinter.printCalcResultForEmail(
+				calc.getCalculationResult(),
 				context.getString(R.string.calculation_printText_titleText),
 				context.getString(R.string.calculation_printText_howMuchPaid),
 				context.getString(R.string.calculation_printText_howMuchShouldPay),

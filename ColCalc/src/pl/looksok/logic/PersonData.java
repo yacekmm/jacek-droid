@@ -1,12 +1,10 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Set;
 
 import pl.looksok.utils.FormatterHelper;
@@ -214,56 +212,6 @@ public class PersonData implements Serializable{
 		double tmpToReturn;
 		tmpToReturn = toReturn - alreadyReturned;
 		return tmpToReturn;
-	}
-
-	public String printPersonReturnsToOthers(String returnToText, String forText){
-		StringBuilder sb = new StringBuilder(getName());
-		sb.append(" ").append(returnToText).append(":\n");
-		boolean isThereAnyPersonOnReturnList = false;
-		
-		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
-		while(it.hasNext()) {
-			String key = it.next();
-			double result = getRefundForOtherPeople().get(key);
-			if(result >0){
-				isThereAnyPersonOnReturnList = true;
-				sb.append(result).append(" ").append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ");
-				sb.append(forText).append(": ").append(key).append("\n");
-			}
-		}
-		
-		if(isThereAnyPersonOnReturnList)
-			return sb.toString();
-		else
-			return "";
-	}
-
-	public String printPersonReturnsToOthersDetails(String howMuchPaidText, String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
-		String currency = Currency.getInstance(Locale.getDefault()).getSymbol();
-
-		StringBuilder sb = new StringBuilder(getName()).append(" - ").append(howMuchPaidText).append(": ").append(getPayMadeByPerson()).append(currency).append(" ");
-		sb.append("(").append(howMuchShouldPayText).append(": ").append(getHowMuchPersonShouldPay()).append(currency).append(")");
-		
-		String messageIfNoReturnNeeded = sb.toString() + endOfLine;
-		
-		sb.append(", ").append(returnToText).append(":").append(endOfLine);
-		boolean isThereAnyPersonOnReturnList = false;
-		
-		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
-		while(it.hasNext()) {
-			String key = it.next();
-			double result = getRefundForOtherPeople().get(key);
-			if(result >0){
-				isThereAnyPersonOnReturnList = true;
-				sb.append(result).append(" ").append(currency).append(" ");
-				sb.append(forText).append(": ").append(key).append(endOfLine);
-			}
-		}
-		
-		if(isThereAnyPersonOnReturnList)
-			return sb.toString();
-		else
-			return messageIfNoReturnNeeded;
 	}
 
 	@Override

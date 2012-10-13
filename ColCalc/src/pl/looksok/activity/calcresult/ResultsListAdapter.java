@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.utils.FormatterHelper;
 import android.app.Activity;
 import android.content.Context;
@@ -67,7 +68,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		PersonData pp = items.get(position);
         holder.txtName.setText(pp.getName());
         setBalance(holder, pp);
-        holder.txtDetails.setText(pp.printPersonReturnsToOthers(context.getString(R.string.calculation_printText_return),
+        holder.txtDetails.setText(CalculationPrinter.printPersonReturnsToOthers(pp, context.getString(R.string.calculation_printText_return),
         		context.getString(R.string.calculation_printText_for)));
         if(!pp.receivesGift()){
         	holder.imgReceivesGift.setVisibility(View.GONE);
