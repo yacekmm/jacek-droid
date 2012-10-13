@@ -59,49 +59,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setPersonName(String personName) {
-		this.name = personName;
-	}
-
-	public double getPayMadeByPerson() {
-		return howMuchIPaid;
-	}
-
-	public void setPayMadeByPerson(Double payMadeByPerson) {
-		this.howMuchIPaid = payMadeByPerson;
-	}
-
-	public double getHowMuchPersonShouldPay() {
-		return howMuchIShouldPay;
-	}
-
-	public void setHowMuchPersonShouldPay(double value) {
-		this.howMuchIShouldPay = value;
-	}
-
-	public HashMap<String, Double> getRefundForOtherPeople() {
-		return refundForOtherPeople;
-	}
-
-	public void setRefundForOtherPeople(HashMap<String, Double> refundForOtherPeople) {
-		this.refundForOtherPeople = refundForOtherPeople;
-	}
-
-	public double getCalculatedReturnForPersonB(String personB) {
-		return getRefundForOtherPeople().get(personB);
-	}
-
-	public double getAlreadyRefunded() {
-		return alreadyRefunded;
-	}
-
-	public void setAlreadyRefunded(double alreadyRefunded) {
-		this.alreadyRefunded = alreadyRefunded;
-	}
 
 	public void prepareCalculationData(double _howMuchPerPerson) {
 		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
@@ -165,10 +122,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 			return 0.0;
 	}
 
-	public void addToAlreadyRefunded(double valueToAdd) {
-		setAlreadyRefunded(getAlreadyRefunded() + valueToAdd);
-	}
-	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -176,6 +129,98 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 		return sb.toString();
 	}
+
+	public void increaseRefund(String forWhichPerson, double payValueToAdd) {
+		double currentValue = getRefundForOtherPeople().remove(forWhichPerson);
+		getRefundForOtherPeople().put(forWhichPerson, currentValue + payValueToAdd);
+	}
+
+	@Override
+	public int compareTo(PersonData another) {
+		return this.getName().compareToIgnoreCase(another.getName());
+	}
+
+	public HashMap<String, Double> getPersonDebts() {
+		HashMap<String, Double> result = new HashMap<String, Double>();
+
+		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
+		while(it.hasNext()){
+			String key = it.next();
+			Double value = getRefundForOtherPeople().get(key);
+			if(value > 0){
+				result.put(key, value);
+			}
+		}
+		return result;
+	}
+
+	////////////////////////////////////
+	//// GETTERS & SETTERS
+	////////////////////////////////////
+	public String getName() {
+		return name;
+	}
+
+	public void setPersonName(String personName) {
+		this.name = personName;
+	}
+
+	public double getPayMadeByPerson() {
+		return howMuchIPaid;
+	}
+
+	public void setPayMadeByPerson(Double payMadeByPerson) {
+		this.howMuchIPaid = payMadeByPerson;
+	}
+
+	public double getHowMuchPersonShouldPay() {
+		return howMuchIShouldPay;
+	}
+
+	public void setHowMuchPersonShouldPay(double value) {
+		this.howMuchIShouldPay = value;
+	}
+
+	public HashMap<String, Double> getRefundForOtherPeople() {
+		return refundForOtherPeople;
+	}
+
+	public void setRefundForOtherPeople(HashMap<String, Double> refundForOtherPeople) {
+		this.refundForOtherPeople = refundForOtherPeople;
+	}
+
+	public double getCalculatedReturnForPersonB(String personB) {
+		return getRefundForOtherPeople().get(personB);
+	}
+
+	public double getAlreadyRefunded() {
+		return alreadyRefunded;
+	}
+
+	public void setAlreadyRefunded(double alreadyRefunded) {
+		this.alreadyRefunded = alreadyRefunded;
+	}
+
+	public HashMap<String, Double> getReturnsFromOtherPeople() {
+		return returnsFromOtherPeople;
+	}
+
+	public void setReturnsFromOtherPeople(HashMap<String, Double> returnsFromOtherPeople) {
+		this.returnsFromOtherPeople = returnsFromOtherPeople;
+	}
+
+	public double getHowMuchIPaid() {
+		return howMuchIPaid;
+	}
+
+	public double getAlreadyReturned() {
+		return alreadyReturned;
+	}
+
+	public void setAlreadyReturned(double alreadyReturned) {
+		this.alreadyReturned = alreadyReturned;
+	}
+	
 
 	public HashSet<String> getEmails() {
 		return emails;
@@ -203,50 +248,5 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public void setHowMuchIPaidForGift(double howMuchIPaidForGift) {
 		this.howMuchIPaidForGift = howMuchIPaidForGift;
-	}
-
-	public void increaseRefund(String forWhichPerson, double payValueToAdd) {
-		double currentValue = getRefundForOtherPeople().remove(forWhichPerson);
-		getRefundForOtherPeople().put(forWhichPerson, currentValue + payValueToAdd);
-
-	}
-
-	@Override
-	public int compareTo(PersonData another) {
-		return this.getName().compareToIgnoreCase(another.getName());
-	}
-
-	public HashMap<String, Double> getPersonDebts() {
-		HashMap<String, Double> result = new HashMap<String, Double>();
-
-		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
-		while(it.hasNext()){
-			String key = it.next();
-			Double value = getRefundForOtherPeople().get(key);
-			if(value > 0){
-				result.put(key, value);
-			}
-		}
-		return result;
-	}
-
-	public HashMap<String, Double> getReturnsFromOtherPeople() {
-		return returnsFromOtherPeople;
-	}
-
-	public void setReturnsFromOtherPeople(HashMap<String, Double> returnsFromOtherPeople) {
-		this.returnsFromOtherPeople = returnsFromOtherPeople;
-	}
-
-	public double getHowMuchIPaid() {
-		return howMuchIPaid;
-	}
-
-	public double getAlreadyReturned() {
-		return alreadyReturned;
-	}
-
-	public void setAlreadyReturned(double alreadyReturned) {
-		this.alreadyReturned = alreadyReturned;
 	}
 }
