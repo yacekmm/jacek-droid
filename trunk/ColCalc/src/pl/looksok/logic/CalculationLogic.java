@@ -193,6 +193,13 @@ public class CalculationLogic implements Serializable {
 			}
 		}
 		calculationResult = removeLoopRefunds(newCalculationResult);
+		
+		
+		Iterator<String> itMain = newCalculationResult.keySet().iterator();
+		while(itMain.hasNext()){
+			String personName = itMain.next();
+			setPersonReturnsFromOthers(personName);
+		}
 	}
 
 	private Hashtable<String, PersonData> removeLoopRefunds(Hashtable<String, PersonData> newCalculationResult) {
@@ -344,20 +351,11 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, Double> getPersonDebts(String personName) {
 		PersonData pd = calculationResult.get(personName);
-		HashMap<String, Double> result = new HashMap<String, Double>();
+		return pd.getPersonDebts();
 		
-		Iterator<String> it = pd.getRefundForOtherPeople().keySet().iterator();
-		while(it.hasNext()){
-			String key = it.next();
-			Double value = pd.getRefundForOtherPeople().get(key);
-			if(value > 0){
-				result.put(key, value);
-			}
-		}
-		return result;
 	}
 
-	public HashMap<String, Double> getPersonRefunds(String personName) {
+	public HashMap<String, Double> setPersonReturnsFromOthers(String personName) {
 		HashMap<String, Double> result = new HashMap<String, Double>();
 		
 		Iterator<String> it = getCalculationResult().keySet().iterator();
@@ -371,6 +369,8 @@ public class CalculationLogic implements Serializable {
 				result.put(key, value);
 			}
 		}
-		return result;
+		PersonData pd = calculationResult.get(personName);
+		pd.setReturnsFromOtherPeople(result);
+		return pd.getReturnsFromOtherPeople();
 	}
 }

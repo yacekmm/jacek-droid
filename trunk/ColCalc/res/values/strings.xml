@@ -77,6 +77,8 @@
     <string name="calculation_printText_howMuchShouldPay">powinno być zapłacone</string>
     <string name="calculation_printText_return">musi oddać</string>
     <string name="calculation_printText_for">dla</string>
+    <string name="calculation_printText_refund">dostaje zwrot</string>
+    <string name="calculation_printText_from">od</string>
     <string name="calculation_printText_titleText">Podsumowanie rozliczeń</string>
     
     
