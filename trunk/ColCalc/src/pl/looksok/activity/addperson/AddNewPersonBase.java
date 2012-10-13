@@ -56,7 +56,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	protected void loadInputDataFromBundle(Bundle extras) {
 		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 		calc.setCalculationResult(new Hashtable<String, PersonData>());
-		
+
 		for (PersonData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);
 			inputPaysList.add(data);
@@ -67,7 +67,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 		initTopControlsBar();
 		mNewPersonPayInput = (EditText)findViewById(getPayInputResId());
 		mNewPersonPayInput.setOnFocusChangeListener(editTextFocusListener);
-		//	    mNewPersonPayInput.addTextChangedListener(payTextChangedListener);
 	}
 
 	protected abstract int getPayInputResId();
@@ -80,7 +79,11 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	OnClickListener saveAndShowResultsClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			saveAndShowResults(getNewInputDataToAdd());
+			try{
+				saveAndShowResults(getNewInputDataToAdd());
+			}catch(BadInputDataException e){
+				Log.d(LOG_TAG, "Input data was not valid");
+			}
 		}
 	};
 
@@ -94,13 +97,17 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			Log.d(LOG_TAG, "Input data was not valid: " + e.getMessage());
 		}
 	}
-	
+
 	OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			saveAndAddNextPerson(getNewInputDataToAdd());
+			try{
+				saveAndAddNextPerson(getNewInputDataToAdd());
+			}catch(BadInputDataException e){
+				Log.d(LOG_TAG, "Input data was not valid");
+			}
 		}
 	};
-	
+
 	protected void saveAndAddNextPerson(HashSet<PersonData> newInputData) {
 		try{
 			for (PersonData pd : newInputData) {
@@ -117,7 +124,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 		}
 	}
 
-		OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
+	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
 				for (PersonData pd : getNewInputDataToAdd()) {
@@ -139,18 +146,18 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
 		public void onFocusChange(View v, boolean hasFocus) {
-//			if(v.getId() == mNewPersonPayInput.getId()){
-				EditText editTextView = (EditText)v;
-				if(hasFocus){
-					double payDouble = FormatterHelper.readDoubleFromEditText(editTextView);
-					if(payDouble == 0.0){
-						editTextView.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
-					}
-				}else{
-					if(editTextView.getText().length() == 0)
-						editTextView.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+			//			if(v.getId() == mNewPersonPayInput.getId()){
+			EditText editTextView = (EditText)v;
+			if(hasFocus){
+				double payDouble = FormatterHelper.readDoubleFromEditText(editTextView);
+				if(payDouble == 0.0){
+					editTextView.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
 				}
-//			}
+			}else{
+				if(editTextView.getText().length() == 0)
+					editTextView.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
+			}
+			//			}
 		}
 	};
 	HashSet<String> emails = new HashSet<String>();
