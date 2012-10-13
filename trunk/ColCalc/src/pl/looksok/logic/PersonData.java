@@ -12,8 +12,8 @@ import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 
 public class PersonData implements Serializable, Comparable<PersonData>{
-
 	private static final long serialVersionUID = 4909331903428866567L;
+	
 	private String name;
 	private HashSet<String> emails = new HashSet<String>();
 	private double howMuchIPaid;
