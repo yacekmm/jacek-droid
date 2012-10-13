@@ -59,7 +59,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
 
-
 	public String getName() {
 		return name;
 	}
@@ -74,11 +73,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public void setPayMadeByPerson(Double payMadeByPerson) {
 		this.howMuchIPaid = payMadeByPerson;
-	}
-
-
-	private boolean personBNeedsMoreThanIShouldGive(double tmpToReturn) {
-		return alreadyReturned + tmpToReturn > toReturn;
 	}
 
 	public double getHowMuchPersonShouldPay() {
@@ -125,7 +119,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 			if(this.getName() != pp2.getName()){
 				double returnValue = howMuchIGiveBackToPersonB(pp2);
 				getRefundForOtherPeople().put(pp2.getName(), returnValue);
-				//				Log.d(LOG_TAG, "----------Adding new person to calculated refunds: " + pp2.getName() + ", value: " + returnValue);
 			}
 		}
 	}
@@ -166,55 +159,16 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
 
 		if(howMuchRefundPersonBNeeds>0){
-			double tmpToReturn = getHowMuchPersonShouldPay() - howMuchIPaid;
-
-			if(personBNeedsMoreThanIShouldGive(tmpToReturn)){
-				tmpToReturn = splitMyReturnAmount();
-			}else if(personBWantsLessThanIHaveToReturn(howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds)){
-				tmpToReturn = givePersonBNoMoreThanHeWants(howMuchPersonBPaid, howMuchPersonBShouldPay);
-			}
-
-			if(tmpToReturn > howMuchRefundPersonBNeeds){
-				tmpToReturn = howMuchRefundPersonBNeeds;
-			}
-
-			if(tmpToReturn<0.0)
-				tmpToReturn = 0.0;
-
-			alreadyReturned += tmpToReturn;
-			otherPeoplePayments.get(personBName).addToAlreadyRefunded(tmpToReturn);
-			return tmpToReturn;
+			return PersonDataUtils.returnMoneyToPersonB(personBName, howMuchPersonBPaid,
+					howMuchPersonBShouldPay, howMuchRefundPersonBNeeds, this);
 		}else
 			return 0.0;
 	}
 
-	private void addToAlreadyRefunded(double valueToAdd) {
+	public void addToAlreadyRefunded(double valueToAdd) {
 		setAlreadyRefunded(getAlreadyRefunded() + valueToAdd);
 	}
-
-	private double givePersonBNoMoreThanHeWants(double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
-		double tmpToReturn;
-		double refundForPersonBNeeded = howMuchPersonBPaid - howMuchPersonBShouldPay;
-		if(refundForPersonBNeeded<0)
-			tmpToReturn = 0.0;
-
-		tmpToReturn = howMuchPersonBPaid - getHowMuchPersonShouldPay();
-		if(tmpToReturn<0)
-			tmpToReturn = 0;
-		return tmpToReturn;
-	}
-
-	private boolean personBWantsLessThanIHaveToReturn(
-			double howMuchPersonBPaid, double howMuchPersonBShouldPay, double tmpToReturn, double howMuchRefundPersonBNeeds) {
-		return howMuchRefundPersonBNeeds < getHowMuchPersonShouldPay() - howMuchIPaid;
-	}
-
-	private double splitMyReturnAmount() {
-		double tmpToReturn;
-		tmpToReturn = toReturn - alreadyReturned;
-		return tmpToReturn;
-	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -233,11 +187,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public HashMap<String, PersonData> getOtherPeoplePayments() {
 		return otherPeoplePayments;
-	}
-
-	public void setOtherPeoplePayments(
-			HashMap<String, PersonData> otherPeoplePayments) {
-		this.otherPeoplePayments = otherPeoplePayments;
 	}
 
 	public boolean receivesGift() {
@@ -287,5 +236,17 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public void setReturnsFromOtherPeople(HashMap<String, Double> returnsFromOtherPeople) {
 		this.returnsFromOtherPeople = returnsFromOtherPeople;
+	}
+
+	public double getHowMuchIPaid() {
+		return howMuchIPaid;
+	}
+
+	public double getAlreadyReturned() {
+		return alreadyReturned;
+	}
+
+	public void setAlreadyReturned(double alreadyReturned) {
+		this.alreadyReturned = alreadyReturned;
 	}
 }
