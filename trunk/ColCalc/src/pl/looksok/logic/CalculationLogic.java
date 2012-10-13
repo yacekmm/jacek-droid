@@ -10,6 +10,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import pl.looksok.logic.utils.CalculationPrinter;
+import pl.looksok.logic.utils.CalculationUtils;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.exceptions.BadInputDataException;
 import pl.looksok.utils.exceptions.BadPayException;
@@ -175,22 +176,7 @@ public class CalculationLogic implements Serializable {
 		}
 		
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
-			Hashtable<String, PersonData> giftCalcResult = giftCalc.getCalculationResult();
-			Iterator<String> giftIt = giftCalcResult.keySet().iterator();
-			while(giftIt.hasNext()){
-				PersonData giftGiverPerson = giftCalcResult.get(giftIt.next());
-				PersonData giverInMainCalc = newCalculationResult.get(giftGiverPerson.getName());
-				
-				HashMap<String, Double> giftGiverRefund = giftGiverPerson.getRefundForOtherPeople();
-				Iterator<String> giftGiverIter = giftGiverRefund.keySet().iterator();
-				while(giftGiverIter.hasNext()){
-					String key = giftGiverIter.next();
-					double value = giftGiverRefund.get(key);
-					
-					//increase main refund
-					giverInMainCalc.increaseRefund(key, value);
-				}
-			}
+			newCalculationResult = CalculationUtils.includeGiftPaymentsInCalculation(newCalculationResult, giftCalc);
 		}
 		calculationResult = removeLoopRefunds(newCalculationResult);
 		
@@ -215,18 +201,7 @@ public class CalculationLogic implements Serializable {
 				if(myRefundForHim > 0){
 					double hisRefundToMe = newCalculationResult.get(refundPersonName).getRefundForOtherPeople().get(personName);
 					if(hisRefundToMe > 0){
-						double correctedMyRefundForHim;
-						double correctedHisRefundToMe;
-						if(myRefundForHim > hisRefundToMe){
-							correctedMyRefundForHim = myRefundForHim - hisRefundToMe;
-							correctedHisRefundToMe = 0;
-						}else{
-							correctedMyRefundForHim = 0;
-							correctedHisRefundToMe = hisRefundToMe = myRefundForHim;
-						}
-						newCalculationResult.get(personName).getRefundForOtherPeople().put(refundPersonName, correctedMyRefundForHim);
-						
-						newCalculationResult.get(refundPersonName).getRefundForOtherPeople().put(personName, correctedHisRefundToMe);
+						newCalculationResult = CalculationUtils.correctLoopRefund(newCalculationResult, personName, refundPersonName, myRefundForHim, hisRefundToMe);
 					}
 				}
 			}
