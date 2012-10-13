@@ -1,4 +1,4 @@
-package pl.looksok.utils;
+package pl.looksok.activity.addperson.utils;
 
 import java.util.List;
 
