@@ -35,6 +35,7 @@ public class AddNewPerson extends AddNewPersonBase {
 	CheckBox mReceivesGiftCheckBox;
 	CheckBox mBuysGiftCheckBox;
 	EditText mGiftValueInput;
+	private PersonData editPersonData = null;
 
 	protected static final int PICK_CONTACT = 0;
 	@Override
@@ -46,9 +47,10 @@ public class AddNewPerson extends AddNewPersonBase {
 	protected int getPayInputResId() {
 		return R.id.EnterPays_EditText_Pay;
 	}
-
+	
 	@Override
 	protected void initActivityViews() {
+		
 		super.initActivityViews();
 		((ImageButton)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
 		mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
@@ -75,13 +77,15 @@ public class AddNewPerson extends AddNewPersonBase {
 		
 		PersonData pd = (PersonData)extras.getSerializable(Constants.BUNDLE_PERSON_TO_EDIT);
 		if(pd!=null){
+			editPersonData = pd;
 			mNewPersonNameInput.setText(pd.getName());
 			mNewPersonPayInput.setText(String.valueOf(pd.getPayMadeByPerson()));
 			mNewPersonShouldPayInput.setText(String.valueOf(pd.getHowMuchPersonShouldPay()));
 			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
-		}
+		}else
+			editPersonData = null;
 	};
 	
 	@Override
@@ -215,8 +219,14 @@ public class AddNewPerson extends AddNewPersonBase {
 		public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 		public void afterTextChanged(Editable s) {}
 	};
-
-
-
-
+	
+	@Override
+	public void onBackPressed() {
+		if(editPersonData!=null){
+			HashSet<PersonData> dataToAdd = new HashSet<PersonData>();
+			dataToAdd.add(editPersonData);
+			saveAndShowResults(dataToAdd);
+		}
+		super.onBackPressed();
+	}
 }

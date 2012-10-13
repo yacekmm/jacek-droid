@@ -32,7 +32,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
 	protected AddPersonUtils utils = new AddPersonUtils();
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,36 +79,44 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	OnClickListener saveAndShowResultsClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			try{
-				for (PersonData pd : getNewInputDataToAdd()) {
-					inputPaysList.add(pd);
-				}
-				//        		clearInputFieldsToDefaults();
-				calculateAndShowResults();
-			}catch(BadInputDataException e){
-				Log.d(LOG_TAG, "Input data was not valid");
-			}
+			saveAndShowResults(getNewInputDataToAdd());
 		}
 	};
+
+	protected void saveAndShowResults(HashSet<PersonData> newInputData) {
+		try{
+			for (PersonData pd : newInputData) {
+				inputPaysList.add(pd);
+			}
+			calculateAndShowResults();
+		}catch(BadInputDataException e){
+			Log.d(LOG_TAG, "Input data was not valid: " + e.getMessage());
+		}
+	}
+	
 	OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			try{
-				for (PersonData pd : getNewInputDataToAdd()) {
-					inputPaysList.add(pd);
-				}
-				calc.calculate(inputPaysList);
-				//        		clearInputFieldsToDefaults();
-				Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
-				intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-				startActivity(intent);
-				overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-				finish();
-			}catch(BadInputDataException e){
-				Log.d(LOG_TAG, "Input data was not valid");
-			}
+			saveAndAddNextPerson(getNewInputDataToAdd());
 		}
 	};
-	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
+	
+	protected void saveAndAddNextPerson(HashSet<PersonData> newInputData) {
+		try{
+			for (PersonData pd : newInputData) {
+				inputPaysList.add(pd);
+			}
+			calc.calculate(inputPaysList);
+			Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+			startActivity(intent);
+			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+			finish();
+		}catch(BadInputDataException e){
+			Log.d(LOG_TAG, "Input data was not valid");
+		}
+	}
+
+		OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
 				for (PersonData pd : getNewInputDataToAdd()) {
@@ -126,13 +133,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			}
 		}
 	};
-//	
-//	OnClickListener calculateButtonClickListener = new OnClickListener() {
-//		public void onClick(View v) {
-//			calculateAndShowResults();
-//		}
-//
-//	};
 
 	protected abstract HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException;
 
