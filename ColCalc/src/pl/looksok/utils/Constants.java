@@ -16,4 +16,5 @@ public class Constants {
 	public static final String APPLICATION_WEBSITE_URL = "http://looksok.wordpress.com/";
 	
 	public static final DateTimeFormatter SIMPLE_DATE_FORMAT = DateTimeFormat.forPattern("dd.MM.yyyy");
+	public static final DateTimeFormatter SIMPLE_DATE_FORMAT_WITH_HOUR = DateTimeFormat.forPattern("dd.MM.yyyy, HH:mm");
 }

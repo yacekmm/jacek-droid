@@ -23,6 +23,7 @@ public class WelcomeActivity extends ColCalcActivity {
 
 	private List<CalculationLogic> storedCalcs;
 	private StoredCalcsListAdapter adapter;
+	private CalculationLogic calcItemToRemove;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class WelcomeActivity extends ColCalcActivity {
         	finish();
         }
     };
+
     
     public void editCalcOnClickHandler(View v){
     	CalculationLogic calcItem = (CalculationLogic)v.getTag();
@@ -62,9 +64,8 @@ public class WelcomeActivity extends ColCalcActivity {
     }
     
 	public void removeCalcOnClickHandler(View v){
-		CalculationLogic calcItem = (CalculationLogic)v.getTag();
-		CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calcItem);
-		populateStoredCalcsList();
+		calcItemToRemove = (CalculationLogic)v.getTag();
+		showDialog(DIALOG_REMOVE_CALC);
 	}
 	
 	public void shareCalcOnClickHandler(View v){
@@ -72,5 +73,12 @@ public class WelcomeActivity extends ColCalcActivity {
 		CalcResultUtils utils = new CalcResultUtils();
 		Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calcItem);
 		startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
+	}
+
+	@Override
+	protected void handleRemoveConfirm(int dialogType) {
+		CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calcItemToRemove);
+		populateStoredCalcsList();
+		calcItemToRemove = null;
 	}
 }

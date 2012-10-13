@@ -16,9 +16,6 @@ import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,29 +30,27 @@ import android.widget.Toast;
 
 public class CalculationActivity extends ColCalcActivity {
 	protected static final String LOG_TAG = CalculationActivity.class.getSimpleName();
-	
-	private static final int DIALOG_REMOVE_PERSON = 1;
-	
+
 	private CalculationLogic calc = null;
 	private ListView resultList;
 	private List<PersonData> listArray;
 	private ResultsListAdapter adapter;
-	
+
 	private PersonData personDataHolder = null;
-	
+
 	private CalcResultUtils utils = new CalcResultUtils();
-	
-    @Override
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.calculation);
-        
-        readInputBundle();
-        resultList = (ListView)findViewById(R.id.calc_listView_list);
-        populateListArray();
-        initButtons();
-        initCalculationDetails();
-    }
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.calculation);
+
+		readInputBundle();
+		resultList = (ListView)findViewById(R.id.calc_listView_list);
+		populateListArray();
+		initButtons();
+		initCalculationDetails();
+	}
 
 	private void initButtons() {
 		boolean isAnyPersonOnList = calc.getTotalPersons() > 0;
@@ -63,25 +58,25 @@ public class CalculationActivity extends ColCalcActivity {
 		Button saveCalcBtn = (Button)findViewById(R.id.calc_saveCalculation_button);
 		saveCalcBtn.setOnClickListener(saveCalculationButtonClickListener);
 		saveCalcBtn.setEnabled(isAnyPersonOnList);
-		
-        ImageButton shareCalcBtn = (ImageButton)findViewById(R.id.calc_sendCalculation_button);
-        shareCalcBtn.setOnClickListener(shareCalculationButtonClickListener);
-        shareCalcBtn.setEnabled(isAnyPersonOnList);
-        
-        ((ImageButton)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
-        ((ImageButton)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
-        ((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
+
+		ImageButton shareCalcBtn = (ImageButton)findViewById(R.id.calc_sendCalculation_button);
+		shareCalcBtn.setOnClickListener(shareCalculationButtonClickListener);
+		shareCalcBtn.setEnabled(isAnyPersonOnList);
+
+		((ImageButton)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
+		((ImageButton)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
+		((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
 	}
-	
+
 	private void initCalculationDetails() {
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setText(calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
-        ((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(String.valueOf(calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
-        ((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));
+		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(String.valueOf(calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
+		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));
 	}
 
 	private void populateListArray() {
 		listArray = utils.readCalcPeopleToListArray(calc);
-		
+
 		adapter = new ResultsListAdapter(CalculationActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
@@ -97,79 +92,78 @@ public class CalculationActivity extends ColCalcActivity {
 			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
 		}
 	}
-	
+
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
-        public void onClick(View v) {
-        	String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
-        	if(calcName.length() == 0)
-        		calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT);
-        	
-        	calc.setCalcName( calcName );
-        	calc.setDateSaved(DateTime.now());
-        	CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
-        	Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
+		public void onClick(View v) {
+			String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
+			if(calcName.length() == 0)
+				calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
 
-        	goToWelcomeScreen();
-        }
-    };
-    
-    OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
-    	public void onClick(View v) {
-    		try{
-    			Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calc);
-    			startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
-    		}catch(NullPointerException e){
-    			Log.e(LOG_TAG, "Error while preparing email. there is no email Addresses probably: " + e.getMessage());
-    		}
-    	}
-    };
+			calc.setCalcName( calcName );
+			calc.setDateSaved(DateTime.now());
+			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+			Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
 
-    OnClickListener addPersonButtonClickListener = new OnClickListener() {
-    	public void onClick(View v) {
-    		calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
-        	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
-        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-        	startActivity(intent);
-        	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-        	finish();
-    	}
-    };
+			goToWelcomeScreen();
+		}
+	};
 
-    OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
-    	public void onClick(View v) {
-    		calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
-    		Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
-        	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-        	startActivity(intent);
-        	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-        	finish();
-    	}
-    };
-    
-    OnClickListener removeCalcButtonClickListener = new OnClickListener() {
-    	public void onClick(View v) {
-    		CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
-    		goToWelcomeScreen();
-    	}
-    };
+	OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			try{
+				Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calc);
+				startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
+			}catch(NullPointerException e){
+				Log.e(LOG_TAG, "Error while preparing email. there is no email Addresses probably: " + e.getMessage());
+			}
+		}
+	};
 
-    private void goToWelcomeScreen() {
-    	Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
-    	startActivity(intent);
-    	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
-    	finish();
-    }
+	OnClickListener addPersonButtonClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
+			Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+			startActivity(intent);
+			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+			finish();
+		}
+	};
+
+	OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
+			Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
+			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+			startActivity(intent);
+			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+			finish();
+		}
+	};
+
+	OnClickListener removeCalcButtonClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			showDialog(DIALOG_REMOVE_CALC);
+		}
+	};
+
+	private void goToWelcomeScreen() {
+		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
+		startActivity(intent);
+		overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
+		finish();
+	}
 
 	public void editPerson(View v) {
 		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
 		calc.getInputPaysList().remove(pd);
-		
-    	Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
-    	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
+
+		Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+		intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
-    	startActivity(intent);
-    	overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-    	finish();
+		startActivity(intent);
+		overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+		finish();
 	}
 
 	public void removePerson(View v){
@@ -177,34 +171,25 @@ public class CalculationActivity extends ColCalcActivity {
 		showDialog(DIALOG_REMOVE_PERSON);
 	}
 
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_REMOVE_PERSON:
-        	return createDialogRemovePerson();
-        }
-        return null;
+	@Override
+	protected void handleRemoveConfirm(int dialogType) {
+		if(dialogType == DIALOG_REMOVE_PERSON){
+			calc.removePerson(personDataHolder);
+			calc.recalculate();
+			populateListArray();
+		}else if(dialogType == DIALOG_REMOVE_CALC){
+			CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+			goToWelcomeScreen();
+		}
 	}
 
-	private Dialog createDialogRemovePerson() {
-		return new AlertDialog.Builder(CalculationActivity.this)
-		.setIcon(R.drawable.content_discard)
-		.setTitle(R.string.calculation_dialog_remove_text_removePerson)
-		.setPositiveButton(R.string.calculation_dialog_button_ok, new DialogInterface.OnClickListener() {
-		    public void onClick(DialogInterface dialog, int whichButton) {
-		    	calc.removePerson(personDataHolder);
-		    	calc.recalculate();
-		    	populateListArray();
-		    }
-		})
-		.setNegativeButton(R.string.calculation_dialog_button_cancel, null)
-		.create();
-	}
 
 	@Override
 	public void onBackPressed() {
-    	Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
-    	startActivity(intent);
-    	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
-    	finish();
+		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
+		startActivity(intent);
+		overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
+		finish();
 	}
+
 }
