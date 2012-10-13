@@ -29,7 +29,6 @@ public class CalculationLogic implements Serializable {
 	private CalculationType calculationType = CalculationType.DEFAULT;
 	private String calcName = "";
 	private CalculationLogic giftCalc = null;
-	private double giftValue = 0;
 	
 	public Hashtable<String, PersonData> getCalculationResult() {
 		return calculationResult;
@@ -294,22 +293,6 @@ public class CalculationLogic implements Serializable {
 
 	public void setCalcName(String calcName) {
 		this.calcName = calcName;
-	}
-
-	public CalculationLogic getGiftCalc() {
-		return giftCalc;
-	}
-
-	public void setGiftCalc(CalculationLogic giftCalc) {
-		this.giftCalc = giftCalc;
-	}
-
-	public double getGiftValue() {
-		return giftValue;
-	}
-
-	public void setGiftValue(double giftValue) {
-		this.giftValue = giftValue;
 	}
 
 	public int getTotalPay() {
