@@ -8,8 +8,8 @@ import org.joda.time.DateTime;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.addperson.AddNewPersonMulti;
 import pl.looksok.activity.addperson.AddNewPerson;
+import pl.looksok.activity.addperson.AddNewPersonMulti;
 import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,7 +34,6 @@ import android.widget.Toast;
 public class CalculationActivity extends ColCalcActivity {
 	protected static final String LOG_TAG = CalculationActivity.class.getSimpleName();
 	
-	private static final int DIALOG_INCREASE_PERSON_PAY = 0;
 	private static final int DIALOG_REMOVE_PERSON = 1;
 	
 	private CalculationLogic calc = null;
@@ -98,7 +96,6 @@ public class CalculationActivity extends ColCalcActivity {
 			calc = new CalculationLogic();
 			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
 		}
-		
 	}
 	
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
@@ -154,7 +151,6 @@ public class CalculationActivity extends ColCalcActivity {
     		CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
     		goToWelcomeScreen();
     	}
-
     };
 
     private void goToWelcomeScreen() {
@@ -181,16 +177,8 @@ public class CalculationActivity extends ColCalcActivity {
 		showDialog(DIALOG_REMOVE_PERSON);
 	}
 
-	public void increasePersonPay(View v){
-		personDataHolder = calc.findPersonInList((PersonData)v.getTag());
-		showDialog(DIALOG_INCREASE_PERSON_PAY);
-	}
-	
-	@Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-        case DIALOG_INCREASE_PERSON_PAY:
-            return createDialogIncreasePay();
         case DIALOG_REMOVE_PERSON:
         	return createDialogRemovePerson();
         }
@@ -212,29 +200,6 @@ public class CalculationActivity extends ColCalcActivity {
 		.create();
 	}
 
-	private Dialog createDialogIncreasePay() {
-		LayoutInflater factory = LayoutInflater.from(this);
-		final View textEntryView = factory.inflate(R.layout.alert_dialog_increase_pay, null);
-		((TextView)textEntryView.findViewById(R.id.textCurrency)).setText(Currency.getInstance(Locale.getDefault()).getSymbol());
-		return new AlertDialog.Builder(CalculationActivity.this)
-		    .setIcon(R.drawable.increase_pay)
-		    .setTitle(personDataHolder.getName() + " - " + getString(R.string.calculation_dialog_title_increasePAyment))
-		    .setView(textEntryView)
-		    .setPositiveButton(R.string.calculation_dialog_button_ok, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int whichButton) {
-		        	EditText valueHolder = (EditText)textEntryView.findViewById(R.id.paymentIncreaseEdit);
-		        	String valueHolderText = valueHolder.getText().toString();
-		        	double valueToAdd = Double.parseDouble(valueHolderText);
-		    		personDataHolder.setPayMadeByPerson(personDataHolder.getPayMadeByPerson() + valueToAdd);
-		    		calc.recalculate();
-		    		populateListArray();
-		        }
-		    })
-		    .setNegativeButton(R.string.calculation_dialog_button_cancel, null)
-		    .create();
-	}
-        
-	
 	@Override
 	public void onBackPressed() {
     	Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;

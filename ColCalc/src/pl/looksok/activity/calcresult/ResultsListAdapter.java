@@ -10,7 +10,6 @@ import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.utils.FormatterHelper;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultsListAdapter extends ArrayAdapter<PersonData> {
-
+	@SuppressWarnings("unused")
 	private static final String LOG_TAG = ResultsListAdapter.class.getSimpleName();
+	
 	private List<PersonData> items;
 	private int layoutResourceId;
 	private Context context;
@@ -63,16 +63,22 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     }
 
 	private void setupItem(int position, ResultHolder holder) {
-		PersonData pp = items.get(position);
-        holder.txtName.setText(pp.getName());
-        setBalance(holder, pp);
-        holder.txtDetails.setText(CalculationPrinter.printPersonReturnsToOthers(pp, context.getString(R.string.calculation_printText_return),
-        		context.getString(R.string.calculation_printText_for)));
-        if(!pp.receivesGift()){
+		PersonData pd = items.get(position);
+		if(holder.txtName.getText().toString().equals(pd.getName()))
+			return;
+
+		holder.txtName.setText(pd.getName());
+        setBalance(holder, pd);
+        if(!pd.receivesGift()){
         	holder.imgReceivesGift.setVisibility(View.GONE);
-	        holder.txtPaidForGift.setText("Zapłacił za prezent: " + pp.getHowMuchIPaidForGift());
+	        holder.txtPaidForGift.setText("Zapłacił za prezent: " + pd.getHowMuchIPaidForGift());
 		}
-        Log.d(LOG_TAG, pp.getName() + " receives gift: " + pp.receivesGift());
+
+        String debtsText = CalculationPrinter.printPersonReturnsToOthers(pd, context.getString(R.string.calculation_printText_return),
+        		context.getString(R.string.calculation_printText_for));
+        String refundsText = CalculationPrinter.printPersonRefundsFromOthers(pd, context.getString(R.string.calculation_printText_refund),
+        		context.getString(R.string.calculation_printText_from));
+		holder.txtDetails.setText(debtsText + "\n" + refundsText);
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
