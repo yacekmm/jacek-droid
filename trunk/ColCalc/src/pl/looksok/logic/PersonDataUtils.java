@@ -20,7 +20,8 @@ public class PersonDataUtils {
 			tmpToReturn = 0.0;
 
 		pd.setAlreadyReturned(pd.getAlreadyReturned() + tmpToReturn);
-		pd.getOtherPeoplePayments().get(personBName).addToAlreadyRefunded(tmpToReturn);
+		PersonData personBData = pd.getOtherPeoplePayments().get(personBName);
+		personBData.setAlreadyRefunded(personBData.getAlreadyRefunded() + tmpToReturn);
 		return tmpToReturn;
 	}
 	
