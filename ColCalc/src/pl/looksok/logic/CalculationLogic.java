@@ -9,14 +9,14 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import pl.looksok.logic.exceptions.BadInputDataException;
+import pl.looksok.logic.exceptions.BadPayException;
+import pl.looksok.logic.exceptions.BadPeopleCountException;
+import pl.looksok.logic.exceptions.DuplicatePersonNameException;
+import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.logic.utils.CalculationUtils;
 import pl.looksok.utils.FormatterHelper;
-import pl.looksok.utils.exceptions.BadInputDataException;
-import pl.looksok.utils.exceptions.BadPayException;
-import pl.looksok.utils.exceptions.BadPeopleCountException;
-import pl.looksok.utils.exceptions.DuplicatePersonNameException;
-import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;

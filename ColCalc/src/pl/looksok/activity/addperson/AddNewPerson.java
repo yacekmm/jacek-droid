@@ -5,10 +5,10 @@ import java.util.HashSet;
 
 import pl.looksok.R;
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import pl.looksok.utils.InputValidator;
-import pl.looksok.utils.exceptions.BadInputDataException;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;

@@ -7,8 +7,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
+import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.utils.FormatterHelper;
-import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 
 public class PersonData implements Serializable, Comparable<PersonData>{

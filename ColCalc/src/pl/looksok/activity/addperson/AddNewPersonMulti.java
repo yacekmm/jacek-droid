@@ -4,8 +4,8 @@ import java.util.HashSet;
 
 import pl.looksok.R;
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.FormatterHelper;
-import pl.looksok.utils.exceptions.BadInputDataException;
 import android.widget.EditText;
 
 public class AddNewPersonMulti extends AddNewPersonBase {
