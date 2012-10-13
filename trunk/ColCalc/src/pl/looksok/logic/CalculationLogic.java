@@ -344,7 +344,6 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, Double> getPersonDebts(String personName) {
 		PersonData pd = calculationResult.get(personName);
-//		PersonData pd = findPersonInList(personName);
 		HashMap<String, Double> result = new HashMap<String, Double>();
 		
 		Iterator<String> it = pd.getRefundForOtherPeople().keySet().iterator();
@@ -358,8 +357,20 @@ public class CalculationLogic implements Serializable {
 		return result;
 	}
 
-	public HashMap<String, Double> getPersonRefunds(String personaname) {
-		// TODO Auto-generated method stub
-		return null;
+	public HashMap<String, Double> getPersonRefunds(String personName) {
+		HashMap<String, Double> result = new HashMap<String, Double>();
+		
+		Iterator<String> it = getCalculationResult().keySet().iterator();
+		while(it.hasNext()){
+			String key = it.next();
+			if(key.equals(personName))
+				continue;
+			
+			Double value = howMuchPersonAGivesBackToPersonB(key, personName);
+			if(value > 0){
+				result.put(key, value);
+			}
+		}
+		return result;
 	}
 }
