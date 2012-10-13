@@ -3,7 +3,6 @@ package pl.looksok.test.logic.gift.returnobjects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -37,117 +36,6 @@ public class CcLogicCalcResultFormatTest extends TestCase {
 		assertNotNull(calc);
 	}
 	
-//	public void testRefundOfZeroPayOnePersonNoGift(){
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(0.0, giftReceivers, 0.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//	}
-//
-//	public void testRefundOfZeroPayOnePersonGetsGiftNoValue(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(0.0, giftReceivers, 0.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//	}
-//
-//	public void testRefundOfZeroPayOnePersonGetsGift(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(0.0, giftReceivers, 10.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testRefundOfNonZeroPayOnePersonNoGift(){
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(10.0, giftReceivers, 0.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testRefundOfNonZeroPayOnePersonGetsGiftNoValue(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(10.0, giftReceivers, 0.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testRefundOfNonZeroPayOnePersonGetsGift(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(10.0, giftReceivers, 20.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testRefundOfZeroPayTwoPeopleNoGift(){
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseTwoPeopleGift(0.0, 0.0, giftReceivers, 0.0, 0.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testRefundOfZeroPayTwoPeopleGetsGift(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseTwoPeopleGift(0.0, 0.0, giftReceivers, 0.0, 10.0);
-//		
-//		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
-//		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
-//	}
-//	
-//	public void testRefundOfNonZeroPayThreePeopleOnePaidWhoToWhom(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseThreePeopleGift(15.0, 0.0, 0.0, giftReceivers, 0.0, 30.0, 0.0);
-//		
-//		calc.calculate(inputPaysList);
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 15.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personCName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personCName));
-//	}
-//	
-//	public void testRefundOfNonZeroPayThreePeopleTwoPaidForGift(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseThreePeopleGift(15.0, 0.0, 0.0, giftReceivers, 0.0, 20.0, 10.0);
-//		
-//		calc.calculate(inputPaysList);
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personCName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personCName));
-//	}
-//
-//	public void testRefundOfNonZeroPayThreePeopleTwoPaidForGiftTwoPotluck(){
-//		giftReceivers.add(Constants.personAName);
-//		inputPaysList = GiftTestScenarioBuilder.buildTestCaseThreePeopleGift(15.0, 0.0, 30.0, giftReceivers, 0.0, 20.0, 10.0);
-//		
-//		calc.calculate(inputPaysList);
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personAName));
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personCName, Constants.personBName));
-//		
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personCName));
-//		assertEquals(Constants.INCORRECT_CALC_BETWEEN_THREE, 10.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personCName));
-//	}
-	
 	public void testDebtsObject(){
 		giftReceivers.add(Constants.personAName);
 		giftReceivers.add(Constants.personBName);
@@ -180,13 +68,13 @@ public class CcLogicCalcResultFormatTest extends TestCase {
 		HashMap<String, Double> personBRefunds = calc.getPersonRefunds(Constants.personBName);
 		HashMap<String, Double> personCRefunds = calc.getPersonRefunds(Constants.personCName);
 		
-//		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personBDebts.get(Constants.personAName));
-//		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personCDebts.get(Constants.personAName));
-//		
-//		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personADebts.get(Constants.personBName));
-//		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 20.0, personCDebts.get(Constants.personBName));
-//		
-//		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personADebts.get(Constants.personCName));
-//		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personBDebts.get(Constants.personCName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personARefunds.get(Constants.personBName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personARefunds.get(Constants.personCName));
+		
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personBRefunds.get(Constants.personAName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 20.0, personBRefunds.get(Constants.personCName));
+		
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personCRefunds.get(Constants.personAName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personCRefunds.get(Constants.personBName));
 	}
 }
