@@ -1,4 +1,4 @@
-package pl.looksok.utils.exceptions;
+package pl.looksok.logic.exceptions;
 
 public class PaysNotCalculatedException extends RuntimeException {
 	public PaysNotCalculatedException(String msg) {

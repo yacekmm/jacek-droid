@@ -1,4 +1,4 @@
-package pl.looksok.utils.exceptions;
+package pl.looksok.logic.exceptions;
 
 public class BadInputDataException extends RuntimeException {
 	public BadInputDataException(String msg) {

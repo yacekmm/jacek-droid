@@ -8,11 +8,11 @@ import junit.framework.TestCase;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.exceptions.BadPayException;
+import pl.looksok.logic.exceptions.DuplicatePersonNameException;
+import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.test.utils.Constants;
 import pl.looksok.test.utils.TestScenarioBuilder;
-import pl.looksok.utils.exceptions.BadPayException;
-import pl.looksok.utils.exceptions.DuplicatePersonNameException;
-import pl.looksok.utils.exceptions.PaysNotCalculatedException;
 
 public class CcLogicEqualPaysTest extends TestCase {
 
