@@ -90,7 +90,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		}
 		
 		holder.txtBalance.setText(context.getString(R.string.calculation_TextView_personPaid_text) + "\n" + 
-				FormatterHelper.roundDouble(pp.getPayMadeByPerson(),2) + 
+				FormatterHelper.roundDouble(pp.getPayMadeByPerson(), 2) + 
 				Currency.getInstance(Locale.getDefault()).getSymbol());
 	}
 	
