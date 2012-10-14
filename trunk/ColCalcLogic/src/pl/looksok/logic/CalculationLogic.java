@@ -222,7 +222,8 @@ public class CalculationLogic implements Serializable {
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
 			double result = calculationResult.get(personA).getCalculatedReturnForPersonB(personB);
-			return FormatterHelper.roundDouble(result, 2);
+//			return FormatterHelper.roundDouble(result, 2);
+			return result;
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
@@ -324,7 +325,7 @@ public class CalculationLogic implements Serializable {
 			
 			Double value = howMuchPersonAGivesBackToPersonB(key, personName);
 			if(value > 0){
-				result.put(key, value);
+				result.put(key, FormatterHelper.roundDouble(value, 2));
 			}
 		}
 		PersonData pd = calculationResult.get(personName);
