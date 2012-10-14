@@ -10,25 +10,25 @@
         android:layout_height="wrap_content"
         layout="@layout/add_person_header" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
+    <TextView
             android:id="@+id/enterPaysMulti_TextView_peopleCount"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="@string/enterPaysMulti_TextView_peopleCount" />
+    
+    <HorizontalScrollView
+        android:id="@+id/enterPaysMulti_peopleCount_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+		 >
 
-        <EditText
-            android:id="@+id/enterPaysMulti_EditText_peopleCount"
-            android:layout_width="140sp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:inputType="numberDecimal"
-            android:text="@string/enterPaysMulti_EditText_peopleCount" />
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/enterPaysMulti_peopleCount_content"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_micro" />
+    </HorizontalScrollView>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -49,5 +49,5 @@
             android:inputType="numberDecimal"
             android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
-    
+
 </LinearLayout>
