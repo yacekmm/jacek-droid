@@ -17,4 +17,8 @@ public class Constants {
 	
 	public static final DateTimeFormatter SIMPLE_DATE_FORMAT = DateTimeFormat.forPattern("dd.MM.yyyy");
 	public static final DateTimeFormatter SIMPLE_DATE_FORMAT_WITH_HOUR = DateTimeFormat.forPattern("dd.MM.yyyy, HH:mm");
+	
+	public static final int MULTI_PERSON_DEFAULT_COUNT = 3;
+	public static final int MULTI_PERSON_MIN_COUNT = 2;
+	public static final int MULTI_PERSON_MAX_COUNT = 12;
 }
