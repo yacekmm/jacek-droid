@@ -21,6 +21,7 @@
         android:layout_margin="@dimen/margin_small"
         android:layout_toRightOf="@id/welcome_appName"
         android:layout_alignParentRight="true"
+        android:background="@drawable/button_bgnd"
         android:text="@string/welcome_mode_potluckParty" />
 
     <ListView
