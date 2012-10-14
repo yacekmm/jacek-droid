@@ -61,7 +61,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 
 	public void prepareCalculationData(double _howMuchPerPerson) {
-		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
+//		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
+		howMuchIShouldPay = _howMuchPerPerson;
 
 		calculateHowMuchIShouldReturn();
 		calculateHowMuchRefundIShouldReceive();
@@ -83,7 +84,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	private double howMuchIGiveBackToPersonB(PersonData personB) {
 		try{
 			double result = this.howMuchShouldReturnTo(personB.getName());
-			return FormatterHelper.roundDouble(result, 2);
+//			return FormatterHelper.roundDouble(result, 2);
+			return result;
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
@@ -148,7 +150,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 			String key = it.next();
 			Double value = getRefundForOtherPeople().get(key);
 			if(value > 0){
-				result.put(key, value);
+				result.put(key, FormatterHelper.roundDouble(value, 2));
 			}
 		}
 		return result;
