@@ -65,6 +65,12 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchIPaidForGift(giftPayment);
 	}
 
+	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails, boolean receivesGift, double giftPayment) {
+		this(name, atomPays, emails);
+		setReceivesGift(receivesGift);
+		setHowMuchIPaidForGift(giftPayment);
+	}
+
 	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
 		this(name, payDouble, emails);
 		setHowMuchPersonShouldPay(shouldPayDouble);
