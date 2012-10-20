@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
-import pl.looksok.logic.exceptions.BadPayException;
+import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.logic.test.utils.Constants;
@@ -100,8 +100,8 @@ public class CcLogicEqualPaysTest extends TestCase {
 			inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(-10.0, 0.0);
 			
 			calc.calculate(inputPaysList);
-			fail(Constants.SHOULD_THROW_EXCEPTION + BadPayException.class.getSimpleName());
-		}catch(BadPayException e){}
+			fail(Constants.SHOULD_THROW_EXCEPTION + BadInputDataException.class.getSimpleName());
+		}catch(BadInputDataException e){}
 	}
 	
 	public void testRefundOfZeroPayTwoPeopleOnePaidWhoToWhom(){
@@ -252,7 +252,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	
 	public void testThrowExceptionIfDuplicatePersonName(){
 		try{
-			inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(Constants.personAName, 9.0, 
+			inputPaysList = TestScenarioBuilder.buildTestCaseThreePeopleWithNames(Constants.personAName, 9.0, 
 					Constants.personAName, 9.0, 
 					Constants.personCName, 0.0);
 			calc.calculate(inputPaysList);
