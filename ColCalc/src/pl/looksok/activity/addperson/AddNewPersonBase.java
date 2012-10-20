@@ -26,11 +26,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public abstract class AddNewPersonBase extends ColCalcActivity {
+	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
 
 	CalculationLogic calc;
 	List<PersonData> inputPaysList = new ArrayList<PersonData>();
 	protected EditText mNewPersonPayInput;
-	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
 	protected AddPersonUtils utils = new AddPersonUtils();
 
 	@Override
@@ -101,20 +101,26 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
-				saveAndAddNextPerson(getNewInputDataToAdd());
+				saveAndAddNext(getNewInputDataToAdd(), AddNewPerson.class);
 			}catch(BadInputDataException e){
 				Log.d(LOG_TAG, "Input data was not valid");
 			}
 		}
 	};
 
-	protected void saveAndAddNextPerson(HashSet<PersonData> newInputData) {
+	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			saveAndAddNext(getNewInputDataToAdd(), AddNewPersonMulti.class);
+		}
+	};
+	
+	protected void saveAndAddNext(HashSet<PersonData> newInputData, Class<?> nextActivityClass) {
 		try{
 			for (PersonData pd : newInputData) {
 				inputPaysList.add(pd);
 			}
 			calc.calculate(inputPaysList);
-			Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+			Intent intent = new Intent(getApplicationContext(), nextActivityClass) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
@@ -123,24 +129,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			Log.d(LOG_TAG, "Input data was not valid");
 		}
 	}
-
-	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
-		public void onClick(View v) {
-			try{
-				for (PersonData pd : getNewInputDataToAdd()) {
-					inputPaysList.add(pd);
-				}
-				calc.calculate(inputPaysList);
-				Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
-				intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
-				startActivity(intent);
-				overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-				finish();
-			}catch(BadInputDataException e){
-				Log.d(LOG_TAG, "Input data was not valid");
-			}
-		}
-	};
 
 	protected abstract HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException;
 

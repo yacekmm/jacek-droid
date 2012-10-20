@@ -1,6 +1,10 @@
 package pl.looksok.logic;
 
-public class AtomPayment {
+import java.io.Serializable;
+
+public class AtomPayment implements Serializable {
+	private static final long serialVersionUID = -5544983199052310005L;
+	
 	private String name = "";
 	private double value = 0;
 	

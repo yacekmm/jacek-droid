@@ -12,6 +12,7 @@ import java.util.Set;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.logic.utils.FormatterHelper;
+import pl.looksok.logic.utils.PersonDataUtils;
 
 
 public class PersonData implements Serializable, Comparable<PersonData>{
@@ -46,11 +47,11 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		refundForOtherPeople = new HashMap<String, Double>();
 	}
 
-	public PersonData(String name, double payDouble, HashSet<String> emails) {
-		this.name = name;
-		this.setPayMadeByPerson(payDouble);
-		this.emails = emails;
-	}
+//	public PersonData(String name, double payDouble, HashSet<String> emails) {
+//		this.name = name;
+//		this.setPayMadeByPerson(payDouble);
+//		this.emails = emails;
+//	}
 
 	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails) {
 		this.name = name;
@@ -59,22 +60,22 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.emails = emails;
 	}
 
-	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftPayment) {
-		this(name, payDouble, emails);
-		setReceivesGift(receivesGift);
-		setHowMuchIPaidForGift(giftPayment);
-	}
+//	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftPayment) {
+//		this(name, payDouble, emails);
+//		setReceivesGift(receivesGift);
+//		setHowMuchIPaidForGift(giftPayment);
+//	}
 
 	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails, boolean receivesGift, double giftPayment) {
 		this(name, atomPays, emails);
 		setReceivesGift(receivesGift);
 		setHowMuchIPaidForGift(giftPayment);
 	}
-
-	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
-		this(name, payDouble, emails);
-		setHowMuchPersonShouldPay(shouldPayDouble);
-	}
+//
+//	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
+//		this(name, payDouble, emails);
+//		setHowMuchPersonShouldPay(shouldPayDouble);
+//	}
 	
 	public PersonData(String name, List<AtomPayment> atomPays, double shouldPayDouble, HashSet<String> emails) {
 		this(name, atomPays, emails);

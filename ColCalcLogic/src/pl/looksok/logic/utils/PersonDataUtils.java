@@ -1,4 +1,10 @@
-package pl.looksok.logic;
+package pl.looksok.logic.utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import pl.looksok.logic.AtomPayment;
+import pl.looksok.logic.PersonData;
 
 public class PersonDataUtils {
 	public static double returnMoneyToPersonB(String personBName, double howMuchPersonBPaid,
@@ -50,5 +56,15 @@ public class PersonDataUtils {
 	
 	private static boolean personBNeedsMoreThanIShouldGive(double tmpToReturn, double alreadyReturned, double toReturn) {
 		return alreadyReturned + tmpToReturn > toReturn;
+	}
+	
+	public static List<AtomPayment> getDefaultAtomPaymentsList(double payment) {
+		return getDefaultAtomPaymentsList("", payment);
+	}
+
+	public static List<AtomPayment> getDefaultAtomPaymentsList(String name, double payment) {
+		List<AtomPayment> atomPayments = new ArrayList<AtomPayment>();
+		atomPayments.add(new AtomPayment(name, payment));
+		return atomPayments;
 	}
 }
