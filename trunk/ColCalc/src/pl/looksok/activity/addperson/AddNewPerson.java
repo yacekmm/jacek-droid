@@ -7,6 +7,7 @@ import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.InputValidator;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
+import pl.looksok.logic.utils.PersonDataUtils;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import android.app.Activity;
@@ -104,7 +105,7 @@ public class AddNewPerson extends AddNewPersonBase {
 			throw new BadInputDataException();
 
 		if(calc.isEqualPayments())
-			personDataSet.add(new PersonData(name, payDouble, emails, receivesGift, giftPayment));
+			personDataSet.add(new PersonData(name, PersonDataUtils.getDefaultAtomPaymentsList(payDouble), emails, receivesGift, giftPayment));
 		else{
 			throw new BadInputDataException("should not reach here!");
 		}

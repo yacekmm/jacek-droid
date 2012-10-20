@@ -1,10 +1,13 @@
 package pl.looksok.activity.addperson;
 
 import java.util.HashSet;
+import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
+import pl.looksok.logic.utils.PersonDataUtils;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import android.view.View;
@@ -75,7 +78,9 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 				name = namePrefix + " " + (i + nameOffset);
 			}
 
-			personDataSet.add(new PersonData(name, payDouble, emails));
+			String atomPayName = new StringBuilder(getString(R.string.EnterPays_atomPay_defaultName)).append(" ").append(i).toString();
+			List<AtomPayment> atomPays = PersonDataUtils.getDefaultAtomPaymentsList(atomPayName, payDouble);
+			personDataSet.add(new PersonData(name, atomPays, emails));
 		}
 		return personDataSet;
 	}

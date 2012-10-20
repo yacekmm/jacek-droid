@@ -16,6 +16,7 @@ import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.logic.utils.CalculationUtils;
 import pl.looksok.logic.utils.FormatterHelper;
+import pl.looksok.logic.utils.PersonDataUtils;
 
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
@@ -87,7 +88,7 @@ public class CalculationLogic implements Serializable {
 				shouldPayForGift = 0.0;
 			double howMuchPersonPaidForGift = pd.getHowMuchIPaidForGift();
 			if(howMuchPersonPaidForGift !=0 || shouldPayForGift !=0){
-				PersonData giverPersonData = new PersonData(pd.getName(), howMuchPersonPaidForGift, shouldPayForGift, null);
+				PersonData giverPersonData = new PersonData(pd.getName(), PersonDataUtils.getDefaultAtomPaymentsList(howMuchPersonPaidForGift), shouldPayForGift, null);
 				giftGivers.add(giverPersonData);
 			}
 		}

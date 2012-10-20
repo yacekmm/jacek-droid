@@ -5,13 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.utils.PersonDataUtils;
 
 public class GiftTestScenarioBuilder extends TestScenarioBuilder{
 	
 	public static List<PersonData> buildTestCaseOnePersonGift(double paymentA, 
 			HashSet<String> giftReceivers, double giftPaymentA) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
-		inputPaysList.add(new PersonData(Constants.personAName, getAtomPaymentsList(paymentA), new HashSet<String>(), giftReceivers.contains(Constants.personAName), giftPaymentA));
+		inputPaysList.add(new PersonData(Constants.personAName, PersonDataUtils.getDefaultAtomPaymentsList(paymentA), new HashSet<String>(), giftReceivers.contains(Constants.personAName), giftPaymentA));
 		return inputPaysList;
 	}
 
@@ -19,7 +20,7 @@ public class GiftTestScenarioBuilder extends TestScenarioBuilder{
 			HashSet<String> giftReceivers, double giftPaymentA, double giftPaymentB) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
 		inputPaysList = buildTestCaseOnePersonGift(paymentA, giftReceivers, giftPaymentA);
-		inputPaysList.add(new PersonData(Constants.personBName, getAtomPaymentsList(paymentB), new HashSet<String>(), giftReceivers.contains(Constants.personBName), giftPaymentB));
+		inputPaysList.add(new PersonData(Constants.personBName, PersonDataUtils.getDefaultAtomPaymentsList(paymentB), new HashSet<String>(), giftReceivers.contains(Constants.personBName), giftPaymentB));
 		return inputPaysList;
 	}
 	
@@ -27,7 +28,7 @@ public class GiftTestScenarioBuilder extends TestScenarioBuilder{
 			HashSet<String> giftReceivers, double giftPaymentA, double giftPaymentB, double giftPaymentC) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
 		inputPaysList = buildTestCaseTwoPeopleGift(paymentA, paymentB, giftReceivers, giftPaymentA, giftPaymentB);
-		inputPaysList.add(new PersonData(Constants.personCName, getAtomPaymentsList(paymentC), new HashSet<String>(), giftReceivers.contains(Constants.personCName), giftPaymentC));
+		inputPaysList.add(new PersonData(Constants.personCName, PersonDataUtils.getDefaultAtomPaymentsList(paymentC), new HashSet<String>(), giftReceivers.contains(Constants.personCName), giftPaymentC));
 		return inputPaysList;
 	}
 }
