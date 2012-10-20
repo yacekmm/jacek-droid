@@ -30,6 +30,12 @@
             android:contentDescription="@string/EnterPays_button_getContact"
             android:src="@drawable/address_book" />
     </RelativeLayout>
+    
+    <ListView 
+        android:id="@+id/EnterPays_atomPaysList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -49,7 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:inputType="numberDecimal"
-            android:text="@string/EnterPays_TextView_ZeroValue" />
+            android:text="@string/EnterPays_TextView_ZeroValue"
+             />
     </RelativeLayout>
     
     <CheckBox
@@ -79,16 +86,5 @@
             android:hint="@string/EnterPays_boughtGiftValue_hint"
             android:enabled="false" />
     </RelativeLayout>
-<!--     
-    <ListView
-        android:id="@+id/EnterPays_List_People"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:layout_marginLeft="@dimen/margin_big"
-        android:layout_marginRight="@dimen/margin_big" 
-        android:visibility="gone">
-    </ListView> -->
-
 
 </LinearLayout>
