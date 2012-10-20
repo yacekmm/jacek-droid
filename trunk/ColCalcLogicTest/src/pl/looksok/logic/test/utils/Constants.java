@@ -15,4 +15,5 @@ public class Constants {
 	public static final String INCORRECT_CALC_BETWEEN_THREE = "Incorrect calculation between three people.";
 	public static final String INCORRECT_CALC_BETWEEN_SIX = "Incorrect calculation between six people.";
 	public static final String INCORRECT_RETURN_OBJECT_VALUE = "Incorrect return object value.";
+	public static final String INCORRECT_ATOM_PAYMENTS_SUM = "Incorrect sum of AtomPays";
 }

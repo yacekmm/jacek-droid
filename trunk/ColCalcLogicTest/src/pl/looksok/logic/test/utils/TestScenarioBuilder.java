@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 
 public class TestScenarioBuilder {
@@ -13,13 +14,24 @@ public class TestScenarioBuilder {
 		return inputPaysList;
 	}
 
+	public static List<PersonData> buildTestCaseOnePersonAtomPays(AtomPayment... inputAtomPays) {
+		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
+		List<AtomPayment> atomPays = new ArrayList<AtomPayment>();
+		for (AtomPayment ap : inputAtomPays) {
+			atomPays.add(ap);
+		}
+		
+		inputPaysList.add(new PersonData(Constants.personAName, atomPays, new HashSet<String>()));
+		return inputPaysList;
+	}
+
 	public static List<PersonData> buildTestCaseTwoPeople(double paymentA, double paymentB) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
 		inputPaysList = buildTestCaseOnePerson(paymentA);
 		inputPaysList.add(new PersonData(Constants.personBName, paymentB, new HashSet<String>()));
 		return inputPaysList;
 	}
-	
+
 	public static List<PersonData> buildTestCaseTwoPeopleVariousPays(double paymentA, double howMuchAShouldPay,
 			double paymentB, double howMuchBShouldPay) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
@@ -34,7 +46,7 @@ public class TestScenarioBuilder {
 		inputPaysList.add(new PersonData(Constants.personCName, paymentC, new HashSet<String>()));
 		return inputPaysList;
 	}
-	
+
 	public static List<PersonData> buildTestCaseThreePeople(String personAName, double paymentA, 
 			String personBName, double paymentB, 
 			String personCName, double paymentC) {
@@ -51,7 +63,7 @@ public class TestScenarioBuilder {
 		inputPaysList.add(new PersonData(Constants.personDName, paymentD, new HashSet<String>()));
 		return inputPaysList;
 	}
-	
+
 	public static List<PersonData> buildTestCaseSixPeople(double paymentA, double paymentB, double paymentC, 
 			double paymentD, double paymentE, double paymentF) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
