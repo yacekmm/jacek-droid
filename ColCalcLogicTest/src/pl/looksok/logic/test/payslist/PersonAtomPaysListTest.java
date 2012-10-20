@@ -13,9 +13,18 @@ import pl.looksok.logic.test.utils.TestScenarioBuilder;
 
 public class PersonAtomPaysListTest extends TestCase {
 
+	private List<PersonData> inputPays;
+	
+	@Override
+	protected void setUp() throws Exception {
+		inputPays = new ArrayList<PersonData>();
+		super.setUp();
+	}
+	
+
 	public void test1PersonAtomPaysList(){
 		AtomPayment apA = new AtomPayment("piwo", 25);
-		List<PersonData> inputPays = TestScenarioBuilder.buildTestCaseOnePersonAtomPays(apA);
+		inputPays = TestScenarioBuilder.buildTestCaseOnePersonAtomPays(apA);
 		PersonData pd = inputPays.get(0);
 		
 		assertEquals(Constants.INCORRECT_ATOM_PAYMENTS_SUM, 25.0, pd.getHowMuchIPaid());
@@ -24,7 +33,7 @@ public class PersonAtomPaysListTest extends TestCase {
 	public void testPerson2AtomPaysList(){
 		AtomPayment apA = new AtomPayment("piwo", 25);
 		AtomPayment apB = new AtomPayment("jedzenie", 37);
-		List<PersonData> inputPays = TestScenarioBuilder.buildTestCaseOnePersonAtomPays(apA, apB);
+		inputPays = TestScenarioBuilder.buildTestCaseOnePersonAtomPays(apA, apB);
 		PersonData pd = inputPays.get(0);
 		
 		assertEquals(Constants.INCORRECT_ATOM_PAYMENTS_SUM, 62.0, pd.getHowMuchIPaid());
@@ -44,4 +53,6 @@ public class PersonAtomPaysListTest extends TestCase {
 			fail(Constants.SHOULD_THROW_EXCEPTION + BadInputDataException.class);
 		}catch (BadInputDataException e) {}
 	}
+	
+	
 }

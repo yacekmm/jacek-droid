@@ -10,7 +10,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import pl.looksok.logic.exceptions.BadInputDataException;
-import pl.looksok.logic.exceptions.BadPayException;
 import pl.looksok.logic.exceptions.BadPeopleCountException;
 import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
@@ -46,7 +45,7 @@ public class CalculationLogic implements Serializable {
 
 	private double howMuchPerPerson(double totalPay, int peopleCount) {
 		if(totalPay < 0)
-			throw new BadPayException();
+			throw new BadInputDataException();
 		if(peopleCount < 0)
 			throw new BadPeopleCountException();
 		
