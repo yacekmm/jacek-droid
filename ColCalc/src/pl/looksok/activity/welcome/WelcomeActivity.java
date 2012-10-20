@@ -68,7 +68,7 @@ public class WelcomeActivity extends ColCalcActivity {
 		showDialog(DIALOG_REMOVE_CALC);
 	}
 	
-	public void shareCalcOnClickHandler(View v){
+	public void shareCalculation(View v){
 		CalculationLogic calcItem = (CalculationLogic)v.getTag();
 		CalcResultUtils utils = new CalcResultUtils();
 		Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calcItem);

@@ -50,7 +50,6 @@ public class AddNewPerson extends AddNewPersonBase {
 	
 	@Override
 	protected void initActivityViews() {
-		
 		super.initActivityViews();
 		((ImageButton)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
 		mEqualPaymentsBox = (CheckBox) findViewById(R.id.EnterPays_CheckBox_EverybodyPaysEqually);
@@ -207,7 +206,6 @@ public class AddNewPerson extends AddNewPersonBase {
 			}
 		}
 	};
-
 
 	private TextWatcher payTextChangedListener = new TextWatcher() {
 

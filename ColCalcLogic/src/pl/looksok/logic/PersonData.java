@@ -1,12 +1,15 @@
 package pl.looksok.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.logic.utils.FormatterHelper;
 
@@ -16,6 +19,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	
 	private String name;
 	private HashSet<String> emails = new HashSet<String>();
+	private List<AtomPayment> atomPayments = new ArrayList<AtomPayment>();
 	private double howMuchIPaid;
 	private double howMuchIShouldPay =-1;
 	private double toReturn;
@@ -48,6 +52,13 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.emails = emails;
 	}
 
+	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails) {
+		this.name = name;
+		this.setAtomPayments(atomPays);
+		this.setPayMadeByPerson(atomPays);
+		this.emails = emails;
+	}
+
 	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftPayment) {
 		this(name, payDouble, emails);
 		setReceivesGift(receivesGift);
@@ -59,9 +70,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
 
-
 	public void prepareCalculationData(double _howMuchPerPerson) {
-//		howMuchIShouldPay = FormatterHelper.roundDouble(_howMuchPerPerson, 2);
 		howMuchIShouldPay = _howMuchPerPerson;
 
 		calculateHowMuchIShouldReturn();
@@ -84,7 +93,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	private double howMuchIGiveBackToPersonB(PersonData personB) {
 		try{
 			double result = this.howMuchShouldReturnTo(personB.getName());
-//			return FormatterHelper.roundDouble(result, 2);
 			return result;
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
@@ -175,6 +183,16 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.howMuchIPaid = payMadeByPerson;
 	}
 
+	private void setPayMadeByPerson(List<AtomPayment> atomPays) {
+		double totalPay = 0;
+		for (AtomPayment ap : atomPays) {
+			if(ap.getValue() < 0)
+				throw new BadInputDataException("AtomPay is less than zero: " + ap);
+			totalPay += ap.getValue();
+		}
+		setPayMadeByPerson(totalPay);
+	}
+
 	public double getHowMuchPersonShouldPay() {
 		return howMuchIShouldPay;
 	}
@@ -250,5 +268,13 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public void setHowMuchIPaidForGift(double howMuchIPaidForGift) {
 		this.howMuchIPaidForGift = howMuchIPaidForGift;
+	}
+
+	public List<AtomPayment> getAtomPayments() {
+		return atomPayments;
+	}
+
+	public void setAtomPayments(List<AtomPayment> atomPayments) {
+		this.atomPayments = atomPayments;
 	}
 }
