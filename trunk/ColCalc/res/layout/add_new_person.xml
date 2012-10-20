@@ -10,15 +10,6 @@
         android:layout_height="wrap_content"
         layout="@layout/add_person_header" />
 
-    <CheckBox
-        android:id="@+id/EnterPays_CheckBox_EverybodyPaysEqually"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_big"
-        android:layout_marginRight="@dimen/margin_big"
-        android:text="@string/EnterPays_CheckBox_EqualPays"
-        android:visibility="gone" />
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
@@ -60,28 +51,6 @@
             android:inputType="numberDecimal"
             android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/EnterPays_TextView_ShouldPay"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/EnterPays_EditText_ShouldPay"
-            android:text="@string/EnterPays_TextView_ShouldPay" />
-
-        <EditText
-            android:id="@+id/EnterPays_EditText_ShouldPay"
-            android:layout_width="140sp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:inputType="numberDecimal"
-            android:text="@string/EnterPays_TextView_ZeroValue" />
-    </RelativeLayout>
-
     
     <CheckBox
             android:id="@+id/EnterPays_gotGift_checkbox"
