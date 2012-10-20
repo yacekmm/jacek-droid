@@ -4,7 +4,9 @@ package pl.looksok.activity.addperson;
 import java.util.HashSet;
 
 import pl.looksok.R;
+import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
 import pl.looksok.activity.addperson.utils.InputValidator;
+import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.utils.PersonDataUtils;
@@ -23,6 +25,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 public class AddNewPerson extends AddNewPersonBase {
 	EditText mNewPersonNameInput;
@@ -66,6 +69,14 @@ public class AddNewPerson extends AddNewPersonBase {
 			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
+			
+			//FIXME: wyniesc ten adapter aby mozna bylo go obslugiwac i dodac onclick listenera
+			AtomPayListAdapter adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, editPersonData.getAtomPayments());
+			ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
+			atomPaysListView.setAdapter(adapter);
+			
+			AtomPayment testAtomPayment = new AtomPayment("Test", 13);
+			adapter.add(testAtomPayment);
 		}else
 			editPersonData = null;
 	};
