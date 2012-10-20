@@ -74,7 +74,7 @@ public class TestScenarioBuilder {
 		return inputPaysList;
 	}
 	
-	private static List<AtomPayment> getAtomPaymentsList(double paymentA) {
+	static List<AtomPayment> getAtomPaymentsList(double paymentA) {
 		List<AtomPayment> atomPayments = new ArrayList<AtomPayment>();
 		atomPayments.add(new AtomPayment("", paymentA));
 		return atomPayments;
