@@ -8,6 +8,8 @@ public class AtomPayment implements Serializable {
 	private String name = "";
 	private double value = 0;
 	
+	public AtomPayment() {}
+
 	public AtomPayment(String name, double value) {
 		this.setName(name);
 		this.setValue(value);

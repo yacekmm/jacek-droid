@@ -32,6 +32,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	List<PersonData> inputPaysList = new ArrayList<PersonData>();
 	protected EditText mNewPersonPayInput;
 	protected AddPersonUtils utils = new AddPersonUtils();
+	HashSet<String> emails = new HashSet<String>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -132,7 +133,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected abstract HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException;
 
-	OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
+	public OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
 		public void onFocusChange(View v, boolean hasFocus) {
 			//			if(v.getId() == mNewPersonPayInput.getId()){
 			EditText editTextView = (EditText)v;
@@ -148,7 +149,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			//			}
 		}
 	};
-	HashSet<String> emails = new HashSet<String>();
 
 
 

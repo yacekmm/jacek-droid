@@ -31,12 +31,6 @@
             android:src="@drawable/address_book" />
     </RelativeLayout>
     
-    <ListView 
-        android:id="@+id/EnterPays_atomPaysList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </ListView>
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
@@ -56,8 +50,25 @@
             android:layout_alignParentRight="true"
             android:inputType="numberDecimal"
             android:text="@string/EnterPays_TextView_ZeroValue"
+            android:enabled="false"
              />
     </RelativeLayout>
+    
+    <ListView 
+        android:id="@+id/EnterPays_atomPaysList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    </ListView>
+    
+    <Button 
+        android:id="@+id/EnterPays_addAtomPayment"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:text="@string/EnterPays_button_addAtomPayment"
+        android:drawableLeft="@android:drawable/ic_input_add"
+        />
+
     
     <CheckBox
             android:id="@+id/EnterPays_gotGift_checkbox"

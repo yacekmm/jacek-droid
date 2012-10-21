@@ -1,7 +1,9 @@
 package pl.looksok.activity.addperson;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
@@ -9,7 +11,6 @@ import pl.looksok.activity.addperson.utils.InputValidator;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
-import pl.looksok.logic.utils.PersonDataUtils;
 import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import android.app.Activity;
@@ -24,7 +25,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class AddNewPerson extends AddNewPersonBase {
@@ -51,13 +51,16 @@ public class AddNewPerson extends AddNewPersonBase {
 	@Override
 	protected void initActivityViews() {
 		super.initActivityViews();
-		((ImageButton)findViewById(R.id.EnterPays_button_getPersonFromContacts)).setOnClickListener(getContactClickListener);
+		findViewById(R.id.EnterPays_button_getPersonFromContacts).setOnClickListener(getContactClickListener);
+		findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(addAtomPaymentClickListener);
 		mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
 		mReceivesGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
 		mReceivesGiftCheckBox.setOnCheckedChangeListener(receivesGiftChangeListener);
 		mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (EditText)findViewById(R.id.EnterPays_EditText_giftValue);
+		
+		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
 	}
 
 	@Override
@@ -72,13 +75,18 @@ public class AddNewPerson extends AddNewPersonBase {
 			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
-
-			adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, editPersonData.getAtomPayments());
-			((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
+			setUpAtomPayAdapter(editPersonData.getAtomPayments());
 		}else
 			editPersonData = null;
-	};
+	}
 
+	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
+		if(atomPaymentsList.size()==0)
+			atomPaymentsList.add(new AtomPayment());
+		adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, atomPaymentsList);
+		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
+	}
+	
 	public void removeAtomPayOnClickHandler(View v) {
 		atomPaymentToRemove = (AtomPayment)v.getTag();
 		showDialog(DIALOG_REMOVE_PAY);
@@ -106,8 +114,7 @@ public class AddNewPerson extends AddNewPersonBase {
 			throw new BadInputDataException();
 
 		if(calc.isEqualPayments())
-			//FIXME: zamienić na prawdziwe atom pays list
-			personDataSet.add(new PersonData(name, PersonDataUtils.getDefaultAtomPaymentsList(payDouble), emails, receivesGift, giftPayment));
+			personDataSet.add(new PersonData(name, adapter.getItems(), emails, receivesGift, giftPayment));
 		else{
 			throw new BadInputDataException("should not reach here!");
 		}
@@ -120,6 +127,12 @@ public class AddNewPerson extends AddNewPersonBase {
 		public void onClick(View v) {
 			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 			startActivityForResult(intent, PICK_CONTACT);
+		}
+	};
+	
+	OnClickListener addAtomPaymentClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			adapter.insert(new AtomPayment("wsuniety", adapter.getCount()), adapter.getCount());
 		}
 	};
 
@@ -140,7 +153,7 @@ public class AddNewPerson extends AddNewPersonBase {
 					emails = utils.getPersonEmailsSet(id, AddNewPerson.this);
 				}
 			}
-		break;
+			break;
 		}
 	}
 
