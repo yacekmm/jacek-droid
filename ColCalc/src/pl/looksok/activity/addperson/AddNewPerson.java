@@ -108,6 +108,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	@Override
 	protected void handleRemoveConfirm(int dialogType) {
 		adapter.remove(atomPaymentToRemove);
+		setUpAtomPayAdapter(adapter.getItems());
 		atomPaymentToRemove = null;
 	}
 
@@ -145,9 +146,8 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	
 	OnClickListener addAtomPaymentClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			List<AtomPayment> items = adapter.getItems();
-			items.add(new AtomPayment("wsuniety", adapter.getCount()));
-			setUpAtomPayAdapter(items);
+			adapter.insert(new AtomPayment("wsuniety", adapter.getCount()), adapter.getCount());
+			setUpAtomPayAdapter(adapter.getItems());
 		}
 	};
 
