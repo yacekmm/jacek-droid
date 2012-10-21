@@ -88,6 +88,32 @@ public class CalculationPrinter {
 		return printCalculationList(forText, sb, refundMap);
 	}
 
+	public static String printPersonReturnsToOthersSimple(PersonData pd) {
+		String prefix = "-";
+		HashMap<String, Double> refundMap = pd.getRefundForOtherPeople();
+		return simplePrinter(prefix, refundMap);
+	}
+
+	public static String printPersonRefundsFromOthersSimple(PersonData pd) {
+		String prefix = "+";
+		HashMap<String, Double> refundMap = pd.getReturnsFromOtherPeople();
+		return simplePrinter(prefix, refundMap);
+	}
+
+	private static String simplePrinter(String prefix, HashMap<String, Double> payMap) {
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<String> it = payMap.keySet().iterator();
+		while(it.hasNext()) {
+			String key = it.next();
+			double value = FormatterHelper.roundDouble(payMap.get(key), 2);
+			if(value > 0)
+				sb.append(prefix).append(value).append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ").append(key).append("    ");
+		}
+		
+		return sb.toString();
+	}
+
 	private static String printCalculationList(String separator, StringBuilder sb, HashMap<String, Double> paysMap) {
 		Iterator<String> it = paysMap.keySet().iterator();
 		while(it.hasNext()) {
@@ -127,5 +153,4 @@ public class CalculationPrinter {
 		else
 			return messageIfNoReturnNeeded;
 	}
-
 }
