@@ -41,12 +41,11 @@
             android:layout_centerVertical="true"
             android:text="@string/enterPaysMulti_TextView_Pay" />
 
-        <EditText
+        <pl.looksok.currencyedittext.CurrencyEditText
             android:id="@+id/enterPaysMulti_EditText_Pay"
             android:layout_width="140sp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:inputType="numberDecimal"
             android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
 

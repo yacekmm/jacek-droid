@@ -30,8 +30,9 @@ public class CurrencyEditText extends EditText {
 	}
 
 	private OnFocusChangeListener currencyEditTextFocusListener = new OnFocusChangeListener() {
+		
 		public void onFocusChange(View v, boolean hasFocus) {
-			EditText editTextView = (EditText)v;
+			CurrencyEditText editTextView = CurrencyEditText.this;
 			if(hasFocus){
 				double payDouble = FormatterHelper.readDoubleFromEditText(editTextView);
 				if(payDouble == 0.0){
@@ -39,7 +40,7 @@ public class CurrencyEditText extends EditText {
 				}
 			}else{
 				if(editTextView.getText().length() == 0)
-					editTextView.setText(0);
+					editTextView.setText("0");
 			}
 		}
 	};
