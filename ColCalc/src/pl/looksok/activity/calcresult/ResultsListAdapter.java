@@ -45,7 +45,8 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.txtName = (TextView)row.findViewById(R.id.calcItem_textView_name);
             holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_personPay);
             holder.txtPaidForGift = (TextView)row.findViewById(R.id.calcItem_textView_personPayForGift);
-            holder.txtDetails = (TextView)row.findViewById(R.id.calcItem_details_text);
+            holder.txtDebts = (TextView)row.findViewById(R.id.calcItem_details_debts);
+            holder.txtRefunds = (TextView)row.findViewById(R.id.calcItem_details_refunds);
             holder.imgEditPerson = (ImageView)row.findViewById(R.id.calcItem_image_edit);
             holder.imgEditPerson.setTag(items.get(position));
             holder.imgRemovePerson = (ImageView)row.findViewById(R.id.calcItem_image_delete);
@@ -73,11 +74,10 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 	        holder.txtPaidForGift.setText("Zapłacił za prezent: " + pd.getHowMuchIPaidForGift());
 		}
 
-        String debtsText = CalculationPrinter.printPersonReturnsToOthers(pd, context.getString(R.string.calculation_printText_return),
-        		context.getString(R.string.calculation_printText_for));
-        String refundsText = CalculationPrinter.printPersonRefundsFromOthers(pd, context.getString(R.string.calculation_printText_refund),
-        		context.getString(R.string.calculation_printText_from));
-		holder.txtDetails.setText(debtsText + "\n" + refundsText);
+        String debtsText = CalculationPrinter.printPersonReturnsToOthersSimple(pd);
+        holder.txtDebts.setText(debtsText);
+        String refundsText = CalculationPrinter.printPersonRefundsFromOthersSimple(pd);
+        holder.txtRefunds.setText(refundsText);
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
@@ -97,7 +97,8 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     	TextView txtName;
     	TextView txtBalance;
     	TextView txtPaidForGift;
-    	TextView txtDetails;
+    	TextView txtDebts;
+    	TextView txtRefunds;
     	ImageView imgEditPerson;
     	ImageView imgRemovePerson;
     	ImageView imgReceivesGift;

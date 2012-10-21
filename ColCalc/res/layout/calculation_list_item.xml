@@ -45,19 +45,6 @@
             android:onClick="removePerson"
             android:src="@drawable/content_discard" />
 
-        <!--
-             <ImageView
-            android:id="@+id/calcItem_image_increasePay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/calcItem_image_edit"
-            android:src="@drawable/increase_pay"
-            android:contentDescription="@string/app_name" 
-            android:onClick="increasePersonPay"
-            />
-        -->
-
         <ImageView
             android:id="@+id/calcItem_image_receivesGift"
             android:layout_width="wrap_content"
@@ -73,17 +60,31 @@
         android:id="@+id/calcItem_itemContent"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:baselineAligned="false"
         android:layout_below="@+id/calcItem_mainBar_layout"
         android:layout_marginBottom="@dimen/calc_listItem_borderSize"
         android:layout_marginLeft="@dimen/calc_listItem_borderSize"
         android:layout_marginRight="@dimen/calc_listItem_borderSize" >
-
-        <TextView
-            android:id="@+id/calcItem_details_text"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6" >
-        </TextView>
+            android:layout_weight="0.6"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/calcItem_details_debts"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pink_dark_popularGirl" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/calcItem_details_refunds"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green_kotak" >
+            </TextView>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
