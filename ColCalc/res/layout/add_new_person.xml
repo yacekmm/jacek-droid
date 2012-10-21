@@ -31,28 +31,6 @@
             android:src="@drawable/address_book" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/EnterPays_TextView_Pay"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/EnterPays_EditText_Pay"
-            android:text="@string/EnterPays_TextView_Pay" />
-
-        <EditText
-            android:id="@+id/EnterPays_EditText_Pay"
-            android:layout_width="140sp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:enabled="false"
-            android:inputType="numberDecimal"
-            android:text="@string/EnterPays_TextView_ZeroValue" />
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/EnterPays_paysHeaderText"
         android:layout_width="fill_parent"
