@@ -57,6 +57,8 @@
     <string name="EnterPays_Menu_Remove">Usuń</string>
     <string name="EnterPays_saveAndExit_text">Zapisz i pokaż rozliczenie</string>
 
+    <string name="EnterPays_atomPay_headerText_left">bills (total: </string>
+    <string name="EnterPays_atomPay_headerText_right">)</string>
     <string name="EnterPays_atomPay_defaultName">płatność</string>
     <string name="EnterPays_atomPay_nameHint">nazwa płatności</string>
     

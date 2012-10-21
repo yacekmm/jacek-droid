@@ -54,6 +54,13 @@
              />
     </RelativeLayout>
     
+    <TextView 
+        android:id="@+id/EnterPays_paysHeaderText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/EnterPays_atomPay_headerText_left"/>
+    
     <ListView 
         android:id="@+id/EnterPays_atomPaysList"
         android:layout_width="fill_parent"
