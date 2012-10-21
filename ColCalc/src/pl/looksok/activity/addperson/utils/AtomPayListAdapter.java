@@ -66,8 +66,7 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		holder.value.setText(String.valueOf(holder.atomPayment.getValue()));
 	}
 
-
-	public static class AtomPaymentHolder {
+	public class AtomPaymentHolder {
 		AtomPayment atomPayment;
 		TextView name;
 		TextView value;

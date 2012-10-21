@@ -83,6 +83,7 @@ public class AddNewPerson extends AddNewPersonBase {
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
 		if(atomPaymentsList.size()==0)
 			atomPaymentsList.add(new AtomPayment());
+		adapter = null;
 		adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, atomPaymentsList);
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
 	}
@@ -132,7 +133,9 @@ public class AddNewPerson extends AddNewPersonBase {
 	
 	OnClickListener addAtomPaymentClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			adapter.insert(new AtomPayment("wsuniety", adapter.getCount()), adapter.getCount());
+			List<AtomPayment> items = adapter.getItems();
+			items.add(new AtomPayment("wsuniety", adapter.getCount()));
+			setUpAtomPayAdapter(items);
 		}
 	};
 
