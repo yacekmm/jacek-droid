@@ -39,7 +39,7 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		View row = convertView;
 		AtomPaymentHolder holder = null;
 
-		if(row == null) {
+//		if(row == null) {
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 			row = inflater.inflate(layoutResourceId, parent, false);
 
@@ -53,10 +53,10 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 			holder.value = (CurrencyEditText)row.findViewById(R.id.atomPay_value);
 			setValueTextListeners(holder);
 
-			row.setTag(holder);
-		} else {
-			holder = (AtomPaymentHolder)row.getTag();
-		}
+//			row.setTag(holder);
+//		} else {
+//			holder = (AtomPaymentHolder)row.getTag();
+//		}
 
 		setupItem(holder);
 		return row;

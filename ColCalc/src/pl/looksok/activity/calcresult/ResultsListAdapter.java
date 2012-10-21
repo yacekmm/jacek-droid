@@ -37,7 +37,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         View row = convertView;
         ResultHolder holder = null;
         
-        if(row == null) {
+//        if(row == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             
@@ -52,11 +52,10 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             holder.imgRemovePerson.setTag(items.get(position));
             holder.imgReceivesGift = (ImageView)row.findViewById(R.id.calcItem_image_receivesGift);
             
-            row.setTag(holder);
-
-        } else {
-            holder = (ResultHolder)row.getTag();
-        }
+//            row.setTag(holder);
+//        } else {
+//            holder = (ResultHolder)row.getTag();
+//        }
         setupItem(position, holder);
         
         return row;
@@ -94,7 +93,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 				Currency.getInstance(Locale.getDefault()).getSymbol());
 	}
 	
-    public static class ResultHolder {
+    public class ResultHolder {
     	TextView txtName;
     	TextView txtBalance;
     	TextView txtPaidForGift;
