@@ -41,7 +41,10 @@
     <ListView
         android:id="@+id/EnterPays_atomPaysList"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:headerDividersEnabled="false"
+        >
     </ListView>
 
     <Button

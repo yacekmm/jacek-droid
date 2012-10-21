@@ -35,7 +35,7 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
         View row = convertView;
         ResultHolder holder = null;
         
-        if(row == null) {
+//        if(row == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             
@@ -53,13 +53,12 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
             holder.txtCalcTotal = (TextView)row.findViewById(R.id.calcDetailsHeader_calcTotal);
             holder.txtCalcPersons = (TextView)row.findViewById(R.id.calcDetailsHeader_calcPersons);
 
-            row.setTag(holder);
-
-            setupItem(holder);
-        } else {
-            holder = (ResultHolder)row.getTag();
-        }
+//            row.setTag(holder);
+//        } else {
+//            holder = (ResultHolder)row.getTag();
+//        }
         
+        setupItem(holder);
         return row;
     }
 
