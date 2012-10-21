@@ -53,12 +53,6 @@
             android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
 
-    <pl.looksok.currencyedittext.CurrencyEditText
-        android:id="@+id/currencyEditText1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/EnterPays_TextView_ZeroValue" />
-
     <TextView
         android:id="@+id/EnterPays_paysHeaderText"
         android:layout_width="fill_parent"

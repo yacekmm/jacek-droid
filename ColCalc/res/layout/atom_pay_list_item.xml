@@ -13,13 +13,12 @@
         android:hint="@string/EnterPays_atomPay_nameHint"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
+    <pl.looksok.currencyedittext.CurrencyEditText
         android:id="@+id/atomPay_value"
         android:layout_width="0sp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:inputType="numberDecimal"
         android:text="@string/EnterPays_TextView_ZeroValue"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
