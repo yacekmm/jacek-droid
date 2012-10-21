@@ -1,5 +1,6 @@
 package pl.looksok.activity.addperson.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.looksok.R;
@@ -12,8 +13,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +26,8 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 	private List<AtomPayment> items;
 	private int layoutResourceId;
 	private Context context;
+
+	private ArrayList<OnTotalPayChangeListener> totalPayChangeListeners = new ArrayList<OnTotalPayChangeListener>();
 
 	public AtomPayListAdapter(Context context, int layoutResourceId, List<AtomPayment> items) {
 		super(context, layoutResourceId, items);
@@ -96,6 +99,9 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				try{
 					holder.atomPayment.setValue(Double.parseDouble(s.toString()));
+					for (OnTotalPayChangeListener listener : totalPayChangeListeners) {
+						listener.notifyOnTotalPayChange(getTotalPay());
+					}
 				}catch (NumberFormatException e) {
 					Log.d(LOG_TAG, "this is not correct double number. Temporarily it will not be persisted: " + e.getMessage());
 				}
@@ -126,5 +132,21 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 	public List<AtomPayment> getItems() {
 		return items;
+	}
+
+	private double getTotalPay() {
+		double result = 0;
+		for (AtomPayment item : items) {
+			result += item.getValue();
+		}
+		return result;
+	}
+	
+	public void registerOnTotalChangeListener(OnTotalPayChangeListener listener){
+		totalPayChangeListeners.add(listener);
+	}
+	
+	public void unregisterOnTotalChangeListener(OnTotalPayChangeListener listener){
+		totalPayChangeListeners.remove(listener);
 	}
 }

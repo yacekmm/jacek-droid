@@ -68,7 +68,6 @@
         android:text="@string/EnterPays_button_addAtomPayment"
         android:drawableLeft="@android:drawable/ic_input_add"
         />
-
     
     <CheckBox
             android:id="@+id/EnterPays_gotGift_checkbox"
