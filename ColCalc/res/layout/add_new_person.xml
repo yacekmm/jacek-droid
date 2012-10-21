@@ -30,7 +30,7 @@
             android:contentDescription="@string/EnterPays_button_getContact"
             android:src="@drawable/address_book" />
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
@@ -48,45 +48,48 @@
             android:layout_width="140sp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:inputType="numberDecimal"
-            android:text="@string/EnterPays_TextView_ZeroValue"
             android:enabled="false"
-             />
+            android:inputType="numberDecimal"
+            android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
-    
-    <TextView 
+
+    <pl.looksok.currencyedittext.CurrencyEditText
+        android:id="@+id/currencyEditText1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/EnterPays_TextView_ZeroValue" />
+
+    <TextView
         android:id="@+id/EnterPays_paysHeaderText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/EnterPays_atomPay_headerText_left"/>
-    
-    <ListView 
+        android:text="@string/EnterPays_atomPay_headerText_left" />
+
+    <ListView
         android:id="@+id/EnterPays_atomPaysList"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content" >
     </ListView>
-    
-    <Button 
+
+    <Button
         android:id="@+id/EnterPays_addAtomPayment"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
-        android:text="@string/EnterPays_button_addAtomPayment"
         android:drawableLeft="@android:drawable/ic_input_add"
-        />
-    
+        android:text="@string/EnterPays_button_addAtomPayment" />
+
     <CheckBox
-            android:id="@+id/EnterPays_gotGift_checkbox"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/EnterPays_gotGift_text" />
-            
+        android:id="@+id/EnterPays_gotGift_checkbox"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/EnterPays_gotGift_text" />
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
-    <CheckBox
+        <CheckBox
             android:id="@+id/EnterPays_buysGift_checkbox"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -99,9 +102,9 @@
             android:layout_width="140sp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:inputType="numberDecimal"
+            android:enabled="false"
             android:hint="@string/EnterPays_boughtGiftValue_hint"
-            android:enabled="false" />
+            android:inputType="numberDecimal" />
     </RelativeLayout>
 
 </LinearLayout>

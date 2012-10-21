@@ -136,7 +136,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		return personDataSet;
 	}
 
-
 	OnClickListener getContactClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);

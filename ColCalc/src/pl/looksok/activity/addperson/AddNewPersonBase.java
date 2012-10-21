@@ -150,8 +150,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 		}
 	};
 
-
-
 	private void calculateAndShowResults() {
 		try{
 			calc.calculate(inputPaysList);

@@ -24,6 +24,5 @@ public class AddPersonUtils {
       	}
 		
 		return emails;
-      	
 	}
 }
