@@ -2,8 +2,10 @@ package pl.looksok.activity.addperson;
 
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
@@ -27,12 +29,15 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeListener {
-	EditText mNewPersonNameInput;
-	CheckBox mReceivesGiftCheckBox;
-	CheckBox mBuysGiftCheckBox;
-	EditText mGiftValueInput;
+	private EditText mNewPersonNameInput;
+	private CheckBox mReceivesGiftCheckBox;
+	private CheckBox mBuysGiftCheckBox;
+	private EditText mGiftValueInput;
+	private TextView mTotalPaysText;
+	
 	private PersonData editPersonData = null;
 	private AtomPayListAdapter adapter;
 	private AtomPayment atomPaymentToRemove = null;
@@ -60,6 +65,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (EditText)findViewById(R.id.EnterPays_EditText_giftValue);
+		mTotalPaysText = (TextView)findViewById(R.id.EnterPays_paysHeaderText);
 		
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
 	}
@@ -77,6 +83,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
 			setUpAtomPayAdapter(editPersonData.getAtomPayments());
+			updateTotalPayValue(pd.getPayMadeByPerson());
 		}else
 			editPersonData = null;
 	}
@@ -204,6 +211,14 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 
 	@Override
 	public void notifyOnTotalPayChange(double totalPay) {
-		mNewPersonPayInput.setText(String.valueOf(totalPay));
+		updateTotalPayValue(totalPay);
+	}
+
+	private void updateTotalPayValue(double payMadeByPerson) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getString(R.string.EnterPays_atomPay_headerText_left)).append(" ");
+		sb.append(payMadeByPerson).append(Currency.getInstance(Locale.getDefault()).getSymbol());
+		sb.append(getString(R.string.EnterPays_atomPay_headerText_right));
+		mTotalPaysText.setText(sb);
 	}
 }
