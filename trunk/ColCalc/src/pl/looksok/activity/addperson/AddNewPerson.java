@@ -8,6 +8,7 @@ import java.util.List;
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
 import pl.looksok.activity.addperson.utils.InputValidator;
+import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -27,7 +28,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class AddNewPerson extends AddNewPersonBase {
+public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeListener {
 	EditText mNewPersonNameInput;
 	CheckBox mReceivesGiftCheckBox;
 	CheckBox mBuysGiftCheckBox;
@@ -81,11 +82,15 @@ public class AddNewPerson extends AddNewPersonBase {
 	}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
+		if(adapter!=null)
+			adapter.unregisterOnTotalChangeListener(this);
+		
 		if(atomPaymentsList.size()==0)
 			atomPaymentsList.add(new AtomPayment());
 		adapter = null;
 		adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, atomPaymentsList);
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
+		adapter.registerOnTotalChangeListener(this);
 	}
 	
 	public void removeAtomPayOnClickHandler(View v) {
@@ -195,5 +200,10 @@ public class AddNewPerson extends AddNewPersonBase {
 			saveAndShowResults(dataToAdd);
 		}
 		super.onBackPressed();
+	}
+
+	@Override
+	public void notifyOnTotalPayChange(double totalPay) {
+		mNewPersonPayInput.setText(String.valueOf(totalPay));
 	}
 }
