@@ -18,9 +18,6 @@
     <string name="calculation_default_name_text">Rozliczenie z </string>
     
     <string name="welcome_mode_potluckParty">nowa impreza składkowa</string>
-    <string name="welcome_mode_restaurant">Restauracja</string>
-    <string name="welcome_mode_holidays">Wakacje</string>
-    <string name="welcome_mode_equalPays">Zrzutka po równo</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
     
     <string name="enterPaysMulti_TextView_Pay">Każda z osób zapłaciła:</string>
@@ -28,7 +25,6 @@
     <string name="enterPaysMulti_buysGift_text">Każda z osób zapłaciła za prezent:</string>
     <string name="enterPaysMulti_boughtGiftValue_hint">ile każdy zapłacił za prezent</string>
     <string name="enterPaysMulti_TextView_peopleCount">Ile osób dodać:</string>
-    <string name="enterPaysMulti_EditText_peopleCount">2</string>
     <string name="enterPaysMulti_personPrefix">Osoba</string>
     
     <string name="EnterPays_TextView_EnterPayPerEachPerson">Dodaj nową osobę</string>
@@ -38,21 +34,16 @@
     <string name="EnterPays_button_addAtomPayment">nowa płatność</string>
     <string name="EnterPays_TextView_Pay">Ile zapłacił:</string>
     <string name="EnterPays_TextView_ZeroValue">0</string>
-    <string name="EnterPays_TextView_EmptyText"></string>
     <string name="EnterPays_TextView_ShouldPay">Ile powinien zapłacić:</string>
     <string name="EnterPays_gotGift_text">Dostał prezent</string>
     <string name="EnterPays_buysGift_text">Płacił za prezent</string>
     <string name="EnterPays_boughtGiftValue_hint">ile zapłacił za prezent</string>
-    <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_Start">(Wciąż brakuje</string>
-    <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_TooMuch_Start">(Za dużo o</string>
-    <string name="EnterPays_TextView_ShouldPay_HowMuchLeft_End">zł)</string>
     <string name="EnterPays_Button_AddToList">Zapisz</string>
     <string name="EnterPays_Button_Calculate">Pokaż rozliczenie</string>
     <string name="EnterPays_Toast_BadNameAndPayError">Wpisz Imię i poprawną kwotę</string>
     <string name="EnterPays_Toast_DuplicatedNameError">Osoba o tym imieniu jest już na liście</string>
     <string name="EnterPays_Toast_ShouldPayError">Wpisz poprawną kwotę jaką osoba powinna zapłacić</string>
     <string name="EnterPays_Toast_BadInputDataError">Błąd: Nieprawidłowe wartości do obliczeń</string>
-    <string name="EnterPays_Toast_PersonAdded">Składka dodana!</string>
     <string name="EnterPays_Menu_Edit">Edytuj</string>
     <string name="EnterPays_Menu_Remove">Usuń</string>
     <string name="EnterPays_saveAndExit_text">Zapisz i pokaż rozliczenie</string>
