@@ -117,7 +117,7 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		return items;
 	}
 
-	private double getTotalPay() {
+	public double getTotalPay() {
 		double result = 0;
 		for (AtomPayment item : items) {
 			result += item.getValue();

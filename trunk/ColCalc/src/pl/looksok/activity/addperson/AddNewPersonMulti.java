@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.currencyedittext.CurrencyEditText;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -20,6 +21,7 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 
 	private LinearLayout mHowManyPersonsScroller;
 	private Button mHowManyPersonsSelectedBtn;
+	private CurrencyEditText mNewPersonPayInput;
 
 	@Override
 	protected int getAddPersonContentView() {
@@ -27,14 +29,10 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 	}
 
 	@Override
-	protected int getPayInputResId() {
-		return R.id.enterPaysMulti_EditText_Pay;
-	}
-
-	@Override
 	protected void initActivityViews() {
 		super.initActivityViews();
 		
+		mNewPersonPayInput = (CurrencyEditText)findViewById(R.id.enterPaysMulti_EditText_Pay);
 		mHowManyPersonsScroller = (LinearLayout)findViewById(R.id.enterPaysMulti_peopleCount_content);
 		for(int i=Constants.MULTI_PERSON_MIN_COUNT; i<Constants.MULTI_PERSON_MAX_COUNT; i++){
 			Button b = new Button(getApplicationContext());

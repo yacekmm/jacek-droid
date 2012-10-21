@@ -13,15 +13,12 @@ import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.Constants;
-import pl.looksok.utils.FormatterHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -30,7 +27,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	CalculationLogic calc;
 	List<PersonData> inputPaysList = new ArrayList<PersonData>();
-	protected EditText mNewPersonPayInput;
 	protected AddPersonUtils utils = new AddPersonUtils();
 	HashSet<String> emails = new HashSet<String>();
 
@@ -66,11 +62,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected void initActivityViews() {
 		initTopControlsBar();
-		mNewPersonPayInput = (EditText)findViewById(getPayInputResId());
-		mNewPersonPayInput.setOnFocusChangeListener(editTextFocusListener);
 	}
-
-	protected abstract int getPayInputResId();
 
 	private void initTopControlsBar() {
 		((ImageButton)findViewById(R.id.addPersonHeader_addPerson_btn)).setOnClickListener(saveAndAddNextPersonClickListener);
@@ -132,23 +124,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	}
 
 	protected abstract HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException;
-
-	public OnFocusChangeListener editTextFocusListener = new OnFocusChangeListener() {
-		public void onFocusChange(View v, boolean hasFocus) {
-			//			if(v.getId() == mNewPersonPayInput.getId()){
-			EditText editTextView = (EditText)v;
-			if(hasFocus){
-				double payDouble = FormatterHelper.readDoubleFromEditText(editTextView);
-				if(payDouble == 0.0){
-					editTextView.setText(getResources().getString(R.string.EnterPays_TextView_EmptyText));
-				}
-			}else{
-				if(editTextView.getText().length() == 0)
-					editTextView.setText(getResources().getString(R.string.EnterPays_TextView_ZeroValue));
-			}
-			//			}
-		}
-	};
 
 	private void calculateAndShowResults() {
 		try{

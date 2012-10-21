@@ -50,11 +50,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	}
 
 	@Override
-	protected int getPayInputResId() {
-		return R.id.EnterPays_EditText_Pay;
-	}
-
-	@Override
 	protected void initActivityViews() {
 		super.initActivityViews();
 		findViewById(R.id.EnterPays_button_getPersonFromContacts).setOnClickListener(getContactClickListener);
@@ -78,7 +73,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		if(pd!=null){
 			editPersonData = pd;
 			mNewPersonNameInput.setText(pd.getName());
-			mNewPersonPayInput.setText(String.valueOf(pd.getPayMadeByPerson()));
 			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
@@ -115,7 +109,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	@Override
 	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
 		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
-		double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
 		String name = mNewPersonNameInput.getText().toString();
 		boolean receivesGift = mReceivesGiftCheckBox.isChecked();
 		boolean buysGift = mBuysGiftCheckBox.isChecked();
@@ -124,7 +117,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		if(!buysGift)
 			giftPayment = 0;
 
-		if(!InputValidator.inputIsValid(getApplicationContext(), name, payDouble, calc.isEqualPayments(), inputPaysList))
+		if(!InputValidator.inputIsValid(getApplicationContext(), name, adapter.getTotalPay(), calc.isEqualPayments(), inputPaysList))
 			throw new BadInputDataException();
 
 		if(calc.isEqualPayments())
