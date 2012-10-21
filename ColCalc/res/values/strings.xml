@@ -57,7 +57,7 @@
     <string name="EnterPays_Menu_Remove">Usuń</string>
     <string name="EnterPays_saveAndExit_text">Zapisz i pokaż rozliczenie</string>
 
-    <string name="EnterPays_atomPay_headerText_left">bills (total: </string>
+    <string name="EnterPays_atomPay_headerText_left">płatności (razem: </string>
     <string name="EnterPays_atomPay_headerText_right">)</string>
     <string name="EnterPays_atomPay_defaultName">płatność</string>
     <string name="EnterPays_atomPay_nameHint">nazwa płatności</string>
@@ -68,9 +68,6 @@
     <string name="calculation_saved_text">Zapisano!</string>
     <string name="calculation_load_error_text">Nie znaleziono żadnych zapisanych rozliczeń</string>
     
-    <string name="table_column0_weight">2</string>
-    <string name="table_column1_weight">1</string>
-
     <string name="email_subject">Rozliczenie naszych składek</string>
     <string name="email_content_welcome">Hej!</string>
     <string name="email_content_text">Przesyłam rozliczenie po naszych składkach. Info kto komu ile powinien oddać jest niżej.</string>
