@@ -33,8 +33,11 @@ public class AddNewPerson extends AddNewPersonBase {
 	CheckBox mBuysGiftCheckBox;
 	EditText mGiftValueInput;
 	private PersonData editPersonData = null;
+	private AtomPayListAdapter adapter;
+	private AtomPayment atomPaymentToRemove = null;
 
 	protected static final int PICK_CONTACT = 0;
+
 	@Override
 	protected int getAddPersonContentView() {
 		return R.layout.add_new_person;
@@ -44,7 +47,7 @@ public class AddNewPerson extends AddNewPersonBase {
 	protected int getPayInputResId() {
 		return R.id.EnterPays_EditText_Pay;
 	}
-	
+
 	@Override
 	protected void initActivityViews() {
 		super.initActivityViews();
@@ -56,11 +59,11 @@ public class AddNewPerson extends AddNewPersonBase {
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (EditText)findViewById(R.id.EnterPays_EditText_giftValue);
 	}
-	
+
 	@Override
 	protected void loadInputDataFromBundle(Bundle extras) {
 		super.loadInputDataFromBundle(extras);
-		
+
 		PersonData pd = (PersonData)extras.getSerializable(Constants.BUNDLE_PERSON_TO_EDIT);
 		if(pd!=null){
 			editPersonData = pd;
@@ -69,18 +72,24 @@ public class AddNewPerson extends AddNewPersonBase {
 			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
 			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
 			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
-			
-			//FIXME: wyniesc ten adapter aby mozna bylo go obslugiwac i dodac onclick listenera
-			AtomPayListAdapter adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, editPersonData.getAtomPayments());
-			ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
-			atomPaysListView.setAdapter(adapter);
-			
-			AtomPayment testAtomPayment = new AtomPayment("Test", 13);
-			adapter.add(testAtomPayment);
+
+			adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, editPersonData.getAtomPayments());
+			((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
 		}else
 			editPersonData = null;
 	};
+
+	public void removeAtomPayOnClickHandler(View v) {
+		atomPaymentToRemove = (AtomPayment)v.getTag();
+		showDialog(DIALOG_REMOVE_PAY);
+	}
 	
+	@Override
+	protected void handleRemoveConfirm(int dialogType) {
+		adapter.remove(atomPaymentToRemove);
+		atomPaymentToRemove = null;
+	}
+
 	@Override
 	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
 		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
@@ -102,7 +111,7 @@ public class AddNewPerson extends AddNewPersonBase {
 		else{
 			throw new BadInputDataException("should not reach here!");
 		}
-		
+
 		return personDataSet;
 	}
 

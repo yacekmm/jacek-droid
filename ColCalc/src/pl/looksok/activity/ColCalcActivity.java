@@ -18,6 +18,7 @@ public class ColCalcActivity extends Activity {
 
 	protected static final int DIALOG_REMOVE_CALC = 1;
 	protected static final int DIALOG_REMOVE_PERSON = DIALOG_REMOVE_CALC+1;
+	protected static final int DIALOG_REMOVE_PAY = DIALOG_REMOVE_PERSON+1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class ColCalcActivity extends Activity {
 			return createDialogRemoveConfirm(DIALOG_REMOVE_CALC);
 		case DIALOG_REMOVE_PERSON:
 			return createDialogRemoveConfirm(DIALOG_REMOVE_PERSON);
+		case DIALOG_REMOVE_PAY:
+			return createDialogRemoveConfirm(DIALOG_REMOVE_PAY);
 		}
 		return null;
 	}
