@@ -90,4 +90,10 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 		}
 		return false;
 	}
+	
+
+	@Override
+	public void onBackPressed() {
+		calculateAndShowResults();
+	}
 }

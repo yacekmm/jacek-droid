@@ -125,7 +125,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected abstract HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException;
 
-	private void calculateAndShowResults() {
+	protected void calculateAndShowResults() {
 		try{
 			calc.calculate(inputPaysList);
 
@@ -143,10 +143,4 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	public AddNewPersonBase() {
 		super();
 	}
-
-	@Override
-	public void onBackPressed() {
-		calculateAndShowResults();
-	}
-
 }
