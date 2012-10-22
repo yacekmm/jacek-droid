@@ -198,6 +198,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			dataToAdd.add(editPersonData);
 			saveAndShowResults(dataToAdd);
 		}
+		finish();
 		super.onBackPressed();
 	}
 
