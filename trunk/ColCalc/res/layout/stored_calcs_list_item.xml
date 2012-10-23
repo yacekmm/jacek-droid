@@ -3,7 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/height_button"
     android:orientation="horizontal"
-    android:layout_marginBottom="@dimen/margin_micro"
      >
 
     <RelativeLayout
@@ -29,7 +28,8 @@
             android:layout_marginLeft="@dimen/margin_normal"
             android:text="@string/app_name"
             android:textSize="@dimen/textSize_medium"
-            android:textColor="@color/gray_dark" />
+            android:textColor="@color/gray_dark"
+            android:singleLine="true" />
     </RelativeLayout>
 
     <ImageButton

@@ -39,8 +39,14 @@ public class WelcomeActivity extends ColCalcActivity {
 		if(storedCalcs!=null){
 			adapter = new StoredCalcsListAdapter(WelcomeActivity.this, R.layout.stored_calcs_list_item, storedCalcs);
 			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setAdapter(adapter);
+			
+			if(adapter.getItems().size() > 0)
+				findViewById(R.id.welcome_noStoredCalcs).setVisibility(View.GONE);
+			else
+				findViewById(R.id.welcome_noStoredCalcs).setVisibility(View.VISIBLE);
 		} else{
 			Log.d(LOG_TAG, "Stored calcs is null. no items were saved until now");
+			findViewById(R.id.welcome_noStoredCalcs).setVisibility(View.VISIBLE);
 		}
 	}
 	
