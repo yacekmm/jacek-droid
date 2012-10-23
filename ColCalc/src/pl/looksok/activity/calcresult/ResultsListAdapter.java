@@ -103,4 +103,8 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
     	ImageView imgRemovePerson;
     	ImageView imgReceivesGift;
     }
+
+	public List<PersonData> getItems() {
+		return items;
+	}
 }

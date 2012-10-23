@@ -80,6 +80,12 @@ public class CalculationActivity extends ColCalcActivity {
 		adapter = new ResultsListAdapter(CalculationActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
+		
+		if(adapter.getItems().size() > 0)
+			findViewById(R.id.calc_emptyPeopleListText).setVisibility(View.GONE);
+		else
+			findViewById(R.id.calc_emptyPeopleListText).setVisibility(View.VISIBLE);
+			
 	}
 
 	private void readInputBundle() {

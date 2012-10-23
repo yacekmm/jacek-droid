@@ -4,7 +4,7 @@
     <string name="app_name">Potluck</string>
     <string name="emptyText"></string>
     
-    <string name="calculation_calcName_hint">Tu wpisz nazwę imprezy</string>
+    <string name="calculation_calcName_hint">wpisz nazwę imprezy</string>
     <string name="calculation_TextView_name">Imię</string>
     <string name="calculation_TextView_personPaid_text">składka:</string>
     <string name="calculation_TextView_personPay">0,00</string>
@@ -16,6 +16,7 @@
     <string name="calculation_dialog_button_cancel">Anuluj</string>
     <string name="calculation_dialog_remove_text">Usunąć?</string>
     <string name="calculation_default_name_text">Rozliczenie z </string>
+    <string name="calculation_noPeopleAddedYet">dodaj nowe osoby\naby zobaczyć rozliczenie</string>
     
     <string name="welcome_mode_potluckParty">dotknij aby rozliczyć się\npo imprezie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
