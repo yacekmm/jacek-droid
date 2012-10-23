@@ -54,8 +54,11 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
             holder.calcDetailsLayout.setTag(holder.calc);
             holder.txtCalcName = (TextView)row.findViewById(R.id.storedCalc_calcName);
             holder.txtCalcDate = (TextView)row.findViewById(R.id.calcDetailsHeader_calcDate);
+            holder.txtCalcDate.setTextColor(context.getResources().getColor(R.color.gray_dark));
             holder.txtCalcTotal = (TextView)row.findViewById(R.id.calcDetailsHeader_calcTotal);
+            holder.txtCalcTotal.setTextColor(context.getResources().getColor(R.color.gray_dark));
             holder.txtCalcPersons = (TextView)row.findViewById(R.id.calcDetailsHeader_calcPersons);
+            holder.txtCalcPersons.setTextColor(context.getResources().getColor(R.color.gray_dark));
 
 //            row.setTag(holder);
 //        } else {
