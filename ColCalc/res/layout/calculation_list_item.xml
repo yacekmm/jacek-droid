@@ -21,7 +21,7 @@
             android:id="@+id/calcItem_textView_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/margin_micro"
+            android:layout_marginLeft="@dimen/margin_normal"
             android:layout_toLeftOf="@+id/calcItem_image_receivesGift"
             android:gravity="center_vertical"
             android:text="@string/calculation_TextView_name"
@@ -97,7 +97,7 @@
                 style="@style/balancePositiveText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_micro"
+                android:layout_marginRight="@dimen/margin_normal"
                 android:gravity="right"
                 android:text="@string/calculation_TextView_personPay"
                 android:textAppearance="?android:attr/textAppearanceMedium" />

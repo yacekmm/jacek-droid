@@ -17,7 +17,7 @@
     <string name="calculation_dialog_remove_text">Usunąć?</string>
     <string name="calculation_default_name_text">Rozliczenie z </string>
     
-    <string name="welcome_mode_potluckParty">nowa impreza składkowa</string>
+    <string name="welcome_mode_potluckParty">dotknij aby rozliczyć się\npo imprezie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
     
     <string name="enterPaysMulti_TextView_Pay">Każda z osób zapłaciła:</string>
