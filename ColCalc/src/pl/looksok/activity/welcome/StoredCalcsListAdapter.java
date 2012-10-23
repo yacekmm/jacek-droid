@@ -9,6 +9,7 @@ import pl.looksok.logic.CalculationLogic;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,9 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         ResultHolder holder = null;
+        
+        if(items.size() == 0)
+        	Log.e("TAG", "NO CALCS!!!!");
         
 //        if(row == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
@@ -80,4 +84,9 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
     	TextView txtCalcTotal;
     	TextView txtCalcPersons;
     }
+
+
+	public List<CalculationLogic> getItems() {
+		return items;
+	}
 }

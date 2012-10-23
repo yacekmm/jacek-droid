@@ -19,6 +19,7 @@
     
     <string name="welcome_mode_potluckParty">dotknij aby rozliczyć się\npo imprezie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
+    <string name="welcome_noSavedCalcsYet">nie masz jeszcze żadnych\nzapisanych rozliczeń</string>
     
     <string name="enterPaysMulti_TextView_Pay">Każda z osób zapłaciła:</string>
     <string name="enterPaysMulti_gotGift_text">Dostali prezent</string>

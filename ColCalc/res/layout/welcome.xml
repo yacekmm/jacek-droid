@@ -27,6 +27,16 @@
         android:textSize="@dimen/textSize_huge"
         android:textColor="@color/gray_dark" />
 
+    <TextView 
+        android:id="@+id/welcome_noStoredCalcs"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignTop="@+id/welcome_savedCalcs_list"
+        android:gravity="center"
+        android:text="@string/welcome_noSavedCalcsYet"
+        android:textSize="@dimen/textSize_micro"
+        android:textColor="@color/gray"
+        />
     <ListView
         android:id="@+id/welcome_savedCalcs_list"
         android:layout_width="fill_parent"
@@ -36,6 +46,9 @@
         android:layout_marginBottom="@dimen/margin_normal"
         android:layout_below="@+id/welcome_mode_potluckParty"
         android:layout_alignParentBottom="true"
+        android:stackFromBottom="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/margin_micro"
         >
     </ListView>
 
