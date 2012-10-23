@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:layout_height="@dimen/height_button"
+    android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/margin_micro"
+     >
 
     <RelativeLayout
         android:id="@+id/storedCalc_calcDetails"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
         android:layout_toLeftOf="@+id/storedCalc_removeCalc"
-        android:onClick="editCalcOnClickHandler" >
+        android:onClick="editCalcOnClickHandler"
+        android:background="@color/yellow" >
 
         <include
             android:id="@+id/storedCalc_calcDetailsHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_micro"
+            android:layout_marginLeft="@dimen/margin_normal"
             layout="@layout/calc_details_header" />
 
         <TextView
@@ -23,9 +26,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/storedCalc_calcDetailsHeader"
-            android:layout_margin="@dimen/margin_micro"
+            android:layout_margin="@dimen/margin_normal"
             android:text="@string/app_name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textSize="@dimen/textSize_medium"
+            android:textColor="@color/gray_dark" />
     </RelativeLayout>
 
     <ImageButton

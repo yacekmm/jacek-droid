@@ -14,7 +14,7 @@
         android:id="@+id/calc_calcDetailsHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_micro"
+        android:layout_marginLeft="@dimen/margin_normal"
         android:layout_alignParentRight="true"
         layout="@layout/calc_details_header" />
 

@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
-            android:padding="@dimen/margin_micro" />
+            android:padding="@dimen/margin_normal" />
     </HorizontalScrollView>
 
     <RelativeLayout
