@@ -39,7 +39,8 @@ public class WelcomeActivity extends ColCalcActivity {
 		if(storedCalcs!=null){
 			adapter = new StoredCalcsListAdapter(WelcomeActivity.this, R.layout.stored_calcs_list_item, storedCalcs);
 			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setAdapter(adapter);
-			
+			((ListView)findViewById(R.id.welcome_savedCalcs_list)).setSelection(0);
+
 			if(adapter.getItems().size() > 0)
 				findViewById(R.id.welcome_noStoredCalcs).setVisibility(View.GONE);
 			else
