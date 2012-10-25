@@ -24,7 +24,8 @@
             android:layout_width="@dimen/height_button"
             android:layout_height="fill_parent"
             android:layout_marginLeft="@dimen/margin_micro"
-            android:layout_toLeftOf="@+id/calc_placeholder1" />
+            android:layout_toLeftOf="@+id/calc_placeholder1" 
+            />
 
         <View
             android:id="@+id/calc_placeholder1"
@@ -43,33 +44,44 @@
             android:id="@+id/calc_calcName_edit"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_toLeftOf="@+id/calc_removeCalc_button"
-            android:background="@color/yellow"
+            android:layout_toLeftOf="@+id/calc_manageButtons"
+            android:background="@drawable/edittext_bgnd_yellow_left"
             android:hint="@string/calculation_calcName_hint"
             android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_micro"
             android:singleLine="true"
             android:textColor="@color/gray_dark"
-            android:textSize="@dimen/textSize_medium" />
+            android:textSize="@dimen/textSize_medium"
+            android:textStyle="bold" />
+
+        <LinearLayout 
+            android:id="@+id/calc_manageButtons"
+            android:layout_width="@dimen/height_button_big"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            >
+            
+        <ImageButton
+            android:id="@+id/calc_sendCalculation_button"
+            android:layout_width="0sp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_bgnd_middle"
+            android:contentDescription="@string/calculation_button_sendCalculation_text"
+            android:src="@drawable/share" 
+           	/>
 
         <ImageButton
             android:id="@+id/calc_removeCalc_button"
-            android:layout_width="@dimen/height_button"
+            android:layout_width="0sp"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:layout_marginLeft="@dimen/margin_micro"
-            android:layout_toLeftOf="@+id/calc_sendCalculation_button"
-            android:background="@color/yellow"
+            android:background="@drawable/button_bgnd_right"
             android:contentDescription="@android:string/cancel"
-            android:src="@android:drawable/ic_menu_delete" />
-
-        <ImageButton
-            android:id="@+id/calc_sendCalculation_button"
-            android:layout_width="@dimen/height_button"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="@dimen/margin_micro"
-            android:background="@color/yellow"
-            android:contentDescription="@string/calculation_button_sendCalculation_text"
-            android:src="@drawable/share" />
+            android:src="@drawable/trashbin_icon" />
+        </LinearLayout> 
     </RelativeLayout>
 
     <RelativeLayout
@@ -78,34 +90,34 @@
         android:layout_height="@dimen/height_button"
         android:layout_marginTop="@dimen/margin_normal" >
 
+        <Button
+            android:id="@+id/calc_saveCalculation_button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_toLeftOf="@+id/calc_addPerson_button"
+            android:background="@drawable/button_bgnd"
+            android:drawableLeft="@drawable/save"
+            android:text="@string/calculation_button_save_text" />
+
         <ImageButton
             android:id="@+id/calc_addPerson_button"
-            android:layout_width="@dimen/height_button"
+            android:layout_width="@dimen/height_button_big"
             android:layout_height="fill_parent"
             android:layout_marginRight="@dimen/margin_micro"
-            android:background="@color/yellow"
+            android:layout_toLeftOf="@+id/calc_addMultiPerson_button"
+            android:background="@drawable/button_bgnd_left"
             android:contentDescription="@string/calculation_button_addPerson_text"
             android:src="@drawable/add_person" />
 
         <ImageButton
             android:id="@+id/calc_addMultiPerson_button"
-            android:layout_width="@dimen/height_button"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="@dimen/margin_micro"
-            android:layout_toRightOf="@id/calc_addPerson_button"
-            android:background="@color/yellow"
-            android:contentDescription="@string/emptyText"
-            android:src="@drawable/add_multi_person" />
-
-        <Button
-            android:id="@+id/calc_saveCalculation_button"
-            android:layout_width="fill_parent"
+            android:layout_width="@dimen/height_button_big"
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/calc_addMultiPerson_button"
-            android:background="@color/yellow"
-            android:drawableLeft="@drawable/save"
-            android:text="@string/calculation_button_save_text" />
+            android:background="@drawable/button_bgnd_right"
+            android:contentDescription="@string/emptyText"
+            android:src="@drawable/add_multi_person" />
     </RelativeLayout>
 
     <RelativeLayout
