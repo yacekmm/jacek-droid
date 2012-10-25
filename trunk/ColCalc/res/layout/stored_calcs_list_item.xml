@@ -18,6 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             layout="@layout/calc_details_header" />
 
         <TextView
@@ -29,6 +30,7 @@
             android:text="@string/app_name"
             android:textSize="@dimen/textSize_medium"
             android:textColor="@color/gray_dark"
+            android:textStyle="bold"
             android:singleLine="true" />
     </RelativeLayout>
     
@@ -40,7 +42,7 @@
         android:layout_toLeftOf="@+id/storedCalc_removeCalc"
         android:contentDescription="@string/emptyText"
         android:onClick="shareCalcOnClickHandler"
-        android:src="@drawable/share"
+        android:src="@drawable/share_icon"
         android:background="@drawable/button_bgnd_middle" />
     
     <ImageButton
@@ -51,7 +53,7 @@
         android:layout_marginLeft="@dimen/margin_micro"
         android:contentDescription="@string/emptyText"
         android:onClick="removeCalcOnClickHandler"
-        android:src="@android:drawable/ic_menu_delete"
+        android:src="@drawable/trashbin_icon"
         android:background="@drawable/button_bgnd_right" />
 
 </RelativeLayout>

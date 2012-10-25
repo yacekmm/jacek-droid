@@ -11,6 +11,7 @@
         android:gravity="left|center_vertical"
         android:contentDescription="@string/app_name"
         android:drawableLeft="@drawable/calendar"
+        android:drawablePadding="@dimen/margin_micro"
         android:textColor="@color/gray"
         android:textSize="@dimen/textSize_micro" />
 
@@ -23,6 +24,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:contentDescription="@string/app_name"
         android:drawableLeft="@drawable/sum"
+        android:drawablePadding="@dimen/margin_micro"
         android:textColor="@color/gray"
         android:textSize="@dimen/textSize_micro" />
 
@@ -35,6 +37,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:contentDescription="@string/app_name"
         android:drawableLeft="@drawable/person"
+        android:drawablePadding="@dimen/margin_micro"
         android:textColor="@color/gray"
         android:textSize="@dimen/textSize_micro" />
 
