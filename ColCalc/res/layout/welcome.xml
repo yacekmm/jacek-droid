@@ -39,6 +39,7 @@
         android:stackFromBottom="true"
         android:divider="@android:color/transparent"
         android:dividerHeight="@dimen/margin_normal"
+        android:cacheColorHint="@android:color/transparent"
         >
     </ListView>
 

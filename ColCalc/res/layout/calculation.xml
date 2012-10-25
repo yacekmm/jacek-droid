@@ -133,7 +133,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:divider="@color/transparent"
-            android:dividerHeight="@dimen/margin_small" >
+            android:dividerHeight="@dimen/margin_small"
+            android:cacheColorHint="@android:color/transparent" >
         </ListView>
     </RelativeLayout>
 
