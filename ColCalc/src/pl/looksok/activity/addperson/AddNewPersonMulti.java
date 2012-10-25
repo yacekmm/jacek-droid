@@ -40,7 +40,8 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 					new LayoutParams(
 							getResources().getDimensionPixelSize(R.dimen.height_button),
 							LayoutParams.FILL_PARENT));
-			b.setBackgroundResource(R.drawable.button_background_gray_active);
+			//FIXME: set button pressed
+//			b.setBackgroundResource(R.drawable.button_background_gray_active);
 			if(i==Constants.MULTI_PERSON_DEFAULT_COUNT){
 				b.setBackgroundColor(getResources().getColor(R.color.green_kotak));
 				mHowManyPersonsSelectedBtn = b;
@@ -54,7 +55,8 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 	private OnClickListener setPeopleCountOnClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			mHowManyPersonsSelectedBtn.setBackgroundResource(R.drawable.button_background_gray_active);
+			//FIXME: set button pressed
+//			mHowManyPersonsSelectedBtn.setBackgroundResource(R.drawable.button_background_gray_active);
 			mHowManyPersonsSelectedBtn = (Button)v;
 			mHowManyPersonsSelectedBtn.setBackgroundColor(getResources().getColor(R.color.green_kotak));
 		}

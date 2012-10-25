@@ -17,7 +17,6 @@
         android:layout_height="@dimen/height_button"
         android:layout_toRightOf="@id/addPersonHeader_addPerson_btn"
         android:contentDescription="@string/emptyText"
-        android:background="@drawable/button_bgnd_middle"
         android:src="@drawable/add_multi_person" />
 
     <Button
@@ -27,7 +26,6 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/addPersonHeader_addMultiPerson_btn"
         android:drawableLeft="@drawable/save"
-        android:background="@drawable/button_bgnd_right"
         android:text="@string/EnterPays_saveAndExit_text" />
 
 </RelativeLayout>

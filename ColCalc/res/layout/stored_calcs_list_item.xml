@@ -9,9 +9,9 @@
         android:id="@+id/storedCalc_calcDetails"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
-        android:layout_toLeftOf="@+id/storedCalc_removeCalc"
+        android:layout_toLeftOf="@+id/storedCalc_shareCalc"
         android:onClick="editCalcOnClickHandler"
-        android:background="@color/yellow" >
+        android:background="@drawable/button_bgnd_left" >
 
         <include
             android:id="@+id/storedCalc_calcDetailsHeader"
@@ -31,27 +31,27 @@
             android:textColor="@color/gray_dark"
             android:singleLine="true" />
     </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/storedCalc_removeCalc"
-        android:layout_width="@dimen/height_button"
-        android:layout_height="@dimen/height_button"
-        android:layout_toLeftOf="@+id/storedCalc_shareCalc"
-        android:layout_marginLeft="@dimen/margin_micro"
-        android:contentDescription="@string/emptyText"
-        android:onClick="removeCalcOnClickHandler"
-        android:src="@android:drawable/ic_menu_delete"
-        android:background="@color/yellow" />
-
+    
     <ImageButton
         android:id="@+id/storedCalc_shareCalc"
         android:layout_width="@dimen/height_button"
         android:layout_height="@dimen/height_button"
         android:layout_marginLeft="@dimen/margin_micro"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/storedCalc_removeCalc"
         android:contentDescription="@string/emptyText"
         android:onClick="shareCalcOnClickHandler"
         android:src="@drawable/share"
-        android:background="@color/yellow" />
+        android:background="@drawable/button_bgnd_middle" />
+    
+    <ImageButton
+        android:id="@+id/storedCalc_removeCalc"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/margin_micro"
+        android:contentDescription="@string/emptyText"
+        android:onClick="removeCalcOnClickHandler"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="@drawable/button_bgnd_right" />
 
 </RelativeLayout>
