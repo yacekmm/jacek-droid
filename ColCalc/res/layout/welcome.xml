@@ -10,22 +10,12 @@
         android:layout_height="@dimen/height_welcomeButton"
         android:gravity="center_horizontal|bottom"
         android:layout_margin="@dimen/margin_normal"
-        android:padding="@dimen/margin_big"
-        android:background="@color/yellow"
+        android:padding="@dimen/margin_normal"
+        android:background="@drawable/button_bgnd"
         android:text="@string/welcome_mode_potluckParty"
         android:textSize="@dimen/textSize_huge"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/welcome_appName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_big"
-        android:padding="@dimen/margin_big"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="@dimen/textSize_huge"
-        android:textColor="@color/gray_dark" />
+        android:textColor="@color/black"
+        android:drawableTop="@drawable/app_logo" />
 
     <TextView 
         android:id="@+id/welcome_noStoredCalcs"
@@ -48,7 +38,7 @@
         android:layout_alignParentBottom="true"
         android:stackFromBottom="true"
         android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/margin_micro"
+        android:dividerHeight="@dimen/margin_normal"
         >
     </ListView>
 
