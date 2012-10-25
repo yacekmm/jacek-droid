@@ -20,6 +20,7 @@
 
     <dimen name="height_welcomeButton">146sp</dimen>
     <dimen name="height_button">46sp</dimen>
+    <dimen name="height_button_big">98sp</dimen>
     <dimen name="height_calcHeader">24sp</dimen>
     
     <dimen name="width_button">46sp</dimen>
