@@ -5,7 +5,9 @@
     android:background="@color/gray_dark"
     android:orientation="vertical"
     android:paddingLeft="@dimen/margin_normal"
-    android:paddingRight="@dimen/margin_normal" >
+    android:paddingRight="@dimen/margin_normal"
+    android:paddingTop="@dimen/margin_normal"
+     >
 
     <RelativeLayout
         android:id="@+id/calc_calcHeader"
@@ -16,20 +18,12 @@
             android:id="@+id/calc_calcDetailsHeader"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_toLeftOf="@+id/calc_placeholder2"
+            android:layout_toLeftOf="@+id/calc_placeholder1"
             layout="@layout/calc_details_header" />
 
         <View
-            android:id="@+id/calc_placeholder2"
-            android:layout_width="@dimen/height_button"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/margin_micro"
-            android:layout_toLeftOf="@+id/calc_placeholder1" 
-            />
-
-        <View
             android:id="@+id/calc_placeholder1"
-            android:layout_width="@dimen/height_button"
+            android:layout_width="@dimen/height_button_big"
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/margin_micro" />
