@@ -71,7 +71,7 @@ public class CalcPersistence {
 		boolean exist = false;
 		int index = 0;
 		for (CalculationLogic calcItem : calcList) {
-			if(calcItem.getCalcName().equals(calc.getCalcName())){
+			if(calcItem.getId() == calc.getId()){
 				index = calcList.indexOf(calcItem);
 				exist = true;
 				break;

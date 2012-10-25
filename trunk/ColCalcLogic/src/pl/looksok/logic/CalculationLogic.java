@@ -2,6 +2,7 @@ package pl.looksok.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -22,6 +23,8 @@ public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
 	@SuppressWarnings("unused")
 	private static final String LOG_TAG = CalculationLogic.class.getSimpleName();
+	
+	private long id = Calendar.getInstance().getTimeInMillis();
 	private Hashtable<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
@@ -331,5 +334,9 @@ public class CalculationLogic implements Serializable {
 		PersonData pd = calculationResult.get(personName);
 		pd.setReturnsFromOtherPeople(result);
 		return pd.getReturnsFromOtherPeople();
+	}
+
+	public long getId() {
+		return id;
 	}
 }
