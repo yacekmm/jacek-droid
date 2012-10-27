@@ -138,7 +138,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	
 	OnClickListener addAtomPaymentClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			adapter.insert(new AtomPayment("wsuniety", adapter.getCount()), adapter.getCount());
+			adapter.insert(new AtomPayment(), adapter.getCount());
 			setUpAtomPayAdapter(adapter.getItems());
 		}
 	};
