@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="@dimen/height_button"
     android:orientation="horizontal" >
 
     <EditText
         android:id="@+id/atomPay_name"
         android:layout_width="0sp"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:gravity="center_vertical"
+        android:background="@drawable/edittext_bgnd_gray_left"
         android:hint="@string/EnterPays_atomPay_nameHint"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:padding="@dimen/margin_normal"
+        android:singleLine="true"
+        style="@style/textMediumDark"
+        android:textStyle="bold" />
 
     <pl.looksok.currencyedittext.CurrencyEditText
         android:id="@+id/atomPay_value"
-        android:layout_width="0sp"
+        android:layout_width="@dimen/height_button_big"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
         android:gravity="center"
+        android:background="@drawable/edittext_bgnd_gray_middle"
         android:text="@string/EnterPays_TextView_ZeroValue"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        style="@style/textMediumDark"
+        android:textStyle="bold"
+         />
 
     <ImageButton
         android:id="@+id/atomPay_removePay"
@@ -28,5 +34,6 @@
         android:layout_height="fill_parent"
         android:contentDescription="@string/emptyText"
         android:onClick="removeAtomPayOnClickHandler"
-        android:src="@android:drawable/ic_menu_delete" />
+        android:background="@drawable/button_bgnd_gray_right"
+        android:src="@drawable/trashbin_icon" />
 </LinearLayout>
