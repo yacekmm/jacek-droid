@@ -3,6 +3,9 @@
     android:id="@+id/EnterPays_mainLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/gray_dark"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:padding="@dimen/margin_normal" >
 
     <include
@@ -18,30 +21,53 @@
         android:layout_below="@+id/EnterPays_addPersonHeader"
         android:layout_marginTop="@dimen/margin_normal" >
 
+        <TextView
+            android:id="@+id/EnterPays_personHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:drawableLeft="@drawable/person_light"
+            android:drawablePadding="@dimen/margin_small"
+            android:text="@string/EnterPays_personLabel"
+            android:textColor="@color/gray" />
+
         <EditText
             android:id="@+id/EnterPays_EditText_Name"
+            style="@style/textMediumDark"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/height_button"
+            android:layout_below="@+id/EnterPays_personHeader"
             android:layout_toLeftOf="@+id/EnterPays_button_getPersonFromContacts"
+            android:background="@drawable/edittext_bgnd_gray_left"
             android:hint="@string/EnterPays_TextView_Name"
-            android:inputType="text" />
+            android:padding="@dimen/margin_normal"
+            android:singleLine="true"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/EnterPays_button_getPersonFromContacts"
-            android:layout_width="@dimen/height_button"
+            android:layout_width="@dimen/width_button"
             android:layout_height="@dimen/height_button"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/EnterPays_personHeader"
+            android:background="@drawable/button_bgnd_gray_right"
             android:contentDescription="@string/EnterPays_button_getContact"
-            android:src="@drawable/address_book" />
+            android:src="@drawable/addressbook" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/EnterPays_paysHeaderText"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/EnterPays_personName"
-        android:gravity="center"
-        android:text="@string/EnterPays_atomPay_headerText_left" />
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:drawableLeft="@drawable/bills"
+        android:drawablePadding="@dimen/margin_small"
+        android:text="@string/EnterPays_atomPay_headerText_left"
+        android:textColor="@color/gray" />
 
     <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
@@ -60,8 +86,8 @@
             android:id="@+id/EnterPays_addAtomPayment"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/height_button"
-            android:layout_below="@+id/EnterPays_atomPaysList"
             android:layout_alignBottom="@+id/EnterPays_AtomPaymentsHolder"
+            android:layout_below="@+id/EnterPays_atomPaysList"
             android:drawableLeft="@android:drawable/ic_input_add"
             android:text="@string/EnterPays_button_addAtomPayment" />
     </RelativeLayout>
@@ -69,12 +95,11 @@
     <LinearLayout
         android:id="@+id/EnterPays_giftDetails"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/EnterPays_AtomPaymentsHolder"
         android:gravity="top"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        >
+        android:orientation="vertical" >
 
         <CheckBox
             android:id="@+id/EnterPays_gotGift_checkbox"
@@ -85,8 +110,7 @@
         <RelativeLayout
             android:id="@+id/EnterPays_giftPayment"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content" >
 
             <EditText
                 android:id="@+id/EnterPays_EditText_giftValue"
