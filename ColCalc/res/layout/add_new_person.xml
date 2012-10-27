@@ -74,7 +74,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/EnterPays_paysHeaderText"
-        android:layout_above="@+id/EnterPays_giftDetails" >
+         >
 
         <ListView
             android:id="@+id/EnterPays_atomPaysList"
@@ -103,6 +103,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/EnterPays_AtomPaymentsHolder"
         android:gravity="top"
         android:orientation="vertical" >
 
