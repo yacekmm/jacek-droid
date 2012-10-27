@@ -8,4 +8,12 @@
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:textColor">@color/pink_dark_popularGirl</item>
     </style>
+    <style name="textMicroDark" parent="android:Widget.Button">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">@dimen/textSize_micro</item>
+    </style>
+    <style name="textMediumDark" parent="android:Widget.EditText">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">@dimen/textSize_medium</item>
+    </style>
 </resources>

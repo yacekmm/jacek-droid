@@ -5,9 +5,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    
+    
     <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_button"
         layout="@layout/add_person_header" />
 
     <TextView

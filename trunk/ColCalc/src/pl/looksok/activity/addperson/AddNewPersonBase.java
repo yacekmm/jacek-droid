@@ -18,8 +18,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 public abstract class AddNewPersonBase extends ColCalcActivity {
@@ -65,9 +63,9 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	}
 
 	private void initTopControlsBar() {
-		((ImageButton)findViewById(R.id.addPersonHeader_addPerson_btn)).setOnClickListener(saveAndAddNextPersonClickListener);
-		((ImageButton)findViewById(R.id.addPersonHeader_addMultiPerson_btn)).setOnClickListener(saveAndAddNextMultiPersonClickListener);
-		((Button)findViewById(R.id.addPersonHeader_saveCalculation_btn)).setOnClickListener(saveAndShowResultsClickListener);
+		findViewById(R.id.calc_addPerson_button).setOnClickListener(saveAndAddNextPersonClickListener);
+		findViewById(R.id.calc_addMultiPerson_button).setOnClickListener(saveAndAddNextMultiPersonClickListener);
+		findViewById(R.id.calc_saveCalculation_button).setOnClickListener(saveAndShowResultsClickListener);
 	}
 
 	OnClickListener saveAndShowResultsClickListener = new OnClickListener() {

@@ -57,7 +57,8 @@
     
     <string name="calculation_button_save_text">Zapisz i wyjdź</string>
     <string name="calculation_button_sendCalculation_text">Wyślij</string>
-    <string name="calculation_button_addPerson_text">Dodaj osobę</string>
+    <string name="calculation_button_addPerson_text">dodaj osobę</string>
+    <string name="calculation_button_addPersonMulti_text">dodaj wielu</string>
     <string name="calculation_saved_text">Zapisano!</string>
     <string name="calculation_load_error_text">Nie znaleziono żadnych zapisanych rozliczeń</string>
     
