@@ -101,7 +101,12 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			saveAndAddNext(getNewInputDataToAdd(), AddNewPersonMulti.class);
+			try{
+				HashSet<PersonData> data = getNewInputDataToAdd();
+				saveAndAddNext(data, AddNewPersonMulti.class);
+			}catch(BadInputDataException e){
+				Log.d(LOG_TAG, "Bad input data");
+			}
 		}
 	};
 	
