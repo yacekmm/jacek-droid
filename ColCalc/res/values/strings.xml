@@ -37,6 +37,7 @@
     <string name="EnterPays_TextView_Pay">Ile zapłacił:</string>
     <string name="EnterPays_TextView_ZeroValue">0</string>
     <string name="EnterPays_TextView_ShouldPay">Ile powinien zapłacić:</string>
+    <string name="EnterPays_gift">prezent</string>
     <string name="EnterPays_gotGift_text">Dostał prezent</string>
     <string name="EnterPays_buysGift_text">Płacił za prezent</string>
     <string name="EnterPays_boughtGiftValue_hint">ile zapłacił za prezent</string>
