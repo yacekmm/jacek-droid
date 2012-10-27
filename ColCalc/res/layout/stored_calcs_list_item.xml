@@ -18,7 +18,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_small"
             layout="@layout/calc_details_header" />
 
         <TextView
@@ -28,8 +27,8 @@
             android:layout_below="@+id/storedCalc_calcDetailsHeader"
             android:layout_marginLeft="@dimen/margin_normal"
             android:text="@string/app_name"
-            android:textSize="@dimen/textSize_medium"
-            android:textColor="@color/gray_dark"
+            android:background="@android:color/transparent"
+            style="@style/textMediumDark"
             android:textStyle="bold"
             android:singleLine="true" />
     </RelativeLayout>

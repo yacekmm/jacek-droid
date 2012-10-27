@@ -2,19 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/EnterPays_mainLayout"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:padding="@dimen/margin_normal" >
 
     <include
         android:id="@+id/EnterPays_addPersonHeader"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_button"
         layout="@layout/add_person_header" />
 
     <RelativeLayout
         android:id="@+id/EnterPays_personName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/EnterPays_addPersonHeader" >
+        android:layout_below="@+id/EnterPays_addPersonHeader"
+        android:layout_marginTop="@dimen/margin_normal" >
 
         <EditText
             android:id="@+id/EnterPays_EditText_Name"

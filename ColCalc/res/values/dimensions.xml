@@ -19,7 +19,7 @@
     <dimen name="welcome_savedCalcs_List_height">220sp</dimen>
 
     <dimen name="height_welcomeButton">146sp</dimen>
-    <dimen name="height_button">46sp</dimen>
+    <dimen name="height_button">40sp</dimen>
     <dimen name="height_button_big">98sp</dimen>
     <dimen name="height_calcHeader">24sp</dimen>
     

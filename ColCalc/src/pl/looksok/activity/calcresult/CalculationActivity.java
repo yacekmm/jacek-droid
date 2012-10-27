@@ -40,15 +40,18 @@ public class CalculationActivity extends ColCalcActivity {
 
 	private CalcResultUtils utils = new CalcResultUtils();
 
+	private EditText calcNameEditText;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calculation);
 
+		calcNameEditText = (EditText)findViewById(R.id.calc_calcName_edit);
 		readInputBundle();
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
-		populateListArray();
 		initButtons();
+		populateListArray();
 		initCalculationDetails();
 	}
 
@@ -63,8 +66,8 @@ public class CalculationActivity extends ColCalcActivity {
 		shareCalcBtn.setOnClickListener(shareCalculationButtonClickListener);
 		shareCalcBtn.setEnabled(isAnyPersonOnList);
 
-		((ImageButton)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
-		((ImageButton)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
+		((Button)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
+		((Button)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
 		((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
 	}
 
@@ -92,7 +95,7 @@ public class CalculationActivity extends ColCalcActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-			((EditText)findViewById(R.id.calc_calcName_edit)).setText(calc.getCalcName());
+			calcNameEditText.setText(calc.getCalcName());
 		}else{
 			calc = new CalculationLogic();
 			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
@@ -101,7 +104,7 @@ public class CalculationActivity extends ColCalcActivity {
 
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			String calcName = ((EditText)findViewById(R.id.calc_calcName_edit)).getText().toString();
+			String calcName = calcNameEditText.getText().toString();
 			if(calcName.length() == 0)
 				calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
 
@@ -127,7 +130,7 @@ public class CalculationActivity extends ColCalcActivity {
 
 	OnClickListener addPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
+			calc.setCalcName(calcNameEditText.getText().toString());
 			Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
@@ -138,7 +141,7 @@ public class CalculationActivity extends ColCalcActivity {
 
 	OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			calc.setCalcName(((TextView)findViewById(R.id.calc_calcName_edit)).getText().toString());
+			calc.setCalcName(calcNameEditText.getText().toString());
 			Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
@@ -189,7 +192,6 @@ public class CalculationActivity extends ColCalcActivity {
 		}
 	}
 
-
 	@Override
 	public void onBackPressed() {
 		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
@@ -197,5 +199,4 @@ public class CalculationActivity extends ColCalcActivity {
 		overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
 		finish();
 	}
-
 }

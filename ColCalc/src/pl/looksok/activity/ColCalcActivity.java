@@ -10,6 +10,7 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 public class ColCalcActivity extends Activity {
 
@@ -55,4 +56,9 @@ public class ColCalcActivity extends Activity {
 	}
 
 	protected void handleRemoveConfirm(int dialogRemove) {}
+	
+	protected void clearEditTextFocus(EditText editText){
+		editText.setFocusable(false);
+		editText.setFocusableInTouchMode(true);
+	}
 }
