@@ -49,6 +49,7 @@
     <string name="EnterPays_Menu_Edit">Edytuj</string>
     <string name="EnterPays_Menu_Remove">Usuń</string>
     <string name="EnterPays_saveAndExit_text">Zapisz i pokaż rozliczenie</string>
+    <string name="EnterPays_personLabel">imię</string>
 
     <string name="EnterPays_atomPay_headerText_left">płatności (razem: </string>
     <string name="EnterPays_atomPay_headerText_right">)</string>
