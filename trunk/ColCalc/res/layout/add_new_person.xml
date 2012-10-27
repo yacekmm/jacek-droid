@@ -4,7 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gray_dark"
-    android:focusableInTouchMode="true"
     android:padding="@dimen/margin_normal" >
 
     <include
@@ -91,8 +90,10 @@
             android:id="@+id/EnterPays_addAtomPayment"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/height_button"
+            android:layout_marginTop="@dimen/margin_normal"
             android:layout_alignBottom="@+id/EnterPays_AtomPaymentsHolder"
             android:layout_below="@+id/EnterPays_atomPaysList"
+            android:background="@drawable/button_bgnd_gray"
             android:drawableLeft="@android:drawable/ic_input_add"
             android:text="@string/EnterPays_button_addAtomPayment" />
     </RelativeLayout>
