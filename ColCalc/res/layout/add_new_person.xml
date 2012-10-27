@@ -4,7 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gray_dark"
-    android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:padding="@dimen/margin_normal" >
 
@@ -30,7 +29,8 @@
             android:drawableLeft="@drawable/person_light"
             android:drawablePadding="@dimen/margin_small"
             android:text="@string/EnterPays_personLabel"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+			android:textSize="@dimen/textSize_micro"/>
 
         <EditText
             android:id="@+id/EnterPays_EditText_Name"
@@ -67,7 +67,8 @@
         android:drawableLeft="@drawable/bills"
         android:drawablePadding="@dimen/margin_small"
         android:text="@string/EnterPays_atomPay_headerText_left"
-        android:textColor="@color/gray" />
+        android:textColor="@color/gray"
+        android:textSize="@dimen/textSize_micro" />
 
     <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
@@ -80,8 +81,10 @@
             android:id="@+id/EnterPays_atomPaysList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:headerDividersEnabled="false"
-            android:cacheColorHint="@android:color/transparent" >
+            android:cacheColorHint="@android:color/transparent"
+            android:dividerHeight="@dimen/margin_normal"
+            android:divider="@android:color/transparent"
+             >
         </ListView>
 
         <Button
