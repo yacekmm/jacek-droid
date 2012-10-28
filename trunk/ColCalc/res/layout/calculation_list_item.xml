@@ -73,7 +73,8 @@
             android:layout_marginLeft="@dimen/margin_big"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
-            android:src="@drawable/giftreceiver_dark" />
+            android:src="@drawable/giftreceiver_dark"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <LinearLayout
