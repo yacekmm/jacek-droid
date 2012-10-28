@@ -14,8 +14,8 @@
         android:hint="@string/EnterPays_atomPay_nameHint"
         android:padding="@dimen/margin_normal"
         android:singleLine="true"
-        style="@style/textMediumDark"
-        android:textStyle="bold" />
+        style="@style/textMediumDarkBold"
+        />
 
     <pl.looksok.currencyedittext.CurrencyEditText
         android:id="@+id/atomPay_value"
@@ -24,8 +24,7 @@
         android:gravity="center"
         android:background="@drawable/edittext_bgnd_gray_middle"
         android:text="@string/EnterPays_TextView_ZeroValue"
-        style="@style/textMediumDark"
-        android:textStyle="bold"
+        style="@style/textMediumDarkBold"
          />
 
     <ImageButton

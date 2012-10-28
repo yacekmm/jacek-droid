@@ -37,7 +37,7 @@
 
         <EditText
             android:id="@+id/calc_calcName_edit"
-            style="@style/textMediumDark"
+            style="@style/textMediumDarkBold"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginRight="@dimen/margin_micro"
@@ -47,7 +47,7 @@
             android:paddingLeft="@dimen/margin_normal"
             android:paddingRight="@dimen/margin_normal"
             android:singleLine="true"
-            android:textStyle="bold" />
+             />
 
         <LinearLayout
             android:id="@+id/calc_manageButtons"
