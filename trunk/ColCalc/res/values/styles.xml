@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="balancePositiveText" parent="android:Widget.TextView">
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
-        <item name="android:textColor">@color/green_kotak</item>
-    </style>
-    <style name="balanceNegativeText" parent="android:Widget.TextView">
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
-        <item name="android:textColor">@color/pink_dark_popularGirl</item>
-    </style>
     <style name="textMicroDark" parent="android:Widget.Button">
         <item name="android:textColor">@color/gray_dark</item>
         <item name="android:textSize">@dimen/textSize_micro</item>
