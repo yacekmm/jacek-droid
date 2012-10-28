@@ -103,12 +103,18 @@ public class CalculationPrinter {
 	private static String simplePrinter(String prefix, HashMap<String, Double> payMap) {
 		StringBuilder sb = new StringBuilder();
 
+		boolean first = true;
 		Iterator<String> it = payMap.keySet().iterator();
 		while(it.hasNext()) {
 			String key = it.next();
 			double value = FormatterHelper.roundDouble(payMap.get(key), 2);
-			if(value > 0)
-				sb.append(prefix).append(value).append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ").append(key).append("    ");
+			if(value > 0){
+				if(!first){
+					first = false;
+					sb.append(",   ");
+				}
+				sb.append(prefix).append(value).append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ").append(key);
+			}
 		}
 		
 		return sb.toString();

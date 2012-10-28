@@ -14,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ResultsListAdapter extends ArrayAdapter<PersonData> {
@@ -43,13 +45,13 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
             
             holder = new ResultHolder();
             holder.txtName = (TextView)row.findViewById(R.id.calcItem_textView_name);
-            holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_personPay);
+            holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_pay);
             holder.txtPaidForGift = (TextView)row.findViewById(R.id.calcItem_textView_personPayForGift);
             holder.txtDebts = (TextView)row.findViewById(R.id.calcItem_details_debts);
             holder.txtRefunds = (TextView)row.findViewById(R.id.calcItem_details_refunds);
-            holder.imgEditPerson = (ImageView)row.findViewById(R.id.calcItem_image_edit);
-            holder.imgEditPerson.setTag(items.get(position));
-            holder.imgRemovePerson = (ImageView)row.findViewById(R.id.calcItem_image_delete);
+            holder.itemLayout = (RelativeLayout)row.findViewById(R.id.calcItem_mainLayout);
+            holder.itemLayout.setTag(items.get(position));
+            holder.imgRemovePerson = (ImageButton)row.findViewById(R.id.calcItem_image_delete);
             holder.imgRemovePerson.setTag(items.get(position));
             holder.imgReceivesGift = (ImageView)row.findViewById(R.id.calcItem_image_receivesGift);
             
@@ -71,36 +73,42 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         setBalance(holder, pd);
         if(!pd.receivesGift()){
         	holder.imgReceivesGift.setVisibility(View.GONE);
-	        holder.txtPaidForGift.setText("Zapłacił za prezent: " + pd.getHowMuchIPaidForGift());
+	        holder.txtPaidForGift.setText("" + pd.getHowMuchIPaidForGift());
+	        holder.txtPaidForGift.setVisibility(View.VISIBLE);
+		}else{
+			holder.imgReceivesGift.setVisibility(View.VISIBLE);
+			holder.txtPaidForGift.setVisibility(View.GONE);
 		}
 
         String debtsText = CalculationPrinter.printPersonReturnsToOthersSimple(pd);
-        holder.txtDebts.setText(debtsText);
+        setResultText(holder, debtsText, holder.txtDebts);
+        
         String refundsText = CalculationPrinter.printPersonRefundsFromOthersSimple(pd);
-        holder.txtRefunds.setText(refundsText);
+        setResultText(holder, refundsText, holder.txtRefunds);
+	}
+
+	protected void setResultText(ResultHolder holder, String debtsText, TextView textView) {
+		if(debtsText.length()>0){
+			textView.setText(debtsText);
+			textView.setVisibility(View.VISIBLE);
+        } else{
+        	textView.setVisibility(View.GONE);
+        }
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
-		
-		if(pp.getPayMadeByPerson() > pp.getHowMuchPersonShouldPay()){
-			holder.txtBalance.setTextAppearance(context, R.style.balancePositiveText);
-		}else{
-			holder.txtBalance.setTextAppearance(context, R.style.balanceNegativeText);
-		}
-		
-		holder.txtBalance.setText(context.getString(R.string.calculation_TextView_personPaid_text) + "\n" + 
-				FormatterHelper.roundDouble(pp.getPayMadeByPerson(), 2) + 
+		holder.txtBalance.setText(FormatterHelper.roundDouble(pp.getPayMadeByPerson(), 2) + 
 				Currency.getInstance(Locale.getDefault()).getSymbol());
 	}
 	
     public class ResultHolder {
+    	RelativeLayout itemLayout;
     	TextView txtName;
     	TextView txtBalance;
     	TextView txtPaidForGift;
     	TextView txtDebts;
     	TextView txtRefunds;
-    	ImageView imgEditPerson;
-    	ImageView imgRemovePerson;
+    	ImageButton imgRemovePerson;
     	ImageView imgReceivesGift;
     }
 

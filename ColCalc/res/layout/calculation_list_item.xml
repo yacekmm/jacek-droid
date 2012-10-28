@@ -1,75 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calcItem_mainLayout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/calc_listitem" >
+    android:background="@drawable/button_bgnd_gray"
+    android:onClick="editPerson"
+    android:paddingBottom="@dimen/margin_normal"
+    android:paddingTop="@dimen/margin_micro"
+     >
 
-    <RelativeLayout
+    <ImageButton
+        android:id="@+id/calcItem_image_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/button_bgnd_gray"
+        android:contentDescription="@string/EnterPays_Menu_Remove"
+        android:onClick="removePerson"
+        android:src="@drawable/trashbin_icon" />
+
+    <LinearLayout
         android:id="@+id/calcItem_mainBar_layout"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/calc_listItem_mainBar_height"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/calc_listItem_borderSize"
-        android:layout_marginRight="@dimen/calc_listItem_borderSize"
-        android:layout_marginTop="@dimen/calc_listItem_borderSize"
-        android:background="@drawable/calc_listitem_name_gradient"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_toLeftOf="@+id/calcItem_image_delete"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/calcItem_textView_name"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/margin_normal"
-            android:layout_toLeftOf="@+id/calcItem_image_receivesGift"
-            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/person"
+            android:drawablePadding="@dimen/margin_small"
             android:text="@string/calculation_TextView_name"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textColor="@color/gray_dark"
+            android:textSize="@dimen/textSize_medium"
+            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/calcItem_image_edit"
+        <TextView
+            android:id="@+id/calcItem_textView_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/calcItem_image_delete"
-            android:contentDescription="@string/EnterPays_Menu_Edit"
-            android:onClick="editPerson"
-            android:src="@drawable/content_edit" />
+            android:layout_marginLeft="@dimen/margin_big"
+            android:drawableLeft="@drawable/bills_dark"
+            android:drawablePadding="@dimen/margin_small"
+            android:text="@string/calculation_TextView_personPay"
+            android:textColor="@color/gray_dark"
+            android:textSize="@dimen/textSize_medium" />
 
-        <ImageView
-            android:id="@+id/calcItem_image_delete"
+        <TextView
+            android:id="@+id/calcItem_textView_personPayForGift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/EnterPays_Menu_Remove"
-            android:onClick="removePerson"
-            android:src="@drawable/content_discard" />
+            android:layout_marginLeft="@dimen/margin_big"
+            android:drawableLeft="@drawable/giftbuyer_dark"
+            android:drawablePadding="@dimen/margin_small"
+            android:text="@string/calculation_TextView_personPay"
+            android:textColor="@color/gray_dark"
+            android:textSize="@dimen/textSize_medium" />
 
         <ImageView
             android:id="@+id/calcItem_image_receivesGift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/calcItem_image_edit"
+            android:layout_width="@dimen/textSize_medium"
+            android:layout_height="@dimen/textSize_medium"
+            android:layout_marginLeft="@dimen/margin_big"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
-            android:src="@drawable/gift" />
-    </RelativeLayout>
+            android:src="@drawable/giftreceiver_dark" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/calcItem_itemContent"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:baselineAligned="false"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_normal"
         android:layout_below="@+id/calcItem_mainBar_layout"
-        android:layout_marginBottom="@dimen/calc_listItem_borderSize"
-        android:layout_marginLeft="@dimen/calc_listItem_borderSize"
-        android:layout_marginRight="@dimen/calc_listItem_borderSize" >
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:orientation="vertical" >
+        android:layout_toLeftOf="@+id/calcItem_image_delete"
+        android:baselineAligned="false"
+        android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/calcItem_details_debts"
@@ -84,30 +95,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/green_kotak" >
             </TextView>
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:gravity="right" >
-
-            <TextView
-                android:id="@+id/calcItem_textView_personPay"
-                style="@style/balancePositiveText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_normal"
-                android:gravity="right"
-                android:text="@string/calculation_TextView_personPay"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/calcItem_textView_personPayForGift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/calcItem_textView_personPay" />
-        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

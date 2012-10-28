@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_bgnd_middle"
                 android:contentDescription="@string/calculation_button_sendCalculation_text"
-                android:src="@drawable/share" />
+                android:src="@drawable/share_icon" />
 
             <ImageButton
                 android:id="@+id/calc_removeCalc_button"
@@ -103,7 +103,7 @@
             android:layout_height="fill_parent"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@color/transparent"
-            android:dividerHeight="@dimen/margin_small" >
+            android:dividerHeight="@dimen/margin_normal" >
         </ListView>
     </RelativeLayout>
 
