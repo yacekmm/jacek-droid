@@ -23,11 +23,9 @@
     <string name="welcome_noSavedCalcsYet">nie masz jeszcze żadnych\nzapisanych rozliczeń</string>
     
     <string name="enterPaysMulti_TextView_Pay">Każda z osób zapłaciła:</string>
-    <string name="enterPaysMulti_gotGift_text">Dostali prezent</string>
-    <string name="enterPaysMulti_buysGift_text">Każda z osób zapłaciła za prezent:</string>
-    <string name="enterPaysMulti_boughtGiftValue_hint">ile każdy zapłacił za prezent</string>
-    <string name="enterPaysMulti_TextView_peopleCount">Ile osób dodać:</string>
+    <string name="enterPaysMulti_TextView_peopleCount">liczba osób do dodania</string>
     <string name="enterPaysMulti_personPrefix">Osoba</string>
+    <string name="enterPaysMulti_pays">płatności</string>
     
     <string name="EnterPays_TextView_EnterPayPerEachPerson">Dodaj nową osobę</string>
     <string name="EnterPays_CheckBox_EqualPays">Wszyscy składają się po równo</string>
