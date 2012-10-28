@@ -54,6 +54,7 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 			b.setOnClickListener(setPeopleCountOnClickListener);
 			mHowManyPersonsScroller.addView(b);
 			b.setText("" + i);
+			b.setTextAppearance(getApplicationContext(), R.style.textMediumDarkBold);
 		}
 	}
 

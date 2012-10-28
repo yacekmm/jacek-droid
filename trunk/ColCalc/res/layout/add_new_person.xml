@@ -21,19 +21,18 @@
 
         <TextView
             android:id="@+id/EnterPays_personHeader"
+            style="@style/add_person_section_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_small"
             android:drawableLeft="@drawable/person_light"
-            android:drawablePadding="@dimen/margin_small"
             android:text="@string/EnterPays_personLabel"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textSize_micro" />
+             />
 
         <EditText
             android:id="@+id/EnterPays_EditText_Name"
-            style="@style/textMediumDark"
+            style="@style/textMediumDarkBold"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/height_button"
             android:layout_below="@+id/EnterPays_personHeader"
@@ -42,7 +41,7 @@
             android:hint="@string/EnterPays_TextView_Name"
             android:padding="@dimen/margin_normal"
             android:singleLine="true"
-            android:textStyle="bold" />
+			/>
 
         <ImageButton
             android:id="@+id/EnterPays_button_getPersonFromContacts"
@@ -57,6 +56,7 @@
 
     <TextView
         android:id="@+id/EnterPays_paysHeaderText"
+        style="@style/add_person_section_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/EnterPays_personName"
@@ -64,10 +64,8 @@
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_normal"
         android:drawableLeft="@drawable/bills"
-        android:drawablePadding="@dimen/margin_small"
         android:text="@string/EnterPays_atomPay_headerText_left"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/textSize_micro" />
+        />
 
     <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
@@ -106,15 +104,13 @@
         android:orientation="vertical" >
 
         <TextView
+            style="@style/add_person_section_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin_small"
             android:drawableLeft="@drawable/gift"
-            android:drawablePadding="@dimen/margin_small"
             android:text="@string/EnterPays_gift"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textSize_micro" />
+			 />
 
         <RelativeLayout
             android:layout_width="fill_parent"

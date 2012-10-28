@@ -16,6 +16,11 @@
         <item name="android:textColor">@color/gray_dark</item>
         <item name="android:textSize">@dimen/textSize_medium</item>
     </style>
+    <style name="textMediumDarkBold" parent="android:Widget.EditText">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">@dimen/textSize_medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="add_person_section_header" parent="android:Widget.TextView">
         <item name="android:drawablePadding">@dimen/margin_small</item>
         <item name="android:textColor">@color/gray</item>
