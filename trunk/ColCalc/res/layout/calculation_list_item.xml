@@ -31,14 +31,16 @@
 
         <TextView
             android:id="@+id/calcItem_textView_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0sp"
             android:layout_height="wrap_content"
+            android:layout_weight="8"
             android:drawableLeft="@drawable/person"
             android:drawablePadding="@dimen/margin_small"
             android:text="@string/calculation_TextView_name"
             android:textColor="@color/gray_dark"
             android:textSize="@dimen/textSize_medium"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/calcItem_textView_pay"
@@ -49,7 +51,8 @@
             android:drawablePadding="@dimen/margin_small"
             android:text="@string/calculation_TextView_personPay"
             android:textColor="@color/gray_dark"
-            android:textSize="@dimen/textSize_medium" />
+            android:textSize="@dimen/textSize_medium"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/calcItem_textView_personPayForGift"
@@ -60,7 +63,8 @@
             android:drawablePadding="@dimen/margin_small"
             android:text="@string/calculation_TextView_personPay"
             android:textColor="@color/gray_dark"
-            android:textSize="@dimen/textSize_medium" />
+            android:textSize="@dimen/textSize_medium"
+            android:singleLine="true" />
 
         <ImageView
             android:id="@+id/calcItem_image_receivesGift"
