@@ -26,6 +26,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 	private List<PersonData> items;
 	private int layoutResourceId;
 	private Context context;
+	private boolean giftsIncluded = true;
 
 	public ResultsListAdapter(Context context, int layoutResourceId, List<PersonData> items) {
 		super(context, layoutResourceId, items);
@@ -71,14 +72,24 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 
 		holder.txtName.setText(pd.getName());
         setBalance(holder, pd);
-        if(!pd.receivesGift()){
+        
+        if(giftsIncluded){
+        	holder.imgReceivesGift.setVisibility(View.VISIBLE);
+        	holder.txtPaidForGift.setVisibility(View.VISIBLE);
+        	if(!pd.receivesGift()){
+        		holder.imgReceivesGift.setVisibility(View.GONE);
+        		holder.txtPaidForGift.setText("" + pd.getHowMuchIPaidForGift());
+        		holder.txtPaidForGift.setVisibility(View.VISIBLE);
+        	}else{
+        		holder.imgReceivesGift.setVisibility(View.VISIBLE);
+        		holder.txtPaidForGift.setVisibility(View.GONE);
+        	}
+        }else{
         	holder.imgReceivesGift.setVisibility(View.GONE);
-	        holder.txtPaidForGift.setText("" + pd.getHowMuchIPaidForGift());
-	        holder.txtPaidForGift.setVisibility(View.VISIBLE);
-		}else{
-			holder.imgReceivesGift.setVisibility(View.VISIBLE);
-			holder.txtPaidForGift.setVisibility(View.GONE);
-		}
+        	holder.txtPaidForGift.setVisibility(View.GONE);
+        }
+
+
 
         String debtsText = CalculationPrinter.printPersonReturnsToOthersSimple(pd);
         setResultText(holder, debtsText, holder.txtDebts);
