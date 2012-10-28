@@ -16,4 +16,12 @@
         <item name="android:textColor">@color/gray_dark</item>
         <item name="android:textSize">@dimen/textSize_medium</item>
     </style>
+    <style name="add_person_section_header" parent="android:Widget.TextView">
+        <item name="android:drawablePadding">@dimen/margin_small</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/textSize_micro</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">@dimen/textSize_micro</item>
+        <item name="android:textSize">@dimen/textSize_micro</item>
+    </style>
 </resources>

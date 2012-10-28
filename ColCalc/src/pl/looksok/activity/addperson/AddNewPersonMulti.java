@@ -13,7 +13,6 @@ import pl.looksok.utils.Constants;
 import pl.looksok.utils.FormatterHelper;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -22,6 +21,9 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 	private LinearLayout mHowManyPersonsScroller;
 	private Button mHowManyPersonsSelectedBtn;
 	private CurrencyEditText mNewPersonPayInput;
+	
+	private int buttonBgndNormal = R.drawable.button_bgnd_gray;
+	private int buttonBgndPressed = R.drawable.button_pressed;
 
 	@Override
 	protected int getAddPersonContentView() {
@@ -34,16 +36,19 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 		
 		mNewPersonPayInput = (CurrencyEditText)findViewById(R.id.enterPaysMulti_EditText_Pay);
 		mHowManyPersonsScroller = (LinearLayout)findViewById(R.id.enterPaysMulti_peopleCount_content);
+
 		for(int i=Constants.MULTI_PERSON_MIN_COUNT; i<Constants.MULTI_PERSON_MAX_COUNT; i++){
 			Button b = new Button(getApplicationContext());
-			b.setLayoutParams(
-					new LayoutParams(
-							getResources().getDimensionPixelSize(R.dimen.height_button),
-							LayoutParams.FILL_PARENT));
-			//FIXME: set button pressed
-//			b.setBackgroundResource(R.drawable.button_background_gray_active);
+			
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+					getResources().getDimensionPixelSize(R.dimen.height_button),
+					getResources().getDimensionPixelSize(R.dimen.height_button));
+			layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.margin_normal);
+			b.setLayoutParams(layoutParams);
+			
+			b.setBackgroundResource(buttonBgndNormal);
 			if(i==Constants.MULTI_PERSON_DEFAULT_COUNT){
-				b.setBackgroundColor(getResources().getColor(R.color.green_kotak));
+				b.setBackgroundResource(buttonBgndPressed);
 				mHowManyPersonsSelectedBtn = b;
 			}
 			b.setOnClickListener(setPeopleCountOnClickListener);
@@ -55,10 +60,9 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 	private OnClickListener setPeopleCountOnClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			//FIXME: set button pressed
-//			mHowManyPersonsSelectedBtn.setBackgroundResource(R.drawable.button_background_gray_active);
+			mHowManyPersonsSelectedBtn.setBackgroundResource(buttonBgndNormal);
 			mHowManyPersonsSelectedBtn = (Button)v;
-			mHowManyPersonsSelectedBtn.setBackgroundColor(getResources().getColor(R.color.green_kotak));
+			mHowManyPersonsSelectedBtn.setBackgroundResource(buttonBgndPressed);
 		}
 	};
 
