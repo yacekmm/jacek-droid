@@ -34,12 +34,12 @@ public class WelcomeActivity extends ColCalcActivity {
 		setContentView(R.layout.welcome);
 		
 		((Button)findViewById(R.id.welcome_mode_potluckParty)).setOnClickListener(modePotluckPartyClickListener);
-		ReadStoredCalcs readCalcsTask = new ReadStoredCalcs();
-		readCalcsTask.execute();
 	}
 	
 	@Override
 	protected void onResume() {
+		ReadStoredCalcs readCalcsTask = new ReadStoredCalcs();
+		readCalcsTask.execute();
 		findViewById(R.id.welcome_savedCalcs_list).setVisibility(View.INVISIBLE);
 		super.onResume();
 	}
