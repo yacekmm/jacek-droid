@@ -78,8 +78,8 @@
             android:id="@+id/EnterPays_atomPaysList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="@android:color/transparent"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
         </ListView>
     </RelativeLayout>
