@@ -101,7 +101,7 @@
             android:id="@+id/calc_listView_list"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:cacheColorHint="@android:color/transparent"
+            android:cacheColorHint="@color/transparent"
             android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
         </ListView>
