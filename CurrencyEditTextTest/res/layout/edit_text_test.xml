@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/hello_world"
+        tools:context=".EditTextTestActivity" />
+
+    <pl.looksok.currencyedittext.CurrencyEditText
+        android:id="@+id/currencyEditText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:text="0" >
+
+        <requestFocus />
+    </pl.looksok.currencyedittext.CurrencyEditText>
+
+    <pl.looksok.currencyedittext.CurrencyEditText
+        android:id="@+id/currencyEditText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/currencyEditText1"
+        android:layout_alignLeft="@+id/currencyEditText1"
+        android:layout_marginBottom="78dp"
+        android:ems="10"
+        android:text="14" />
+
+    <TextView
+        android:id="@+id/curTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

@@ -10,7 +10,7 @@ import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.utils.PersonDataUtils;
 import pl.looksok.utils.Constants;
-import pl.looksok.utils.FormatterHelper;
+import pl.looksok.utils.CalcFormatterHelper;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -71,7 +71,7 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 	@Override
 	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
 		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
-		double payDouble = FormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
+		double payDouble = CalcFormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
 		double howManyPersons = Integer.parseInt(mHowManyPersonsSelectedBtn.getText().toString());
 		String namePrefix = getString(R.string.enterPaysMulti_personPrefix);
 

@@ -1,11 +1,10 @@
 package pl.looksok.activity.welcome;
 
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
+import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Context;
@@ -72,10 +71,9 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
 	private void setupItem(ResultHolder holder) {
         holder.txtCalcName.setText(holder.calc.getCalcName());
         holder.txtCalcDate.setText(holder.calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
-        holder.txtCalcTotal.setText(String.valueOf(holder.calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
+        holder.txtCalcTotal.setText(CalcFormatterHelper.currencyFormat(holder.calc.getTotalPay(), 0));
         holder.txtCalcPersons.setText(String.valueOf(holder.calc.getTotalPersons()));
 	}
-
 	
     public static class ResultHolder {
 		CalculationLogic calc;
