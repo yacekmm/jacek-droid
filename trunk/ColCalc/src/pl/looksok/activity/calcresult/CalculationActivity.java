@@ -1,8 +1,6 @@
 package pl.looksok.activity.calcresult;
 
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 
 import org.joda.time.DateTime;
 
@@ -14,6 +12,7 @@ import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
+import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
@@ -52,7 +51,7 @@ public class CalculationActivity extends ColCalcActivity {
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
 		initButtons();
 		populateListArray();
-		initCalculationDetails();
+		initCalculationDetailsBar();
 	}
 
 	private void initButtons() {
@@ -71,9 +70,9 @@ public class CalculationActivity extends ColCalcActivity {
 		((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
 	}
 
-	private void initCalculationDetails() {
+	private void initCalculationDetailsBar() {
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setText(calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
-		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(String.valueOf(calc.getTotalPay()) + " " + Currency.getInstance(Locale.getDefault()).getSymbol());
+		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(CalcFormatterHelper.currencyFormat(calc.getTotalPay(), 0));
 		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));
 	}
 

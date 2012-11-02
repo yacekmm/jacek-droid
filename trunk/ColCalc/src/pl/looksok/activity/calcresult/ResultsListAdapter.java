@@ -1,13 +1,11 @@
 package pl.looksok.activity.calcresult;
 
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.utils.CalculationPrinter;
-import pl.looksok.utils.FormatterHelper;
+import pl.looksok.utils.CalcFormatterHelper;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -78,7 +76,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         	holder.txtPaidForGift.setVisibility(View.VISIBLE);
         	if(!pd.receivesGift()){
         		holder.imgReceivesGift.setVisibility(View.GONE);
-        		holder.txtPaidForGift.setText("" + pd.getHowMuchIPaidForGift());
+        		holder.txtPaidForGift.setText(CalcFormatterHelper.currencyFormat(pd.getHowMuchIPaidForGift(), 2));
         		holder.txtPaidForGift.setVisibility(View.VISIBLE);
         	}else{
         		holder.imgReceivesGift.setVisibility(View.VISIBLE);
@@ -98,9 +96,9 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
         setResultText(holder, refundsText, holder.txtRefunds);
 	}
 
-	protected void setResultText(ResultHolder holder, String debtsText, TextView textView) {
-		if(debtsText.length()>0){
-			textView.setText(debtsText);
+	protected void setResultText(ResultHolder holder, String text, TextView textView) {
+		if(text.length()>0){
+			textView.setText(text);
 			textView.setVisibility(View.VISIBLE);
         } else{
         	textView.setVisibility(View.GONE);
@@ -108,8 +106,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
-		holder.txtBalance.setText(FormatterHelper.roundDouble(pp.getPayMadeByPerson(), 2) + 
-				Currency.getInstance(Locale.getDefault()).getSymbol());
+		holder.txtBalance.setText(CalcFormatterHelper.currencyFormat(pp.getPayMadeByPerson(), 2));
 	}
 	
     public class ResultHolder {

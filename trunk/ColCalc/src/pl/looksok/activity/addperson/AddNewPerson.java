@@ -2,10 +2,8 @@ package pl.looksok.activity.addperson;
 
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
@@ -14,8 +12,8 @@ import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
+import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.Constants;
-import pl.looksok.utils.FormatterHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -112,7 +110,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		String name = mNewPersonNameInput.getText().toString();
 		boolean receivesGift = mReceivesGiftCheckBox.isChecked();
 		boolean buysGift = mBuysGiftCheckBox.isChecked();
-		double giftPayment = FormatterHelper.readDoubleFromEditText(mGiftValueInput);
+		double giftPayment = CalcFormatterHelper.readDoubleFromEditText(mGiftValueInput);
 
 		if(!buysGift)
 			giftPayment = 0;
@@ -210,7 +208,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	private void updateTotalPayValue(double payMadeByPerson) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getString(R.string.EnterPays_atomPay_headerText_left)).append(" ");
-		sb.append(payMadeByPerson).append(Currency.getInstance(Locale.getDefault()).getSymbol());
+		sb.append(CalcFormatterHelper.currencyFormat(payMadeByPerson, 2));
 		sb.append(getString(R.string.EnterPays_atomPay_headerText_right));
 		mTotalPaysText.setText(sb);
 	}

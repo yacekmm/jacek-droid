@@ -7,6 +7,7 @@
 
     
     <dimen name="textSize_micro">12sp</dimen>
+    <dimen name="textSize_small">15sp</dimen>
     <dimen name="textSize_medium">18sp</dimen>
     <dimen name="textSize_huge">22sp</dimen>
     

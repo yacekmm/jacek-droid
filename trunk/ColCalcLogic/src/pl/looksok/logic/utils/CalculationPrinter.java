@@ -107,13 +107,13 @@ public class CalculationPrinter {
 		Iterator<String> it = payMap.keySet().iterator();
 		while(it.hasNext()) {
 			String key = it.next();
-			double value = FormatterHelper.roundDouble(payMap.get(key), 2);
+			double value = payMap.get(key);
 			if(value > 0){
 				if(!first){
+					sb.append(",    ");
+				}else
 					first = false;
-					sb.append(",   ");
-				}
-				sb.append(prefix).append(value).append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ").append(key);
+				sb.append(prefix).append(FormatterHelper.currencyFormat(value, 2)).append(" ").append(key);
 			}
 		}
 		

@@ -2,12 +2,16 @@ package pl.looksok.currencyedittext;
 
 import pl.looksok.currencyedittext.utils.FormatterHelper;
 import android.content.Context;
+import android.text.Editable;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 public class CurrencyEditText extends EditText {
+
+	private static final String LOG_TAG = CurrencyEditText.class.getSimpleName();
 
 	public CurrencyEditText(Context context) {
 		super(context);
@@ -26,7 +30,7 @@ public class CurrencyEditText extends EditText {
 
 	private void setSpecificParams() {
 		this.setOnFocusChangeListener(currencyEditTextFocusListener);
-		this.setInputType(InputType.TYPE_CLASS_NUMBER);
+		this.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 	}
 
 	private OnFocusChangeListener currencyEditTextFocusListener = new OnFocusChangeListener() {
@@ -44,4 +48,19 @@ public class CurrencyEditText extends EditText {
 			}
 		}
 	};
+
+	@Override
+	public Editable getText() {
+		Editable text = super.getText();
+		Log.d(LOG_TAG, "getting text: " + text);
+		return text;
+	}
+
+	@Override
+	public void setText(CharSequence text, BufferType type) {
+		Log.d(LOG_TAG, "setting text: " + text);
+		super.setText(text, type);
+	}
+	
+	
 }
