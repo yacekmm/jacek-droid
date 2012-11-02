@@ -27,7 +27,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	private double totalRefundForThisPerson;
 	private HashMap<String, PersonData> otherPeoplePayments;
 	private HashMap<String, Double> refundForOtherPeople;
-	private HashMap<String, Double> returnsFromOtherPeople;
+	private HashMap<String, Double> refundsFromOtherPeople;
 	private double alreadyReturned;
 	private double alreadyRefunded = 0.0;
 
@@ -47,12 +47,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		refundForOtherPeople = new HashMap<String, Double>();
 	}
 
-//	public PersonData(String name, double payDouble, HashSet<String> emails) {
-//		this.name = name;
-//		this.setPayMadeByPerson(payDouble);
-//		this.emails = emails;
-//	}
-
 	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails) {
 		this.name = name;
 		this.setAtomPayments(atomPays);
@@ -60,22 +54,11 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.emails = emails;
 	}
 
-//	public PersonData(String name, double payDouble, HashSet<String> emails, boolean receivesGift, double giftPayment) {
-//		this(name, payDouble, emails);
-//		setReceivesGift(receivesGift);
-//		setHowMuchIPaidForGift(giftPayment);
-//	}
-
 	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails, boolean receivesGift, double giftPayment) {
 		this(name, atomPays, emails);
 		setReceivesGift(receivesGift);
 		setHowMuchIPaidForGift(giftPayment);
 	}
-//
-//	public PersonData(String name, double payDouble, double shouldPayDouble, HashSet<String> emails) {
-//		this(name, payDouble, emails);
-//		setHowMuchPersonShouldPay(shouldPayDouble);
-//	}
 	
 	public PersonData(String name, List<AtomPayment> atomPays, double shouldPayDouble, HashSet<String> emails) {
 		this(name, atomPays, emails);
@@ -233,12 +216,12 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.alreadyRefunded = alreadyRefunded;
 	}
 
-	public HashMap<String, Double> getReturnsFromOtherPeople() {
-		return returnsFromOtherPeople;
+	public HashMap<String, Double> getRefundsFromOtherPeople() {
+		return refundsFromOtherPeople;
 	}
 
-	public void setReturnsFromOtherPeople(HashMap<String, Double> returnsFromOtherPeople) {
-		this.returnsFromOtherPeople = returnsFromOtherPeople;
+	public void setRefundsFromOtherPeople(HashMap<String, Double> refundsFromOtherPeople) {
+		this.refundsFromOtherPeople = refundsFromOtherPeople;
 	}
 
 	public double getHowMuchIPaid() {

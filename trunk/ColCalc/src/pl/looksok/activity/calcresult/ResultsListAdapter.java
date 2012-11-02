@@ -89,7 +89,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 
 
 
-        String debtsText = CalculationPrinter.printPersonReturnsToOthersSimple(pd);
+        String debtsText = CalculationPrinter.printPersonDebtsSimple(pd);
         setResultText(holder, debtsText, holder.txtDebts);
         
         String refundsText = CalculationPrinter.printPersonRefundsFromOthersSimple(pd);
