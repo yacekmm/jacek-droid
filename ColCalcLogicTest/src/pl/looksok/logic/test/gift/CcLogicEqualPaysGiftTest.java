@@ -24,7 +24,7 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		calc = new CalculationLogic("SampleTitle");
+		calc = new CalculationLogic();
 		calc.setEqualPayments(equalPayments);
 		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
 //		inputPaysList = null;

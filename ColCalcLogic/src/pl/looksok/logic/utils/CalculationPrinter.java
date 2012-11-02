@@ -80,7 +80,7 @@ public class CalculationPrinter {
 	public static String printPersonRefundsFromOthers(PersonData pd, String returnToText, String forText){
 		StringBuilder sb = new StringBuilder(pd.getName());
 		sb.append(" ").append(returnToText).append(":\n");
-		HashMap<String, Double> refundMap = pd.getReturnsFromOtherPeople();
+		HashMap<String, Double> refundMap = pd.getRefundsFromOtherPeople();
 		
 		if(refundMap.size()<=0)
 			return "";
@@ -88,16 +88,15 @@ public class CalculationPrinter {
 		return printCalculationList(forText, sb, refundMap);
 	}
 
-	public static String printPersonReturnsToOthersSimple(PersonData pd) {
-		String prefix = "-";
-		HashMap<String, Double> refundMap = pd.getRefundForOtherPeople();
-		return simplePrinter(prefix, refundMap);
+	public static String printPersonDebtsSimple(PersonData pd) {
+//		HashMap<String, Double> refundMap = pd.getRefundForOtherPeople();
+		HashMap<String, Double> refundMap = pd.getPersonDebts();
+		return simplePrinter("-", refundMap);
 	}
 
 	public static String printPersonRefundsFromOthersSimple(PersonData pd) {
-		String prefix = "+";
-		HashMap<String, Double> refundMap = pd.getReturnsFromOtherPeople();
-		return simplePrinter(prefix, refundMap);
+		HashMap<String, Double> refundMap = pd.getRefundsFromOtherPeople();
+		return simplePrinter("+", refundMap);
 	}
 
 	private static String simplePrinter(String prefix, HashMap<String, Double> payMap) {

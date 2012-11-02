@@ -21,8 +21,6 @@ import pl.looksok.logic.utils.PersonDataUtils;
 
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
-	@SuppressWarnings("unused")
-	private static final String LOG_TAG = CalculationLogic.class.getSimpleName();
 	
 	private long id = Calendar.getInstance().getTimeInMillis();
 	private Hashtable<String, PersonData> calculationResult;
@@ -40,11 +38,6 @@ public class CalculationLogic implements Serializable {
 	public CalculationLogic(){
 		calculationResult = new Hashtable<String, PersonData>();
 		inputPaysList = new ArrayList<PersonData>();
-	}
-	
-	public CalculationLogic(String title){
-		this();
-		setCalcName(title);
 	}
 
 	private double howMuchPerPerson(double totalPay, int peopleCount) {
@@ -68,7 +61,7 @@ public class CalculationLogic implements Serializable {
 	}
 
 	private void calculateGiftsRefunds(List<PersonData> inputPaysList) {
-		giftCalc = new CalculationLogic("giftCalc");
+		giftCalc = new CalculationLogic();
 		giftCalc.setCalculationType(CalculationType.EQUAL_PAYMENTS);
 		List<PersonData> giftGivers = new ArrayList<PersonData>();
 		
@@ -128,8 +121,10 @@ public class CalculationLogic implements Serializable {
 
 	public Hashtable<String, PersonData> recalculate() {
 		resetInputData();
-		if(giftCalc != null)
-			giftCalc.resetInputData();
+		if(giftCalc != null){
+//			giftCalc.resetInputData();
+			giftCalc.recalculate();
+		}
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
 		return calculate(inputPays);
 	}
@@ -137,6 +132,7 @@ public class CalculationLogic implements Serializable {
 	private void resetInputData() {
 		setCalculationResult(new Hashtable<String, PersonData>());
 		for (PersonData data : getInputPaysList()) {
+//			data = new PersonData(data.getName(), data.getAtomPayments(), data.getEmails(), data.receivesGift(), data.getHowMuchIPaidForGift());
 			data.setAlreadyRefunded(0.0);
 		}
 	}
@@ -183,10 +179,10 @@ public class CalculationLogic implements Serializable {
 		calculationResult = removeLoopRefunds(newCalculationResult);
 		
 		
-		Iterator<String> itMain = newCalculationResult.keySet().iterator();
+		Iterator<String> itMain = calculationResult.keySet().iterator();
 		while(itMain.hasNext()){
 			String personName = itMain.next();
-			setPersonReturnsFromOthers(personName);
+			setPersonRefundsFromOthers(personName);
 		}
 	}
 
@@ -224,9 +220,7 @@ public class CalculationLogic implements Serializable {
 	
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
-			double result = calculationResult.get(personA).getCalculatedReturnForPersonB(personB);
-//			return FormatterHelper.roundDouble(result, 2);
-			return result;
+			return calculationResult.get(personA).getCalculatedReturnForPersonB(personB);
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
@@ -317,7 +311,7 @@ public class CalculationLogic implements Serializable {
 		
 	}
 
-	public HashMap<String, Double> setPersonReturnsFromOthers(String personName) {
+	public HashMap<String, Double> setPersonRefundsFromOthers(String personName) {
 		HashMap<String, Double> result = new HashMap<String, Double>();
 		
 		Iterator<String> it = getCalculationResult().keySet().iterator();
@@ -332,11 +326,15 @@ public class CalculationLogic implements Serializable {
 			}
 		}
 		PersonData pd = calculationResult.get(personName);
-		pd.setReturnsFromOtherPeople(result);
-		return pd.getReturnsFromOtherPeople();
+		pd.setRefundsFromOtherPeople(result);
+		return pd.getRefundsFromOtherPeople();
 	}
 
 	public long getId() {
 		return id;
+	}
+
+	public PersonData getPerson(String personName) {
+		return calculationResult.get(personName);
 	}
 }
