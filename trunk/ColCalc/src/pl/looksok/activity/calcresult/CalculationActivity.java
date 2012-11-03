@@ -52,7 +52,6 @@ public class CalculationActivity extends ColCalcActivity {
 		initButtons();
 		populateListArray();
 		initCalculationDetailsBar();
-//		calc.setCalculationResult(calculationResult);
 	}
 
 	private void initButtons() {

@@ -53,6 +53,4 @@ public class PersonAtomPaysListTest extends TestCase {
 			fail(Constants.SHOULD_THROW_EXCEPTION + BadInputDataException.class);
 		}catch (BadInputDataException e) {}
 	}
-	
-	
 }

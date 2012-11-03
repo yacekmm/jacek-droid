@@ -179,10 +179,6 @@ public class CalculationLogic implements Serializable {
 	public List<PersonData> getInputPaysList() {
 		return inputPaysList;
 	}
-	
-	public void setInputPaysList(List<PersonData> list) {
-		this.inputPaysList = list;
-	}
 
 	public void resetCalculationResult() {
 		this.calculationResult = new HashMap<String, PersonData>();
