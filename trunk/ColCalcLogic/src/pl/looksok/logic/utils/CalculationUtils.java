@@ -45,4 +45,15 @@ public class CalculationUtils {
 		}
 		return newCalculationResult;
 	}
+
+	public static Double calculateTotalPayValue(HashMap<String, PersonData> inputPays) {
+		Double totalPay = 0.0;
+		
+		Iterator<PersonData> itr = inputPays.values().iterator();
+
+		while (itr.hasNext()){
+			totalPay += itr.next().getPayMadeByPerson();
+		}
+		return totalPay;
+	}
 }
