@@ -125,10 +125,15 @@ public class CalculationLogic implements Serializable {
 		
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
 			newCalculationResult = CalculationUtils.includeGiftPaymentsInCalculation(newCalculationResult, giftCalc);
+			calculationResult = CalculationUtils.removeLoopRefunds(newCalculationResult);
+			buildRefundMapForPersons();
+			calculationResult = CalculationUtils.removeForwardedRefunds(newCalculationResult);
+		}else{
+			buildRefundMapForPersons();
 		}
-		calculationResult = CalculationUtils.removeLoopRefunds(newCalculationResult);
-		
-		
+	}
+
+	protected void buildRefundMapForPersons() {
 		Iterator<String> itMain = calculationResult.keySet().iterator();
 		while(itMain.hasNext()){
 			String personName = itMain.next();
@@ -266,7 +271,7 @@ public class CalculationLogic implements Serializable {
 		}
 		PersonData pd = calculationResult.get(personName);
 		pd.setRefundsFromOtherPeople(result);
-		return pd.getRefundsFromOtherPeople();
+		return pd.getPersonRefunds();
 	}
 
 	public long getId() {
@@ -274,6 +279,6 @@ public class CalculationLogic implements Serializable {
 	}
 
 	public HashMap<String, Double> getPersonRefunds(String personName) {
-		return calculationResult.get(personName).getRefundsFromOtherPeople();
+		return calculationResult.get(personName).getPersonRefunds();
 	}
 }

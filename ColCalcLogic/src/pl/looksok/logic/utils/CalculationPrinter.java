@@ -79,7 +79,7 @@ public class CalculationPrinter {
 	public static String printPersonRefundsFromOthers(PersonData pd, String returnToText, String forText){
 		StringBuilder sb = new StringBuilder(pd.getName());
 		sb.append(" ").append(returnToText).append(":\n");
-		HashMap<String, Double> refundMap = pd.getRefundsFromOtherPeople();
+		HashMap<String, Double> refundMap = pd.getPersonRefunds();
 		
 		if(refundMap.size()<=0)
 			return "";
@@ -94,7 +94,7 @@ public class CalculationPrinter {
 	}
 
 	public static String printPersonRefundsFromOthersSimple(PersonData pd) {
-		HashMap<String, Double> refundMap = pd.getRefundsFromOtherPeople();
+		HashMap<String, Double> refundMap = pd.getPersonRefunds();
 		return simplePrinter("+", refundMap);
 	}
 

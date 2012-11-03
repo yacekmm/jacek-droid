@@ -215,7 +215,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.alreadyRefunded = alreadyRefunded;
 	}
 
-	public HashMap<String, Double> getRefundsFromOtherPeople() {
+	public HashMap<String, Double> getPersonRefunds() {
 		return refundsFromOtherPeople;
 	}
 
