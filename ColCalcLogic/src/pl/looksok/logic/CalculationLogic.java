@@ -16,6 +16,7 @@ import pl.looksok.logic.exceptions.PaysNotCalculatedException;
 import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.logic.utils.CalculationUtils;
 import pl.looksok.logic.utils.FormatterHelper;
+import pl.looksok.logic.utils.InputValidator;
 import pl.looksok.logic.utils.PersonDataUtils;
 
 public class CalculationLogic implements Serializable {
@@ -50,7 +51,7 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
-		HashMap<String, PersonData> inputPays = convertAndValidateInput();
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, this.equalPayments);
 		
 		if(calculationType.equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
 			calculateGiftsRefunds(inputPaysList);
@@ -95,50 +96,25 @@ public class CalculationLogic implements Serializable {
 		}
 	}
 
-	private HashMap<String, PersonData> convertAndValidateInput() {
-		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
-		double sumOfAllPays = 0.0;
-		double sumOfAllShouldPays = 0.0;
-		
-		for (PersonData in : this.inputPaysList) {
-			if(inputPays.containsKey(in.getName()))
-				throw new DuplicatePersonNameException(in.getName());
-			else{
-				inputPays.put(in.getName(), in);
-				sumOfAllPays += in.getPayMadeByPerson();
-				sumOfAllShouldPays += in.getHowMuchPersonShouldPay();
-			}
-		}
-		
-		if(!equalPayments){
-			if(sumOfAllPays != sumOfAllShouldPays){
-				throw new BadInputDataException("Sum of all Pays made by persons ("+sumOfAllPays+") is not equal to sum of amount that they should pay(" +sumOfAllShouldPays+")");
-			}
-		}
-		return inputPays;
-	}
-	
-
 	public HashMap<String, PersonData> recalculate() {
-		System.out.println("Recalculating");
+//		System.out.println("Recalculating");
 		resetInputData();
 		if(giftCalc != null){
 			giftCalc.recalculate();
 		}
-		HashMap<String, PersonData> inputPays = convertAndValidateInput();
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, equalPayments);
 		return calculate(inputPays);
 	}
 
 	private void resetInputData() {
 		setCalculationResult(new HashMap<String, PersonData>());
 		for (PersonData data : getInputPaysList()) {
-//			data = new PersonData(data.getName(), data.getAtomPayments(), data.getEmails(), data.receivesGift(), data.getHowMuchIPaidForGift());
 			data.setAlreadyRefunded(0.0);
 		}
 	}
 	
 	private HashMap<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
-		double totalPay = calculateTotalPayValue(inputPays);
+		double totalPay = CalculationUtils.calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
 		
@@ -148,8 +124,7 @@ public class CalculationLogic implements Serializable {
 			if(!equalPayments)
 				howMuchPersonShouldPay = inputPays.get(key).getHowMuchPersonShouldPay();
 			else{
-//				if(howMuchPersonShouldPay<0)
-					howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
+				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
 				inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
 			}
 			
@@ -205,17 +180,6 @@ public class CalculationLogic implements Serializable {
 			}
 		}
 		return newCalculationResult;
-	}
-
-	private Double calculateTotalPayValue(HashMap<String, PersonData> inputPays) {
-		Double totalPay = 0.0;
-		
-		Iterator<PersonData> itr = inputPays.values().iterator();
-
-		while (itr.hasNext()){
-			totalPay += itr.next().getPayMadeByPerson();
-		}
-		return totalPay;
 	}
 	
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {

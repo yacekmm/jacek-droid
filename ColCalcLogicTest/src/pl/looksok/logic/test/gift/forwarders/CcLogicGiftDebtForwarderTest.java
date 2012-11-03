@@ -36,7 +36,7 @@ public class CcLogicGiftDebtForwarderTest extends TestCase {
 		assertNotNull(calc);
 	}
 	
-	public void testDebtsObject(){
+	public void testLoopedRefunds(){
 		giftReceivers.add(Constants.personCName);
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseFourPeopleGift(68, 0, 0, 0, giftReceivers, 0, 24, 0, 0);
 		
@@ -52,15 +52,20 @@ public class CcLogicGiftDebtForwarderTest extends TestCase {
 		HashMap<String, Double> personBRefunds = calc.getPerson(Constants.personBName).getRefundsFromOtherPeople();
 		HashMap<String, Double> personCRefunds = calc.getPerson(Constants.personCName).getRefundsFromOtherPeople();
 		HashMap<String, Double> personDRefunds = calc.getPerson(Constants.personDName).getRefundsFromOtherPeople();
-//		HashMap<String, Double> personBRefunds = calc.setPersonRefundsFromOthers(Constants.personBName);
-//		HashMap<String, Double> personCRefunds = calc.setPersonRefundsFromOthers(Constants.personCName);
-//		HashMap<String, Double> personDRefunds = calc.setPersonRefundsFromOthers(Constants.personDName);
 		
 		//personA
 		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personADebts.size() == 0);
+		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personARefunds.size() == 3);
 		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 9.0, personARefunds.get(Constants.personBName));
 		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 17.0, personARefunds.get(Constants.personCName));
 		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 17.0, personARefunds.get(Constants.personDName));
+		
+		//personB
+		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personBDebts.size() == 1);
+		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personBRefunds.size() == 1);
+		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 8.0, personBRefunds.get(Constants.personDName));
+		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 8.0, personBDebts.get(Constants.personAName));
+		
 		
 		
 //		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personBDebts.get(Constants.personAName));
