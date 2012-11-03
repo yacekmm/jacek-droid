@@ -1,7 +1,7 @@
 package pl.looksok.logic.test.base;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -47,21 +47,21 @@ public class CcLogicEqualPaysTest extends TestCase {
 	public void testRefundOfZeroPayOnePerson(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseOnePerson(0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
 	public void testRefundOfNonZeroPayOnePerson(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseOnePerson(10.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
 	public void testRefundOfZeroPayFewPeople(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(0.0, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
@@ -69,7 +69,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	public void testReturnOfNonZeroPayFewPeopleOnePaid(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_TO_RETURN, 0.0, result.get(Constants.personAName).getToReturn());
 		assertEquals(Constants.INCORRECT_TO_RETURN, 5.0, result.get(Constants.personBName).getToReturn());
 	}
@@ -77,7 +77,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	public void testRefundOfNonZeroPayFewPeopleOnePaid(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 5.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
@@ -85,7 +85,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	public void testRefundOfNonZeroPayFewPeopleFewPaid(){
 		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(10.0, 5.0, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 5.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personCName).getTotalRefundForThisPerson());

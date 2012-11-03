@@ -1,8 +1,8 @@
 package pl.looksok.logic.test.gift;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -48,7 +48,7 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 	public void testRefundOfZeroPayOnePersonNoGift(){
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(0.0, giftReceivers, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 
@@ -56,7 +56,7 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		giftReceivers.add(Constants.personAName);
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(0.0, giftReceivers, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 
@@ -64,14 +64,14 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		giftReceivers.add(Constants.personAName);
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(0.0, giftReceivers, 10.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
 	public void testRefundOfNonZeroPayOnePersonNoGift(){
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(10.0, giftReceivers, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
@@ -79,7 +79,7 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		giftReceivers.add(Constants.personAName);
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(10.0, giftReceivers, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
@@ -87,14 +87,14 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		giftReceivers.add(Constants.personAName);
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseOnePersonGift(10.0, giftReceivers, 20.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
 	public void testRefundOfZeroPayTwoPeopleNoGift(){
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseTwoPeopleGift(0.0, 0.0, giftReceivers, 0.0, 0.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
@@ -103,7 +103,7 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		giftReceivers.add(Constants.personAName);
 		inputPaysList = GiftTestScenarioBuilder.buildTestCaseTwoPeopleGift(0.0, 0.0, giftReceivers, 0.0, 10.0);
 		
-		Hashtable<String, PersonData> result = calc.calculate(inputPaysList);
+		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}

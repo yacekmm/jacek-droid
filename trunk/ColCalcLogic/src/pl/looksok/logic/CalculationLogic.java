@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
 	
 	private long id = Calendar.getInstance().getTimeInMillis();
-	private Hashtable<String, PersonData> calculationResult;
+	private HashMap<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
 	private boolean equalPayments = true;
 	private DateTime dateSaved;
@@ -31,12 +30,12 @@ public class CalculationLogic implements Serializable {
 	private String calcName = "";
 	private CalculationLogic giftCalc = null;
 	
-	public Hashtable<String, PersonData> getCalculationResult() {
+	public HashMap<String, PersonData> getCalculationResult() {
 		return calculationResult;
 	}
 
 	public CalculationLogic(){
-		calculationResult = new Hashtable<String, PersonData>();
+		calculationResult = new HashMap<String, PersonData>();
 		inputPaysList = new ArrayList<PersonData>();
 	}
 
@@ -49,7 +48,7 @@ public class CalculationLogic implements Serializable {
 		return totalPay / peopleCount;
 	}
 
-	public Hashtable<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
+	public HashMap<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
 		
@@ -57,7 +56,7 @@ public class CalculationLogic implements Serializable {
 			calculateGiftsRefunds(inputPaysList);
 		}
 		
-		Hashtable<String, PersonData> result = calculate(inputPays);
+		HashMap<String, PersonData> result = calculate(inputPays);
 		return result;
 	}
 
@@ -120,7 +119,7 @@ public class CalculationLogic implements Serializable {
 	}
 	
 
-	public Hashtable<String, PersonData> recalculate() {
+	public HashMap<String, PersonData> recalculate() {
 		System.out.println("Recalculating");
 		resetInputData();
 		if(giftCalc != null){
@@ -131,14 +130,14 @@ public class CalculationLogic implements Serializable {
 	}
 
 	private void resetInputData() {
-		setCalculationResult(new Hashtable<String, PersonData>());
+		setCalculationResult(new HashMap<String, PersonData>());
 		for (PersonData data : getInputPaysList()) {
 //			data = new PersonData(data.getName(), data.getAtomPayments(), data.getEmails(), data.receivesGift(), data.getHowMuchIPaidForGift());
 			data.setAlreadyRefunded(0.0);
 		}
 	}
 	
-	private Hashtable<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
+	private HashMap<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
 		double totalPay = calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
@@ -165,7 +164,7 @@ public class CalculationLogic implements Serializable {
 	}
 
 	private void performCalculation() {
-		Hashtable<String, PersonData> newCalculationResult = new Hashtable<String, PersonData>();
+		HashMap<String, PersonData> newCalculationResult = new HashMap<String, PersonData>();
 		
 		Iterator<String> it = calculationResult.keySet().iterator();
 		while (it.hasNext()){
@@ -187,7 +186,7 @@ public class CalculationLogic implements Serializable {
 		}
 	}
 
-	private Hashtable<String, PersonData> removeLoopRefunds(Hashtable<String, PersonData> newCalculationResult) {
+	private HashMap<String, PersonData> removeLoopRefunds(HashMap<String, PersonData> newCalculationResult) {
 
 		Iterator<String> itMain = newCalculationResult.keySet().iterator();
 		while(itMain.hasNext()){
@@ -242,7 +241,7 @@ public class CalculationLogic implements Serializable {
 		this.inputPaysList = list;
 	}
 
-	public void setCalculationResult(Hashtable<String, PersonData> calculationResult) {
+	public void setCalculationResult(HashMap<String, PersonData> calculationResult) {
 		this.calculationResult = calculationResult;
 	}
 

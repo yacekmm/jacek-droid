@@ -2,28 +2,27 @@ package pl.looksok.activity.calcresult;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
-
-import android.content.Context;
-import android.content.Intent;
-import android.text.Html;
-import android.util.Log;
-import android.widget.Toast;
 
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.utils.Constants;
+import android.content.Context;
+import android.content.Intent;
+import android.text.Html;
+import android.util.Log;
+import android.widget.Toast;
 
 public class CalcResultUtils {
 
 	private static final String LOG_TAG = CalcResultUtils.class.getSimpleName();
 
 	private String[] getEmailsArray(Context context, CalculationLogic calc) {
-		Hashtable<String, PersonData> calcResult = calc.getCalculationResult();
+		HashMap<String, PersonData> calcResult = calc.getCalculationResult();
 		String [] emails = new String[calcResult.size()];
 		boolean noEmailsProvidedInfoShown = false;
 		boolean isAnyEmailAddedToArray = false;

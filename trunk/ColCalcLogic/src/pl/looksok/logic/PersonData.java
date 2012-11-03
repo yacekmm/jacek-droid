@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -72,7 +71,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		calculateHowMuchRefundIShouldReceive();
 	}
 
-	public void calculateRefundToOthers(Hashtable<String, PersonData> calculationResult) {
+	public void calculateRefundToOthers(HashMap<String, PersonData> calculationResult) {
 		Set<String> c = calculationResult.keySet();
 		Iterator<String> it = c.iterator();
 

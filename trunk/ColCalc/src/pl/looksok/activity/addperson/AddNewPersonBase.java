@@ -1,8 +1,8 @@
 package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 
 import pl.looksok.R;
@@ -50,7 +50,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected void loadInputDataFromBundle(Bundle extras) {
 		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-		calc.setCalculationResult(new Hashtable<String, PersonData>());
+		calc.setCalculationResult(new HashMap<String, PersonData>());
 
 		for (PersonData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);
@@ -115,8 +115,8 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			for (PersonData pd : newInputData) {
 				inputPaysList.add(pd);
 			}
-			calc.setInputPaysList(inputPaysList);
-//			calc.calculate(inputPaysList);
+//			calc.setInputPaysList(inputPaysList);
+			calc.calculate(inputPaysList);
 			Intent intent = new Intent(getApplicationContext(), nextActivityClass) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
@@ -131,8 +131,8 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected void calculateAndShowResults() {
 		try{
-//			calc.calculate(inputPaysList);
-			calc.setInputPaysList(inputPaysList);
+			calc.calculate(inputPaysList);
+//			calc.setInputPaysList(inputPaysList);
 			Intent intent = new Intent(this.getApplicationContext(), CalculationActivity.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
