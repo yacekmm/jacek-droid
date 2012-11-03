@@ -7,10 +7,9 @@ import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 
 public class CalculationUtils {
-	public static HashMap<String, PersonData> correctLoopRefund(
-			HashMap<String, PersonData> newCalculationResult,
-			String personName, String refundPersonName, double myRefundForHim,
-			double hisRefundToMe) {
+	public static HashMap<String, PersonData> correctLoopRefund(HashMap<String, PersonData> newCalculationResult,
+			String personName, String refundPersonName, double myRefundForHim, double hisRefundToMe) {
+		
 		double correctedMyRefundForHim;
 		double correctedHisRefundToMe;
 		if(myRefundForHim > hisRefundToMe){
@@ -18,7 +17,7 @@ public class CalculationUtils {
 			correctedHisRefundToMe = 0;
 		}else{
 			correctedMyRefundForHim = 0;
-			correctedHisRefundToMe = hisRefundToMe = myRefundForHim;
+			correctedHisRefundToMe = hisRefundToMe - myRefundForHim;
 		}
 		newCalculationResult.get(personName).getRefundForOtherPeople().put(refundPersonName, correctedMyRefundForHim);
 
