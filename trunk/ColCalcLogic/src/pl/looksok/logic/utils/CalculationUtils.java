@@ -78,4 +78,17 @@ public class CalculationUtils {
 		}
 		return totalPay;
 	}
+
+	public static HashMap<String, PersonData> removeForwardedRefunds(HashMap<String, PersonData> newCalculationResult) {
+		Iterator<String> it = newCalculationResult.keySet().iterator();
+		while(it.hasNext()){
+			PersonData pd = newCalculationResult.get(it.next());
+			
+			if(pd.getPersonDebts().size() > 0 && pd.getPersonRefunds().size() > 0){
+				System.out.println("ELIGIBLE FOR FORWARDED PAYMENTS!!! " + pd.getName());
+			}
+		}
+		
+		return newCalculationResult;
+	}
 }
