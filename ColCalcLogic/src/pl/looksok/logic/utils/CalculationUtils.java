@@ -1,15 +1,14 @@
 package pl.looksok.logic.utils;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 
 public class CalculationUtils {
-	public static Hashtable<String, PersonData> correctLoopRefund(
-			Hashtable<String, PersonData> newCalculationResult,
+	public static HashMap<String, PersonData> correctLoopRefund(
+			HashMap<String, PersonData> newCalculationResult,
 			String personName, String refundPersonName, double myRefundForHim,
 			double hisRefundToMe) {
 		double correctedMyRefundForHim;
@@ -27,9 +26,9 @@ public class CalculationUtils {
 		return newCalculationResult;
 	}
 	
-	public static Hashtable<String, PersonData> includeGiftPaymentsInCalculation(
-			Hashtable<String, PersonData> newCalculationResult, CalculationLogic giftCalc) {
-		Hashtable<String, PersonData> giftCalcResult = giftCalc.getCalculationResult();
+	public static HashMap<String, PersonData> includeGiftPaymentsInCalculation(
+			HashMap<String, PersonData> newCalculationResult, CalculationLogic giftCalc) {
+		HashMap<String, PersonData> giftCalcResult = giftCalc.getCalculationResult();
 		Iterator<String> giftIt = giftCalcResult.keySet().iterator();
 		while(giftIt.hasNext()){
 			PersonData giftGiverPerson = giftCalcResult.get(giftIt.next());

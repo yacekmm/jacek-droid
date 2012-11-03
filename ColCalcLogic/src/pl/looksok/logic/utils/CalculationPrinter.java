@@ -2,7 +2,6 @@ package pl.looksok.logic.utils;
 
 import java.util.Currency;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Locale;
 
@@ -19,7 +18,7 @@ public class CalculationPrinter {
 	 * @param returnToText
 	 * @return
 	 */
-	public static String printCalcResultForResultsList(Hashtable<String, PersonData> calculationResult, String titleText, String returnToText, String forText){
+	public static String printCalcResultForResultsList(HashMap<String, PersonData> calculationResult, String titleText, String returnToText, String forText){
 		StringBuilder sb = new StringBuilder(titleText).append(":\n");
 
 		if(calculationResult != null){
@@ -50,7 +49,7 @@ public class CalculationPrinter {
 	 * @param endOfLine 
 	 * @return
 	 */
-	public static String printCalcResultForEmail(Hashtable<String, PersonData> calculationResult, String titleText, String howMuchPaidText, 
+	public static String printCalcResultForEmail(HashMap<String, PersonData> calculationResult, String titleText, String howMuchPaidText, 
 			String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
 		StringBuilder sb = new StringBuilder(titleText).append(":").append(endOfLine);
 
