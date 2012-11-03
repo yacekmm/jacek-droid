@@ -51,7 +51,7 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
-		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, this.equalPayments);
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, this.equalPayments, calculationType);
 		
 		if(calculationType.equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
 			calculateGiftsRefunds(inputPaysList);
@@ -102,7 +102,7 @@ public class CalculationLogic implements Serializable {
 		if(giftCalc != null){
 			giftCalc.recalculate();
 		}
-		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, equalPayments);
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, equalPayments, calculationType);
 		return calculate(inputPays);
 	}
 
