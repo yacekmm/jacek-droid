@@ -52,6 +52,7 @@ public class CalculationActivity extends ColCalcActivity {
 		initButtons();
 		populateListArray();
 		initCalculationDetailsBar();
+//		calc.setCalculationResult(calculationResult);
 	}
 
 	private void initButtons() {
@@ -164,7 +165,7 @@ public class CalculationActivity extends ColCalcActivity {
 	}
 
 	public void editPerson(View v) {
-		PersonData pd = calc.findPersonInList((PersonData)v.getTag());
+		PersonData pd = calc.findPersonInList(((PersonData)v.getTag()).getName());
 		calc.getInputPaysList().remove(pd);
 
 		Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
@@ -176,7 +177,7 @@ public class CalculationActivity extends ColCalcActivity {
 	}
 
 	public void removePerson(View v){
-		personDataHolder = calc.findPersonInList((PersonData)v.getTag());
+		personDataHolder = calc.findPersonInList(((PersonData)v.getTag()).getName());
 		showDialog(DIALOG_REMOVE_PERSON);
 	}
 

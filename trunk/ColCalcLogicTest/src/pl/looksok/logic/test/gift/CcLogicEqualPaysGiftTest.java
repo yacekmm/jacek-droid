@@ -165,8 +165,8 @@ public class CcLogicEqualPaysGiftTest extends TestCase {
 		HashMap<String, Double> personADebts = calc.getPersonDebts(Constants.personAName);
 		HashMap<String, Double> personBDebts = calc.getPersonDebts(Constants.personBName);
 		
-		HashMap<String, Double> personARefunds = calc.getPerson(Constants.personAName).getRefundsFromOtherPeople();
-		HashMap<String, Double> personBRefunds = calc.getPerson(Constants.personBName).getRefundsFromOtherPeople();
+		HashMap<String, Double> personARefunds = calc.getPersonRefunds(Constants.personAName);
+		HashMap<String, Double> personBRefunds = calc.getPersonRefunds(Constants.personBName);
 		
 		//personA
 		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personADebts.size() == 0);

@@ -7,6 +7,29 @@ import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 
 public class CalculationUtils {
+	
+
+	public static HashMap<String, PersonData> removeLoopRefunds(HashMap<String, PersonData> newCalculationResult) {
+
+		Iterator<String> itMain = newCalculationResult.keySet().iterator();
+		while(itMain.hasNext()){
+			String personName = itMain.next();
+			HashMap<String, Double> refundForOtherPeople = newCalculationResult.get(personName).getRefundForOtherPeople();
+			Iterator<String> itReturnList = refundForOtherPeople.keySet().iterator();
+			while(itReturnList.hasNext()){
+				String refundPersonName = itReturnList.next();
+				double myRefundForHim = newCalculationResult.get(personName).getRefundForOtherPeople().get(refundPersonName);
+				if(myRefundForHim > 0){
+					double hisRefundToMe = newCalculationResult.get(refundPersonName).getRefundForOtherPeople().get(personName);
+					if(hisRefundToMe > 0){
+						newCalculationResult = CalculationUtils.correctLoopRefund(newCalculationResult, personName, refundPersonName, myRefundForHim, hisRefundToMe);
+					}
+				}
+			}
+		}
+		return newCalculationResult;
+	}
+	
 	public static HashMap<String, PersonData> correctLoopRefund(HashMap<String, PersonData> newCalculationResult,
 			String personName, String refundPersonName, double myRefundForHim, double hisRefundToMe) {
 		

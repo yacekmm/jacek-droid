@@ -1,7 +1,6 @@
 package pl.looksok.activity.addperson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -50,7 +49,7 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected void loadInputDataFromBundle(Bundle extras) {
 		calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-		calc.setCalculationResult(new HashMap<String, PersonData>());
+		calc.resetCalculationResult();
 
 		for (PersonData data : calc.getInputPaysList()) {
 			data.setAlreadyRefunded(0.0);

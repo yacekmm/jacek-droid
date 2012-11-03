@@ -64,9 +64,9 @@ public class CcLogicCalcResultFormatTest extends TestCase {
 		
 		calc.calculate(inputPaysList);
 		
-		HashMap<String, Double> personARefunds = calc.setPersonRefundsFromOthers(Constants.personAName);
-		HashMap<String, Double> personBRefunds = calc.setPersonRefundsFromOthers(Constants.personBName);
-		HashMap<String, Double> personCRefunds = calc.setPersonRefundsFromOthers(Constants.personCName);
+		HashMap<String, Double> personARefunds = calc.getPersonRefunds(Constants.personAName);
+		HashMap<String, Double> personBRefunds = calc.getPersonRefunds(Constants.personBName);
+		HashMap<String, Double> personCRefunds = calc.getPersonRefunds(Constants.personCName);
 		
 		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personARefunds.get(Constants.personBName));
 		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 5.0, personARefunds.get(Constants.personCName));
