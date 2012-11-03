@@ -95,6 +95,7 @@ public class CalculationActivity extends ColCalcActivity {
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 			calcNameEditText.setText(calc.getCalcName());
+			calc.recalculate();
 		}else{
 			calc = new CalculationLogic();
 			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);

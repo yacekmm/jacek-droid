@@ -115,7 +115,8 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			for (PersonData pd : newInputData) {
 				inputPaysList.add(pd);
 			}
-			calc.calculate(inputPaysList);
+			calc.setInputPaysList(inputPaysList);
+//			calc.calculate(inputPaysList);
 			Intent intent = new Intent(getApplicationContext(), nextActivityClass) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
@@ -130,8 +131,8 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 	protected void calculateAndShowResults() {
 		try{
-			calc.calculate(inputPaysList);
-
+//			calc.calculate(inputPaysList);
+			calc.setInputPaysList(inputPaysList);
 			Intent intent = new Intent(this.getApplicationContext(), CalculationActivity.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);

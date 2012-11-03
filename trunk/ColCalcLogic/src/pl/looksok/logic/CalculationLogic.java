@@ -57,7 +57,8 @@ public class CalculationLogic implements Serializable {
 			calculateGiftsRefunds(inputPaysList);
 		}
 		
-		return calculate(inputPays);
+		Hashtable<String, PersonData> result = calculate(inputPays);
+		return result;
 	}
 
 	private void calculateGiftsRefunds(List<PersonData> inputPaysList) {
@@ -89,7 +90,7 @@ public class CalculationLogic implements Serializable {
 			}
 		}
 		
-		if(giftGivers.size()>1){
+		if(giftGivers.size()>0){
 			giftCalc.setEqualPayments(false);
 			giftCalc.calculate(giftGivers);
 		}
@@ -120,9 +121,9 @@ public class CalculationLogic implements Serializable {
 	
 
 	public Hashtable<String, PersonData> recalculate() {
+		System.out.println("Recalculating");
 		resetInputData();
 		if(giftCalc != null){
-//			giftCalc.resetInputData();
 			giftCalc.recalculate();
 		}
 		HashMap<String, PersonData> inputPays = convertAndValidateInput();
@@ -235,6 +236,10 @@ public class CalculationLogic implements Serializable {
 	
 	public List<PersonData> getInputPaysList() {
 		return inputPaysList;
+	}
+	
+	public void setInputPaysList(List<PersonData> list) {
+		this.inputPaysList = list;
 	}
 
 	public void setCalculationResult(Hashtable<String, PersonData> calculationResult) {
