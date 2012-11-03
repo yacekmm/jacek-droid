@@ -195,8 +195,9 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			HashSet<PersonData> dataToAdd = new HashSet<PersonData>();
 			dataToAdd.add(editPersonData);
 			saveAndShowResults(dataToAdd);
+		}else{
+			calculateAndShowResults();
 		}
-		finish();
 		super.onBackPressed();
 	}
 
