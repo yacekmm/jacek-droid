@@ -64,7 +64,7 @@ public class CcLogicGiftDebtForwarderTest extends TestCase {
 		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personBDebts.size() == 1);
 		assertTrue(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, personBRefunds.size() == 1);
 		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 8.0, personBRefunds.get(Constants.personDName));
-		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 8.0, personBDebts.get(Constants.personAName));
+		assertEquals(Constants.INCORRECT_FORWARD_PAYMENT_VALUE, 9.0, personBDebts.get(Constants.personAName));
 		
 		
 		
