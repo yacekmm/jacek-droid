@@ -127,7 +127,7 @@ public class CalculationLogic implements Serializable {
 			newCalculationResult = CalculationUtils.includeGiftPaymentsInCalculation(newCalculationResult, giftCalc);
 			calculationResult = CalculationUtils.removeLoopRefunds(newCalculationResult);
 			buildRefundMapForPersons();
-			calculationResult = CalculationUtils.removeForwardedRefunds(newCalculationResult);
+			calculationResult = CalculationUtils.forwardedRefundsDetector(newCalculationResult);
 		}else{
 			buildRefundMapForPersons();
 		}
@@ -168,7 +168,7 @@ public class CalculationLogic implements Serializable {
 	
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
-			return calculationResult.get(personA).getCalculatedReturnForPersonB(personB);
+			return calculationResult.get(personA).getMyDebtForPersonB(personB);
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
@@ -270,8 +270,8 @@ public class CalculationLogic implements Serializable {
 			}
 		}
 		PersonData pd = calculationResult.get(personName);
-		pd.setRefundsFromOtherPeople(result);
-		return pd.getPersonRefunds();
+		pd.setMyRefunds(result);
+		return pd.getMyRefunds();
 	}
 
 	public long getId() {
@@ -279,6 +279,6 @@ public class CalculationLogic implements Serializable {
 	}
 
 	public HashMap<String, Double> getPersonRefunds(String personName) {
-		return calculationResult.get(personName).getPersonRefunds();
+		return calculationResult.get(personName).getMyRefunds();
 	}
 }
