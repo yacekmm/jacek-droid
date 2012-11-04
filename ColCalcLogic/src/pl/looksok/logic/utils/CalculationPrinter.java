@@ -79,7 +79,7 @@ public class CalculationPrinter {
 	public static String printPersonRefundsFromOthers(PersonData pd, String returnToText, String forText){
 		StringBuilder sb = new StringBuilder(pd.getName());
 		sb.append(" ").append(returnToText).append(":\n");
-		HashMap<String, Double> refundMap = pd.getPersonRefunds();
+		HashMap<String, Double> refundMap = pd.getMyRefunds();
 		
 		if(refundMap.size()<=0)
 			return "";
@@ -94,7 +94,7 @@ public class CalculationPrinter {
 	}
 
 	public static String printPersonRefundsFromOthersSimple(PersonData pd) {
-		HashMap<String, Double> refundMap = pd.getPersonRefunds();
+		HashMap<String, Double> refundMap = pd.getMyRefunds();
 		return simplePrinter("+", refundMap);
 	}
 
@@ -141,10 +141,10 @@ public class CalculationPrinter {
 		sb.append(", ").append(returnToText).append(":").append(endOfLine);
 		boolean isThereAnyPersonOnReturnList = false;
 
-		Iterator<String> it = pp.getRefundForOtherPeople().keySet().iterator();
+		Iterator<String> it = pp.getMyDebts().keySet().iterator();
 		while(it.hasNext()) {
 			String key = it.next();
-			double result = pp.getRefundForOtherPeople().get(key);
+			double result = pp.getMyDebts().get(key);
 			if(result >0){
 				isThereAnyPersonOnReturnList = true;
 				sb.append(result).append(" ").append(currency).append(" ");

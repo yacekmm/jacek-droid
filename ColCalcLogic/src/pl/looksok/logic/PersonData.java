@@ -25,8 +25,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	private double toReturn;
 	private double totalRefundForThisPerson;
 	private HashMap<String, PersonData> otherPeoplePayments;
-	private HashMap<String, Double> refundForOtherPeople;
-	private HashMap<String, Double> refundsFromOtherPeople;
+	private HashMap<String, Double> myDebts;
+	private HashMap<String, Double> myRefunds;
 	private double alreadyReturned;
 	private double alreadyRefunded = 0.0;
 
@@ -43,7 +43,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchIPaidForGift(pd.getHowMuchIPaidForGift());
 
 		otherPeoplePayments = inputPays;
-		refundForOtherPeople = new HashMap<String, Double>();
+		myDebts = new HashMap<String, Double>();
 	}
 
 	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails) {
@@ -79,7 +79,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 			PersonData pp2 = calculationResult.get(it.next());
 			if(this.getName() != pp2.getName()){
 				double returnValue = howMuchIGiveBackToPersonB(pp2);
-				getRefundForOtherPeople().put(pp2.getName(), returnValue);
+				getMyDebts().put(pp2.getName(), returnValue);
 			}
 		}
 	}
@@ -135,8 +135,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	public void increaseRefund(String forWhichPerson, double payValueToAdd) {
-		double currentValue = getRefundForOtherPeople().remove(forWhichPerson);
-		getRefundForOtherPeople().put(forWhichPerson, currentValue + payValueToAdd);
+		double currentValue = getMyDebts().remove(forWhichPerson);
+		getMyDebts().put(forWhichPerson, currentValue + payValueToAdd);
 	}
 
 	@Override
@@ -147,10 +147,10 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	public HashMap<String, Double> getPersonDebts() {
 		HashMap<String, Double> result = new HashMap<String, Double>();
 
-		Iterator<String> it = getRefundForOtherPeople().keySet().iterator();
+		Iterator<String> it = getMyDebts().keySet().iterator();
 		while(it.hasNext()){
 			String key = it.next();
-			Double value = getRefundForOtherPeople().get(key);
+			Double value = getMyDebts().get(key);
 			if(value > 0){
 				result.put(key, FormatterHelper.roundDouble(value, 2));
 			}
@@ -195,16 +195,16 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.howMuchIShouldPay = value;
 	}
 
-	public HashMap<String, Double> getRefundForOtherPeople() {
-		return refundForOtherPeople;
+	public HashMap<String, Double> getMyDebts() {
+		return myDebts;
 	}
 
-	public void setRefundForOtherPeople(HashMap<String, Double> refundForOtherPeople) {
-		this.refundForOtherPeople = refundForOtherPeople;
+	public void setMyDebts(HashMap<String, Double> refundForOtherPeople) {
+		this.myDebts = refundForOtherPeople;
 	}
 
-	public double getCalculatedReturnForPersonB(String personB) {
-		return getRefundForOtherPeople().get(personB);
+	public double getMyDebtForPersonB(String personB) {
+		return getMyDebts().get(personB);
 	}
 
 	public double getAlreadyRefunded() {
@@ -215,12 +215,12 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.alreadyRefunded = alreadyRefunded;
 	}
 
-	public HashMap<String, Double> getPersonRefunds() {
-		return refundsFromOtherPeople;
+	public HashMap<String, Double> getMyRefunds() {
+		return myRefunds;
 	}
 
-	public void setRefundsFromOtherPeople(HashMap<String, Double> refundsFromOtherPeople) {
-		this.refundsFromOtherPeople = refundsFromOtherPeople;
+	public void setMyRefunds(HashMap<String, Double> refundsFromOtherPeople) {
+		this.myRefunds = refundsFromOtherPeople;
 	}
 
 	public double getHowMuchIPaid() {
