@@ -123,7 +123,7 @@ public class CalculationPrinter {
 		while(it.hasNext()) {
 			String key = it.next();
 			double value = paysMap.get(key);
-			sb.append(value).append(" ").append(Currency.getInstance(Locale.getDefault()).getSymbol()).append(" ");
+			sb.append(FormatterHelper.currencyFormat(value, 2)).append(" ");
 			sb.append(separator).append(": ").append(key).append("\n");
 		}
 
@@ -131,10 +131,10 @@ public class CalculationPrinter {
 	}
 	
 	public static String printPersonReturnsToOthersDetails(PersonData pp, String howMuchPaidText, String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
-		String currency = Currency.getInstance(Locale.getDefault()).getSymbol();
+//		String currency = Currency.getInstance(Locale.getDefault()).getSymbol();
 
-		StringBuilder sb = new StringBuilder(pp.getName()).append(" - ").append(howMuchPaidText).append(": ").append(pp.getPayMadeByPerson()).append(currency).append(" ");
-		sb.append("(").append(howMuchShouldPayText).append(": ").append(pp.getHowMuchPersonShouldPay()).append(currency).append(")");
+		StringBuilder sb = new StringBuilder(pp.getName()).append(" - ").append(howMuchPaidText).append(": ").append(FormatterHelper.currencyFormat(pp.getPayMadeByPerson(),2)).append(" ");
+		sb.append("(").append(howMuchShouldPayText).append(": ").append(FormatterHelper.currencyFormat(pp.getHowMuchPersonShouldPay(),2)).append(")");
 
 		String messageIfNoReturnNeeded = sb.toString() + endOfLine;
 
@@ -147,7 +147,7 @@ public class CalculationPrinter {
 			double result = pp.getMyDebts().get(key);
 			if(result >0){
 				isThereAnyPersonOnReturnList = true;
-				sb.append(result).append(" ").append(currency).append(" ");
+				sb.append(FormatterHelper.currencyFormat(result,2)).append(" ");
 				sb.append(forText).append(": ").append(key).append(endOfLine);
 			}
 		}

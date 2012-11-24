@@ -26,19 +26,23 @@ public class CalcResultUtils {
 		String [] emails = new String[calcResult.size()];
 		boolean noEmailsProvidedInfoShown = false;
 		boolean isAnyEmailAddedToArray = false;
-		
+
 		Iterator<String> it = calcResult.keySet().iterator();
 		int i = 0;
 		while (it.hasNext()){
 			String key = it.next();
 			try{
 				HashSet<String> emailsSet = calcResult.get(key).getEmails();
-				Iterator<String> it2 = emailsSet.iterator();
-				while (it2.hasNext()){
-					String email = it2.next();
-					emails[i] = email; 
-					isAnyEmailAddedToArray = true;
-					break;
+				if(emailsSet.size()==0)
+					emails[i] = "";
+				else{
+					Iterator<String> it2 = emailsSet.iterator();
+					while (it2.hasNext()){
+						String email = it2.next();
+						emails[i] = email; 
+						isAnyEmailAddedToArray = true;
+						break;
+					}
 				}
 			}catch(NullPointerException e){
 				Log.d(LOG_TAG, "Unknown email address for person '" + key + "'. " + e.getMessage());
@@ -49,12 +53,12 @@ public class CalcResultUtils {
 			}
 			i++;
 		}
-		
+
 		if(!isAnyEmailAddedToArray){
 			emails = new String[1];
 			emails[0] = context.getString(R.string.email_utils_error_mockEmailAddress);
 		}
-		
+
 		return emails;
 	}
 
@@ -73,7 +77,7 @@ public class CalcResultUtils {
 				context.getString(R.string.calculation_printText_for),
 				endOfLine
 				));
-		
+
 		return sb.toString();
 	}
 
@@ -86,10 +90,10 @@ public class CalcResultUtils {
 		sb.append("</a>");
 		return sb.toString();
 	}
-	
+
 	public ArrayList<PersonData> readCalcPeopleToListArray(CalculationLogic calc){
 		ArrayList<PersonData> listArray = new ArrayList<PersonData>();
-		
+
 		Iterator<String> it = calc.getCalculationResult().keySet().iterator();
 		while (it.hasNext()){
 			listArray.add(calc.getCalculationResult().get(it.next()));
@@ -105,7 +109,7 @@ public class CalcResultUtils {
 		emailIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.email_subject));
 		emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(buildEmailMessage(context, calc, "<br/>")));
 		emailIntent.setType("text/html");
-		
+
 		return emailIntent;
 	}
 

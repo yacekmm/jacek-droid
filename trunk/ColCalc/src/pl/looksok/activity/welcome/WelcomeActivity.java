@@ -82,6 +82,7 @@ public class WelcomeActivity extends ColCalcActivity {
 	
 	public void shareCalcOnClickHandler(View v){
 		CalculationLogic calcItem = (CalculationLogic)v.getTag();
+		calcItem.recalculate();
 		CalcResultUtils utils = new CalcResultUtils();
 		Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calcItem);
 		startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
