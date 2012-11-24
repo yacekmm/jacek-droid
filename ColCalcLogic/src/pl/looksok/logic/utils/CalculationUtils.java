@@ -68,7 +68,10 @@ public class CalculationUtils {
 				String keyDebtPersonName = giftGiverDebtsIter.next();
 				double debtValue = giftGiverDebts.get(keyDebtPersonName);
 				
-				giftGiverInMainCalc.increaseRefund(keyDebtPersonName, debtValue);
+//				if(giftGiverInMainCalc.)
+//					
+//				else
+					giftGiverInMainCalc.increaseRefund(keyDebtPersonName, debtValue);
 			}
 		}
 		
