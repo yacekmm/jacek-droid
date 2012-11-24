@@ -9,6 +9,7 @@ import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
 import pl.looksok.activity.addperson.utils.InputValidator;
 import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
+import pl.looksok.currencyedittext.CurrencyEditText;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -22,6 +23,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -33,12 +36,14 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	private EditText mNewPersonNameInput;
 	private CheckBox mReceivesGiftCheckBox;
 	private CheckBox mBuysGiftCheckBox;
-	private EditText mGiftValueInput;
+	private CurrencyEditText mGiftValueInput;
 	private TextView mTotalPaysText;
 	
 	private PersonData editPersonData = null;
 	private AtomPayListAdapter adapter;
 	private AtomPayment atomPaymentToRemove = null;
+	
+	private Activity mActivity = this;
 
 	protected static final int PICK_CONTACT = 0;
 
@@ -57,7 +62,8 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		mReceivesGiftCheckBox.setOnCheckedChangeListener(receivesGiftChangeListener);
 		mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
-		mGiftValueInput = (EditText)findViewById(R.id.EnterPays_EditText_giftValue);
+		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
+		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
 		mTotalPaysText = (TextView)findViewById(R.id.EnterPays_paysHeaderText);
 		
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
@@ -186,6 +192,19 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			if(isChecked){
 				mBuysGiftCheckBox.setChecked(false);
 			}
+		}
+	};
+	
+	private OnFocusChangeListener giftValueFocusChangeListener = new OnFocusChangeListener() {
+		
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if(hasFocus){
+				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+			}else{
+				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+			}
+			
 		}
 	};
 
