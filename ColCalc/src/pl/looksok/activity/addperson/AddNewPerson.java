@@ -38,11 +38,11 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	private CheckBox mBuysGiftCheckBox;
 	private CurrencyEditText mGiftValueInput;
 	private TextView mTotalPaysText;
-	
+
 	private PersonData editPersonData = null;
 	private AtomPayListAdapter adapter;
 	private AtomPayment atomPaymentToRemove = null;
-	
+
 	private Activity mActivity = this;
 
 	protected static final int PICK_CONTACT = 0;
@@ -65,7 +65,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
 		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
 		mTotalPaysText = (TextView)findViewById(R.id.EnterPays_paysHeaderText);
-		
+
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
 	}
 
@@ -89,7 +89,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
 		if(adapter!=null)
 			adapter.unregisterOnTotalChangeListener(this);
-		
+
 		if(atomPaymentsList.size()==0)
 			atomPaymentsList.add(new AtomPayment());
 		adapter = null;
@@ -97,12 +97,12 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
 		adapter.registerOnTotalChangeListener(this);
 	}
-	
+
 	public void removeAtomPayOnClickHandler(View v) {
 		atomPaymentToRemove = (AtomPayment)v.getTag();
 		showDialog(DIALOG_REMOVE_PAY);
 	}
-	
+
 	@Override
 	protected void handleRemoveConfirm(int dialogType) {
 		adapter.remove(atomPaymentToRemove);
@@ -139,7 +139,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			startActivityForResult(intent, PICK_CONTACT);
 		}
 	};
-	
+
 	OnClickListener addAtomPaymentClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			adapter.insert(new AtomPayment(), adapter.getCount());
@@ -164,7 +164,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 					emails = utils.getPersonEmailsSet(id, AddNewPerson.this);
 				}
 			}
-			break;
+		break;
 		}
 	}
 
@@ -194,9 +194,9 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			}
 		}
 	};
-	
+
 	private OnFocusChangeListener giftValueFocusChangeListener = new OnFocusChangeListener() {
-		
+
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
 			if(hasFocus){
@@ -204,7 +204,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			}else{
 				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 			}
-			
+
 		}
 	};
 
@@ -225,11 +225,11 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		updateTotalPayValue(totalPay);
 	}
 
-	private void updateTotalPayValue(double payMadeByPerson) {
+	private void updateTotalPayValue(final double payMadeByPerson) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getString(R.string.EnterPays_atomPay_headerText_left)).append(" ");
 		sb.append(CalcFormatterHelper.currencyFormat(payMadeByPerson, 2));
 		sb.append(getString(R.string.EnterPays_atomPay_headerText_right));
-		mTotalPaysText.setText(sb);
+//		mTotalPaysText.setText(sb);
 	}
 }

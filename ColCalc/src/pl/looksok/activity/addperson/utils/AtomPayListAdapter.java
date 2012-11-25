@@ -1,10 +1,15 @@
 package pl.looksok.activity.addperson.utils;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.currencyedittext.CurrencyEditText;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.AtomPayment;
 import android.app.Activity;
 import android.content.Context;
@@ -64,7 +69,8 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 	private void setupItem(AtomPaymentHolder holder) {
 		holder.name.setText(holder.atomPayment.getName());
-		holder.value.setText(String.valueOf(holder.atomPayment.getValue()));
+//		holder.value.setText(String.valueOf(holder.atomPayment.getValue()));
+		holder.value.setText(FormatterHelper.currencyFormat(holder.atomPayment.getValue(), 2));
 	}
 
 	public class AtomPaymentHolder {
@@ -95,14 +101,23 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//				NumberFormat format = NumberFormat.getCurrencyInstance(Locale.getDefault());
+//				String cur = format.getCurrency().getSymbol();
+//				if(s.toString().contains(cur)){
+//					Log.d(LOG_TAG, "S contains currency symbol. aborting persisting it: " + s);
+//					return;
+//				}
+				
 				try{
 					holder.atomPayment.setValue(Double.parseDouble(s.toString()));
 					for (OnTotalPayChangeListener listener : totalPayChangeListeners) {
 						listener.notifyOnTotalPayChange(getTotalPay());
 					}
 				}catch (NumberFormatException e) {
-					Log.d(LOG_TAG, "this is not correct double number. Temporarily it will not be persisted: " + e.getMessage());
+					Log.d(LOG_TAG, "this is not correct double number (s = " + s + "). It will not be persisted: " + e.getMessage());
+					holder.atomPayment.setValue(FormatterHelper.decodeValueFromCurrency(s.toString()));
 				}
+				Log.i(LOG_TAG, "s: " + s + ", atomPayment.value: " + holder.atomPayment.getValue());
 			}
 
 			@Override

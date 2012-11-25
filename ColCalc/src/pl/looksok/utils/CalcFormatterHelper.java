@@ -3,6 +3,8 @@ package pl.looksok.utils;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
+import pl.looksok.currencyedittext.utils.FormatterHelper;
+
 import android.widget.EditText;
 
 public class CalcFormatterHelper {
@@ -18,7 +20,11 @@ public class CalcFormatterHelper {
     	
     	double payDouble = 0.0;
     	if(payString.length() > 0)
-    		payDouble = Double.parseDouble(payString);
+    		try{
+    			payDouble = Double.parseDouble(payString);
+    		}catch (NumberFormatException e) {
+				payDouble = FormatterHelper.decodeValueFromCurrency(payString);
+			}
 		return payDouble;
 	}
 	
