@@ -39,7 +39,10 @@ public class FormatterHelper {
 		} catch (ParseException e) {
 			Log.e(TAG, "ParseException: " + e.getMessage());
 			Log.e(TAG, "Text: " + text);
-			return Double.parseDouble(text);
+			if(text.length() == 0)
+				return 0.0;
+			else
+				return Double.parseDouble(text);
 		}
 	}
 }

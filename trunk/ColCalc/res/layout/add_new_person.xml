@@ -65,7 +65,7 @@
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_normal"
         android:drawableLeft="@drawable/bills"
-        android:text="@string/EnterPays_atomPay_headerText_left"
+        android:text="@string/EnterPays_atomPay_headerText"
         />
 
     <RelativeLayout

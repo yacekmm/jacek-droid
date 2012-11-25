@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -53,30 +54,12 @@ public class CurrencyEditText extends EditText {
 	};
 
 	@Override
-	public Editable getText() {
-		Editable text = super.getText();
-//		Log.d(LOG_TAG, "getting text: " + text);
-		return text;
-	}
-
-	@Override
-	public void setText(CharSequence text, BufferType type) {
-//		Log.d(LOG_TAG, "setting text: " + text);
-		super.setText(text, type);
-	}
-	
-	@Override
 	protected void onFocusChanged(boolean focused, int direction,
 			Rect previouslyFocusedRect) {
 		
 		if(focused){
 			Log.i(LOG_TAG, "focused!");
-			String text = this.getText().toString();
-			double value = FormatterHelper.decodeValueFromCurrency(text);
-			String textToSet = String.valueOf(value);
-			if(textToSet.endsWith(USELESS_DOUBLE_FRACTION))
-				textToSet = textToSet.substring(0, textToSet.indexOf(USELESS_DOUBLE_FRACTION));
-			
+			String textToSet = getTextWithoutCurrrencyFormat(this.getText().toString());
 			this.setText(textToSet);
 		}else{
 			Log.i(LOG_TAG, "lost focus!");
@@ -86,6 +69,16 @@ public class CurrencyEditText extends EditText {
 		}
 
 		super.onFocusChanged(focused, direction, previouslyFocusedRect);
+	}
+
+	private String getTextWithoutCurrrencyFormat(String text) {
+		double value = FormatterHelper.decodeValueFromCurrency(text);
+		String textToSet = String.valueOf(value);
+		if(textToSet.endsWith(USELESS_DOUBLE_FRACTION))
+			textToSet = textToSet.substring(0, textToSet.indexOf(USELESS_DOUBLE_FRACTION));
+		if(textToSet.equals("0"))
+			textToSet = "";
+		return textToSet;
 	}
 	
 }
