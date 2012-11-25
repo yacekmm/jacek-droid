@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-import android.util.Log;
 import android.widget.EditText;
 
 public class FormatterHelper {
+	@SuppressWarnings("unused")
 	private static final String TAG = FormatterHelper.class.getSimpleName();
 
 	public static double roundDouble(double value, int decimalPlaces){
@@ -37,8 +37,8 @@ public class FormatterHelper {
 			Number number = NumberFormat.getCurrencyInstance().parse(text);
 			return Double.parseDouble(number.toString());
 		} catch (ParseException e) {
-			Log.e(TAG, "ParseException: " + e.getMessage());
-			Log.e(TAG, "Text: " + text);
+//			Log.e(TAG, "ParseException: " + e.getMessage());
+//			Log.e(TAG, "Text: " + text);
 			if(text.length() == 0)
 				return 0.0;
 			else

@@ -3,11 +3,8 @@ package pl.looksok.currencyedittext;
 import pl.looksok.currencyedittext.utils.FormatterHelper;
 import android.content.Context;
 import android.graphics.Rect;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,6 +12,7 @@ public class CurrencyEditText extends EditText {
 
 	private static final String USELESS_DOUBLE_FRACTION = ".0";
 	private static final int CURRENCY_FRACTION_DIGITS = 2;
+	@SuppressWarnings("unused")
 	private static final String LOG_TAG = CurrencyEditText.class.getSimpleName();
 
 	public CurrencyEditText(Context context) {
@@ -58,11 +56,11 @@ public class CurrencyEditText extends EditText {
 			Rect previouslyFocusedRect) {
 		
 		if(focused){
-			Log.i(LOG_TAG, "focused!");
+//			Log.i(LOG_TAG, "focused!");
 			String textToSet = getTextWithoutCurrrencyFormat(this.getText().toString());
 			this.setText(textToSet);
 		}else{
-			Log.i(LOG_TAG, "lost focus!");
+//			Log.i(LOG_TAG, "lost focus!");
 			double value = FormatterHelper.readDoubleFromEditText(this);
 			String text = FormatterHelper.currencyFormat(value, CURRENCY_FRACTION_DIGITS);
 			this.setText(text);
