@@ -51,11 +51,13 @@ public class CalculationUtils {
 	public static HashMap<String, PersonData> includeGiftPaymentsInCalculation(HashMap<String, PersonData> newCalculationResult, CalculationLogic giftCalc) {
 		
 //		return giftIncluderV1(newCalculationResult, giftCalc);
-		return giftIncluderV2(newCalculationResult, giftCalc);
+		if(giftCalc != null)
+			return giftIncluderV2(newCalculationResult, giftCalc);
+		else 
+			return newCalculationResult;
 	}
 
 	private static HashMap<String, PersonData> giftIncluderV2(HashMap<String, PersonData> newCalculationResult, CalculationLogic giftCalc) {
-		
 		HashMap<String, PersonData> giftCalcResult = giftCalc.getCalculationResult();
 		Iterator<String> giftCalcResultIt = giftCalcResult.keySet().iterator();
 		while(giftCalcResultIt.hasNext()){

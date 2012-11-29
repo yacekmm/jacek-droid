@@ -15,6 +15,9 @@ import pl.looksok.logic.PersonData;
 import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +33,8 @@ import android.widget.Toast;
 public class CalculationActivity extends ColCalcActivity {
 	protected static final String LOG_TAG = CalculationActivity.class.getSimpleName();
 
+	private static final int SAVE_NEW_CALC = 0;
+
 	private CalculationLogic calc = null;
 	private ListView resultList;
 	private List<PersonData> listArray;
@@ -40,6 +45,8 @@ public class CalculationActivity extends ColCalcActivity {
 	private CalcResultUtils utils = new CalcResultUtils();
 
 	private EditText calcNameEditText;
+
+	private static boolean calcWasEdited = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -82,12 +89,12 @@ public class CalculationActivity extends ColCalcActivity {
 		adapter = new ResultsListAdapter(CalculationActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
-		
+
 		if(adapter.getItems().size() > 0)
 			findViewById(R.id.calc_emptyPeopleListText).setVisibility(View.GONE);
 		else
 			findViewById(R.id.calc_emptyPeopleListText).setVisibility(View.VISIBLE);
-			
+
 	}
 
 	private void readInputBundle() {
@@ -104,18 +111,21 @@ public class CalculationActivity extends ColCalcActivity {
 
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			String calcName = calcNameEditText.getText().toString();
-			if(calcName.length() == 0)
-				calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
-
-			calc.setCalcName( calcName );
-			calc.setDateSaved(DateTime.now());
-			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
-			Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
-
+			saveCalculation();
 			goToWelcomeScreen();
 		}
 	};
+
+	protected void saveCalculation() {
+		String calcName = calcNameEditText.getText().toString();
+		if(calcName.length() == 0)
+			calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
+
+		calc.setCalcName( calcName );
+		calc.setDateSaved(DateTime.now());
+		CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+		Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
+	}
 
 	OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
@@ -130,6 +140,7 @@ public class CalculationActivity extends ColCalcActivity {
 
 	OnClickListener addPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
+			calcWasEdited = true;
 			calc.setCalcName(calcNameEditText.getText().toString());
 			Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
@@ -141,6 +152,7 @@ public class CalculationActivity extends ColCalcActivity {
 
 	OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
+			calcWasEdited = true;
 			calc.setCalcName(calcNameEditText.getText().toString());
 			Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
@@ -157,6 +169,7 @@ public class CalculationActivity extends ColCalcActivity {
 	};
 
 	private void goToWelcomeScreen() {
+		calcWasEdited = false;
 		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
 		startActivity(intent);
 		overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
@@ -164,6 +177,8 @@ public class CalculationActivity extends ColCalcActivity {
 	}
 
 	public void editPerson(View v) {
+		calcWasEdited = true;
+
 		PersonData pd = calc.findPersonInList(((PersonData)v.getTag()).getName());
 		calc.getInputPaysList().remove(pd);
 
@@ -194,9 +209,41 @@ public class CalculationActivity extends ColCalcActivity {
 
 	@Override
 	public void onBackPressed() {
-		Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class) ;
-		startActivity(intent);
-		overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
-		finish();
+		if(CalcPersistence.isCalcOnSavedList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc)){
+			if(calcWasEdited)
+				saveCalculation();
+			goToWelcomeScreen();
+		}else if(calc.getInputPaysList().size()>0)
+			showDialog(SAVE_NEW_CALC);
+		else 
+			goToWelcomeScreen();
+	}
+
+	protected Dialog onCreateDialog(int id) {
+		Dialog result = super.onCreateDialog(id);
+		switch (id) {
+		case SAVE_NEW_CALC:
+			result = createDialogSaveNewCalc();
+		}
+		return result;
+	}
+
+	private Dialog createDialogSaveNewCalc() {
+		return new AlertDialog.Builder(this)
+		.setIcon(R.drawable.save)
+		.setTitle(R.string.calculation_dialog_saveCalc)
+		.setPositiveButton(R.string.calculation_dialog_yes, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				saveCalculation();
+				goToWelcomeScreen();
+			}
+		})
+		.setNegativeButton(R.string.calculation_dialog_no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				goToWelcomeScreen();
+			}
+		})
+		.create();
 	}
 }
