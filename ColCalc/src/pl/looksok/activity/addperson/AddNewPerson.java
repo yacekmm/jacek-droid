@@ -30,14 +30,12 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeListener {
 	private EditText mNewPersonNameInput;
 	private CheckBox mReceivesGiftCheckBox;
 	private CheckBox mBuysGiftCheckBox;
 	private CurrencyEditText mGiftValueInput;
-	private TextView mTotalPaysText;
 
 	private PersonData editPersonData = null;
 	private AtomPayListAdapter adapter;
@@ -64,7 +62,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
 		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
-		mTotalPaysText = (TextView)findViewById(R.id.EnterPays_paysHeaderText);
 
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
 	}

@@ -8,12 +8,13 @@
     <string name="calculation_TextView_name">Imię</string>
     <string name="calculation_TextView_personPay">0,00</string>
     <string name="calculation_TextView_currency">zł</string>
-    <string name="calculation_dialog_text_increasePayment">Zwiększ składkę dla tej osoby o:</string>
-    <string name="calculation_dialog_title_increasePAyment">Zwiększanie składki</string>
     <string name="calculation_dialog_button_ok">OK</string>
     <string name="calculation_dialog_button_deletePerson">Usuń</string>
     <string name="calculation_dialog_button_cancel">Anuluj</string>
     <string name="calculation_dialog_remove_text">Usunąć?</string>
+    <string name="calculation_dialog_saveCalc">Zapisać to rozliczenie?</string>
+    <string name="calculation_dialog_yes">Tak</string>
+    <string name="calculation_dialog_no">Nie</string>
     <string name="calculation_default_name_text">Rozliczenie z </string>
     <string name="calculation_noPeopleAddedYet">dodaj nowe osoby\naby zobaczyć rozliczenie</string>
     

@@ -1,11 +1,7 @@
 package pl.looksok.activity.addperson.utils;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 
 import pl.looksok.R;
 import pl.looksok.currencyedittext.CurrencyEditText;

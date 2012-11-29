@@ -68,21 +68,29 @@ public class CalcPersistence {
 			calcList = new ArrayList<CalculationLogic>();
 		}
 		
-		boolean exist = false;
-		int index = 0;
-		for (CalculationLogic calcItem : calcList) {
-			if(calcItem.getId() == calc.getId()){
-				index = calcList.indexOf(calcItem);
-				exist = true;
-				break;
-			}
-		}
+		int index = findCalcInList(calc, calcList);
 		
-		if(exist)
+		if(index >= 0)
 			calcList.remove(index);
 
 		calcList.add(0, calc);
 		saveCalculationList(context, filename, calcList);
+	}
+
+	public static boolean isCalcOnSavedList(Context context, String filename, CalculationLogic calc){
+		return findCalcInList(calc, readStoredCalculationList(context, filename)) >= 0;
+	}
+	
+	private static int findCalcInList(CalculationLogic calc,
+			List<CalculationLogic> calcList) {
+		int index = -1;
+		for (CalculationLogic calcItem : calcList) {
+			if(calcItem.getId() == calc.getId()){
+				index = calcList.indexOf(calcItem);
+				break;
+			}
+		}
+		return index;
 	}
 
 	public static void removeCalculationFromList(Context context,
