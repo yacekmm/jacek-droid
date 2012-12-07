@@ -51,7 +51,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/EnterPays_personHeader"
             android:background="@drawable/button_bgnd_gray_right"
-            android:contentDescription="@string/EnterPays_button_getContact"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/addressbook" />
     </RelativeLayout>
 

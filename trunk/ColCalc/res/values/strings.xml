@@ -27,10 +27,7 @@
     <string name="enterPaysMulti_personPrefix">Osoba</string>
     <string name="enterPaysMulti_pays">płatności</string>
     
-    <string name="EnterPays_TextView_EnterPayPerEachPerson">Dodaj nową osobę</string>
-    <string name="EnterPays_CheckBox_EqualPays">Wszyscy składają się po równo</string>
     <string name="EnterPays_TextView_Name">wpisz imię&#8230;</string>
-    <string name="EnterPays_button_getContact">z kontaktów</string>
     <string name="EnterPays_button_addAtomPayment">nowa płatność</string>
     <string name="EnterPays_TextView_Pay">Ile zapłacił:</string>
     <string name="EnterPays_TextView_ZeroValue">0</string>
