@@ -1,23 +1,15 @@
 package pl.looksok.logic.test.gift.forwarders;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
 import junit.framework.TestCase;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
-import pl.looksok.logic.PersonData;
-import pl.looksok.logic.test.utils.Constants;
-import pl.looksok.logic.test.utils.GiftTestScenarioBuilder;
 
 public class CcLogicGiftDebtForwarderTest extends TestCase {
 
 	private CalculationLogic calc;
-	private List<PersonData> inputPaysList;
+//	private List<PersonData> inputPaysList;
 	private boolean equalPayments = true;
-	private HashSet<String> giftReceivers;
+//	private HashSet<String> giftReceivers;
 
 	public CcLogicGiftDebtForwarderTest() {
 		super();
@@ -27,8 +19,8 @@ public class CcLogicGiftDebtForwarderTest extends TestCase {
 		calc = new CalculationLogic();
 		calc.setEqualPayments(equalPayments);
 		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
-		inputPaysList = new ArrayList<PersonData>();
-		giftReceivers = new HashSet<String>();
+//		inputPaysList = new ArrayList<PersonData>();
+//		giftReceivers = new HashSet<String>();
 		super.setUp();
 	}
 	

@@ -1,9 +1,7 @@
 package pl.looksok.logic.utils;
 
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
 
 import pl.looksok.logic.PersonData;
 
