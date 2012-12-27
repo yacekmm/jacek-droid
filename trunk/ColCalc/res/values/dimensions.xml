@@ -28,4 +28,5 @@
 
     <dimen name="border_radius">8sp</dimen>
 
+    <dimen name="adMob_bannerHeight">40sp</dimen>
 </resources>

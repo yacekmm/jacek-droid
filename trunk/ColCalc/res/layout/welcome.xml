@@ -32,7 +32,7 @@
         android:id="@+id/welcome_savedCalcs_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/welcome_AdMob"
+        android:layout_above="@+id/welcome_adView"
         android:layout_below="@+id/welcome_mode_potluckParty"
         android:layout_marginBottom="@dimen/margin_normal"
         android:layout_marginLeft="@dimen/margin_normal"
@@ -49,24 +49,19 @@
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/welcome_AdMob"
+        android:layout_above="@+id/welcome_adView"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/margin_big" />
 
-    <LinearLayout
-        android:id="@+id/welcome_AdMob"
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/welcome_adView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-
-        <com.google.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/adMobPublisherID"
-            ads:loadAdOnCreate="true" />
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adMob_publisherID"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/adMob_testDevices" />
 
 </RelativeLayout>

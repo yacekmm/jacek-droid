@@ -3,7 +3,8 @@
 
     <string name="app_name">Potluck</string>
     <string name="emptyText"></string>
-    <string name="adMobPublisherID">a150dc376e2d3f0</string>
+    <string name="adMob_publisherID">a150dc376e2d3f0</string>
+    <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796</string>
     
     
     <string name="calculation_calcName_hint">wpisz nazwę imprezy</string>
