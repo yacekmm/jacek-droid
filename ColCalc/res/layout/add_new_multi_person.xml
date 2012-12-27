@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/enterPaysMulti_mainLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/gray_dark"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_normal"
-    android:focusableInTouchMode="true" >
+    android:layout_height="fill_parent" >
 
-    <include
+    <LinearLayout
+        android:id="@+id/enterPaysMulti_mainLayout"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_button"
-        layout="@layout/add_person_header" />
+        android:layout_height="fill_parent"
+        android:background="@color/gray_dark"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_normal" >
 
-    <TextView
-        style="@style/add_person_section_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:drawableLeft="@drawable/person_light"
-        android:text="@string/enterPaysMulti_TextView_peopleCount" />
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/height_button"
+            layout="@layout/add_person_header" />
 
-    <HorizontalScrollView
-        android:id="@+id/enterPaysMulti_peopleCount_scroll"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:id="@+id/enterPaysMulti_peopleCount_content"
+        <TextView
+            style="@style/add_person_section_header"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_normal" />
-    </HorizontalScrollView>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:drawableLeft="@drawable/person_light"
+            android:text="@string/enterPaysMulti_TextView_peopleCount" />
 
-    <TextView
-        style="@style/add_person_section_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:drawableLeft="@drawable/bills"
-        android:text="@string/enterPaysMulti_pays" />
+        <HorizontalScrollView
+            android:id="@+id/enterPaysMulti_peopleCount_scroll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/enterPaysMulti_peopleCount_content"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_normal" />
+        </HorizontalScrollView>
+
+        <TextView
+            style="@style/add_person_section_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:drawableLeft="@drawable/bills"
+            android:text="@string/enterPaysMulti_pays" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -59,13 +63,25 @@
 
             <pl.looksok.currencyedittext.CurrencyEditText
                 android:id="@+id/enterPaysMulti_EditText_Pay"
+                style="@style/textMediumDarkBold"
                 android:layout_width="@dimen/height_button_big"
                 android:layout_height="@dimen/height_button"
                 android:layout_alignParentRight="true"
-                android:text="@string/EnterPays_TextView_ZeroValue"
-                style="@style/textMediumDarkBold"
+                android:background="@drawable/edittext_bgnd_gray"
                 android:gravity="center"
-                android:background="@drawable/edittext_bgnd_gray" />
+                android:text="@string/EnterPays_TextView_ZeroValue" />
         </RelativeLayout>
+    </LinearLayout>
 
-</LinearLayout>
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/enterPaysMulti_adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adMob_publisherID"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/adMob_testDevices" />
+
+</RelativeLayout>

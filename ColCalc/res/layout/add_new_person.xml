@@ -4,13 +4,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gray_dark"
-    android:padding="@dimen/margin_normal"
-    android:focusableInTouchMode="true" >
+    android:focusableInTouchMode="true"
+    android:paddingTop="@dimen/margin_normal" >
 
     <include
         android:id="@+id/EnterPays_addPersonHeader"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
         layout="@layout/add_person_header" />
 
     <RelativeLayout
@@ -18,6 +20,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/EnterPays_addPersonHeader"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal" >
 
         <TextView
@@ -28,8 +32,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_small"
             android:drawableLeft="@drawable/person_light"
-            android:text="@string/EnterPays_personLabel"
-             />
+            android:text="@string/EnterPays_personLabel" />
 
         <EditText
             android:id="@+id/EnterPays_EditText_Name"
@@ -41,8 +44,7 @@
             android:background="@drawable/edittext_bgnd_gray_left"
             android:hint="@string/EnterPays_TextView_Name"
             android:padding="@dimen/margin_normal"
-            android:singleLine="true"
-			/>
+            android:singleLine="true" />
 
         <ImageButton
             android:id="@+id/EnterPays_button_getPersonFromContacts"
@@ -63,16 +65,19 @@
         android:layout_below="@+id/EnterPays_personName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         android:drawableLeft="@drawable/bills"
-        android:text="@string/EnterPays_atomPay_headerText"
-        />
+        android:text="@string/EnterPays_atomPay_headerText" />
 
     <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
         android:layout_width="fill_parent"
-        android:layout_height="100sp"
-        android:layout_below="@+id/EnterPays_paysHeaderText" >
+        android:layout_height="80sp"
+        android:layout_below="@+id/EnterPays_paysHeaderText"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal" >
 
         <ListView
             android:id="@+id/EnterPays_atomPaysList"
@@ -89,6 +94,8 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
         android:layout_below="@+id/EnterPays_AtomPaymentsHolder"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         android:background="@drawable/button_bgnd_gray"
         android:drawableLeft="@drawable/add_icon"
@@ -98,9 +105,9 @@
         android:id="@+id/EnterPays_giftDetails"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_below="@+id/EnterPays_addAtomPayment"
-        android:layout_marginTop="@dimen/margin_normal"
+		android:layout_above="@+id/EnterPays_adView"
+        android:layout_margin="@dimen/margin_normal"
         android:gravity="top"
         android:orientation="vertical" >
 
@@ -110,8 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
             android:drawableLeft="@drawable/gift"
-            android:text="@string/EnterPays_gift"
-			 />
+            android:text="@string/EnterPays_gift" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -174,16 +180,15 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/height_button"
-                android:layout_margin="@dimen/margin_normal"
-			>
+                android:layout_margin="@dimen/margin_normal" >
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/margin_normal"
-                    android:paddingLeft="@dimen/margin_big"
                     android:layout_toLeftOf="@+id/EnterPays_EditText_giftValue"
                     android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/margin_big"
                     android:text="@string/EnterPays_boughtGiftValue_hint"
                     android:textColor="@color/gray" />
 
@@ -192,13 +197,23 @@
                     android:layout_width="@dimen/height_button_big"
                     android:layout_height="fill_parent"
                     android:layout_alignParentRight="true"
-                    android:text="@string/EnterPays_TextView_ZeroValue"
                     android:background="@drawable/edittext_bgnd_gray"
-                    android:gravity="center"
                     android:enabled="false"
-                     />
+                    android:gravity="center"
+                    android:text="@string/EnterPays_TextView_ZeroValue" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/EnterPays_adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adMob_publisherID"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/adMob_testDevices" />
 
 </RelativeLayout>
