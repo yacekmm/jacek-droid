@@ -107,6 +107,7 @@
             android:layout_above="@+id/calc_adView"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
             android:cacheColorHint="@color/transparent"
             android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
