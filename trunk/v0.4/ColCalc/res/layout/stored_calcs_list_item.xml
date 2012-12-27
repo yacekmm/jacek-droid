@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/height_button"
+    android:orientation="horizontal"
+     >
+
+    <RelativeLayout
+        android:id="@+id/storedCalc_calcDetails"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_toLeftOf="@+id/storedCalc_shareCalc"
+        android:onClick="editCalcOnClickHandler"
+        android:background="@drawable/button_bgnd_left" >
+
+        <include
+            android:id="@+id/storedCalc_calcDetailsHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_normal"
+            layout="@layout/calc_details_header" />
+
+        <TextView
+            android:id="@+id/storedCalc_calcName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/storedCalc_calcDetailsHeader"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:text="@string/app_name"
+            android:textSize="@dimen/textSize_medium"
+            android:textColor="@color/gray_dark"
+            android:textStyle="bold"
+            android:singleLine="true" />
+    </RelativeLayout>
+    
+    <ImageButton
+        android:id="@+id/storedCalc_shareCalc"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_marginLeft="@dimen/margin_micro"
+        android:layout_toLeftOf="@+id/storedCalc_removeCalc"
+        android:contentDescription="@string/emptyText"
+        android:onClick="shareCalcOnClickHandler"
+        android:src="@drawable/share_icon"
+        android:background="@drawable/button_bgnd_middle" />
+    
+    <ImageButton
+        android:id="@+id/storedCalc_removeCalc"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/margin_micro"
+        android:contentDescription="@string/emptyText"
+        android:onClick="removeCalcOnClickHandler"
+        android:src="@drawable/trashbin_icon"
+        android:background="@drawable/button_bgnd_right" />
+
+</RelativeLayout>
