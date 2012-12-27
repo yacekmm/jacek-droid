@@ -46,8 +46,7 @@
             android:hint="@string/calculation_calcName_hint"
             android:paddingLeft="@dimen/margin_normal"
             android:paddingRight="@dimen/margin_normal"
-            android:singleLine="true"
-             />
+            android:singleLine="true" />
 
         <LinearLayout
             android:id="@+id/calc_manageButtons"
@@ -101,10 +100,22 @@
             android:id="@+id/calc_listView_list"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_above="@+id/calc_adView"
             android:cacheColorHint="@color/transparent"
             android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
         </ListView>
+
+        <com.google.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+            android:id="@+id/calc_adView"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/adMob_bannerHeight"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adMob_publisherID"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="@string/adMob_testDevices" />
     </RelativeLayout>
 
 </LinearLayout>
