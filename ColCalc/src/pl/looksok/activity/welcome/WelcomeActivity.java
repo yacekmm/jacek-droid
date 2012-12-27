@@ -129,7 +129,8 @@ public class WelcomeActivity extends ColCalcActivity {
 		        
 		        updateHelperVisibility();
 			}catch(Exception e){
-				
+				Log.i(LOG_TAG, "Exception while reading stored calcs: " + e.getMessage());
+				findViewById(R.id.welcome_progressBar).setVisibility(View.INVISIBLE);
 			}
 			super.onPostExecute(result);
 		}

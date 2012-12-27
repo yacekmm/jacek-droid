@@ -8,41 +8,40 @@
         android:id="@+id/welcome_mode_potluckParty"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_welcomeButton"
-        android:gravity="center_horizontal|bottom"
         android:layout_margin="@dimen/margin_normal"
-        android:padding="@dimen/margin_normal"
         android:background="@drawable/button_bgnd"
+        android:drawableTop="@drawable/app_logo"
+        android:gravity="center_horizontal|bottom"
+        android:padding="@dimen/margin_normal"
         android:text="@string/welcome_mode_potluckParty"
-        android:textSize="@dimen/textSize_huge"
         android:textColor="@color/black"
-        android:drawableTop="@drawable/app_logo" />
+        android:textSize="@dimen/textSize_huge" />
 
-    <TextView 
+    <TextView
         android:id="@+id/welcome_noStoredCalcs"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
         android:layout_alignTop="@+id/welcome_savedCalcs_list"
         android:gravity="center"
         android:text="@string/welcome_noSavedCalcsYet"
-        android:textSize="@dimen/textSize_micro"
         android:textColor="@color/gray"
-        android:visibility="invisible"
-        />
+        android:textSize="@dimen/textSize_micro"
+        android:visibility="invisible" />
+
     <ListView
         android:id="@+id/welcome_savedCalcs_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_above="@+id/welcome_AdMob"
+        android:layout_below="@+id/welcome_mode_potluckParty"
+        android:layout_marginBottom="@dimen/margin_normal"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
-        android:layout_marginBottom="@dimen/margin_normal"
-        android:layout_below="@+id/welcome_mode_potluckParty"
-        android:layout_alignParentBottom="true"
-        android:stackFromBottom="true"
+        android:cacheColorHint="@color/gray_dark"
         android:divider="@null"
         android:dividerHeight="@dimen/margin_normal"
-        android:cacheColorHint="@color/gray_dark"
-        android:visibility="invisible"
-        >
+        android:stackFromBottom="true"
+        android:visibility="invisible" >
     </ListView>
 
     <ProgressBar
@@ -50,8 +49,24 @@
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/welcome_AdMob"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/margin_big" />
+
+    <LinearLayout
+        android:id="@+id/welcome_AdMob"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <com.google.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adMobPublisherID"
+            ads:loadAdOnCreate="true" />
+    </LinearLayout>
 
 </RelativeLayout>
