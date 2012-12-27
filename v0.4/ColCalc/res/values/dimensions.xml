@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_micro">2sp</dimen>
+    <dimen name="margin_small">4sp</dimen>
+    <dimen name="margin_normal">8sp</dimen>
+    <dimen name="margin_big">16sp</dimen>
+
+    
+    <dimen name="textSize_micro">12sp</dimen>
+    <dimen name="textSize_small">15sp</dimen>
+    <dimen name="textSize_medium">18sp</dimen>
+    <dimen name="textSize_huge">22sp</dimen>
+    
+    <dimen name="mode_height">110sp</dimen>
+    
+    <!-- <dimen name="calc_listItem_height">110sp</dimen>
+    <dimen name="calc_listItem_borderSize">2sp</dimen>
+    <dimen name="calc_listItem_mainBar_height">30sp</dimen> -->
+    
+    <dimen name="welcome_savedCalcs_List_height">220sp</dimen>
+
+    <dimen name="height_welcomeButton">146sp</dimen>
+    <dimen name="height_button">40sp</dimen>
+    <dimen name="height_button_big">98sp</dimen>
+    <dimen name="height_calcHeader">24sp</dimen>
+    
+    <dimen name="width_button">46sp</dimen>
+
+    <dimen name="border_radius">8sp</dimen>
+
+</resources>
