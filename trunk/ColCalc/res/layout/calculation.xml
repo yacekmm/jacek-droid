@@ -6,14 +6,14 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/margin_normal"
-    android:paddingRight="@dimen/margin_normal"
     android:paddingTop="@dimen/margin_normal" >
 
     <RelativeLayout
         android:id="@+id/calc_calcHeader"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_calcHeader" >
+        android:layout_height="@dimen/height_calcHeader"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal" >
 
         <include
             android:id="@+id/calc_calcDetailsHeader"
@@ -33,7 +33,9 @@
     <RelativeLayout
         android:id="@+id/calc_calcNameBar"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_button" >
+        android:layout_height="@dimen/height_button"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal" >
 
         <EditText
             android:id="@+id/calc_calcName_edit"
@@ -79,6 +81,8 @@
         android:id="@+id/calc_calcPeopleControl_ref"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_button"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         layout="@layout/add_person_header" />
 
@@ -101,6 +105,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_above="@+id/calc_adView"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             android:cacheColorHint="@color/transparent"
             android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
@@ -110,7 +116,7 @@
             xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
             android:id="@+id/calc_adView"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/adMob_bannerHeight"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
             ads:adUnitId="@string/adMob_publisherID"
