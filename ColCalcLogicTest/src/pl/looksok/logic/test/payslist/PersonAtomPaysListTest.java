@@ -24,7 +24,7 @@ public class PersonAtomPaysListTest extends TestCase {
 
 	public void test1PersonAtomPaysList(){
 		AtomPayment apA = new AtomPayment("piwo", 25);
-		inputPays = TestScenarioBuilder.buildTestCaseOnePersonAtomPays(apA);
+		inputPays = TestScenarioBuilder.buildTestCase_OnePerson_AtomPays(apA);
 		PersonData pd = inputPays.get(0);
 		
 		assertEquals(Constants.INCORRECT_ATOM_PAYMENTS_SUM, 25.0, pd.getHowMuchIPaid());
@@ -33,7 +33,7 @@ public class PersonAtomPaysListTest extends TestCase {
 	public void testPerson2AtomPaysList(){
 		AtomPayment apA = new AtomPayment("piwo", 25);
 		AtomPayment apB = new AtomPayment("jedzenie", 37);
-		inputPays = TestScenarioBuilder.buildTestCaseOnePersonAtomPays(apA, apB);
+		inputPays = TestScenarioBuilder.buildTestCase_OnePerson_AtomPays(apA, apB);
 		PersonData pd = inputPays.get(0);
 		
 		assertEquals(Constants.INCORRECT_ATOM_PAYMENTS_SUM, 62.0, pd.getHowMuchIPaid());
