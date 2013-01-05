@@ -126,7 +126,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	private double howMuchShouldReturnTo(String personBName, CalculationType calculationType){
 		PersonData personBData = otherPeoplePayments.get(personBName);
-		double howMuchPersonBPaid = personBData.getHowMuchIPaidForCalculationAlgorithm();
+		double howMuchPersonBPaid = personBData.getPayMadeByPersonForCalculationAlgorithm();
 		double howMuchPersonBShouldPay = personBData.getHowMuchPersonShouldPay();
 		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
 
@@ -289,7 +289,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.atomPayments = atomPayments;
 	}
 
-	public double getHowMuchIPaidForCalculationAlgorithm() {
+	public double getPayMadeByPersonForCalculationAlgorithm() {
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2))
 			return getPayMadeByPerson() + getHowMuchIPaidForGift();
 		else
