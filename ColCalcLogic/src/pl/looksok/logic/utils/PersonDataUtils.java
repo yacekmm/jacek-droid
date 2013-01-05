@@ -10,13 +10,13 @@ import pl.looksok.logic.PersonData;
 public class PersonDataUtils {
 	public static double returnMoneyToPersonB(String personBName, double howMuchPersonBPaid,
 			double howMuchPersonBShouldPay, double howMuchRefundPersonBNeeds,
-			PersonData pd, CalculationType calculationType) {
-		double tmpToReturn = pd.getHowMuchPersonShouldPay() - pd.getPayMadeByPerson();
+			PersonData me, CalculationType calculationType) {
+		double tmpToReturn = me.getHowMuchPersonShouldPay() - me.getPayMadeByPerson();
 		
-		if(personBNeedsMoreThanIShouldGive(tmpToReturn, pd.getAlreadyReturned(), pd.getToReturn())){
-			tmpToReturn = splitMyReturnAmount(pd);
-		}else if(personBWantsLessThanIHaveToReturn(pd, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds, calculationType)){
-			tmpToReturn = givePersonBNoMoreThanHeWants(pd, howMuchPersonBPaid, howMuchPersonBShouldPay);
+		if(personBNeedsMoreThanIShouldGive(tmpToReturn, me.getAlreadyReturned(), me.getToReturn())){
+			tmpToReturn = splitMyReturnAmount(me);
+		}else if(personBWantsLessThanIHaveToReturn(me, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds, calculationType)){
+			tmpToReturn = givePersonBNoMoreThanHeWants(me, howMuchPersonBPaid, howMuchPersonBShouldPay);
 		}
 
 		if(tmpToReturn > howMuchRefundPersonBNeeds){
@@ -26,21 +26,24 @@ public class PersonDataUtils {
 		if(tmpToReturn<0.0)
 			tmpToReturn = 0.0;
 
-		pd.setAlreadyReturned(pd.getAlreadyReturned() + tmpToReturn);
-		PersonData personBData = pd.getOtherPeoplePayments().get(personBName);
+		me.setAlreadyReturned(me.getAlreadyReturned() + tmpToReturn);
+		PersonData personBData = me.getOtherPeoplePayments().get(personBName);
 		personBData.setAlreadyRefunded(personBData.getAlreadyRefunded() + tmpToReturn);
 		return tmpToReturn;
 	}
 	
-	private static double givePersonBNoMoreThanHeWants(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
+	private static double givePersonBNoMoreThanHeWants(PersonData me, double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
 		double tmpToReturn;
 		double refundForPersonBNeeded = howMuchPersonBPaid - howMuchPersonBShouldPay;
 		if(refundForPersonBNeeded<0)
 			tmpToReturn = 0.0;
 
 		//FIXME: to tutaj sie test pieprzy??????
-		tmpToReturn = howMuchPersonBPaid - pd.getHowMuchPersonShouldPay();
+		double howMuchPersonAShouldPay = me.getHowMuchPersonShouldPay();
+		tmpToReturn = howMuchPersonBPaid - howMuchPersonAShouldPay;
 //		tmpToReturn = howMuchPersonBPaid - howMuchPersonBShouldPay;
+		//FIXME: nieudolna proba
+//		tmpToReturn = howMuchPersonAShouldPay - refundForPersonBNeeded;
 		if(tmpToReturn<0)
 			tmpToReturn = 0;
 		return tmpToReturn;
@@ -49,6 +52,8 @@ public class PersonDataUtils {
 	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, 
 			double tmpToReturn, double howMuchRefundPersonBNeeds, CalculationType calculationType) {
 		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getPayMadeByPerson();
+		//FIXME: Tu sie pierdoli test?
+//		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchIPaidForCalculationAlgorithm();
 	}
 
 	private static double splitMyReturnAmount(PersonData pd) {
