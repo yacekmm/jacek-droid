@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
@@ -33,6 +34,9 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	//gift
 	private boolean receivesGift = false;
 	private double howMuchIPaidForGift;
+	private double howMuchIShouldPayForGift;
+
+	private CalculationType calculationType = null;
 
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
@@ -41,6 +45,9 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setEmails(pd.getEmails());
 		setReceivesGift(pd.receivesGift);
 		setHowMuchIPaidForGift(pd.getHowMuchIPaidForGift());
+		setHowMuchIShouldPayForGift(pd.getHowMuchIShouldPayForGift());
+		setCalculationType(pd.getCalculationType());
+		setHowMuchPersonShouldPay(pd.getHowMuchPersonShouldPay());
 
 		otherPeoplePayments = inputPays;
 		myDebts = new HashMap<String, Double>();
@@ -75,22 +82,22 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		calculateHowMuchRefundIShouldReceive();
 	}
 
-	public void calculateRefundToOthers(HashMap<String, PersonData> calculationResult) {
+	public void calculateRefundToOthers(HashMap<String, PersonData> calculationResult, CalculationType calculationType) {
 		Set<String> c = calculationResult.keySet();
 		Iterator<String> it = c.iterator();
 
 		while(it.hasNext()) {
 			PersonData pp2 = calculationResult.get(it.next());
 			if(this.getName() != pp2.getName()){
-				double returnValue = howMuchIGiveBackToPersonB(pp2);
+				double returnValue = howMuchIGiveBackToPersonB(pp2, calculationType);
 				getMyDebts().put(pp2.getName(), returnValue);
 			}
 		}
 	}
 
-	private double howMuchIGiveBackToPersonB(PersonData personB) {
+	private double howMuchIGiveBackToPersonB(PersonData personB, CalculationType calculationType) {
 		try{
-			double result = this.howMuchShouldReturnTo(personB.getName());
+			double result = this.howMuchShouldReturnTo(personB.getName(), calculationType);
 			return result;
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
@@ -98,13 +105,13 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	private void calculateHowMuchIShouldReturn() {
-		toReturn = getHowMuchPersonShouldPay() - howMuchIPaid;
+		toReturn = getHowMuchPersonShouldPay() - getPayMadeByPerson();
 		if(toReturn < 0.0)
 			toReturn = 0.0;
 	}
 
 	private void calculateHowMuchRefundIShouldReceive() {
-		totalRefundForThisPerson = howMuchIPaid - getHowMuchPersonShouldPay();
+		totalRefundForThisPerson = getPayMadeByPerson() - getHowMuchPersonShouldPay();
 		if(totalRefundForThisPerson < 0.0)
 			totalRefundForThisPerson = 0.0;
 	}
@@ -117,15 +124,15 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		return totalRefundForThisPerson;
 	}
 
-	private double howMuchShouldReturnTo(String personBName){
+	private double howMuchShouldReturnTo(String personBName, CalculationType calculationType){
 		PersonData personBData = otherPeoplePayments.get(personBName);
-		double howMuchPersonBPaid = personBData.getPayMadeByPerson();
+		double howMuchPersonBPaid = personBData.getHowMuchIPaidForCalculationAlgorithm();
 		double howMuchPersonBShouldPay = personBData.getHowMuchPersonShouldPay();
 		double howMuchRefundPersonBNeeds = howMuchPersonBPaid - howMuchPersonBShouldPay - personBData.getAlreadyRefunded();
 
 		if(howMuchRefundPersonBNeeds>0){
 			return PersonDataUtils.returnMoneyToPersonB(personBName, howMuchPersonBPaid,
-					howMuchPersonBShouldPay, howMuchRefundPersonBNeeds, this);
+					howMuchPersonBShouldPay, howMuchRefundPersonBNeeds, this, calculationType);
 		}else
 			return 0.0;
 	}
@@ -196,6 +203,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	public void setHowMuchPersonShouldPay(double value) {
+		if(value < 0)
+			value = 0;
 		this.howMuchIShouldPay = value;
 	}
 
@@ -225,10 +234,6 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public void setMyRefunds(HashMap<String, Double> refundsFromOtherPeople) {
 		this.myRefunds = refundsFromOtherPeople;
-	}
-
-	public double getHowMuchIPaid() {
-		return howMuchIPaid;
 	}
 
 	public double getAlreadyReturned() {
@@ -268,11 +273,39 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.howMuchIPaidForGift = howMuchIPaidForGift;
 	}
 
+	public double getHowMuchIShouldPayForGift() {
+		return howMuchIShouldPayForGift;
+	}
+
+	public void setHowMuchIShouldPayForGift(double howMuchIShouldPayForGift) {
+		this.howMuchIShouldPayForGift = howMuchIShouldPayForGift;
+	}
+
 	public List<AtomPayment> getAtomPayments() {
 		return atomPayments;
 	}
 
 	public void setAtomPayments(List<AtomPayment> atomPayments) {
 		this.atomPayments = atomPayments;
+	}
+
+	public double getHowMuchIPaidForCalculationAlgorithm() {
+		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2))
+			return getPayMadeByPerson() + getHowMuchIPaidForGift();
+		else
+			return getPayMadeByPerson();
+	}
+
+	public CalculationType getCalculationType() {
+		if(calculationType == null){
+//			System.out.println("Warning! Calculation Type in PersonData was null. setting to default.");
+			calculationType = CalculationType.DEFAULT;
+		}
+		System.out.println("!!!!!!!!! Calculation Type in PersonData was: " + calculationType.name());
+		return calculationType;
+	}
+
+	public void setCalculationType(CalculationType calculationType) {
+		this.calculationType = calculationType;
 	}
 }

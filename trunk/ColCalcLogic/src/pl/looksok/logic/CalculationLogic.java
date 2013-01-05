@@ -21,7 +21,7 @@ import pl.looksok.logic.utils.PersonDataUtils;
 
 public class CalculationLogic implements Serializable {
 	private static final long serialVersionUID = -1238265432953764569L;
-	
+
 	private long id = Calendar.getInstance().getTimeInMillis();
 	private HashMap<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
@@ -30,7 +30,7 @@ public class CalculationLogic implements Serializable {
 	private CalculationType calculationType = CalculationType.DEFAULT;
 	private String calcName = "";
 	private CalculationLogic giftCalc = null;
-	
+
 	public HashMap<String, PersonData> getCalculationResult() {
 		return calculationResult;
 	}
@@ -42,21 +42,45 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
-		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, this.equalPayments, calculationType);
-		
-		if(calculationType.equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, this.equalPayments, getCalculationType());
+
+		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
 			calculateGiftsRefunds(inputPaysList);
+		}else if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
+			calculateGiftsRefundsV2(inputPaysList);
 		}
-		
+
 		HashMap<String, PersonData> result = calculate(inputPays);
 		return result;
+	}
+
+	private void calculateGiftsRefundsV2(List<PersonData> inputPaysList) {
+
+		double giftValue = 0.0;
+		int giftGiversCount = 0;
+
+		for(PersonData pd: inputPaysList){
+			giftValue += pd.getHowMuchIPaidForGift();
+			if(!pd.receivesGift())
+				giftGiversCount++;
+		}
+
+		if(giftGiversCount == 0)
+			giftValue = 0.0;
+
+		for(PersonData pd :inputPaysList){
+			if(pd.receivesGift())
+				pd.setHowMuchIShouldPayForGift(0.0);
+			else
+				pd.setHowMuchIShouldPayForGift(giftValue/giftGiversCount);
+		}
 	}
 
 	private void calculateGiftsRefunds(List<PersonData> inputPaysList) {
 		giftCalc = new CalculationLogic();
 		giftCalc.setCalculationType(CalculationType.EQUAL_PAYMENTS);
 		List<PersonData> giftGivers = new ArrayList<PersonData>();
-		
+
 		double giftValue = 0.0;
 		int giftGiversCount = 0;
 		for(PersonData pd: inputPaysList){
@@ -64,13 +88,13 @@ public class CalculationLogic implements Serializable {
 			if(!pd.receivesGift())
 				giftGiversCount++;
 		}
-		
+
 		if(giftGiversCount == 0)
 			giftValue = 0.0;
-				
-				
+
+
 		for(PersonData pd :inputPaysList){
-				
+
 			double shouldPayForGift = giftValue/giftGiversCount;
 			if(pd.receivesGift())
 				shouldPayForGift = 0.0;
@@ -80,49 +104,59 @@ public class CalculationLogic implements Serializable {
 				giftGivers.add(giverPersonData);
 			}
 		}
-		
+
 		if(giftGivers.size()>0){
 			giftCalc.setEqualPayments(false);
 			giftCalc.calculate(giftGivers);
 		}
 	}
 
-	
+
 	private HashMap<String, PersonData> calculate(HashMap<String, PersonData> inputPays) {
 		double totalPay = CalculationUtils.calculateTotalPayValue(inputPays);
 		int peopleCount = inputPays.size();
 		double howMuchPersonShouldPay = -1;
-		
+
 		Iterator<String> itr = inputPays.keySet().iterator();
 		while (itr.hasNext()){
 			String key = itr.next();
-			if(!equalPayments)
-				howMuchPersonShouldPay = inputPays.get(key).getHowMuchPersonShouldPay();
-			else{
+			PersonData personDataItem = inputPays.get(key);
+			personDataItem.setCalculationType(getCalculationType());
+			if(!equalPayments){
+				howMuchPersonShouldPay = personDataItem.getHowMuchPersonShouldPay();
+			}else if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
 				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
-				inputPays.get(key).setHowMuchPersonShouldPay(howMuchPersonShouldPay);
+				if(inputPays.size() > 1){
+					howMuchPersonShouldPay += personDataItem.getHowMuchIShouldPayForGift();
+					if(howMuchPersonShouldPay >= personDataItem.getHowMuchIPaidForGift())
+						howMuchPersonShouldPay -= personDataItem.getHowMuchIPaidForGift();
+				}
+				personDataItem.setHowMuchPersonShouldPay(howMuchPersonShouldPay);
+			}else{
+				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
+				personDataItem.setHowMuchPersonShouldPay(howMuchPersonShouldPay);
 			}
-			
+
 			PersonData p = new PersonData(key, inputPays);
 			p.prepareCalculationData(howMuchPersonShouldPay);
 			calculationResult.put(p.getName(), p);
 		}
-		
+
 		performCalculation();
-		
+
 		return calculationResult;
 	}
 
 	private void performCalculation() {
 		HashMap<String, PersonData> newCalculationResult = new HashMap<String, PersonData>();
-		
+
 		Iterator<String> it = calculationResult.keySet().iterator();
 		while (it.hasNext()){
 			PersonData pp = calculationResult.get(it.next());
-			pp.calculateRefundToOthers(calculationResult);
+			pp.calculateRefundToOthers(calculationResult, getCalculationType());
 			newCalculationResult.put(pp.getName(), pp);
 		}
-		
+
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT)){
 			newCalculationResult = CalculationUtils.includeGiftPaymentsInCalculation(newCalculationResult, giftCalc);
 			calculationResult = CalculationUtils.removeLoopRefunds(newCalculationResult);
@@ -140,22 +174,22 @@ public class CalculationLogic implements Serializable {
 			setPersonRefundsFromOthers(personName);
 		}
 	}
-	
+
 	private double howMuchPerPerson(double totalPay, int peopleCount) {
 		if(totalPay < 0)
 			throw new BadInputDataException();
 		if(peopleCount < 0)
 			throw new BadPeopleCountException();
-		
+
 		return totalPay / peopleCount;
 	}
-	
+
 	public HashMap<String, PersonData> recalculate() {
 		resetInputData();
 		if(giftCalc != null){
 			giftCalc.recalculate();
 		}
-		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, equalPayments, calculationType);
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, equalPayments, getCalculationType());
 		return calculate(inputPays);
 	}
 
@@ -165,7 +199,7 @@ public class CalculationLogic implements Serializable {
 			data.setAlreadyRefunded(0.0);
 		}
 	}
-	
+
 	public double howMuchPersonAGivesBackToPersonB(String personA, String personB) {
 		try{
 			return calculationResult.get(personA).getMyDebtForPersonB(personB);
@@ -173,14 +207,14 @@ public class CalculationLogic implements Serializable {
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
 	}
-	
+
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(CalculationPrinter.printCalcResultForResultsList(calculationResult, "Calculation results", "should return", "for"));
 		return sb.toString();
 	}
-	
+
 	public List<PersonData> getInputPaysList() {
 		return inputPaysList;
 	}
@@ -227,6 +261,10 @@ public class CalculationLogic implements Serializable {
 
 	public void setCalculationType(CalculationType calculationType) {
 		this.calculationType = calculationType;
+		
+		for (PersonData person : inputPaysList) {
+			person.setCalculationType(calculationType);
+		}
 	}
 
 	public String getCalcName() {
@@ -252,18 +290,18 @@ public class CalculationLogic implements Serializable {
 	public HashMap<String, Double> getPersonDebts(String personName) {
 		PersonData pd = calculationResult.get(personName);
 		return pd.getPersonDebts();
-		
+
 	}
 
 	private HashMap<String, Double> setPersonRefundsFromOthers(String personName) {
 		HashMap<String, Double> result = new HashMap<String, Double>();
-		
+
 		Iterator<String> it = getCalculationResult().keySet().iterator();
 		while(it.hasNext()){
 			String key = it.next();
 			if(key.equals(personName))
 				continue;
-			
+
 			Double value = howMuchPersonAGivesBackToPersonB(key, personName);
 			if(value > 0){
 				result.put(key, FormatterHelper.roundDouble(value, 2));
