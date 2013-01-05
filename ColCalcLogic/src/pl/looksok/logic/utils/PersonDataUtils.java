@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.looksok.logic.AtomPayment;
+import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 
 public class PersonDataUtils {
 	public static double returnMoneyToPersonB(String personBName, double howMuchPersonBPaid,
 			double howMuchPersonBShouldPay, double howMuchRefundPersonBNeeds,
-			PersonData pd) {
-		double tmpToReturn = pd.getHowMuchPersonShouldPay() - pd.getHowMuchIPaid();
+			PersonData pd, CalculationType calculationType) {
+		double tmpToReturn = pd.getHowMuchPersonShouldPay() - pd.getPayMadeByPerson();
 		
 		if(personBNeedsMoreThanIShouldGive(tmpToReturn, pd.getAlreadyReturned(), pd.getToReturn())){
 			tmpToReturn = splitMyReturnAmount(pd);
-		}else if(personBWantsLessThanIHaveToReturn(pd, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds)){
+		}else if(personBWantsLessThanIHaveToReturn(pd, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds, calculationType)){
 			tmpToReturn = givePersonBNoMoreThanHeWants(pd, howMuchPersonBPaid, howMuchPersonBShouldPay);
 		}
 
@@ -37,15 +38,17 @@ public class PersonDataUtils {
 		if(refundForPersonBNeeded<0)
 			tmpToReturn = 0.0;
 
+		//FIXME: to tutaj sie test pieprzy??????
 		tmpToReturn = howMuchPersonBPaid - pd.getHowMuchPersonShouldPay();
+//		tmpToReturn = howMuchPersonBPaid - howMuchPersonBShouldPay;
 		if(tmpToReturn<0)
 			tmpToReturn = 0;
 		return tmpToReturn;
 	}
 
-	private static boolean personBWantsLessThanIHaveToReturn(
-			PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, double tmpToReturn, double howMuchRefundPersonBNeeds) {
-		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchIPaid();
+	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, 
+			double tmpToReturn, double howMuchRefundPersonBNeeds, CalculationType calculationType) {
+		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getPayMadeByPerson();
 	}
 
 	private static double splitMyReturnAmount(PersonData pd) {
