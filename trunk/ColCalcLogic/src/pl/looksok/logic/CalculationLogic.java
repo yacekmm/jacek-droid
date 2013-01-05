@@ -76,7 +76,7 @@ public class CalculationLogic implements Serializable {
 				shouldPayForGift = 0.0;
 			double howMuchPersonPaidForGift = pd.getHowMuchIPaidForGift();
 			if(howMuchPersonPaidForGift !=0 || shouldPayForGift !=0){
-				PersonData giverPersonData = new PersonData(pd.getName(), PersonDataUtils.getDefaultAtomPaymentsList(howMuchPersonPaidForGift), shouldPayForGift, null);
+				PersonData giverPersonData = new PersonData(pd.getName(), PersonDataUtils.getDefaultAtomPaymentsList(howMuchPersonPaidForGift), shouldPayForGift);
 				giftGivers.add(giverPersonData);
 			}
 		}

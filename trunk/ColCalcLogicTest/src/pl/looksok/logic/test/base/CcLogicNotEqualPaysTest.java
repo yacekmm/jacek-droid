@@ -20,7 +20,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
 		calc.setEqualPayments(equalPayments);
-		calc.setCalculationType(CalculationType.RESTAURANT);
+		calc.setCalculationType(CalculationType.NOT_EQUAL_PAYMENTS);
 		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
 	}
@@ -30,7 +30,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 	}
 	
 	public void testZeroPayTwoPeople(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(0.0, 0.0, 
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(0.0, 0.0, 
 				0.0, 0.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
@@ -39,7 +39,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 	}
 	
 	public void testEqualPayTwoPeople(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(10.0, 5.0, 
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(10.0, 5.0, 
 				20.0, 25.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
@@ -48,7 +48,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 	}
 	
 	public void testEqualPayTwoPeopleV2(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(3.0, 8.0, 
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(3.0, 8.0, 
 				7.0, 2.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
@@ -57,7 +57,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 	}
 
 	public void testCalculationOfNonZeroPayTwoPeopleTwoPaid(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeopleVariousPays(3.0, 8.0, 
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(3.0, 8.0, 
 				7.0, 2.0);
 		
 		calc.calculate(inputPaysList);

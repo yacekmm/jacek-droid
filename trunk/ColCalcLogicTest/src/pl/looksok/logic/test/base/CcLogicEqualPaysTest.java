@@ -45,21 +45,21 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfZeroPayOnePerson(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseOnePerson(0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_OnePerson(0.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
 	public void testRefundOfNonZeroPayOnePerson(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseOnePerson(10.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_OnePerson(10.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
 	}
 	
 	public void testRefundOfZeroPayFewPeople(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(0.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(0.0, 0.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 0.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
@@ -67,7 +67,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testReturnOfNonZeroPayFewPeopleOnePaid(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(10.0, 0.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_TO_RETURN, 0.0, result.get(Constants.personAName).getToReturn());
@@ -75,7 +75,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayFewPeopleOnePaid(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(10.0, 0.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 5.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
@@ -83,7 +83,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 
 	public void testRefundOfNonZeroPayFewPeopleFewPaid(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(10.0, 5.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(10.0, 5.0, 0.0);
 		
 		HashMap<String, PersonData> result = calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_REFUND, 5.0, result.get(Constants.personAName).getTotalRefundForThisPerson());
@@ -97,7 +97,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	
 	public void testThrowBadPayException(){
 		try{
-			inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(-10.0, 0.0);
+			inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(-10.0, 0.0);
 			
 			calc.calculate(inputPaysList);
 			fail(Constants.SHOULD_THROW_EXCEPTION + BadInputDataException.class.getSimpleName());
@@ -105,7 +105,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfZeroPayTwoPeopleOnePaidWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(0.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(0.0, 0.0);
 		
 		calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
@@ -113,7 +113,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayTwoPeopleOnePaidWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(10.0, 0.0);
 		
 		calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
@@ -121,7 +121,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayTwoPeopleTwoPaidWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(10.0, 2.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(10.0, 2.0);
 		
 		calc.calculate(inputPaysList);
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
@@ -129,7 +129,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleOnePaidWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(15.0, 0.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(15.0, 0.0, 0.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -144,7 +144,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleOnePaidWhoToWhomV2(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(0.0, 0.0, 15.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(0.0, 0.0, 15.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -159,7 +159,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleTwoPaidWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(12.0, 3.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(12.0, 3.0, 0.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -174,7 +174,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleThreePaidWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(11.0, 3.0, 4.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(11.0, 3.0, 4.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -189,7 +189,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleTwoPaidEquallyWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(9.0, 9.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(9.0, 9.0, 0.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -204,7 +204,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleTwoPaidEquallyWhoToWhomV2(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(0.0, 9.0, 9.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(0.0, 9.0, 9.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -219,7 +219,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfNonZeroPayThreePeopleTwoPaidNotEquallyWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(18.0, 6.0, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(18.0, 6.0, 0.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -234,7 +234,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	}
 	
 	public void testRefundOfZeroPayTwoPeopleOnePaidNotEquallyWhoToWhom(){
-		inputPaysList = TestScenarioBuilder.buildTestCaseTwoPeople(18.9, 0.0);
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople(18.9, 0.0);
 		
 		calc.calculate(inputPaysList);
 		
@@ -244,7 +244,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	
 	public void testThrowExceptionIfNotCalculated(){
 		try{
-			inputPaysList = TestScenarioBuilder.buildTestCaseThreePeople(9.0, 9.0, 0.0);
+			inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(9.0, 9.0, 0.0);
 			calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName);
 			fail(Constants.SHOULD_THROW_EXCEPTION + PaysNotCalculatedException.class.getSimpleName());
 		}catch (PaysNotCalculatedException e){}
@@ -252,7 +252,7 @@ public class CcLogicEqualPaysTest extends TestCase {
 	
 	public void testThrowExceptionIfDuplicatePersonName(){
 		try{
-			inputPaysList = TestScenarioBuilder.buildTestCaseThreePeopleWithNames(Constants.personAName, 9.0, 
+			inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople_WithNames(Constants.personAName, 9.0, 
 					Constants.personAName, 9.0, 
 					Constants.personCName, 0.0);
 			calc.calculate(inputPaysList);

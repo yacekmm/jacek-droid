@@ -63,6 +63,10 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this(name, atomPays, emails);
 		setHowMuchPersonShouldPay(shouldPayDouble);
 	}
+	
+	public PersonData(String name, List<AtomPayment> atomPays, double shouldPayDouble) {
+		this(name, atomPays, shouldPayDouble, new HashSet<String>());
+	}
 
 	public void prepareCalculationData(double _howMuchPerPerson) {
 		howMuchIShouldPay = _howMuchPerPerson;
