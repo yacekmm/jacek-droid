@@ -9,8 +9,8 @@ import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.utils.PersonDataUtils;
-import pl.looksok.utils.Constants;
 import pl.looksok.utils.CalcFormatterHelper;
+import pl.looksok.utils.Constants;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -42,7 +42,7 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 			Button b = new Button(getApplicationContext());
 			
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-					getResources().getDimensionPixelSize(R.dimen.height_button),
+					getResources().getDimensionPixelSize(R.dimen.width_button),
 					getResources().getDimensionPixelSize(R.dimen.height_button));
 			layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.margin_normal);
 			b.setLayoutParams(layoutParams);
