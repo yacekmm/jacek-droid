@@ -58,8 +58,8 @@ public class TestScenarioBuilder {
 	public static List<PersonData> buildTestCase_TwoPeople_VariousPays(double paymentA, double howMuchAShouldPay,
 			double paymentB, double howMuchBShouldPay) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
-		inputPaysList.add(new PersonData(Constants.personAName, PersonDataUtils.getDefaultAtomPaymentsList(paymentA), howMuchAShouldPay));
-		inputPaysList.add(new PersonData(Constants.personBName, PersonDataUtils.getDefaultAtomPaymentsList(paymentB), howMuchBShouldPay));
+		inputPaysList.add(new PersonData(Constants.personAName, PersonDataUtils.getDefaultAtomPaymentsList(howMuchAShouldPay), paymentA));
+		inputPaysList.add(new PersonData(Constants.personBName, PersonDataUtils.getDefaultAtomPaymentsList(howMuchBShouldPay), paymentB));
 		return inputPaysList;
 	}
 
@@ -69,10 +69,10 @@ public class TestScenarioBuilder {
 			double paymentC, double howMuchCShouldPay,
 			double paymentD, double howMuchDShouldPay ) {
 		List<PersonData> inputPaysList = new  ArrayList<PersonData>();
-		inputPaysList.add(new PersonData(Constants.personAName, PersonDataUtils.getDefaultAtomPaymentsList(paymentA), howMuchAShouldPay));
-		inputPaysList.add(new PersonData(Constants.personBName, PersonDataUtils.getDefaultAtomPaymentsList(paymentB), howMuchBShouldPay));
-		inputPaysList.add(new PersonData(Constants.personCName, PersonDataUtils.getDefaultAtomPaymentsList(paymentC), howMuchCShouldPay));
-		inputPaysList.add(new PersonData(Constants.personDName, PersonDataUtils.getDefaultAtomPaymentsList(paymentD), howMuchDShouldPay));
+		inputPaysList.add(new PersonData(Constants.personAName, PersonDataUtils.getDefaultAtomPaymentsList(howMuchAShouldPay), paymentA));
+		inputPaysList.add(new PersonData(Constants.personBName, PersonDataUtils.getDefaultAtomPaymentsList(howMuchBShouldPay), paymentB));
+		inputPaysList.add(new PersonData(Constants.personCName, PersonDataUtils.getDefaultAtomPaymentsList(howMuchCShouldPay), paymentC));
+		inputPaysList.add(new PersonData(Constants.personDName, PersonDataUtils.getDefaultAtomPaymentsList(howMuchDShouldPay), paymentD));
 		return inputPaysList;
 	}
 

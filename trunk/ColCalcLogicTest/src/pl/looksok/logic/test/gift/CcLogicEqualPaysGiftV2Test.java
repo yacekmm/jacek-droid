@@ -214,7 +214,7 @@ public class CcLogicEqualPaysGiftV2Test extends TestCase {
 	
 	public void testNotEqualPaysInsteadOfForwardedPaymentsFighting(){
 		calc.setEqualPayments(false);
-		calc.setCalculationType(CalculationType.NOT_EQUAL_PAYMENTS);
+		calc.setCalculationType(CalculationType.RESTAURANT);
 		
 			inputPaysList = TestScenarioBuilder.buildTestCase_FourPeople_VariousPays(
 					68.0, 25.0, 
