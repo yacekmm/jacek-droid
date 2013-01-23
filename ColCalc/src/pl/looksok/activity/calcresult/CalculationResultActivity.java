@@ -30,8 +30,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public abstract class CalcResultBaseActivity extends ColCalcActivity {
-	protected static final String LOG_TAG = CalcResultBaseActivity.class.getSimpleName();
+public class CalculationResultActivity extends ColCalcActivity {
+	protected static final String LOG_TAG = CalculationResultActivity.class.getSimpleName();
 
 	private static final int SAVE_NEW_CALC = 0;
 
@@ -51,23 +51,18 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(getXmlLayout());
+		setContentView(R.layout.calculation);
 
 		calcNameEditText = (EditText)findViewById(R.id.calc_calcName_edit);
 		calcNameEditText.setOnKeyListener(hideKeyboardListener);
 		readInputBundle();
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
-		initButtonsActions();
-		initButtonsStyles();
+		initButtons();
 		populateListArray();
 		initCalculationDetailsBar();
 	}
 
-	protected void initButtonsStyles() {}
-
-	protected abstract int getXmlLayout();
-
-	private void initButtonsActions() {
+	private void initButtons() {
 		boolean isAnyPersonOnList = calc.getTotalPersons() > 0;
 
 		Button saveCalcBtn = (Button)findViewById(R.id.calc_saveCalculation_button);
@@ -92,7 +87,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	private void populateListArray() {
 		listArray = utils.readCalcPeopleToListArray(calc);
 
-		adapter = new ResultsListAdapter(CalcResultBaseActivity.this, R.layout.calculation_list_item, listArray);
+		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
@@ -111,11 +106,9 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			calc.recalculate();
 		}else{
 			calc = new CalculationLogic();
-			calc.setCalculationType(getCalculationType());
+			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2);
 		}
 	}
-
-	protected abstract CalculationType getCalculationType();
 
 	OnClickListener saveCalculationButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {

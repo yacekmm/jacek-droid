@@ -9,41 +9,61 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginRight="@dimen/margin_normal"
-        android:layout_toLeftOf="@+id/calc_addPerson_buttonsLayout"
+        android:layout_toLeftOf="@+id/calc_addPerson_button"
         android:background="@drawable/button_bgnd_potluck"
         android:drawableLeft="@drawable/save"
         android:text="@string/calculation_button_save_text" />
 
-    <LinearLayout
-        android:id="@+id/calc_addPerson_buttonsLayout"
-        android:layout_width="@dimen/height_button_big_x2"
+    <Button
+        android:id="@+id/calc_addPerson_button"
+        style="@style/textMicroDark"
+        android:layout_width="@dimen/height_button_big"
         android:layout_height="fill_parent"
-        android:layout_alignParentRight="true" >
+        android:layout_marginRight="@dimen/margin_micro"
+        android:layout_toLeftOf="@+id/calc_addMultiPerson_button"
+        android:background="@drawable/button_bgnd_potluck_left"
+        android:contentDescription="@string/calculation_button_addPerson_text"
+        android:drawableLeft="@drawable/add_person"
+        android:drawablePadding="@dimen/margin_small"
+        android:text="@string/calculation_button_addPerson_text" />
 
-        <Button
-            android:id="@+id/calc_addPerson_button"
-            style="@style/textMicroDark"
-            android:layout_width="0sp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:layout_marginRight="@dimen/margin_micro"
-            android:background="@drawable/button_bgnd_potluck_left"
-            android:contentDescription="@string/calculation_button_addPerson_text"
-            android:drawableLeft="@drawable/add_person"
-            android:drawablePadding="@dimen/margin_small"
-            android:text="@string/calculation_button_addPerson_text" />
+    <Button
+        android:id="@+id/calc_addMultiPerson_button"
+        style="@style/textMicroDark"
+        android:layout_width="@dimen/height_button_big"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_bgnd_potluck_right"
+        android:contentDescription="@string/emptyText"
+        android:drawableLeft="@drawable/add_multi_person"
+        android:drawablePadding="@dimen/margin_small"
+        android:text="@string/calculation_button_addPersonMulti_text" />
 
-        <Button
-            android:id="@+id/calc_addMultiPerson_button"
-            style="@style/textMicroDark"
-            android:layout_width="0sp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/button_bgnd_potluck_right"
-            android:contentDescription="@string/emptyText"
-            android:drawableLeft="@drawable/add_multi_person"
-            android:drawablePadding="@dimen/margin_small"
-            android:text="@string/calculation_button_addPersonMulti_text" />
-    </LinearLayout>
+    <!--
+         <ImageButton
+        android:id="@+id/addPersonHeader_addPerson_btn"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:contentDescription="@string/calculation_button_addPerson_text"
+        android:background="@drawable/button_bgnd_left"
+        android:src="@drawable/add_person" />
+
+    <ImageButton
+        android:id="@+id/addPersonHeader_addMultiPerson_btn"
+        android:layout_width="@dimen/height_button"
+        android:layout_height="@dimen/height_button"
+        android:layout_toRightOf="@id/addPersonHeader_addPerson_btn"
+        android:contentDescription="@string/emptyText"
+        android:src="@drawable/add_multi_person" />
+
+    <Button
+        android:id="@+id/addPersonHeader_saveCalculation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/addPersonHeader_addMultiPerson_btn"
+        android:drawableLeft="@drawable/save"
+        android:text="@string/EnterPays_saveAndExit_text" />
+    -->
 
 </RelativeLayout>

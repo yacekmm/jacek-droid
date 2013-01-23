@@ -17,19 +17,6 @@
         android:textColor="@color/black"
         android:textSize="@dimen/textSize_huge" />
 
-    <Button
-        android:id="@+id/welcome_mode_restaurant"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_button_big"
-        android:layout_below="@+id/welcome_mode_potluckParty"
-        android:layout_margin="@dimen/margin_normal"
-        android:background="@drawable/button_bgnd_restaurant"
-        android:gravity="center"
-        android:padding="@dimen/margin_normal"
-        android:text="@string/welcome_mode_restaurant"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textSize_huge" />
-
     <TextView
         android:id="@+id/welcome_noStoredCalcs"
         android:layout_width="fill_parent"
@@ -46,7 +33,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/welcome_adView"
-        android:layout_below="@+id/welcome_mode_restaurant"
+        android:layout_below="@+id/welcome_mode_potluckParty"
         android:layout_marginBottom="@dimen/margin_normal"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"

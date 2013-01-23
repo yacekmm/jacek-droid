@@ -20,11 +20,8 @@
     <string name="calculation_dialog_no">Nie</string>
     <string name="calculation_default_name_text">Rozliczenie z </string>
     <string name="calculation_noPeopleAddedYet">dodaj nowe osoby\naby zobaczyć rozliczenie</string>
-
-    <string name="calculation_restaruant_tips">jaki napiwek dajecie?</string>
     
-    <string name="welcome_mode_potluckParty">dotknij, aby rozliczyć się\npo imprezie</string>
-    <string name="welcome_mode_restaurant">dotknij, aby rozliczyć się\nw restauracji</string>
+    <string name="welcome_mode_potluckParty">dotknij aby rozliczyć się\npo imprezie</string>
     <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
     <string name="welcome_noSavedCalcsYet">nie masz jeszcze żadnych\nzapisanych rozliczeń</string>
     
