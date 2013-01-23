@@ -116,7 +116,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		totalRefundForThisPerson = getPayMadeByPerson() - getHowMuchPersonShouldPay();
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
 			totalRefundForThisPerson += getHowMuchIPaidForGift();
-			//totalRefundForThisPerson -= getHowMuchIShouldPayForGift();
+			totalRefundForThisPerson -= getHowMuchIShouldPayForGift();
 		}
 		if(totalRefundForThisPerson < 0.0)
 			totalRefundForThisPerson = 0.0;
