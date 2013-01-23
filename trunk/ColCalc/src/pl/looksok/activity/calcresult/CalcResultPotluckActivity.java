@@ -1,6 +1,7 @@
 package pl.looksok.activity.calcresult;
 
 import pl.looksok.R;
+import pl.looksok.activity.addperson.AddPersonSinglePotluck;
 import pl.looksok.logic.CalculationType;
 
 
@@ -16,5 +17,9 @@ public class CalcResultPotluckActivity extends CalcResultBaseActivity {
 	protected CalculationType getCalculationType()  {
 		return CalculationType.POTLUCK_PARTY_WITH_GIFT_V2;
 	}
-
+	
+	@Override
+	protected Class<?> getAddPersonSingleActivity()  {
+		return AddPersonSinglePotluck.class;
+	}
 }

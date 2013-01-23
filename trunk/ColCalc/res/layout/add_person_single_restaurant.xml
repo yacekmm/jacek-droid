@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/EnterPays_mainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray_dark"
+    android:focusableInTouchMode="true"
+    android:paddingTop="@dimen/margin_normal" >
+
+    <include
+        android:id="@+id/EnterPays_addPersonHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        layout="@layout/add_person_header" />
+
+    <RelativeLayout
+        android:id="@+id/EnterPays_personName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EnterPays_addPersonHeader"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal" >
+
+        <TextView
+            android:id="@+id/EnterPays_personHeader"
+            style="@style/add_person_section_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:drawableLeft="@drawable/person_light"
+            android:text="@string/EnterPays_personLabel" />
+
+        <EditText
+            android:id="@+id/EnterPays_EditText_Name"
+            style="@style/textMediumDarkBold"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/height_button"
+            android:layout_below="@+id/EnterPays_personHeader"
+            android:layout_toLeftOf="@+id/EnterPays_button_getPersonFromContacts"
+            android:background="@drawable/edittext_bgnd_gray_left"
+            android:hint="@string/EnterPays_TextView_Name"
+            android:padding="@dimen/margin_normal"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/EnterPays_button_getPersonFromContacts"
+            android:layout_width="@dimen/width_button"
+            android:layout_height="@dimen/height_button"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/EnterPays_personHeader"
+            android:background="@drawable/button_bgnd_gray_right"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/addressbook" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/EnterPays_paysHeaderText"
+        style="@style/add_person_section_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EnterPays_personName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:drawableLeft="@drawable/bills"
+        android:text="@string/EnterPays_atomPay_headerText" />
+
+    <RelativeLayout
+        android:id="@+id/EnterPays_AtomPaymentsHolder"
+        android:layout_width="fill_parent"
+        android:layout_height="80sp"
+        android:layout_below="@+id/EnterPays_paysHeaderText"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal" >
+
+        <ListView
+            android:id="@+id/EnterPays_atomPaysList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/transparent"
+            android:dividerHeight="@dimen/margin_normal" >
+        </ListView>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/EnterPays_addAtomPayment"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_below="@+id/EnterPays_AtomPaymentsHolder"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@drawable/button_bgnd_gray"
+        android:drawableLeft="@drawable/add_icon"
+        android:text="@string/EnterPays_button_addAtomPayment" />
+
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/EnterPays_adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adMob_publisherID"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/adMob_testDevices" />
+
+</RelativeLayout>

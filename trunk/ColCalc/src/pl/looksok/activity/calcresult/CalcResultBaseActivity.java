@@ -6,8 +6,8 @@ import org.joda.time.DateTime;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.addperson.AddNewPerson;
-import pl.looksok.activity.addperson.AddNewPersonMulti;
+import pl.looksok.activity.addperson.AddPersonSinglePotluck;
+import pl.looksok.activity.addperson.AddPersonMultiPotluck;
 import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
@@ -150,19 +150,22 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		public void onClick(View v) {
 			calcWasEdited = true;
 			calc.setCalcName(calcNameEditText.getText().toString());
-			Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+			Intent intent = new Intent(getApplicationContext(), getAddPersonSingleActivity()) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 			finish();
 		}
+
 	};
+
+	protected abstract Class<?> getAddPersonSingleActivity();
 
 	OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			calcWasEdited = true;
 			calc.setCalcName(calcNameEditText.getText().toString());
-			Intent intent = new Intent(getApplicationContext(), AddNewPersonMulti.class) ;
+			Intent intent = new Intent(getApplicationContext(), AddPersonMultiPotluck.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
@@ -190,7 +193,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		PersonData pd = calc.findPersonInList(((PersonData)v.getTag()).getName());
 		calc.getInputPaysList().remove(pd);
 
-		Intent intent = new Intent(getApplicationContext(), AddNewPerson.class) ;
+		Intent intent = new Intent(getApplicationContext(), AddPersonSinglePotluck.class) ;
 		intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
 		startActivity(intent);

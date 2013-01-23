@@ -34,7 +34,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeListener {
+public abstract class AddPersonSingleBase extends AddPersonBase implements OnTotalPayChangeListener {
 	private EditText mNewPersonNameInput;
 	private CheckBox mReceivesGiftCheckBox;
 	private CheckBox mBuysGiftCheckBox;
@@ -46,11 +46,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 
 	private Activity mActivity = this;
 	protected static final int PICK_CONTACT = 0;
-
-	@Override
-	protected int getAddPersonContentView() {
-		return R.layout.add_new_person;
-	}
 
 	@Override
 	protected void initActivityViews() {
@@ -94,7 +89,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		if(atomPaymentsList.size()==0)
 			atomPaymentsList.add(new AtomPayment());
 		adapter = null;
-		adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, atomPaymentsList);
+		adapter = new AtomPayListAdapter(AddPersonSingleBase.this, R.layout.atom_pay_list_item, atomPaymentsList);
 		adapter.setKeyboardHiderListener(hideKeyboardListener);
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
 		adapter.registerOnTotalChangeListener(this);
@@ -163,7 +158,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 					String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
 					mNewPersonNameInput.setText(name);
 
-					emails = utils.getPersonEmailsSet(id, AddNewPerson.this);
+					emails = utils.getPersonEmailsSet(id, AddPersonSingleBase.this);
 				}
 			}
 		break;
