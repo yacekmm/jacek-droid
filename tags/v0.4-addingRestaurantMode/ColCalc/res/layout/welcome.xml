@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray_dark" >
+
+    <Button
+        android:id="@+id/welcome_mode_potluckParty"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_welcomeButton"
+        android:layout_margin="@dimen/margin_normal"
+        android:background="@drawable/button_bgnd_potluck"
+        android:drawableTop="@drawable/app_logo"
+        android:gravity="center_horizontal|bottom"
+        android:padding="@dimen/margin_normal"
+        android:text="@string/welcome_mode_potluckParty"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize_huge" />
+
+    <TextView
+        android:id="@+id/welcome_noStoredCalcs"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_alignTop="@+id/welcome_savedCalcs_list"
+        android:gravity="center"
+        android:text="@string/welcome_noSavedCalcsYet"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/textSize_micro"
+        android:visibility="invisible" />
+
+    <ListView
+        android:id="@+id/welcome_savedCalcs_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/welcome_adView"
+        android:layout_below="@+id/welcome_mode_potluckParty"
+        android:layout_marginBottom="@dimen/margin_normal"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:cacheColorHint="@color/gray_dark"
+        android:divider="@null"
+        android:dividerHeight="@dimen/margin_normal"
+        android:stackFromBottom="true"
+        android:visibility="invisible" >
+    </ListView>
+
+    <ProgressBar
+        android:id="@+id/welcome_progressBar"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/welcome_adView"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_big" />
+
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/welcome_adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adMob_publisherID"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="@string/adMob_testDevices" />
+
+</RelativeLayout>
