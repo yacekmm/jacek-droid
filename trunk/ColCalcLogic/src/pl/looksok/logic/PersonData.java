@@ -106,12 +106,18 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	private void calculateHowMuchIShouldReturn() {
 		toReturn = getHowMuchPersonShouldPay() - getPayMadeByPerson();
+		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2))
+			toReturn -= getHowMuchIPaidForGift();
 		if(toReturn < 0.0)
 			toReturn = 0.0;
 	}
 
 	private void calculateHowMuchRefundIShouldReceive() {
 		totalRefundForThisPerson = getPayMadeByPerson() - getHowMuchPersonShouldPay();
+		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
+			totalRefundForThisPerson += getHowMuchIPaidForGift();
+			//totalRefundForThisPerson -= getHowMuchIShouldPayForGift();
+		}
 		if(totalRefundForThisPerson < 0.0)
 			totalRefundForThisPerson = 0.0;
 	}

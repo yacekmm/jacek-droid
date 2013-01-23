@@ -40,8 +40,8 @@ public class PersonDataUtils {
 
 		//FIXME: to tutaj sie test pieprzy??????
 		double howMuchPersonAShouldPay = me.getHowMuchPersonShouldPay();
-		tmpToReturn = howMuchPersonBPaid - howMuchPersonAShouldPay;
-//		tmpToReturn = howMuchPersonBPaid - howMuchPersonBShouldPay;
+//		tmpToReturn = howMuchPersonBPaid - howMuchPersonAShouldPay;
+		tmpToReturn = howMuchPersonBPaid - howMuchPersonBShouldPay;
 		//FIXME: nieudolna proba
 //		tmpToReturn = howMuchPersonAShouldPay - refundForPersonBNeeded;
 		if(tmpToReturn<0)
