@@ -5,7 +5,7 @@ import java.util.List;
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.calcresult.CalcResultUtils;
-import pl.looksok.activity.calcresult.CalculationActivity;
+import pl.looksok.activity.calcresult.CalculationResultActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
@@ -58,7 +58,7 @@ public class WelcomeActivity extends ColCalcActivity {
 	
 	OnClickListener modePotluckPartyClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
+        	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
         	startActivity(intent);
         	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();
@@ -68,7 +68,7 @@ public class WelcomeActivity extends ColCalcActivity {
     
     public void editCalcOnClickHandler(View v){
     	CalculationLogic calcItem = (CalculationLogic)v.getTag();
-    	Intent intent = new Intent(getApplicationContext(), CalculationActivity.class) ;
+    	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calcItem);
     	startActivity(intent);
     	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);

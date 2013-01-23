@@ -30,8 +30,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CalculationActivity extends ColCalcActivity {
-	protected static final String LOG_TAG = CalculationActivity.class.getSimpleName();
+public class CalculationResultActivity extends ColCalcActivity {
+	protected static final String LOG_TAG = CalculationResultActivity.class.getSimpleName();
 
 	private static final int SAVE_NEW_CALC = 0;
 
@@ -54,6 +54,7 @@ public class CalculationActivity extends ColCalcActivity {
 		setContentView(R.layout.calculation);
 
 		calcNameEditText = (EditText)findViewById(R.id.calc_calcName_edit);
+		calcNameEditText.setOnKeyListener(hideKeyboardListener);
 		readInputBundle();
 		resultList = (ListView)findViewById(R.id.calc_listView_list);
 		initButtons();
@@ -86,7 +87,7 @@ public class CalculationActivity extends ColCalcActivity {
 	private void populateListArray() {
 		listArray = utils.readCalcPeopleToListArray(calc);
 
-		adapter = new ResultsListAdapter(CalculationActivity.this, R.layout.calculation_list_item, listArray);
+		adapter = new ResultsListAdapter(CalculationResultActivity.this, R.layout.calculation_list_item, listArray);
 		resultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 

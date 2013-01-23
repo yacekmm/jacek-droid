@@ -35,6 +35,7 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 		super.initActivityViews();
 		
 		mNewPersonPayInput = (CurrencyEditText)findViewById(R.id.enterPaysMulti_EditText_Pay);
+		mNewPersonPayInput.setOnKeyListener(hideKeyboardListener);
 		mHowManyPersonsScroller = (LinearLayout)findViewById(R.id.enterPaysMulti_peopleCount_content);
 
 		for(int i=Constants.MULTI_PERSON_MIN_COUNT; i<Constants.MULTI_PERSON_MAX_COUNT; i++){
