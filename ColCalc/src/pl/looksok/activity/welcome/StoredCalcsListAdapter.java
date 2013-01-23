@@ -73,7 +73,7 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
 	}
 	
 	private void setupItemStyle(ResultHolder holder) {
-		if(holder.calc.getCalculationType().equals(CalculationType.NOT_EQUAL_PAYMENTS)){
+		if(holder.calc.getCalculationType().equals(CalculationType.RESTAURANT)){
 			holder.removeCalcButton.setBackgroundResource(R.drawable.button_bgnd_restaurant_right);
 			holder.shareCalcButton.setBackgroundResource(R.drawable.button_bgnd_restaurant_middle);
 			holder.calcNameLayout.setBackgroundResource(R.drawable.button_bgnd_restaurant_left);

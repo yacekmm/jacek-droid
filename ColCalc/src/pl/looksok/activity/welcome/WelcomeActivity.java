@@ -8,6 +8,7 @@ import pl.looksok.activity.calcresult.CalcResultRestaurantActivity;
 import pl.looksok.activity.calcresult.CalcResultUtils;
 import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.logic.CalculationLogic;
+import pl.looksok.logic.CalculationType;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
@@ -76,15 +77,21 @@ public class WelcomeActivity extends ColCalcActivity {
         }
     };
 
-    
     public void editCalcOnClickHandler(View v){
     	CalculationLogic calcItem = (CalculationLogic)v.getTag();
-    	Intent intent = new Intent(getApplicationContext(), CalcResultPotluckActivity.class) ;
+    	Intent intent = new Intent(getApplicationContext(), getCalcResultActivityForCalcType(calcItem.getCalculationType())) ;
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calcItem);
     	startActivity(intent);
     	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
     	finish();
     }
+
+	protected Class<?> getCalcResultActivityForCalcType(CalculationType calculationType) {
+		if(calculationType.equals(CalculationType.RESTAURANT))
+			return CalcResultRestaurantActivity.class;
+		else
+			return CalcResultPotluckActivity.class;
+	}
     
 	public void removeCalcOnClickHandler(View v){
 		calcItemToRemove = (CalculationLogic)v.getTag();

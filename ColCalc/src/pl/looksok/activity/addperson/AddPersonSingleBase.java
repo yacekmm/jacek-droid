@@ -7,13 +7,9 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
-import pl.looksok.activity.addperson.utils.InputValidator;
 import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
-import pl.looksok.currencyedittext.CurrencyEditText;
-import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
-import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
@@ -24,27 +20,18 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
 public abstract class AddPersonSingleBase extends AddPersonBase implements OnTotalPayChangeListener {
-	private EditText mNewPersonNameInput;
-	private CheckBox mReceivesGiftCheckBox;
-	private CheckBox mBuysGiftCheckBox;
-	private CurrencyEditText mGiftValueInput;
+	protected EditText mNewPersonNameInput;
 
 	private PersonData editPersonData = null;
-	private AtomPayListAdapter adapter;
+	protected AtomPayListAdapter adapter;
 	private AtomPayment atomPaymentToRemove = null;
 
-	private Activity mActivity = this;
 	protected static final int PICK_CONTACT = 0;
 
 	@Override
@@ -54,14 +41,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(addAtomPaymentClickListener);
 		mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
 		mNewPersonNameInput.setOnKeyListener(hideKeyboardListener);
-		mReceivesGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
-		mReceivesGiftCheckBox.setOnCheckedChangeListener(receivesGiftChangeListener);
-		mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
-		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
-		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
-		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
-		mGiftValueInput.setOnKeyListener(hideKeyboardListener);
-		setGiftPaymentFieldsVisibile(false, false);
 
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
 	}
@@ -73,14 +52,13 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		editPersonData = (PersonData)extras.getSerializable(Constants.BUNDLE_PERSON_TO_EDIT);
 		if(editPersonData!=null){
 			mNewPersonNameInput.setText(editPersonData.getName());
-			mBuysGiftCheckBox.setChecked(editPersonData.getHowMuchIPaidForGift() > 0);
-			mReceivesGiftCheckBox.setChecked(editPersonData.receivesGift());
-			setGiftPaymentFieldsVisibile(editPersonData.getHowMuchIPaidForGift() > 0, false);
-			mGiftValueInput.setText(FormatterHelper.currencyFormat(editPersonData.getHowMuchIPaidForGift(), 2));
+			loadSpecificInputDataFromBundle(editPersonData);
 			setUpAtomPayAdapter(editPersonData.getAtomPayments());
 			updateTotalPayValue(editPersonData.getPayMadeByPerson());
 		}
 	}
+
+	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
 		if(adapter!=null)
@@ -105,29 +83,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		adapter.remove(atomPaymentToRemove);
 		setUpAtomPayAdapter(adapter.getItems());
 		atomPaymentToRemove = null;
-	}
-
-	@Override
-	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
-		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
-		String name = mNewPersonNameInput.getText().toString();
-		boolean receivesGift = mReceivesGiftCheckBox.isChecked();
-		boolean buysGift = mBuysGiftCheckBox.isChecked();
-		double giftPayment = CalcFormatterHelper.readDoubleFromEditText(mGiftValueInput);
-
-		if(!buysGift)
-			giftPayment = 0;
-
-		if(!InputValidator.inputIsValid(getApplicationContext(), name, adapter.getTotalPay(), calc.isEqualPayments(), inputPaysList))
-			throw new BadInputDataException();
-
-		if(calc.isEqualPayments())
-			personDataSet.add(new PersonData(name, adapter.getItems(), emails, receivesGift, giftPayment));
-		else{
-			throw new BadInputDataException("should not reach here!");
-		}
-
-		return personDataSet;
 	}
 
 	OnClickListener getContactClickListener = new OnClickListener() {
@@ -171,60 +126,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		}
 	};
 
-	OnCheckedChangeListener buysGiftChangeListener = new OnCheckedChangeListener() {
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			setGiftPaymentFieldsVisibile(isChecked, true);
-			if(isChecked){
-				mReceivesGiftCheckBox.setChecked(false);
-			}
-		}
-	};
-	
-	private void setGiftPaymentFieldsVisibile(boolean visible, boolean withAnimation) {
-		View giftValueLabel = findViewById(R.id.EnterPays_TextView_giftValue);
-		int viewVisibility;
-		Animation animation;
-		
-		if(visible){
-			animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_down_in);
-			viewVisibility = View.VISIBLE;
-		}else{
-			animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_up_out);
-			viewVisibility = View.INVISIBLE;
-			hideKeyboard(mGiftValueInput);
-		}
-		
-		mGiftValueInput.setVisibility(viewVisibility);
-		giftValueLabel.setVisibility(viewVisibility);
-		if(withAnimation){
-			mGiftValueInput.startAnimation(animation);
-			giftValueLabel.startAnimation(animation);
-		}
-	}
-
-	OnCheckedChangeListener receivesGiftChangeListener = new OnCheckedChangeListener() {
-
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			if(isChecked){
-				mBuysGiftCheckBox.setChecked(false);
-			}
-		}
-	};
-
-	private OnFocusChangeListener giftValueFocusChangeListener = new OnFocusChangeListener() {
-
-		@Override
-		public void onFocusChange(View v, boolean hasFocus) {
-			if(hasFocus){
-				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-			}else{
-				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-			}
-		}
-	};
-	
 	@Override
 	public void onBackPressed() {
 		if(editPersonData!=null){

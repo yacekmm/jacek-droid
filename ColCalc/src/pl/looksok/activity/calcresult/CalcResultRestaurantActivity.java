@@ -15,7 +15,7 @@ public class CalcResultRestaurantActivity extends CalcResultBaseActivity {
 	
 	@Override
 	protected CalculationType getCalculationType()  {
-		return CalculationType.NOT_EQUAL_PAYMENTS;
+		return CalculationType.RESTAURANT;
 	}
 
 	@Override
