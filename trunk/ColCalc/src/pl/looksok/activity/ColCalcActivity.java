@@ -4,12 +4,17 @@ import pl.looksok.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 public class ColCalcActivity extends Activity {
@@ -60,5 +65,22 @@ public class ColCalcActivity extends Activity {
 	protected void clearEditTextFocus(EditText editText){
 		editText.setFocusable(false);
 		editText.setFocusableInTouchMode(true);
+	}
+	
+	
+	protected OnKeyListener hideKeyboardListener = new OnKeyListener() {
+		@Override
+		public boolean onKey(View v, int keyCode, KeyEvent event) {
+			if(keyCode == KeyEvent.KEYCODE_ENTER){
+				hideKeyboard(v);
+			}
+			return false;
+		}
+
+	};
+
+	protected void hideKeyboard(View v) {
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 	}
 }

@@ -45,7 +45,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	private AtomPayment atomPaymentToRemove = null;
 
 	private Activity mActivity = this;
-
 	protected static final int PICK_CONTACT = 0;
 
 	@Override
@@ -59,12 +58,14 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		findViewById(R.id.EnterPays_button_getPersonFromContacts).setOnClickListener(getContactClickListener);
 		findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(addAtomPaymentClickListener);
 		mNewPersonNameInput = (EditText)findViewById(R.id.EnterPays_EditText_Name);
+		mNewPersonNameInput.setOnKeyListener(hideKeyboardListener);
 		mReceivesGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_gotGift_checkbox);
 		mReceivesGiftCheckBox.setOnCheckedChangeListener(receivesGiftChangeListener);
 		mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
 		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
+		mGiftValueInput.setOnKeyListener(hideKeyboardListener);
 		setGiftPaymentFieldsVisibile(false, false);
 
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
@@ -94,6 +95,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			atomPaymentsList.add(new AtomPayment());
 		adapter = null;
 		adapter = new AtomPayListAdapter(AddNewPerson.this, R.layout.atom_pay_list_item, atomPaymentsList);
+		adapter.setKeyboardHiderListener(hideKeyboardListener);
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
 		adapter.registerOnTotalChangeListener(this);
 	}
@@ -175,7 +177,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	};
 
 	OnCheckedChangeListener buysGiftChangeListener = new OnCheckedChangeListener() {
-
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			setGiftPaymentFieldsVisibile(isChecked, true);
@@ -183,9 +184,8 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 				mReceivesGiftCheckBox.setChecked(false);
 			}
 		}
-
 	};
-
+	
 	private void setGiftPaymentFieldsVisibile(boolean visible, boolean withAnimation) {
 		View giftValueLabel = findViewById(R.id.EnterPays_TextView_giftValue);
 		int viewVisibility;
@@ -197,6 +197,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		}else{
 			animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_up_out);
 			viewVisibility = View.INVISIBLE;
+			hideKeyboard(mGiftValueInput);
 		}
 		
 		mGiftValueInput.setVisibility(viewVisibility);
@@ -226,7 +227,6 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 			}else{
 				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 			}
-
 		}
 	};
 	

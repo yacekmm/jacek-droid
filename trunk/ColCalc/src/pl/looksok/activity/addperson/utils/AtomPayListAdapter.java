@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -28,6 +29,8 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 	private ArrayList<OnTotalPayChangeListener> totalPayChangeListeners = new ArrayList<OnTotalPayChangeListener>();
 
+	private OnKeyListener keyboardHiderListener = null;
+
 	public AtomPayListAdapter(Context context, int layoutResourceId, List<AtomPayment> items) {
 		super(context, layoutResourceId, items);
 		this.layoutResourceId = layoutResourceId;
@@ -40,24 +43,23 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		View row = convertView;
 		AtomPaymentHolder holder = null;
 
-//		if(row == null) {
-			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			row = inflater.inflate(layoutResourceId, parent, false);
+		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+		row = inflater.inflate(layoutResourceId, parent, false);
 
-			holder = new AtomPaymentHolder();
-			holder.atomPayment = items.get(position);
-			holder.removePaymentButton = (ImageButton)row.findViewById(R.id.atomPay_removePay);
-			holder.removePaymentButton.setTag(holder.atomPayment);
+		holder = new AtomPaymentHolder();
+		holder.atomPayment = items.get(position);
+		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.atomPay_removePay);
+		holder.removePaymentButton.setTag(holder.atomPayment);
 
-			holder.name = (EditText)row.findViewById(R.id.atomPay_name);
-			setNameTextChangeListener(holder);
-			holder.value = (CurrencyEditText)row.findViewById(R.id.atomPay_value);
-			setValueTextListeners(holder);
-
-//			row.setTag(holder);
-//		} else {
-//			holder = (AtomPaymentHolder)row.getTag();
-//		}
+		holder.name = (EditText)row.findViewById(R.id.atomPay_name);
+		setNameTextChangeListener(holder);
+		holder.value = (CurrencyEditText)row.findViewById(R.id.atomPay_value);
+		setValueTextListeners(holder);
+		
+		if(keyboardHiderListener != null){
+			holder.name.setOnKeyListener(keyboardHiderListener);
+			holder.value.setOnKeyListener(keyboardHiderListener);
+		}
 
 		setupItem(holder);
 		return row;
@@ -65,7 +67,6 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 	private void setupItem(AtomPaymentHolder holder) {
 		holder.name.setText(holder.atomPayment.getName());
-//		holder.value.setText(String.valueOf(holder.atomPayment.getValue()));
 		holder.value.setText(FormatterHelper.currencyFormat(holder.atomPayment.getValue(), 2));
 	}
 
@@ -97,13 +98,6 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//				NumberFormat format = NumberFormat.getCurrencyInstance(Locale.getDefault());
-//				String cur = format.getCurrency().getSymbol();
-//				if(s.toString().contains(cur)){
-//					Log.d(LOG_TAG, "S contains currency symbol. aborting persisting it: " + s);
-//					return;
-//				}
-				
 				try{
 					holder.atomPayment.setValue(Double.parseDouble(s.toString()));
 					for (OnTotalPayChangeListener listener : totalPayChangeListeners) {
@@ -135,12 +129,16 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		}
 		return result;
 	}
-	
+
 	public void registerOnTotalChangeListener(OnTotalPayChangeListener listener){
 		totalPayChangeListeners.add(listener);
 	}
-	
+
 	public void unregisterOnTotalChangeListener(OnTotalPayChangeListener listener){
 		totalPayChangeListeners.remove(listener);
+	}
+
+	public void setKeyboardHiderListener(OnKeyListener hideKeyboardListener) {
+		this.keyboardHiderListener = hideKeyboardListener;
 	}
 }
