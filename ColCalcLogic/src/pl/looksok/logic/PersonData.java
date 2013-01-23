@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
@@ -106,7 +105,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	private void calculateHowMuchIShouldReturn() {
 		toReturn = getHowMuchPersonShouldPay() - getPayMadeByPerson();
-		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2) && !receivesGift())
+		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2) /*&& !receivesGift()*/)
 			toReturn -= getHowMuchIPaidForGift();
 		if(toReturn < 0.0)
 			toReturn = 0.0;
@@ -304,10 +303,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public CalculationType getCalculationType() {
 		if(calculationType == null){
-//			System.out.println("Warning! Calculation Type in PersonData was null. setting to default.");
 			calculationType = CalculationType.DEFAULT;
 		}
-		System.out.println("!!!!!!!!! Calculation Type in PersonData was: " + calculationType.name());
 		return calculationType;
 	}
 

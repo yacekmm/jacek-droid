@@ -24,10 +24,11 @@ public class CcLogicGiftDebtForwarderTest extends TestCase {
 //		super();
 //	}
 
+	//TODO: ten tes bedzie do usuniecia
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
 		calc.setEqualPayments(equalPayments);
-		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
+//		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
 		inputPaysList = new ArrayList<PersonData>();
 		giftReceivers = new HashSet<String>();
 		super.setUp();

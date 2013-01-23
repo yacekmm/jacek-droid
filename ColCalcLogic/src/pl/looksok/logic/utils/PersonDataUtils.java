@@ -38,12 +38,7 @@ public class PersonDataUtils {
 		if(refundForPersonBNeeded<0)
 			tmpToReturn = 0.0;
 
-		//FIXME: to tutaj sie test pieprzy??????
-		double howMuchPersonAShouldPay = me.getHowMuchPersonShouldPay();
-//		tmpToReturn = howMuchPersonBPaid - howMuchPersonAShouldPay;
 		tmpToReturn = howMuchPersonBPaid - howMuchPersonBShouldPay;
-		//FIXME: nieudolna proba
-//		tmpToReturn = howMuchPersonAShouldPay - refundForPersonBNeeded;
 		if(tmpToReturn<0)
 			tmpToReturn = 0;
 		return tmpToReturn;
@@ -52,8 +47,6 @@ public class PersonDataUtils {
 	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, 
 			double tmpToReturn, double howMuchRefundPersonBNeeds, CalculationType calculationType) {
 		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getPayMadeByPerson();
-		//FIXME: Tu sie pierdoli test?
-//		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchIPaidForCalculationAlgorithm();
 	}
 
 	private static double splitMyReturnAmount(PersonData pd) {

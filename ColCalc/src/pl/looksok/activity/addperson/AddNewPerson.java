@@ -227,6 +227,5 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		sb.append(getString(R.string.EnterPays_atomPay_headerText_left)).append(" ");
 		sb.append(CalcFormatterHelper.currencyFormat(payMadeByPerson, 2));
 		sb.append(getString(R.string.EnterPays_atomPay_headerText_right));
-//		mTotalPaysText.setText(sb);
 	}
 }
