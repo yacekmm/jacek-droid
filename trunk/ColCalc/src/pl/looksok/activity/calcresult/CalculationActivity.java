@@ -105,7 +105,7 @@ public class CalculationActivity extends ColCalcActivity {
 			calc.recalculate();
 		}else{
 			calc = new CalculationLogic();
-			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
+			calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2);
 		}
 	}
 

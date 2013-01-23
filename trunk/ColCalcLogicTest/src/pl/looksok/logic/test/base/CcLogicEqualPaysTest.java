@@ -242,6 +242,34 @@ public class CcLogicEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 9.45, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
 	}
 	
+	public void testCalculation_FourPeople_ThreePaid(){
+		inputPaysList = TestScenarioBuilder.buildTestCase_FourPeople(13, 0, 50, 50);
+		
+		calc.calculate(inputPaysList);
+		
+		HashMap<String, Double> personADebts = calc.getPersonDebts(Constants.personAName);
+		HashMap<String, Double> personBDebts = calc.getPersonDebts(Constants.personBName);
+		HashMap<String, Double> personCDebts = calc.getPersonDebts(Constants.personCName);
+		HashMap<String, Double> personDDebts = calc.getPersonDebts(Constants.personDName);
+		
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personBDebts.get(Constants.personAName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personCDebts.get(Constants.personAName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personDDebts.get(Constants.personAName));
+		
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personADebts.get(Constants.personBName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personCDebts.get(Constants.personBName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personDDebts.get(Constants.personBName));
+		
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 15.25, personADebts.get(Constants.personCName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 6.5, personBDebts.get(Constants.personCName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personDDebts.get(Constants.personCName));
+		
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personADebts.get(Constants.personDName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, 21.75, personBDebts.get(Constants.personDName));
+		assertEquals(Constants.INCORRECT_RETURN_OBJECT_VALUE, null, personCDebts.get(Constants.personDName));
+		
+	}
+	
 	public void testThrowExceptionIfNotCalculated(){
 		try{
 			inputPaysList = TestScenarioBuilder.buildTestCase_ThreePeople(9.0, 9.0, 0.0);
