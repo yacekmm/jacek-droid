@@ -40,7 +40,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
 		setPersonName(pd.getName());
-		setPayMadeByPerson(pd.getHowMuchIPaid());
+		setHowMuchIPaid(pd.getHowMuchIPaid());
 		setEmails(pd.getEmails());
 		setReceivesGift(pd.receivesGift);
 		setHowMuchIPaidForGift(pd.getHowMuchIPaidForGift());
@@ -65,13 +65,16 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchIPaidForGift(giftPayment);
 	}
 	
-	public PersonData(String name, List<AtomPayment> atomPays, double shouldPayDouble, HashSet<String> emails) {
-		this(name, atomPays, emails);
-		setHowMuchPersonShouldPay(shouldPayDouble);
+	public PersonData(String name, List<AtomPayment> atomPays_shouldPay, double howMuchPaid, HashSet<String> emails) {
+		this(name, atomPays_shouldPay, howMuchPaid);
+		this.emails = emails;
 	}
-	
-	public PersonData(String name, List<AtomPayment> atomPays, double shouldPayDouble) {
-		this(name, atomPays, shouldPayDouble, new HashSet<String>());
+
+	public PersonData(String name, List<AtomPayment> atomPays_shouldPay, double howMuchPaid) {
+		this.name = name;
+		setHowMuchPersonShouldPay(atomPays_shouldPay);
+		setHowMuchIPaid(howMuchPaid);
+//		this(name, atomPays, shouldPayDouble, new HashSet<String>());
 	}
 
 	public void prepareCalculationData(double _howMuchPerPerson) {
@@ -189,7 +192,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		return howMuchIPaid;
 	}
 
-	public void setPayMadeByPerson(Double payMadeByPerson) {
+	public void setHowMuchIPaid(Double payMadeByPerson) {
 		this.howMuchIPaid = payMadeByPerson;
 	}
 
@@ -200,7 +203,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 				throw new BadInputDataException("AtomPay is less than zero: " + ap);
 			totalPay += ap.getValue();
 		}
-		setPayMadeByPerson(totalPay);
+		setHowMuchIPaid(totalPay);
 	}
 
 	public double getHowMuchPersonShouldPay() {
@@ -211,6 +214,16 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		if(value < 0)
 			value = 0;
 		this.howMuchIShouldPay = value;
+	}
+	
+	private void setHowMuchPersonShouldPay(List<AtomPayment> atomPays_shouldPay) {
+		double totalPay = 0;
+		for (AtomPayment ap : atomPays_shouldPay) {
+			if(ap.getValue() < 0)
+				throw new BadInputDataException("AtomPay is less than zero: " + ap);
+			totalPay += ap.getValue();
+		}
+		setHowMuchPersonShouldPay(totalPay);
 	}
 
 	public HashMap<String, Double> getMyDebts() {

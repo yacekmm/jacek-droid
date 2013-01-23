@@ -26,6 +26,7 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase implements On
 	protected void initActivityViews() {
 		super.initActivityViews();
 		mHowMuchPaidEditText = (EditText)findViewById(R.id.EnterPaysRest_howMuchPaid_value);
+		mHowMuchPaidEditText.setOnKeyListener(hideKeyboardListener);
 	}
 
 	@Override
