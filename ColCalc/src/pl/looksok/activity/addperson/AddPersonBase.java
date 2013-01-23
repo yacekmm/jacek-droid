@@ -7,7 +7,6 @@ import java.util.List;
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.addperson.utils.AddPersonUtils;
-import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -19,8 +18,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-public abstract class AddNewPersonBase extends ColCalcActivity {
-	protected static final String LOG_TAG = AddNewPerson.class.getSimpleName();
+public abstract class AddPersonBase extends ColCalcActivity {
+	protected static final String LOG_TAG = AddPersonSinglePotluck.class.getSimpleName();
 
 	CalculationLogic calc;
 	List<PersonData> inputPaysList = new ArrayList<PersonData>();
@@ -34,9 +33,12 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 
 		calc = new CalculationLogic();
 		initActivityViews();
+		initButtonStyles();
 
 		readInputBundleIfNotEmpty();
 	}
+
+	protected void initButtonStyles() {}
 
 	protected abstract int getAddPersonContentView();
 
@@ -91,18 +93,21 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	OnClickListener saveAndAddNextPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
-				saveAndAddNext(getNewInputDataToAdd(), AddNewPerson.class);
+				saveAndAddNext(getNewInputDataToAdd(), getAddNewPersonSingleActivity());
 			}catch(BadInputDataException e){
 				Log.d(LOG_TAG, "Input data was not valid");
 			}
 		}
+
 	};
+
+	protected abstract Class<?> getAddNewPersonSingleActivity();
 
 	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
 				HashSet<PersonData> data = getNewInputDataToAdd();
-				saveAndAddNext(data, AddNewPersonMulti.class);
+				saveAndAddNext(data, AddPersonMultiPotluck.class);
 			}catch(BadInputDataException e){
 				Log.d(LOG_TAG, "Bad input data");
 			}
@@ -114,7 +119,6 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 			for (PersonData pd : newInputData) {
 				inputPaysList.add(pd);
 			}
-//			calc.setInputPaysList(inputPaysList);
 			calc.calculate(inputPaysList);
 			Intent intent = new Intent(getApplicationContext(), nextActivityClass) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
@@ -131,19 +135,20 @@ public abstract class AddNewPersonBase extends ColCalcActivity {
 	protected void calculateAndShowResults() {
 		try{
 			calc.calculate(inputPaysList);
-//			calc.setInputPaysList(inputPaysList);
-			Intent intent = new Intent(this.getApplicationContext(), CalcResultPotluckActivity.class) ;
+			Intent intent = new Intent(this.getApplicationContext(), getCalcResultActivity()) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
-			finish();
 			overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+			finish();
 		}catch(BadInputDataException e){
 			Log.d(LOG_TAG, "Bad input provided: " + e.getMessage());
 			Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
 		}
 	}
 
-	public AddNewPersonBase() {
+	protected abstract Class<?> getCalcResultActivity();
+
+	public AddPersonBase() {
 		super();
 	}
 }

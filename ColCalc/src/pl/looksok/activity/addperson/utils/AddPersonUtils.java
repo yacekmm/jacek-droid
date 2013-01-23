@@ -2,14 +2,14 @@ package pl.looksok.activity.addperson.utils;
 
 import java.util.HashSet;
 
-import pl.looksok.activity.addperson.AddNewPersonBase;
+import pl.looksok.activity.addperson.AddPersonBase;
 
 import android.database.Cursor;
 import android.provider.ContactsContract;
 
 public class AddPersonUtils {
 
-	public HashSet<String> getPersonEmailsSet(String id, AddNewPersonBase addNewPerson){
+	public HashSet<String> getPersonEmailsSet(String id, AddPersonBase addNewPerson){
         HashSet<String> emails = new HashSet<String>(); 
 		Cursor emailCur = addNewPerson.managedQuery( 
   		ContactsContract.CommonDataKinds.Email.CONTENT_URI, 

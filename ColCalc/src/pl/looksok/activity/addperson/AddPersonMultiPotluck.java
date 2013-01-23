@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.currencyedittext.CurrencyEditText;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
@@ -16,7 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class AddNewPersonMulti extends AddNewPersonBase {
+public class AddPersonMultiPotluck extends AddPersonBase {
 
 	private LinearLayout mHowManyPersonsScroller;
 	private Button mHowManyPersonsSelectedBtn;
@@ -27,9 +28,9 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 
 	@Override
 	protected int getAddPersonContentView() {
-		return R.layout.add_new_multi_person;
+		return R.layout.add_person_multi_potluck;
 	}
-
+	
 	@Override
 	protected void initActivityViews() {
 		super.initActivityViews();
@@ -68,7 +69,6 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 		}
 	};
 
-
 	@Override
 	protected HashSet<PersonData> getNewInputDataToAdd() throws BadInputDataException {
 		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
@@ -99,9 +99,18 @@ public class AddNewPersonMulti extends AddNewPersonBase {
 		return false;
 	}
 	
-
 	@Override
 	public void onBackPressed() {
 		calculateAndShowResults();
+	}
+	
+	@Override
+	protected Class<?> getCalcResultActivity()  {
+		return CalcResultPotluckActivity.class;
+	}
+
+	@Override
+	protected Class<?> getAddNewPersonSingleActivity()  {
+		return AddPersonSinglePotluck.class;
 	}
 }
