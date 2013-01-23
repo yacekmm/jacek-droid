@@ -128,8 +128,8 @@ public class CalculationLogic implements Serializable {
 				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
 				if(inputPays.size() > 1){
 					howMuchPersonShouldPay += personDataItem.getHowMuchIShouldPayForGift();
-					if(howMuchPersonShouldPay >= personDataItem.getHowMuchIPaidForGift())
-						howMuchPersonShouldPay -= personDataItem.getHowMuchIPaidForGift();
+//					if(howMuchPersonShouldPay >= personDataItem.getHowMuchIPaidForGift())
+//						howMuchPersonShouldPay -= personDataItem.getHowMuchIPaidForGift();
 				}
 				personDataItem.setHowMuchPersonShouldPay(howMuchPersonShouldPay);
 			}else{
