@@ -13,5 +13,7 @@
     <color name="black">#000000</color>
     <color name="yellow">#FBEC5D</color>
     <color name="yellow_button">#FDAE24</color>
+
+    <color name="darkBlue_button">#6A87C3</color>
     
 </resources>

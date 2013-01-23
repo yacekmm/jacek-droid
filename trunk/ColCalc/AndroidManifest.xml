@@ -29,7 +29,12 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="pl.looksok.activity.calcresult.CalculationResultActivity"
+            android:name="pl.looksok.activity.calcresult.CalcResultPotluckActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="pl.looksok.activity.calcresult.CalcResultRestaurantActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan" >
         </activity>
