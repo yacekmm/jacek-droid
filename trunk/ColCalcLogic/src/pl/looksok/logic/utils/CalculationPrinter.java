@@ -132,7 +132,7 @@ public class CalculationPrinter {
 	public static String printPersonReturnsToOthersDetails(PersonData pp, String howMuchPaidText, String howMuchShouldPayText, String returnToText, String forText, String endOfLine){
 //		String currency = Currency.getInstance(Locale.getDefault()).getSymbol();
 
-		StringBuilder sb = new StringBuilder(pp.getName()).append(" - ").append(howMuchPaidText).append(": ").append(FormatterHelper.currencyFormat(pp.getPayMadeByPerson(),2)).append(" ");
+		StringBuilder sb = new StringBuilder(pp.getName()).append(" - ").append(howMuchPaidText).append(": ").append(FormatterHelper.currencyFormat(pp.getHowMuchIPaid(),2)).append(" ");
 		sb.append("(").append(howMuchShouldPayText).append(": ").append(FormatterHelper.currencyFormat(pp.getHowMuchPersonShouldPay(),2)).append(")");
 
 		String messageIfNoReturnNeeded = sb.toString() + endOfLine;

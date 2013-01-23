@@ -40,7 +40,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
 		setPersonName(pd.getName());
-		setPayMadeByPerson(pd.getPayMadeByPerson());
+		setPayMadeByPerson(pd.getHowMuchIPaid());
 		setEmails(pd.getEmails());
 		setReceivesGift(pd.receivesGift);
 		setHowMuchIPaidForGift(pd.getHowMuchIPaidForGift());
@@ -104,7 +104,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	private void calculateHowMuchIShouldReturn() {
-		toReturn = getHowMuchPersonShouldPay() - getPayMadeByPerson();
+		toReturn = getHowMuchPersonShouldPay() - getHowMuchIPaid();
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2) /*&& !receivesGift()*/)
 			toReturn -= getHowMuchIPaidForGift();
 		if(toReturn < 0.0)
@@ -112,7 +112,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	private void calculateHowMuchRefundIShouldReceive() {
-		totalRefundForThisPerson = getPayMadeByPerson() - getHowMuchPersonShouldPay();
+		totalRefundForThisPerson = getHowMuchIPaid() - getHowMuchPersonShouldPay();
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2) && !receivesGift()){
 			totalRefundForThisPerson += getHowMuchIPaidForGift();
 			totalRefundForThisPerson -= getHowMuchIShouldPayForGift();
@@ -145,7 +145,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(getName()).append(" paid: ").append(getPayMadeByPerson());
+		sb.append(getName()).append(" paid: ").append(getHowMuchIPaid());
 
 		return sb.toString();
 	}
@@ -185,7 +185,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.name = personName;
 	}
 
-	public double getPayMadeByPerson() {
+	public double getHowMuchIPaid() {
 		return howMuchIPaid;
 	}
 
@@ -296,9 +296,9 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public double getPayMadeByPersonForCalculationAlgorithm() {
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2))
-			return getPayMadeByPerson() + getHowMuchIPaidForGift();
+			return getHowMuchIPaid() + getHowMuchIPaidForGift();
 		else
-			return getPayMadeByPerson();
+			return getHowMuchIPaid();
 	}
 
 	public CalculationType getCalculationType() {

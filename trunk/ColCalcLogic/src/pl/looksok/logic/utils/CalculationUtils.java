@@ -36,7 +36,7 @@ public class CalculationUtils {
 		Iterator<PersonData> itr = inputPays.values().iterator();
 
 		while (itr.hasNext()){
-			totalPay += itr.next().getPayMadeByPerson();
+			totalPay += itr.next().getHowMuchIPaid();
 		}
 		return totalPay;
 	}

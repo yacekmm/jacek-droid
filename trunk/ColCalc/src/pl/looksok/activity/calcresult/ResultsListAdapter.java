@@ -99,7 +99,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 	}
 
 	private void setBalance(ResultHolder holder, PersonData pp) {
-		holder.txtBalance.setText(CalcFormatterHelper.currencyFormat(pp.getPayMadeByPerson(), 2));
+		holder.txtBalance.setText(CalcFormatterHelper.currencyFormat(pp.getHowMuchIPaid(), 2));
 	}
 
 	public class ResultHolder {
