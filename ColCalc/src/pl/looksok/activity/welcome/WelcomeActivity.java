@@ -4,8 +4,9 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.calcresult.CalcResultRestaurantActivity;
 import pl.looksok.activity.calcresult.CalcResultUtils;
-import pl.looksok.activity.calcresult.CalculationResultActivity;
+import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
@@ -34,6 +35,7 @@ public class WelcomeActivity extends ColCalcActivity {
 		setContentView(R.layout.welcome);
 		
 		((Button)findViewById(R.id.welcome_mode_potluckParty)).setOnClickListener(modePotluckPartyClickListener);
+		((Button)findViewById(R.id.welcome_mode_restaurant)).setOnClickListener(modeRestaurantClickListener);
 	}
 	
 	@Override
@@ -58,7 +60,16 @@ public class WelcomeActivity extends ColCalcActivity {
 	
 	OnClickListener modePotluckPartyClickListener = new OnClickListener() {
         public void onClick(View v) {
-        	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
+        	Intent intent = new Intent(getApplicationContext(), CalcResultPotluckActivity.class) ;
+        	startActivity(intent);
+        	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
+        	finish();
+        }
+    };
+	
+	OnClickListener modeRestaurantClickListener = new OnClickListener() {
+        public void onClick(View v) {
+        	Intent intent = new Intent(getApplicationContext(), CalcResultRestaurantActivity.class) ;
         	startActivity(intent);
         	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
         	finish();
@@ -68,7 +79,7 @@ public class WelcomeActivity extends ColCalcActivity {
     
     public void editCalcOnClickHandler(View v){
     	CalculationLogic calcItem = (CalculationLogic)v.getTag();
-    	Intent intent = new Intent(getApplicationContext(), CalculationResultActivity.class) ;
+    	Intent intent = new Intent(getApplicationContext(), CalcResultPotluckActivity.class) ;
     	intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calcItem);
     	startActivity(intent);
     	overridePendingTransition(DEFAULT_TRANSITION_ANIMATION_ENTER, DEFAULT_TRANSITION_ANIMATION_EXIT);
