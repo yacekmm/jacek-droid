@@ -228,7 +228,7 @@ public class CalculationLogic implements Serializable {
 	public int getTotalPay() {
 		double total = 0;
 		for (PersonData data : getInputPaysList()) {
-			total += data.getPayMadeByPerson();
+			total += data.getHowMuchIPaid();
 		}
 		return (int)Math.round(total);
 	}

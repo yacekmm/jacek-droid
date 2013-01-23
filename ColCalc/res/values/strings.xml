@@ -53,6 +53,8 @@
     <string name="EnterPays_saveAndExit_text">Zapisz i pokaż rozliczenie</string>
     <string name="EnterPays_personLabel">imię</string>
 
+    <string name="EnterPaysRest_HowMuchPaid_text">ile dołożył do rachunku</string>
+
     <string name="EnterPays_atomPay_headerText">płatności</string>
     <string name="EnterPays_atomPay_headerText_left">płatności (razem: </string>
     <string name="EnterPays_atomPay_headerText_right">)</string>

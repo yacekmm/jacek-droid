@@ -6,7 +6,6 @@ import org.joda.time.DateTime;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
-import pl.looksok.activity.addperson.AddPersonSinglePotluck;
 import pl.looksok.activity.addperson.AddPersonMultiPotluck;
 import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
@@ -193,7 +192,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		PersonData pd = calc.findPersonInList(((PersonData)v.getTag()).getName());
 		calc.getInputPaysList().remove(pd);
 
-		Intent intent = new Intent(getApplicationContext(), AddPersonSinglePotluck.class) ;
+		Intent intent = new Intent(getApplicationContext(), getAddPersonSingleActivity()) ;
 		intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 		intent.putExtra(Constants.BUNDLE_PERSON_TO_EDIT, pd);
 		startActivity(intent);

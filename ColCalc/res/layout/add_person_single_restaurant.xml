@@ -64,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/EnterPays_personName"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
@@ -72,10 +71,41 @@
         android:text="@string/EnterPays_atomPay_headerText" />
 
     <RelativeLayout
+        android:id="@+id/EnterPaysRest_howMuchPaid_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_below="@+id/EnterPays_paysHeaderText"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_normal" >
+
+        <TextView
+            android:id="@+id/EnterPaysRest_howMuchPaid_label"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@+id/EnterPaysRest_howMuchPaid_value"
+            android:gravity="center_vertical"
+            android:text="@string/EnterPaysRest_HowMuchPaid_text"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textSize_micro" />
+
+        <pl.looksok.currencyedittext.CurrencyEditText
+            android:id="@+id/EnterPaysRest_howMuchPaid_value"
+            style="@style/textMediumDarkBold"
+            android:layout_width="@dimen/height_button_big"
+            android:layout_height="@dimen/height_button"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edittext_bgnd_gray"
+            android:gravity="center"
+            android:text="@string/EnterPays_TextView_ZeroValue" />
+    </RelativeLayout>
+    
+    <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
         android:layout_width="fill_parent"
         android:layout_height="80sp"
-        android:layout_below="@+id/EnterPays_paysHeaderText"
+        android:layout_below="@+id/EnterPaysRest_howMuchPaid_layout"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal" >
 
