@@ -27,7 +27,7 @@
             android:layout_below="@+id/storedCalc_calcDetailsHeader"
             android:layout_marginLeft="@dimen/margin_normal"
             android:text="@string/app_name"
-            android:textSize="@dimen/textSize_medium"
+            android:textSize="@dimen/textSize_small"
             android:textColor="@color/gray_dark"
             android:textStyle="bold"
             android:singleLine="true" />
