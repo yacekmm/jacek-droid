@@ -51,7 +51,7 @@
             android:drawablePadding="@dimen/margin_small"
             android:text="@string/calculation_TextView_personPay"
             android:textColor="@color/gray_dark"
-            android:textSize="@dimen/textSize_small"
+            android:textSize="@dimen/textSize_micro"
             android:singleLine="true" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:drawablePadding="@dimen/margin_small"
             android:text="@string/calculation_TextView_personPay"
             android:textColor="@color/gray_dark"
-            android:textSize="@dimen/textSize_small"
+            android:textSize="@dimen/textSize_micro"
             android:singleLine="true" />
 
         <ImageView

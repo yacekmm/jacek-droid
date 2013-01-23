@@ -61,7 +61,7 @@
                 android:layout_width="0sp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@drawable/button_bgnd_middle"
+                android:background="@drawable/button_bgnd_potluck_middle"
                 android:contentDescription="@string/calculation_button_sendCalculation_text"
                 android:src="@drawable/share_icon" />
 
@@ -71,7 +71,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="@dimen/margin_micro"
                 android:layout_weight="1"
-                android:background="@drawable/button_bgnd_right"
+                android:background="@drawable/button_bgnd_potluck_right"
                 android:contentDescription="@android:string/cancel"
                 android:src="@drawable/trashbin_icon" />
         </LinearLayout>

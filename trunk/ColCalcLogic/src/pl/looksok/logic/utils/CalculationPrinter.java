@@ -85,18 +85,18 @@ public class CalculationPrinter {
 		return printCalculationList(forText, sb, refundMap);
 	}
 
-	public static String printPersonDebtsSimple(PersonData pd) {
+	public static String printPersonDebtsSimple(PersonData pd, String helpText) {
 //		HashMap<String, Double> refundMap = pd.getRefundForOtherPeople();
 		HashMap<String, Double> refundMap = pd.getPersonDebts();
-		return simplePrinter("-", refundMap);
+		return simplePrinter("-", helpText, refundMap);
 	}
 
-	public static String printPersonRefundsFromOthersSimple(PersonData pd) {
+	public static String printPersonRefundsFromOthersSimple(PersonData pd, String helpText) {
 		HashMap<String, Double> refundMap = pd.getMyRefunds();
-		return simplePrinter("+", refundMap);
+		return simplePrinter("+", helpText, refundMap);
 	}
 
-	private static String simplePrinter(String prefix, HashMap<String, Double> payMap) {
+	private static String simplePrinter(String prefix, String helpText, HashMap<String, Double> payMap) {
 		StringBuilder sb = new StringBuilder();
 
 		boolean first = true;
@@ -106,10 +106,11 @@ public class CalculationPrinter {
 			double value = payMap.get(key);
 			if(value > 0){
 				if(!first){
-					sb.append(",    ");
+					//sb.append(",    ");
+					sb.append("\n");
 				}else
 					first = false;
-				sb.append(prefix).append(FormatterHelper.currencyFormat(value, 2)).append(" ").append(key);
+				sb.append(prefix).append(FormatterHelper.currencyFormat(value, 2)).append(" ").append(helpText).append(": ").append(key);
 			}
 		}
 		

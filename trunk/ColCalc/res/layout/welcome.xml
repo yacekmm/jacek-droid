@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_welcomeButton"
         android:layout_margin="@dimen/margin_normal"
-        android:background="@drawable/button_bgnd"
+        android:background="@drawable/button_bgnd_potluck"
         android:drawableTop="@drawable/app_logo"
         android:gravity="center_horizontal|bottom"
         android:padding="@dimen/margin_normal"

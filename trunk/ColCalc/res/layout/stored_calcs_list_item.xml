@@ -11,7 +11,7 @@
         android:layout_height="@dimen/height_button"
         android:layout_toLeftOf="@+id/storedCalc_shareCalc"
         android:onClick="editCalcOnClickHandler"
-        android:background="@drawable/button_bgnd_left" >
+        android:background="@drawable/button_bgnd_potluck_left" >
 
         <include
             android:id="@+id/storedCalc_calcDetailsHeader"
@@ -42,7 +42,7 @@
         android:contentDescription="@string/emptyText"
         android:onClick="shareCalcOnClickHandler"
         android:src="@drawable/share_icon"
-        android:background="@drawable/button_bgnd_middle" />
+        android:background="@drawable/button_bgnd_potluck_middle" />
     
     <ImageButton
         android:id="@+id/storedCalc_removeCalc"
@@ -53,6 +53,6 @@
         android:contentDescription="@string/emptyText"
         android:onClick="removeCalcOnClickHandler"
         android:src="@drawable/trashbin_icon"
-        android:background="@drawable/button_bgnd_right" />
+        android:background="@drawable/button_bgnd_potluck_right" />
 
 </RelativeLayout>
