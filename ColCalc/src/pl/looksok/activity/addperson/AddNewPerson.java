@@ -10,6 +10,7 @@ import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
 import pl.looksok.activity.addperson.utils.InputValidator;
 import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
 import pl.looksok.currencyedittext.CurrencyEditText;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -25,6 +26,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -62,6 +65,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
 		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
+		setGiftPaymentFieldsVisibile(false, false);
 
 		setUpAtomPayAdapter(new ArrayList<AtomPayment>());
 	}
@@ -70,17 +74,16 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 	protected void loadInputDataFromBundle(Bundle extras) {
 		super.loadInputDataFromBundle(extras);
 
-		PersonData pd = (PersonData)extras.getSerializable(Constants.BUNDLE_PERSON_TO_EDIT);
-		if(pd!=null){
-			editPersonData = pd;
-			mNewPersonNameInput.setText(pd.getName());
-			mReceivesGiftCheckBox.setChecked(pd.receivesGift());
-			mBuysGiftCheckBox.setChecked(pd.getHowMuchIPaidForGift() > 0);
-			mGiftValueInput.setText(pd.getHowMuchIPaidForGift() > 0 ? pd.getHowMuchIPaidForGift() + "" : "");
+		editPersonData = (PersonData)extras.getSerializable(Constants.BUNDLE_PERSON_TO_EDIT);
+		if(editPersonData!=null){
+			mNewPersonNameInput.setText(editPersonData.getName());
+			mBuysGiftCheckBox.setChecked(editPersonData.getHowMuchIPaidForGift() > 0);
+			mReceivesGiftCheckBox.setChecked(editPersonData.receivesGift());
+			setGiftPaymentFieldsVisibile(editPersonData.getHowMuchIPaidForGift() > 0, false);
+			mGiftValueInput.setText(FormatterHelper.currencyFormat(editPersonData.getHowMuchIPaidForGift(), 2));
 			setUpAtomPayAdapter(editPersonData.getAtomPayments());
-			updateTotalPayValue(pd.getPayMadeByPerson());
-		}else
-			editPersonData = null;
+			updateTotalPayValue(editPersonData.getPayMadeByPerson());
+		}
 	}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
@@ -175,12 +178,34 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			mGiftValueInput.setEnabled(isChecked);
+			setGiftPaymentFieldsVisibile(isChecked, true);
 			if(isChecked){
 				mReceivesGiftCheckBox.setChecked(false);
 			}
 		}
+
 	};
+
+	private void setGiftPaymentFieldsVisibile(boolean visible, boolean withAnimation) {
+		View giftValueLabel = findViewById(R.id.EnterPays_TextView_giftValue);
+		int viewVisibility;
+		Animation animation;
+		
+		if(visible){
+			animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_down_in);
+			viewVisibility = View.VISIBLE;
+		}else{
+			animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_up_out);
+			viewVisibility = View.INVISIBLE;
+		}
+		
+		mGiftValueInput.setVisibility(viewVisibility);
+		giftValueLabel.setVisibility(viewVisibility);
+		if(withAnimation){
+			mGiftValueInput.startAnimation(animation);
+			giftValueLabel.startAnimation(animation);
+		}
+	}
 
 	OnCheckedChangeListener receivesGiftChangeListener = new OnCheckedChangeListener() {
 
@@ -204,7 +229,7 @@ public class AddNewPerson extends AddNewPersonBase implements OnTotalPayChangeLi
 
 		}
 	};
-
+	
 	@Override
 	public void onBackPressed() {
 		if(editPersonData!=null){

@@ -183,6 +183,7 @@
                 android:layout_margin="@dimen/margin_normal" >
 
                 <TextView
+                    android:id="@+id/EnterPays_TextView_giftValue"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/margin_normal"
@@ -198,7 +199,6 @@
                     android:layout_height="fill_parent"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/edittext_bgnd_gray"
-                    android:enabled="false"
                     android:gravity="center"
                     android:text="@string/EnterPays_TextView_ZeroValue" />
             </RelativeLayout>
