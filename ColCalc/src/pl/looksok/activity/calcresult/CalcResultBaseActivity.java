@@ -91,7 +91,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	private void populateListArray() {
 		listArray = utils.readCalcPeopleToListArray(calc);
 
-		adapter = new ResultsListAdapter(CalcResultBaseActivity.this, R.layout.calculation_list_item, listArray);
+		adapter = new ResultsListAdapter(CalcResultBaseActivity.this, R.layout.calc_result_list_item, listArray, calc);
 		resultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
@@ -99,7 +99,6 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			findViewById(R.id.calc_emptyPeopleListText).setVisibility(View.GONE);
 		else
 			findViewById(R.id.calc_emptyPeopleListText).setVisibility(View.VISIBLE);
-
 	}
 
 	private void readInputBundle() {

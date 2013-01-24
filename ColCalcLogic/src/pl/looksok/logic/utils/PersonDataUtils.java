@@ -11,7 +11,7 @@ public class PersonDataUtils {
 	public static double returnMoneyToPersonB(String personBName, double howMuchPersonBPaid,
 			double howMuchPersonBShouldPay, double howMuchRefundPersonBNeeds,
 			PersonData me, CalculationType calculationType) {
-		double tmpToReturn = me.getHowMuchPersonShouldPay() - me.getHowMuchIPaid();
+		double tmpToReturn = me.getHowMuchPersonShouldPay() - me.getHowMuchPersonPaid();
 		
 		if(personBNeedsMoreThanIShouldGive(tmpToReturn, me.getAlreadyReturned(), me.getToReturn())){
 			tmpToReturn = splitMyReturnAmount(me);
@@ -46,7 +46,7 @@ public class PersonDataUtils {
 
 	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, 
 			double tmpToReturn, double howMuchRefundPersonBNeeds, CalculationType calculationType) {
-		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchIPaid();
+		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchPersonPaid();
 	}
 
 	private static double splitMyReturnAmount(PersonData pd) {

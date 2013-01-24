@@ -51,7 +51,7 @@ public class InputValidator {
 		
 		if(!equalPayments){
 			for (PersonData data : inputPaysList) {
-				totalPayMade += data.getHowMuchIPaid();
+				totalPayMade += data.getHowMuchPersonPaid();
 				totalShouldPaysDeclared += data.getHowMuchPersonShouldPay();
 			}
 			result = totalPayMade - totalShouldPaysDeclared;
