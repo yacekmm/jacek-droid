@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.looksok.logic.AtomPayment;
-import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 
 public class PersonDataUtils {
 	public static double returnMoneyToPersonB(String personBName, double howMuchPersonBPaid,
 			double howMuchPersonBShouldPay, double howMuchRefundPersonBNeeds,
-			PersonData me, CalculationType calculationType) {
+			PersonData me) {
 		double tmpToReturn = me.getHowMuchPersonShouldPay() - me.getHowMuchPersonPaid();
 		
 		if(personBNeedsMoreThanIShouldGive(tmpToReturn, me.getAlreadyReturned(), me.getToReturn())){
 			tmpToReturn = splitMyReturnAmount(me);
-		}else if(personBWantsLessThanIHaveToReturn(me, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds, calculationType)){
+		}else if(personBWantsLessThanIHaveToReturn(me, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds)){
 			tmpToReturn = givePersonBNoMoreThanHeWants(me, howMuchPersonBPaid, howMuchPersonBShouldPay);
 		}
 
@@ -45,7 +44,7 @@ public class PersonDataUtils {
 	}
 
 	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, 
-			double tmpToReturn, double howMuchRefundPersonBNeeds, CalculationType calculationType) {
+			double tmpToReturn, double howMuchRefundPersonBNeeds) {
 		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchPersonPaid();
 	}
 

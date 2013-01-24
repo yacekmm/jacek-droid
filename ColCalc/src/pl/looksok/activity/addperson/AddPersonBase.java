@@ -19,7 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 public abstract class AddPersonBase extends ColCalcActivity {
-	protected static final String LOG_TAG = AddPersonSinglePotluck.class.getSimpleName();
+	protected static final String LOG_TAG = AddPersonBase.class.getSimpleName();
 
 	CalculationLogic calc;
 	List<PersonData> inputPaysList = new ArrayList<PersonData>();
@@ -135,14 +135,15 @@ public abstract class AddPersonBase extends ColCalcActivity {
 	protected void calculateAndShowResults() {
 		try{
 			calc.calculate(inputPaysList);
+		}catch(BadInputDataException e){
+			Log.d(LOG_TAG, "Bad input provided: " + e.getMessage());
+			Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
+		}finally{
 			Intent intent = new Intent(this.getApplicationContext(), getCalcResultActivity()) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
 			finish();
-		}catch(BadInputDataException e){
-			Log.d(LOG_TAG, "Bad input provided: " + e.getMessage());
-			Toast.makeText(getApplicationContext(), getResources().getString(R.string.EnterPays_Toast_BadInputDataError), Toast.LENGTH_SHORT).show();
 		}
 	}
 

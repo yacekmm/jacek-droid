@@ -94,9 +94,16 @@ public class CalcResultUtils {
 	public ArrayList<PersonData> readCalcPeopleToListArray(CalculationLogic calc){
 		ArrayList<PersonData> listArray = new ArrayList<PersonData>();
 
-		Iterator<String> it = calc.getCalculationResult().keySet().iterator();
-		while (it.hasNext()){
-			listArray.add(calc.getCalculationResult().get(it.next()));
+		HashMap<String, PersonData> calcResult = calc.getCalculationResult();
+		if(calcResult.size() != 0){
+			Iterator<String> it = calcResult.keySet().iterator();
+			while (it.hasNext()){
+				listArray.add(calcResult.get(it.next()));
+			}
+		}else if(calc.getInputPaysList().size() != 0){
+			for (PersonData pd : calc.getInputPaysList()) {
+				listArray.add(pd);
+			}
 		}
 		Collections.sort(listArray);
 		return listArray;
