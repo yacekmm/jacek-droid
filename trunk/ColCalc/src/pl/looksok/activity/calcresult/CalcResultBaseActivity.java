@@ -35,7 +35,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 
 	private static final int SAVE_NEW_CALC = 0;
 
-	private CalculationLogic calc = null;
+	protected CalculationLogic calc = null;
 	private ListView mCalcResultList;
 	private List<PersonData> listArray;
 	private ResultsListAdapter adapter;
@@ -44,7 +44,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 
 	private CalcResultUtils utils = new CalcResultUtils();
 
-	private EditText calcNameEditText;
+	private EditText mCalcNameEditText;
 
 	private static boolean calcWasEdited = false;
 
@@ -53,14 +53,19 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(getXmlLayout());
 
-		calcNameEditText = (EditText)findViewById(R.id.calc_calcName_edit);
-		calcNameEditText.setOnKeyListener(hideKeyboardListener);
 		readInputBundle();
+		initViews();
+		populateListArray();
+		initCalculationDetailsBar();
+	}
+
+	protected void initViews() {
+		mCalcNameEditText = (EditText)findViewById(R.id.calc_calcName_edit);
+		mCalcNameEditText.setOnKeyListener(hideKeyboardListener);
+		mCalcNameEditText.setText(calc.getCalcName());
 		mCalcResultList = (ListView)findViewById(R.id.calc_listView_list);
 		initButtonsActions();
 		initButtonsStyles();
-		populateListArray();
-		initCalculationDetailsBar();
 	}
 
 	protected void initButtonsStyles() {}
@@ -106,17 +111,19 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-			calcNameEditText.setText(calc.getCalcName());
 			try{
 				calc.recalculate();
 			}catch (BadInputDataException bidException) {
-				Toast.makeText(getApplicationContext(), "BadInput data note recalculating: " + bidException.getMessage(), Toast.LENGTH_LONG).show();
+				handleException(bidException);
+//				Toast.makeText(getApplicationContext(), "BadInput data note recalculating: " + bidException.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		}else{
 			calc = new CalculationLogic();
 			calc.setCalculationType(getCalculationType());
 		}
 	}
+
+	protected void handleException(Exception exception) { }
 
 	protected abstract CalculationType getCalculationType();
 
@@ -128,7 +135,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	};
 
 	protected void saveCalculation() {
-		String calcName = calcNameEditText.getText().toString();
+		String calcName = mCalcNameEditText.getText().toString();
 		if(calcName.length() == 0)
 			calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
 
@@ -152,7 +159,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	OnClickListener addPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			calcWasEdited = true;
-			calc.setCalcName(calcNameEditText.getText().toString());
+			calc.setCalcName(mCalcNameEditText.getText().toString());
 			Intent intent = new Intent(getApplicationContext(), getAddPersonSingleActivity()) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
@@ -167,7 +174,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	OnClickListener addMultiPersonButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			calcWasEdited = true;
-			calc.setCalcName(calcNameEditText.getText().toString());
+			calc.setCalcName(mCalcNameEditText.getText().toString());
 			Intent intent = new Intent(getApplicationContext(), AddPersonMultiPotluck.class) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);

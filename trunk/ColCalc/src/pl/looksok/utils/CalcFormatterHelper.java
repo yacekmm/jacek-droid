@@ -33,4 +33,8 @@ public class CalcFormatterHelper {
 		nf.setMaximumFractionDigits(fractionDigits);
 		return(nf.format(value));
 	}
+	
+	public static String currencyFormat(double value){
+		return currencyFormat(value, 2);
+	}
 }

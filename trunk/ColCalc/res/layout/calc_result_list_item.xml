@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_micro"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@drawable/button_bgnd_gray"
         android:contentDescription="@string/EnterPays_Menu_Remove"
