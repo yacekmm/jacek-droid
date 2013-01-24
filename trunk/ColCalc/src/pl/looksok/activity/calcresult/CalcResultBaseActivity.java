@@ -153,10 +153,15 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
+				calc.recalculate();
 				Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calc);
 				startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
 			}catch(NullPointerException e){
 				Log.e(LOG_TAG, "Error while preparing email. there is no email Addresses probably: " + e.getMessage());
+				Toast.makeText(getApplicationContext(), getString(R.string.calculation_nullPointerError_whileSharingCalc), Toast.LENGTH_LONG).show();
+			}catch (BadInputDataException e) {
+				Log.i(LOG_TAG, "BadInputException while sharing calculation: " + e.getMessage());
+				Toast.makeText(getApplicationContext(), getString(R.string.calculation_badInputDataError_whileSharingCalc), Toast.LENGTH_LONG).show();
 			}
 		}
 	};

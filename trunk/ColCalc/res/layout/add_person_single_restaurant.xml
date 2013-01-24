@@ -68,7 +68,7 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         android:drawableLeft="@drawable/bills"
-        android:text="@string/EnterPays_atomPay_headerText" />
+        android:text="@string/EnterPays_billPay_headerText" />
 
     <RelativeLayout
         android:id="@+id/EnterPaysRest_howMuchPaid_layout"
@@ -101,13 +101,27 @@
             android:text="@string/EnterPays_TextView_ZeroValue" />
     </RelativeLayout>
     
+	<TextView
+        android:id="@+id/EnterPays_paysHeaderText_bill"
+        style="@style/add_person_section_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EnterPaysRest_howMuchPaid_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:drawableLeft="@drawable/bills"
+        android:text="@string/EnterPays_atomPay_headerText" />
+    
     <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
         android:layout_width="fill_parent"
-        android:layout_height="80sp"
-        android:layout_below="@+id/EnterPaysRest_howMuchPaid_layout"
+        android:layout_height="120sp"
+        android:layout_below="@+id/EnterPays_paysHeaderText_bill"
         android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginRight="@dimen/margin_normal" >
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal" >
 
         <ListView
             android:id="@+id/EnterPays_atomPaysList"
