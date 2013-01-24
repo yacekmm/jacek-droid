@@ -7,6 +7,9 @@ public class AtomPayment implements Serializable {
 	
 	private String name = "";
 	private double value = 0;
+	private AtomPaymentType type = AtomPaymentType.DEFAULT;
+	
+	enum AtomPaymentType {DEFAULT, TIP};
 	
 	public AtomPayment() {}
 
@@ -29,6 +32,14 @@ public class AtomPayment implements Serializable {
 
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	public AtomPaymentType getType() {
+		return type;
+	}
+
+	public void setType(AtomPaymentType type) {
+		this.type = type;
 	}
 
 	@Override
