@@ -40,7 +40,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	public PersonData(String _personName, HashMap<String, PersonData> inputPays) {
 		PersonData pd = inputPays.get(_personName);
 		setPersonName(pd.getName());
-		setHowMuchIPaid(pd.getHowMuchIPaid());
+		setHowMuchIPaid(pd.getHowMuchPersonPaid());
 		setEmails(pd.getEmails());
 		setReceivesGift(pd.receivesGift);
 		setHowMuchIPaidForGift(pd.getHowMuchIPaidForGift());
@@ -72,6 +72,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public PersonData(String name, List<AtomPayment> atomPays_shouldPay, double howMuchPaid) {
 		this.name = name;
+		this.setAtomPayments(atomPays_shouldPay);
 		setHowMuchPersonShouldPay(atomPays_shouldPay);
 		setHowMuchIPaid(howMuchPaid);
 //		this(name, atomPays, shouldPayDouble, new HashSet<String>());
@@ -107,7 +108,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	private void calculateHowMuchIShouldReturn() {
-		toReturn = getHowMuchPersonShouldPay() - getHowMuchIPaid();
+		toReturn = getHowMuchPersonShouldPay() - getHowMuchPersonPaid();
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2) /*&& !receivesGift()*/)
 			toReturn -= getHowMuchIPaidForGift();
 		if(toReturn < 0.0)
@@ -115,7 +116,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	private void calculateHowMuchRefundIShouldReceive() {
-		totalRefundForThisPerson = getHowMuchIPaid() - getHowMuchPersonShouldPay();
+		totalRefundForThisPerson = getHowMuchPersonPaid() - getHowMuchPersonShouldPay();
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2) && !receivesGift()){
 			totalRefundForThisPerson += getHowMuchIPaidForGift();
 			totalRefundForThisPerson -= getHowMuchIShouldPayForGift();
@@ -148,7 +149,10 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(getName()).append(" paid: ").append(getHowMuchIPaid());
+		sb.append(getName()).append(" paid: ").append(getHowMuchPersonPaid());
+		sb.append(", should pay: ").append(getHowMuchPersonShouldPay());
+		sb.append(", paid for gift: ").append(getHowMuchIPaidForGift());
+		sb.append(", should pay for gift: ").append(getHowMuchIShouldPayForGift());
 
 		return sb.toString();
 	}
@@ -188,7 +192,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		this.name = personName;
 	}
 
-	public double getHowMuchIPaid() {
+	public double getHowMuchPersonPaid() {
 		return howMuchIPaid;
 	}
 
@@ -309,9 +313,9 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 	public double getPayMadeByPersonForCalculationAlgorithm() {
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2))
-			return getHowMuchIPaid() + getHowMuchIPaidForGift();
+			return getHowMuchPersonPaid() + getHowMuchIPaidForGift();
 		else
-			return getHowMuchIPaid();
+			return getHowMuchPersonPaid();
 	}
 
 	public CalculationType getCalculationType() {

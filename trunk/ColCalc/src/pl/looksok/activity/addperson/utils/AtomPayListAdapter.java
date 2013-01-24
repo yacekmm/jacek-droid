@@ -11,7 +11,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnKeyListener;
@@ -104,10 +103,10 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 						listener.notifyOnTotalPayChange(getTotalPay());
 					}
 				}catch (NumberFormatException e) {
-					Log.d(LOG_TAG, "this is not correct double number (s = " + s + "). It will not be persisted: " + e.getMessage());
+//					Log.d(LOG_TAG, "this is not correct double number (s = " + s + "). It will not be persisted: " + e.getMessage());
 					holder.atomPayment.setValue(FormatterHelper.decodeValueFromCurrency(s.toString()));
 				}
-				Log.i(LOG_TAG, "s: " + s + ", atomPayment.value: " + holder.atomPayment.getValue());
+//				Log.i(LOG_TAG, "s: " + s + ", atomPayment.value: " + holder.atomPayment.getValue());
 			}
 
 			@Override

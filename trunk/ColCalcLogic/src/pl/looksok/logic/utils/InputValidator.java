@@ -19,7 +19,7 @@ public class InputValidator {
 				throw new DuplicatePersonNameException(in.getName());
 			else{
 				inputPays.put(in.getName(), in);
-				sumOfAllPays += in.getHowMuchIPaid();
+				sumOfAllPays += in.getHowMuchPersonPaid();
 				sumOfAllShouldPays += in.getHowMuchPersonShouldPay();
 			}
 		}

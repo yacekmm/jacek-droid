@@ -54,7 +54,7 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 			mNewPersonNameInput.setText(editPersonData.getName());
 			loadSpecificInputDataFromBundle(editPersonData);
 			setUpAtomPayAdapter(editPersonData.getAtomPayments());
-			updateTotalPayValue(editPersonData.getHowMuchIPaid());
+			updateTotalPayValue(editPersonData.getHowMuchPersonPaid());
 		}
 	}
 

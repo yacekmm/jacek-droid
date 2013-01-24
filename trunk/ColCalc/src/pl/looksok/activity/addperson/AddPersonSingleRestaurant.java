@@ -39,7 +39,7 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase implements On
 	@Override
 	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {
 		super.loadSpecificInputDataFromBundle(loadedPersonData);
-		mHowMuchPaidEditText.setText(CalcFormatterHelper.currencyFormat(loadedPersonData.getHowMuchIPaid(), 2));
+		mHowMuchPaidEditText.setText(CalcFormatterHelper.currencyFormat(loadedPersonData.getHowMuchPersonPaid(), 2));
 	}
 
 	@Override

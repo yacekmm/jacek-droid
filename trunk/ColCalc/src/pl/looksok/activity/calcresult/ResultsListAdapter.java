@@ -3,6 +3,8 @@ package pl.looksok.activity.calcresult;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.logic.CalculationLogic;
+import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.utils.CalcFormatterHelper;
@@ -24,13 +26,15 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 	private List<PersonData> items;
 	private int layoutResourceId;
 	private Context context;
-	private boolean giftsIncluded = true;
+	private CalculationLogic calc;
 
-	public ResultsListAdapter(Context context, int layoutResourceId, List<PersonData> items) {
+
+	public ResultsListAdapter(Context context, int layoutResourceId, List<PersonData> items, CalculationLogic calc) {
 		super(context, layoutResourceId, items);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
 		this.items = items;
+		this.calc = calc;
 	}
 
 	@Override
@@ -44,6 +48,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		holder = new ResultHolder();
 		holder.txtName = (TextView)row.findViewById(R.id.calcItem_textView_name);
 		holder.txtBalance = (TextView)row.findViewById(R.id.calcItem_textView_pay);
+		holder.txtShouldPay = (TextView)row.findViewById(R.id.calcItem_textView_shouldPay);
 		holder.txtPaidForGift = (TextView)row.findViewById(R.id.calcItem_textView_personPayForGift);
 		holder.txtDebts = (TextView)row.findViewById(R.id.calcItem_details_debts);
 		holder.txtRefunds = (TextView)row.findViewById(R.id.calcItem_details_refunds);
@@ -64,9 +69,13 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 			return;
 
 		holder.txtName.setText(pd.getName());
-		setBalance(holder, pd);
+		setHowMuchUserPaidText(holder, pd);
 
-		if(giftsIncluded){
+		holder.imgReceivesGift.setVisibility(View.GONE);
+		holder.txtPaidForGift.setVisibility(View.GONE);
+		holder.txtShouldPay.setVisibility(View.GONE);
+		
+		if(calc.getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
 			holder.imgReceivesGift.setVisibility(View.VISIBLE);
 			holder.txtPaidForGift.setVisibility(View.VISIBLE);
 			if(!pd.receivesGift()){
@@ -77,19 +86,20 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 				holder.imgReceivesGift.setVisibility(View.VISIBLE);
 				holder.txtPaidForGift.setVisibility(View.GONE);
 			}
-		}else{
-			holder.imgReceivesGift.setVisibility(View.GONE);
-			holder.txtPaidForGift.setVisibility(View.GONE);
+		}else if(calc.getCalculationType().equals(CalculationType.RESTAURANT)){
+			holder.txtShouldPay.setVisibility(View.VISIBLE);
+			holder.txtShouldPay.setText(CalcFormatterHelper.currencyFormat(pd.getHowMuchPersonShouldPay(), 2));
 		}
+		
 
 		String debtsText = CalculationPrinter.printPersonDebtsSimple(pd, context.getString(R.string.calculation_printText_for));
-		setResultText(holder, debtsText, holder.txtDebts);
+		setCalcResultText(holder, debtsText, holder.txtDebts);
 
 		String refundsText = CalculationPrinter.printPersonRefundsFromOthersSimple(pd, context.getString(R.string.calculation_printText_from));
-		setResultText(holder, refundsText, holder.txtRefunds);
+		setCalcResultText(holder, refundsText, holder.txtRefunds);
 	}
 
-	protected void setResultText(ResultHolder holder, String text, TextView textView) {
+	protected void setCalcResultText(ResultHolder holder, String text, TextView textView) {
 		if(text.length()>0){
 			textView.setText(text);
 			textView.setVisibility(View.VISIBLE);
@@ -98,14 +108,15 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		}
 	}
 
-	private void setBalance(ResultHolder holder, PersonData pp) {
-		holder.txtBalance.setText(CalcFormatterHelper.currencyFormat(pp.getHowMuchIPaid(), 2));
+	private void setHowMuchUserPaidText(ResultHolder holder, PersonData pp) {
+		holder.txtBalance.setText(CalcFormatterHelper.currencyFormat(pp.getHowMuchPersonPaid(), 2));
 	}
 
 	public class ResultHolder {
 		RelativeLayout itemLayout;
 		TextView txtName;
 		TextView txtBalance;
+		TextView txtShouldPay;
 		TextView txtPaidForGift;
 		TextView txtDebts;
 		TextView txtRefunds;
