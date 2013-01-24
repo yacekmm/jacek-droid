@@ -56,6 +56,7 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		}
 	}
 
+	@SuppressWarnings("unused")
 	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {

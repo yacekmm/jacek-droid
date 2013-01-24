@@ -14,8 +14,8 @@ public class PersonDataUtils {
 		
 		if(personBNeedsMoreThanIShouldGive(tmpToReturn, me.getAlreadyReturned(), me.getToReturn())){
 			tmpToReturn = splitMyReturnAmount(me);
-		}else if(personBWantsLessThanIHaveToReturn(me, howMuchPersonBPaid, howMuchPersonBShouldPay, tmpToReturn, howMuchRefundPersonBNeeds)){
-			tmpToReturn = givePersonBNoMoreThanHeWants(me, howMuchPersonBPaid, howMuchPersonBShouldPay);
+		}else if(personBWantsLessThanIHaveToReturn(me, howMuchRefundPersonBNeeds)){
+			tmpToReturn = givePersonBNoMoreThanHeWants(howMuchPersonBPaid, howMuchPersonBShouldPay);
 		}
 
 		if(tmpToReturn > howMuchRefundPersonBNeeds){
@@ -31,7 +31,7 @@ public class PersonDataUtils {
 		return tmpToReturn;
 	}
 	
-	private static double givePersonBNoMoreThanHeWants(PersonData me, double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
+	private static double givePersonBNoMoreThanHeWants(double howMuchPersonBPaid, double howMuchPersonBShouldPay) {
 		double tmpToReturn;
 		double refundForPersonBNeeded = howMuchPersonBPaid - howMuchPersonBShouldPay;
 		if(refundForPersonBNeeded<0)
@@ -43,8 +43,7 @@ public class PersonDataUtils {
 		return tmpToReturn;
 	}
 
-	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchPersonBPaid, double howMuchPersonBShouldPay, 
-			double tmpToReturn, double howMuchRefundPersonBNeeds) {
+	private static boolean personBWantsLessThanIHaveToReturn(PersonData pd, double howMuchRefundPersonBNeeds) {
 		return howMuchRefundPersonBNeeds < pd.getHowMuchPersonShouldPay() - pd.getHowMuchPersonPaid();
 	}
 

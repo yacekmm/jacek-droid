@@ -23,7 +23,7 @@
 
     <string name="calculation_badInputDataError_part1">Nieprawidłowe dane do obliczeń!\n\nOsoby dołożyły do rachunku w sumie</string>
     <string name="calculation_badInputDataError_part2">\na kwota na rachunku to</string>
-    <string name="calculation_badInputDataError_part3">\n\ndodaj kolejne osoby lub popraw kwoty już dodanych osób</string>
+    <string name="calculation_badInputDataError_part3">\n\ndodawaj nadal kolejne osoby lub popraw kwoty już dodanych</string>
 
     <string name="calculation_restaruant_tips">jaki napiwek dajecie?</string>
     
