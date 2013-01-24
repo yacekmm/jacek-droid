@@ -20,8 +20,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -119,12 +117,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		break;
 		}
 	}
-
-	OnCheckedChangeListener equalPaysChangeListener = new OnCheckedChangeListener(){
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-			calc.setEqualPayments(isChecked);
-		}
-	};
 
 	@Override
 	public void onBackPressed() {

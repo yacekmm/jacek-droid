@@ -16,7 +16,6 @@ public class CcLogicCalcResultFormatTest extends TestCase {
 
 	private CalculationLogic calc;
 	private List<PersonData> inputPaysList;
-	private boolean equalPayments = true;
 	private HashSet<String> giftReceivers;
 
 	public CcLogicCalcResultFormatTest() {
@@ -25,8 +24,6 @@ public class CcLogicCalcResultFormatTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
-		calc.setEqualPayments(equalPayments);
-//		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT);
 		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2);
 		inputPaysList = new ArrayList<PersonData>();
 		giftReceivers = new HashSet<String>();

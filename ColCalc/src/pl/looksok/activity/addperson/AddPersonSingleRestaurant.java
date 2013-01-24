@@ -60,7 +60,7 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase implements On
 		String name = mNewPersonNameInput.getText().toString();
 		double shouldPayDouble = CalcFormatterHelper.readDoubleFromEditText(mHowMuchPaidEditText);
 
-		if(!InputValidator.inputIsValid(getApplicationContext(), name, adapter.getTotalPay(), calc.isEqualPayments(), inputPaysList))
+		if(!InputValidator.inputIsValid(getApplicationContext(), name, adapter.getTotalPay(), inputPaysList))
 			throw new BadInputDataException();
 
 		personDataSet.add(new PersonData(name, adapter.getItems(), shouldPayDouble, emails));

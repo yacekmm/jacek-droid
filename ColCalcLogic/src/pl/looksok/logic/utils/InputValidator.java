@@ -9,7 +9,7 @@ import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 
 public class InputValidator {
-		public static HashMap<String, PersonData> convertAndValidateInput(List<PersonData> inputPaysList, boolean equalPayments, CalculationType calculationType) {
+		public static HashMap<String, PersonData> convertAndValidateInput(List<PersonData> inputPaysList, CalculationType calculationType) {
 		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
 		double sumOfAllPays = 0.0;
 		double sumOfAllShouldPays = 0.0;
@@ -24,8 +24,8 @@ public class InputValidator {
 			}
 		}
 		
-		if(!equalPayments){
-			if(sumOfAllPays != sumOfAllShouldPays && !calculationType.equals(CalculationType.EQUAL_PAYMENTS)){
+		if(calculationType.equals(CalculationType.RESTAURANT)){
+			if(sumOfAllPays != sumOfAllShouldPays){
 				throw new BadInputDataException("Sum of all Pays made by persons ("+sumOfAllPays+") is not equal to sum of amount that they should pay(" +sumOfAllShouldPays+")");
 			}
 		}

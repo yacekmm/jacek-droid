@@ -24,7 +24,6 @@ public class CalculationLogic implements Serializable {
 	private long id = Calendar.getInstance().getTimeInMillis();
 	private HashMap<String, PersonData> calculationResult;
 	private List<PersonData> inputPaysList = null;
-	private boolean equalPayments = true;
 	private DateTime dateSaved;
 	private CalculationType calculationType = CalculationType.DEFAULT;
 	private String calcName = "";
@@ -40,7 +39,7 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, PersonData> calculate(List<PersonData> inputPaysList) throws DuplicatePersonNameException{
 		this.inputPaysList = inputPaysList;
-		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, this.equalPayments, getCalculationType());
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(this.inputPaysList, getCalculationType());
 
 		if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
 			calculateGiftsRefundsV2(inputPaysList);
@@ -82,7 +81,7 @@ public class CalculationLogic implements Serializable {
 			String key = itr.next();
 			PersonData personDataItem = inputPays.get(key);
 			personDataItem.setCalculationType(getCalculationType());
-			if(!equalPayments){
+			if(getCalculationType().equals(CalculationType.RESTAURANT)){
 				howMuchPersonShouldPay = personDataItem.getHowMuchPersonShouldPay();
 			}else if(getCalculationType().equals(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2)){
 				howMuchPersonShouldPay = howMuchPerPerson(totalPay, peopleCount);
@@ -139,7 +138,7 @@ public class CalculationLogic implements Serializable {
 
 	public HashMap<String, PersonData> recalculate() {
 		resetInputData();
-		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, equalPayments, getCalculationType());
+		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, getCalculationType());
 		return calculate(inputPays);
 	}
 
@@ -171,14 +170,6 @@ public class CalculationLogic implements Serializable {
 
 	public void resetCalculationResult() {
 		this.calculationResult = new HashMap<String, PersonData>();
-	}
-
-	public boolean isEqualPayments() {
-		return equalPayments;
-	}
-
-	public void setEqualPayments(boolean equalPayments) {
-		this.equalPayments = equalPayments;
 	}
 
 	public PersonData findPersonInList(String personName) {

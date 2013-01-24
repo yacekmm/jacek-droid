@@ -15,11 +15,9 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 
 	private CalculationLogic calc;
 	private List<PersonData> inputPaysList;
-	private boolean equalPayments = false;
 
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
-		calc.setEqualPayments(equalPayments);
 		calc.setCalculationType(CalculationType.RESTAURANT);
 		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
@@ -76,8 +74,6 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 	}
 
 	public void test_NotEqualPays_FourPeople(){
-//		calc.setEqualPayments(false);
-
 		inputPaysList = TestScenarioBuilder.buildTestCase_FourPeople_VariousPays(
 				68.0, 25.0, 
 				24.0, 25.0,
