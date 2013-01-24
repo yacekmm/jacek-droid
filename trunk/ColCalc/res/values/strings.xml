@@ -19,7 +19,7 @@
     <string name="calculation_dialog_yes">Tak</string>
     <string name="calculation_dialog_no">Nie</string>
     <string name="calculation_default_name_text">Rozliczenie z </string>
-    <string name="calculation_noPeopleAddedYet">dodaj nowe osoby\naby zobaczyć rozliczenie</string>
+    <string name="calculation_noPeopleAddedYet">dodaj osoby\naby zobaczyć rozliczenie</string>
 
     <string name="calculation_badInputDataError_whileSharingCalc">Nieprawidłowe dane do rozliczenia!\nOtwórz rozliczenie aby poprawić</string>
     <string name="calculation_badInputDataError_part1">Nieprawidłowe dane do obliczeń!\n\nOsoby dołożyły do rachunku w sumie</string>
