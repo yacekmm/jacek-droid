@@ -8,12 +8,14 @@ import pl.looksok.utils.TextBuilder;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class CalcResultRestaurantActivity extends CalcResultBaseActivity {
 
 	private TextView mErrorBoxTextView;
+	private EditText mTipValueEditText;
 
 	@Override
 	protected int getXmlLayout() {
@@ -41,6 +43,8 @@ public class CalcResultRestaurantActivity extends CalcResultBaseActivity {
 	protected void initViews() {
 		super.initViews();
 		mErrorBoxTextView = (TextView)findViewById(R.id.calc_badInputData_info);
+		mTipValueEditText = (EditText)findViewById(R.id.calc_tip_money);
+		mTipValueEditText.setOnKeyListener(hideKeyboardListener);
 	}
 
 	@Override

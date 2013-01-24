@@ -9,6 +9,7 @@ import pl.looksok.activity.calcresult.CalcResultUtils;
 import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
+import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
@@ -100,7 +101,12 @@ public class WelcomeActivity extends ColCalcActivity {
 	
 	public void shareCalcOnClickHandler(View v){
 		CalculationLogic calcItem = (CalculationLogic)v.getTag();
-		calcItem.recalculate();
+		try{
+			calcItem.recalculate();
+		}catch(BadInputDataException e){
+			//TODO: handle BadInputDataException on recalculate
+			Log.e(LOG_TAG, "BadInputData exception: " + e.getMessage());
+		}
 		CalcResultUtils utils = new CalcResultUtils();
 		Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calcItem);
 		startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));

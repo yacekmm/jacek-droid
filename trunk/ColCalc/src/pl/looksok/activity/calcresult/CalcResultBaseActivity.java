@@ -111,15 +111,19 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
-			try{
-				calc.recalculate();
-			}catch (BadInputDataException bidException) {
-				handleException(bidException);
-//				Toast.makeText(getApplicationContext(), "BadInput data note recalculating: " + bidException.getMessage(), Toast.LENGTH_LONG).show();
-			}
+			refreshCalculation();
 		}else{
 			calc = new CalculationLogic();
 			calc.setCalculationType(getCalculationType());
+		}
+	}
+
+	private void refreshCalculation() {
+		try{
+			calc.recalculate();
+		}catch (BadInputDataException bidException) {
+			handleException(bidException);
+//				Toast.makeText(getApplicationContext(), "BadInput data note recalculating: " + bidException.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -221,7 +225,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	protected void handleRemoveConfirm(int dialogType) {
 		if(dialogType == DIALOG_REMOVE_PERSON){
 			calc.removePerson(personDataHolder);
-			calc.recalculate();
+			refreshCalculation();
 			populateListArray();
 		}else if(dialogType == DIALOG_REMOVE_CALC){
 			CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
