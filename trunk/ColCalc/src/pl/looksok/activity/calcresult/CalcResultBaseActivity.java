@@ -57,6 +57,10 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		initViews();
 		populateListArray();
 		initCalculationDetailsBar();
+		if(calcWasEdited){
+			Log.i(LOG_TAG, "Calc was edited -> saving");
+			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+		}
 	}
 
 	protected void initViews() {
@@ -232,6 +236,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			calc.removePerson(personDataHolder);
 			refreshCalculation();
 			populateListArray();
+			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 		}else if(dialogType == DIALOG_REMOVE_CALC){
 			CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 			goToWelcomeScreen();

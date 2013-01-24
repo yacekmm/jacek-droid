@@ -12,10 +12,7 @@ import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.CalcFormatterHelper;
-import android.app.Activity;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
@@ -27,8 +24,6 @@ public class AddPersonSinglePotluck extends AddPersonSingleBase implements OnTot
 	private CheckBox mReceivesGiftCheckBox;
 	private CheckBox mBuysGiftCheckBox;
 	private CurrencyEditText mGiftValueInput;
-	
-	private Activity mActivity = this;
 	
 	@Override
 	protected int getAddPersonContentView() {
@@ -53,22 +48,10 @@ public class AddPersonSinglePotluck extends AddPersonSingleBase implements OnTot
 		mBuysGiftCheckBox = (CheckBox) findViewById(R.id.EnterPays_buysGift_checkbox);
 		mBuysGiftCheckBox.setOnCheckedChangeListener(buysGiftChangeListener);
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
-		mGiftValueInput.setOnFocusChangeListener(giftValueFocusChangeListener);
+		mGiftValueInput.setOnFocusChangeListener(softInputModeSwitcherListener);
 		mGiftValueInput.setOnKeyListener(hideKeyboardListener);
 		setGiftPaymentFieldsVisibile(false, false);
 	}
-	
-	private OnFocusChangeListener giftValueFocusChangeListener = new OnFocusChangeListener() {
-
-		@Override
-		public void onFocusChange(View v, boolean hasFocus) {
-			if(hasFocus){
-				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-			}else{
-				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-			}
-		}
-	};
 	
 	OnCheckedChangeListener buysGiftChangeListener = new OnCheckedChangeListener() {
 		@Override
