@@ -37,18 +37,25 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal" >
 
-        <EditText
-            android:id="@+id/calc_calcName_edit"
-            style="@style/textMediumDarkBold"
+        <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginRight="@dimen/margin_micro"
             android:layout_toLeftOf="@+id/calc_manageButtons"
-            android:background="@drawable/edittext_bgnd_yellow_left"
-            android:hint="@string/calculation_calcName_hint"
-            android:paddingLeft="@dimen/margin_normal"
-            android:paddingRight="@dimen/margin_normal"
-            android:singleLine="true" />
+            android:background="@drawable/button_bgnd_restaurant_left"
+            android:padding="@dimen/margin_small" >
+
+            <EditText
+                android:id="@+id/calc_calcName_edit"
+                style="@style/textMediumDark"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/edittext_bgnd_gray"
+                android:hint="@string/calculation_calcName_hint"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal"
+                android:singleLine="true" />
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/calc_manageButtons"
@@ -140,20 +147,19 @@
             android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
         </ListView>
-        
-        <TextView 
+
+        <TextView
             android:id="@+id/calc_badInputData_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/calc_listView_list"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
-            android:padding="@dimen/margin_normal"
             android:background="@color/pink_dark_popularGirl"
-            android:text="@string/app_name"
             android:gravity="center_horizontal"
-            android:visibility="invisible"
-            />
+            android:padding="@dimen/margin_normal"
+            android:text="@string/app_name"
+            android:visibility="invisible" />
 
         <com.google.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"

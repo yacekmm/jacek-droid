@@ -37,18 +37,25 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal" >
 
-        <EditText
-            android:id="@+id/calc_calcName_edit"
-            style="@style/textMediumDarkBold"
+        <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginRight="@dimen/margin_micro"
             android:layout_toLeftOf="@+id/calc_manageButtons"
-            android:background="@drawable/edittext_bgnd_yellow_left"
-            android:hint="@string/calculation_calcName_hint"
-            android:paddingLeft="@dimen/margin_normal"
-            android:paddingRight="@dimen/margin_normal"
-            android:singleLine="true" />
+            android:background="@drawable/button_bgnd_potluck_left"
+            android:padding="@dimen/margin_small" >
+
+            <EditText
+                android:id="@+id/calc_calcName_edit"
+                style="@style/textMediumDark"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/edittext_bgnd_gray"
+                android:hint="@string/calculation_calcName_hint"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal"
+                android:singleLine="true" />
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/calc_manageButtons"
@@ -105,9 +112,9 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_above="@+id/calc_adView"
+            android:layout_marginBottom="@dimen/margin_normal"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_normal"
             android:cacheColorHint="@color/transparent"
             android:divider="@color/transparent"
             android:dividerHeight="@dimen/margin_normal" >
