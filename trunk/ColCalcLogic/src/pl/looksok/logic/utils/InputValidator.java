@@ -8,8 +8,11 @@ import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 
-public class InputValidator {
-		public static HashMap<String, PersonData> convertAndValidateInput(List<PersonData> inputPaysList, CalculationType calculationType) {
+public class InputValidator{
+		
+	public static HashMap<String, PersonData> convertAndValidateInput(List<PersonData> inputPaysList, CalculationType calculationType) 
+				throws BadInputDataException{
+		
 		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
 		double sumOfAllPays = 0.0;
 		double sumOfAllShouldPays = 0.0;

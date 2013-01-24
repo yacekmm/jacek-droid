@@ -112,7 +112,7 @@ public class CalculationLogic implements Serializable {
 		Iterator<String> it = calculationResult.keySet().iterator();
 		while (it.hasNext()){
 			PersonData pp = calculationResult.get(it.next());
-			pp.calculateRefundToOthers(calculationResult, getCalculationType());
+			pp.calculateRefundToOthers(calculationResult);
 			newCalculationResult.put(pp.getName(), pp);
 		}
 
@@ -136,7 +136,7 @@ public class CalculationLogic implements Serializable {
 		return totalPay / peopleCount;
 	}
 
-	public HashMap<String, PersonData> recalculate() {
+	public HashMap<String, PersonData> recalculate() throws BadInputDataException{
 		resetInputData();
 		HashMap<String, PersonData> inputPays = InputValidator.convertAndValidateInput(inputPaysList, getCalculationType());
 		return calculate(inputPays);

@@ -25,8 +25,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	private double toReturn;
 	private double totalRefundForThisPerson;
 	private HashMap<String, PersonData> otherPeoplePayments;
-	private HashMap<String, Double> myDebts;
-	private HashMap<String, Double> myRefunds;
+	private HashMap<String, Double> myDebts = new HashMap<String, Double>();
+	private HashMap<String, Double> myRefunds = new HashMap<String, Double>();
 	private double alreadyReturned;
 	private double alreadyRefunded = 0.0;
 
@@ -49,7 +49,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		setHowMuchPersonShouldPay(pd.getHowMuchPersonShouldPay());
 
 		otherPeoplePayments = inputPays;
-		myDebts = new HashMap<String, Double>();
+//		myDebts = new HashMap<String, Double>();
 	}
 
 	public PersonData(String name, List<AtomPayment> atomPays, HashSet<String> emails) {
@@ -85,22 +85,22 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		calculateHowMuchRefundIShouldReceive();
 	}
 
-	public void calculateRefundToOthers(HashMap<String, PersonData> calculationResult, CalculationType calculationType) {
+	public void calculateRefundToOthers(HashMap<String, PersonData> calculationResult) {
 		Set<String> c = calculationResult.keySet();
 		Iterator<String> it = c.iterator();
 
 		while(it.hasNext()) {
 			PersonData pp2 = calculationResult.get(it.next());
 			if(this.getName() != pp2.getName()){
-				double returnValue = howMuchIGiveBackToPersonB(pp2, calculationType);
+				double returnValue = howMuchIGiveBackToPersonB(pp2);
 				getMyDebts().put(pp2.getName(), returnValue);
 			}
 		}
 	}
 
-	private double howMuchIGiveBackToPersonB(PersonData personB, CalculationType calculationType) {
+	private double howMuchIGiveBackToPersonB(PersonData personB) {
 		try{
-			double result = this.howMuchShouldReturnTo(personB.getName(), calculationType);
+			double result = this.howMuchShouldReturnTo(personB.getName());
 			return result;
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
@@ -133,7 +133,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 		return totalRefundForThisPerson;
 	}
 
-	private double howMuchShouldReturnTo(String personBName, CalculationType calculationType){
+	private double howMuchShouldReturnTo(String personBName){
 		PersonData personBData = otherPeoplePayments.get(personBName);
 		double howMuchPersonBPaid = personBData.getPayMadeByPersonForCalculationAlgorithm();
 		double howMuchPersonBShouldPay = personBData.getHowMuchPersonShouldPay();
@@ -141,7 +141,7 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 
 		if(howMuchRefundPersonBNeeds>0){
 			return PersonDataUtils.returnMoneyToPersonB(personBName, howMuchPersonBPaid,
-					howMuchPersonBShouldPay, howMuchRefundPersonBNeeds, this, calculationType);
+					howMuchPersonBShouldPay, howMuchRefundPersonBNeeds, this);
 		}else
 			return 0.0;
 	}
@@ -231,11 +231,9 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	public HashMap<String, Double> getMyDebts() {
+		if(myDebts == null)
+			myDebts = new HashMap<String, Double>();
 		return myDebts;
-	}
-
-	public void setMyDebts(HashMap<String, Double> refundForOtherPeople) {
-		this.myDebts = refundForOtherPeople;
 	}
 
 	public double getMyDebtForPersonB(String personB) {
@@ -251,6 +249,8 @@ public class PersonData implements Serializable, Comparable<PersonData>{
 	}
 
 	public HashMap<String, Double> getMyRefunds() {
+		if(myRefunds == null)
+			myRefunds = new HashMap<String, Double>();
 		return myRefunds;
 	}
 

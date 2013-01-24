@@ -11,6 +11,7 @@ import pl.looksok.activity.welcome.WelcomeActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
+import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
@@ -35,7 +36,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	private static final int SAVE_NEW_CALC = 0;
 
 	private CalculationLogic calc = null;
-	private ListView resultList;
+	private ListView mCalcResultList;
 	private List<PersonData> listArray;
 	private ResultsListAdapter adapter;
 
@@ -55,7 +56,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		calcNameEditText = (EditText)findViewById(R.id.calc_calcName_edit);
 		calcNameEditText.setOnKeyListener(hideKeyboardListener);
 		readInputBundle();
-		resultList = (ListView)findViewById(R.id.calc_listView_list);
+		mCalcResultList = (ListView)findViewById(R.id.calc_listView_list);
 		initButtonsActions();
 		initButtonsStyles();
 		populateListArray();
@@ -92,7 +93,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		listArray = utils.readCalcPeopleToListArray(calc);
 
 		adapter = new ResultsListAdapter(CalcResultBaseActivity.this, R.layout.calc_result_list_item, listArray, calc);
-		resultList.setAdapter(adapter);
+		mCalcResultList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
 		if(adapter.getItems().size() > 0)
@@ -106,7 +107,11 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		if (extras != null) {
 			calc = (CalculationLogic)extras.getSerializable(Constants.BUNDLE_CALCULATION_OBJECT);
 			calcNameEditText.setText(calc.getCalcName());
-			calc.recalculate();
+			try{
+				calc.recalculate();
+			}catch (BadInputDataException bidException) {
+				Toast.makeText(getApplicationContext(), "BadInput data note recalculating: " + bidException.getMessage(), Toast.LENGTH_LONG).show();
+			}
 		}else{
 			calc = new CalculationLogic();
 			calc.setCalculationType(getCalculationType());

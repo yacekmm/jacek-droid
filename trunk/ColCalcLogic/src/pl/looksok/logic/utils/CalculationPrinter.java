@@ -87,8 +87,8 @@ public class CalculationPrinter {
 
 	public static String printPersonDebtsSimple(PersonData pd, String helpText) {
 //		HashMap<String, Double> refundMap = pd.getRefundForOtherPeople();
-		HashMap<String, Double> refundMap = pd.getPersonDebts();
-		return simplePrinter("-", helpText, refundMap);
+		HashMap<String, Double> debtsMap = pd.getPersonDebts();
+		return simplePrinter("-", helpText, debtsMap);
 	}
 
 	public static String printPersonRefundsFromOthersSimple(PersonData pd, String helpText) {
