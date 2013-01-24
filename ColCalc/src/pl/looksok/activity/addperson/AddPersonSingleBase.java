@@ -19,7 +19,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -31,6 +33,8 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 	private AtomPayment atomPaymentToRemove = null;
 
 	protected static final int PICK_CONTACT = 0;
+	
+	protected Activity mActivity = this;
 
 	@Override
 	protected void initActivityViews() {
@@ -95,6 +99,18 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		public void onClick(View v) {
 			adapter.insert(new AtomPayment(), adapter.getCount());
 			setUpAtomPayAdapter(adapter.getItems());
+		}
+	};
+	
+	protected OnFocusChangeListener softInputModeSwitcherListener = new OnFocusChangeListener() {
+
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if(hasFocus){
+				mActivity .getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+			}else{
+				mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+			}
 		}
 	};
 
