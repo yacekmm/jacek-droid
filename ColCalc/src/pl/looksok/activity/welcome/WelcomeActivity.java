@@ -22,6 +22,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class WelcomeActivity extends ColCalcActivity {
 
@@ -104,8 +105,10 @@ public class WelcomeActivity extends ColCalcActivity {
 		try{
 			calcItem.recalculate();
 		}catch(BadInputDataException e){
-			//TODO: handle BadInputDataException on recalculate
+			//TODO: handle BadInputDataException on recalculate maybe simply open calculation?
 			Log.e(LOG_TAG, "BadInputData exception: " + e.getMessage());
+			Toast.makeText(getApplicationContext(), getString(R.string.calculation_badInputDataError_whileSharingCalc), Toast.LENGTH_LONG).show();
+			return;
 		}
 		CalcResultUtils utils = new CalcResultUtils();
 		Intent emailIntent = utils.prepareEmailIntent(getApplicationContext(), calcItem);
