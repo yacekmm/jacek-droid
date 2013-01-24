@@ -93,13 +93,13 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 		
 
 		String debtsText = CalculationPrinter.printPersonDebtsSimple(pd, context.getString(R.string.calculation_printText_for));
-		setCalcResultText(holder, debtsText, holder.txtDebts);
+		setCalcResultText(debtsText, holder.txtDebts);
 
 		String refundsText = CalculationPrinter.printPersonRefundsFromOthersSimple(pd, context.getString(R.string.calculation_printText_from));
-		setCalcResultText(holder, refundsText, holder.txtRefunds);
+		setCalcResultText(refundsText, holder.txtRefunds);
 	}
 
-	protected void setCalcResultText(ResultHolder holder, String text, TextView textView) {
+	protected void setCalcResultText(String text, TextView textView) {
 		if(text.length()>0){
 			textView.setText(text);
 			textView.setVisibility(View.VISIBLE);
