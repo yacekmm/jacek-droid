@@ -29,7 +29,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 		super(name);
 	}
 
-	public void testZeroPayTwoPeople(){
+	public void test_ZeroPay_TwoPeople(){
 		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(0.0, 0.0, 
 				0.0, 0.0);
 
@@ -38,7 +38,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
 
-	public void testEqualPayTwoPeople(){
+	public void test_EqualPay_TwoPeople(){
 		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(10.0, 5.0, 
 				20.0, 25.0);
 
@@ -47,7 +47,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 0.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
 
-	public void testEqualPayTwoPeopleV2(){
+	public void test_EqualPay_TwoPeople_V2(){
 		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(3.0, 8.0, 
 				7.0, 2.0);
 
@@ -56,7 +56,7 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_REFUND_UNEQUAL, 5.0, result.get(Constants.personBName).getTotalRefundForThisPerson());
 	}
 
-	public void testCalculationOfNonZeroPayTwoPeopleTwoPaid(){
+	public void test_NonZeroPay_TwoPeople_TwoPaid(){
 		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(3.0, 8.0, 
 				7.0, 2.0);
 
@@ -64,9 +64,19 @@ public class CcLogicNotEqualPaysTest extends TestCase {
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 5.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
 		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
 	}
+	
+	public void test_NotEqualPays_TwoPeople(){
+		inputPaysList = TestScenarioBuilder.buildTestCase_TwoPeople_VariousPays(
+				10.0, 25.0, 
+				20.0, 5.0);
 
-	public void testNotEqualPays_FourPeople(){
-		calc.setEqualPayments(false);
+		calc.calculate(inputPaysList);
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 15.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personAName, Constants.personBName));
+		assertEquals(Constants.INCORRECT_CALC_BETWEEN_TWO, 0.0, calc.howMuchPersonAGivesBackToPersonB(Constants.personBName, Constants.personAName));
+	}
+
+	public void test_NotEqualPays_FourPeople(){
+//		calc.setEqualPayments(false);
 
 		inputPaysList = TestScenarioBuilder.buildTestCase_FourPeople_VariousPays(
 				68.0, 25.0, 
