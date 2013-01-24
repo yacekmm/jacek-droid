@@ -223,6 +223,16 @@ public class CalculationLogic implements Serializable {
 		}
 		return (int)Math.round(total);
 	}
+	
+	public int getTotalShouldPay() {
+		double total = 0;
+		for (PersonData pd : getInputPaysList()) {
+			for (AtomPayment ap : pd.getAtomPayments()) {
+				total += ap.getValue();
+			}
+		}
+		return (int)Math.round(total);
+	}
 
 	public int getTotalPersons() {
 		return getInputPaysList().size();
