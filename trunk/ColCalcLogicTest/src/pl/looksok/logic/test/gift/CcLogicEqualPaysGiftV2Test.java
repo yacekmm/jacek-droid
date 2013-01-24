@@ -17,7 +17,6 @@ public class CcLogicEqualPaysGiftV2Test extends TestCase {
 
 	private CalculationLogic calc;
 	private List<PersonData> inputPaysList;
-	private boolean equalPayments = true;
 	private HashSet<String> giftReceivers;
 
 	public CcLogicEqualPaysGiftV2Test() {
@@ -26,7 +25,6 @@ public class CcLogicEqualPaysGiftV2Test extends TestCase {
 
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
-		calc.setEqualPayments(equalPayments);
 		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2);
 		inputPaysList = new ArrayList<PersonData>();
 		giftReceivers = new HashSet<String>();
@@ -213,7 +211,6 @@ public class CcLogicEqualPaysGiftV2Test extends TestCase {
 	}
 	
 	public void testNotEqualPaysInsteadOfForwardedPaymentsFighting(){
-		calc.setEqualPayments(false);
 		calc.setCalculationType(CalculationType.RESTAURANT);
 		
 			inputPaysList = TestScenarioBuilder.buildTestCase_FourPeople_VariousPays(

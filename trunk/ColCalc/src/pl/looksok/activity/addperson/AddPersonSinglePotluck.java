@@ -132,7 +132,7 @@ public class AddPersonSinglePotluck extends AddPersonSingleBase implements OnTot
 		if(!buysGift)
 			giftPayment = 0;
 
-		if(!InputValidator.inputIsValid(getApplicationContext(), name, adapter.getTotalPay(), calc.isEqualPayments(), inputPaysList))
+		if(!InputValidator.inputIsValid(getApplicationContext(), name, adapter.getTotalPay(), inputPaysList))
 			throw new BadInputDataException();
 
 		personDataSet.add(new PersonData(name, adapter.getItems(), emails, receivesGift, giftPayment));

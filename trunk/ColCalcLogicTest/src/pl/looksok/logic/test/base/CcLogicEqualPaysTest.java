@@ -18,7 +18,6 @@ public class CcLogicEqualPaysTest extends TestCase {
 
 	private CalculationLogic calc;
 	private List<PersonData> inputPaysList;
-	private boolean equalPayments = true;
 
 	public CcLogicEqualPaysTest() {
 		super();
@@ -26,7 +25,6 @@ public class CcLogicEqualPaysTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		calc = new CalculationLogic();
-		calc.setEqualPayments(equalPayments);
 		calc.setCalculationType(CalculationType.POTLUCK_PARTY_WITH_GIFT_V2);
 		inputPaysList = new ArrayList<PersonData>();
 		super.setUp();
