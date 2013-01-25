@@ -146,7 +146,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	protected void saveCalculation() {
 		String calcName = mCalcNameEditText.getText().toString();
 		if(calcName.length() == 0)
-			calcName = getString(R.string.calculation_default_name_text) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
+			calcName = getString(R.string.calcResult_default_name) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
 
 		calc.setCalcName( calcName );
 		calc.setDateSaved(DateTime.now());
@@ -162,10 +162,10 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 				startActivity(Intent.createChooser(emailIntent, getString(R.string.email_utils_chooseEmailClient)));
 			}catch(NullPointerException e){
 				Log.e(LOG_TAG, "Error while preparing email. there is no email Addresses probably: " + e.getMessage());
-				Toast.makeText(getApplicationContext(), getString(R.string.calculation_nullPointerError_whileSharingCalc), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.calcResult_nullPointerError_whileSharingCalc), Toast.LENGTH_LONG).show();
 			}catch (BadInputDataException e) {
 				Log.i(LOG_TAG, "BadInputException while sharing calculation: " + e.getMessage());
-				Toast.makeText(getApplicationContext(), getString(R.string.calculation_badInputDataError_whileSharingCalc), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.calcResult_badInputDataError_whileSharingCalc), Toast.LENGTH_LONG).show();
 			}
 		}
 	};
@@ -267,14 +267,14 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	private Dialog createDialogSaveNewCalc() {
 		return new AlertDialog.Builder(this)
 		.setIcon(R.drawable.save)
-		.setTitle(R.string.calculation_dialog_saveCalc)
-		.setPositiveButton(R.string.calculation_dialog_yes, new DialogInterface.OnClickListener() {
+		.setTitle(R.string.dialog_saveCalc)
+		.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				saveCalculation();
 				goToWelcomeScreen();
 			}
 		})
-		.setNegativeButton(R.string.calculation_dialog_no, new DialogInterface.OnClickListener() {
+		.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				goToWelcomeScreen();

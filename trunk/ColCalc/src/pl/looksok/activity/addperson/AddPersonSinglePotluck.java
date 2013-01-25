@@ -5,7 +5,6 @@ import java.util.HashSet;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.InputValidator;
-import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
 import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.currencyedittext.CurrencyEditText;
 import pl.looksok.currencyedittext.utils.FormatterHelper;
@@ -19,7 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class AddPersonSinglePotluck extends AddPersonSingleBase implements OnTotalPayChangeListener {
+public class AddPersonSinglePotluck extends AddPersonSingleBase {
 	
 	private CheckBox mReceivesGiftCheckBox;
 	private CheckBox mBuysGiftCheckBox;

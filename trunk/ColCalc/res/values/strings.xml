@@ -1,69 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Potluck</string>
+    <string name="app_name_potluck">Potluck</string>
     <string name="emptyText"></string>
     <string name="adMob_publisherID">a150dc376e2d3f0</string>
     <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796</string>
     
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_deletePerson">Usuń</string>
+    <string name="dialog_button_cancel">Anuluj</string>
+    <string name="dialog_remove_text">Usunąć?</string>
+    <string name="dialog_saveCalc">Zapisać to rozliczenie?</string>
+    <string name="dialog_yes">Tak</string>
+    <string name="dialog_no">Nie</string>
     
-    <string name="calculation_calcName_hint">wpisz nazwę imprezy</string>
-    <string name="calculation_TextView_name">Imię</string>
-    <string name="calculation_TextView_personPay">0,00</string>
-    <string name="calculation_TextView_currency">zł</string>
-    <string name="calculation_dialog_button_ok">OK</string>
-    <string name="calculation_dialog_button_deletePerson">Usuń</string>
-    <string name="calculation_dialog_button_cancel">Anuluj</string>
-    <string name="calculation_dialog_remove_text">Usunąć?</string>
-    <string name="calculation_dialog_saveCalc">Zapisać to rozliczenie?</string>
-    <string name="calculation_dialog_yes">Tak</string>
-    <string name="calculation_dialog_no">Nie</string>
-    <string name="calculation_default_name_text">Rozliczenie z </string>
-    <string name="calculation_noPeopleAddedYet">dodaj osoby\naby zobaczyć rozliczenie</string>
+    <string name="calcResult_calcName_hint">wpisz nazwę imprezy</string>
+    <string name="calcResult_name_textView">Imię</string>
+    <string name="calcResult_personPay_zero_textView">0,00</string>
+    <string name="calcResult_default_name">Rozliczenie z </string>
+    <string name="calcResult_noPeopleAddedYet">dodaj osoby\naby zobaczyć rozliczenie</string>
 
-    <string name="calculation_nullPointerError_whileSharingCalc">Nieprawidłowe adresy email.\nWysyłanie nieudane</string>
-    <string name="calculation_badInputDataError_whileSharingCalc">Nieprawidłowe dane w rozliczeniu!\nPopraw rozliczenie przed wysłaniem</string>
-    <string name="calculation_badInputDataError_part1">Nieprawidłowe dane do obliczeń!\n\nOsoby dołożyły do rachunku w sumie</string>
-    <string name="calculation_badInputDataError_part2">\na kwota na rachunku to</string>
-    <string name="calculation_badInputDataError_part3">\n\ndodawaj nadal kolejne osoby lub popraw kwoty już dodanych</string>
+    <string name="calcResult_nullPointerError_whileSharingCalc">Nieprawidłowe adresy email.\nWysyłanie nieudane</string>
+    <string name="calcResult_badInputDataError_whileSharingCalc">Nieprawidłowe dane w rozliczeniu!\nPopraw rozliczenie przed wysłaniem</string>
+    <string name="calcResult_badInputDataError_part1">Nieprawidłowe dane do obliczeń!\n\nOsoby dołożyły do rachunku w sumie</string>
+    <string name="calcResult_badInputDataError_part2">\na kwota na rachunku to</string>
+    <string name="calcResult_badInputDataError_part3">\n\ndodawaj nadal kolejne osoby lub popraw kwoty już dodanych</string>
 
-    <string name="calculation_restaruant_tips">dolicz do rachunku napiwek w wysokości</string>
+    <string name="calcResult_restaurant_tips">dolicz do rachunku napiwek w wysokości</string>
     
     <string name="welcome_mode_potluckParty">dotknij, aby rozliczyć się\npo imprezie</string>
     <string name="welcome_mode_restaurant">dotknij, aby rozliczyć się\nw restauracji</string>
-    <string name="welcome_Button_loadCalculation">Wczytaj rozliczenie</string>
     <string name="welcome_noSavedCalcsYet">nie masz jeszcze żadnych\nzapisanych rozliczeń</string>
     
-    <string name="enterPaysMulti_TextView_Pay">Każda z osób zapłaciła:</string>
-    <string name="enterPaysMulti_TextView_peopleCount">liczba osób do dodania</string>
-    <string name="enterPaysMulti_personPrefix">Osoba</string>
-    <string name="enterPaysMulti_pays">płatności</string>
+    <string name="addPerson_multi_personPay">Każda z osób zapłaciła:</string>
+    <string name="addPerson_multi_peopleCount_textView">liczba osób do dodania</string>
+    <string name="addPerson_multi_personPrefix">Osoba</string>
     
-    <string name="EnterPays_TextView_Name">wpisz imię&#8230;</string>
-    <string name="EnterPays_button_addAtomPayment">nowa płatność</string>
-    <string name="EnterPays_TextView_Pay">Ile zapłacił:</string>
-    <string name="EnterPays_TextView_ZeroValue">0</string>
-    <string name="EnterPays_TextView_ShouldPay">Ile powinien zapłacić:</string>
-    <string name="EnterPays_gift">prezent</string>
-    <string name="EnterPays_gotGift_text">Dostał prezent</string>
-    <string name="EnterPays_buysGift_text">Płacił za prezent</string>
-    <string name="EnterPays_boughtGiftValue_hint">ile zapłacił za prezent</string>
-    <string name="EnterPays_Button_AddToList">Zapisz</string>
-    <string name="EnterPays_Button_Calculate">Pokaż rozliczenie</string>
-    <string name="EnterPays_Toast_BadNameAndPayError">Wpisz Imię i poprawną kwotę</string>
-    <string name="EnterPays_Toast_DuplicatedNameError">Osoba o tym imieniu jest już na liście</string>
-    <string name="EnterPays_Toast_ShouldPayError">Wpisz poprawną kwotę jaką osoba powinna zapłacić</string>
-    <string name="EnterPays_Menu_Edit">Edytuj</string>
-    <string name="EnterPays_Menu_Remove">Usuń</string>
-    <string name="EnterPays_saveAndExit_text">Zapisz i pokaż rozliczenie</string>
-    <string name="EnterPays_personLabel">imię</string>
+    <string name="addPerson_pays">płatności</string>
 
-    <string name="EnterPaysRest_HowMuchPaid_text">ile dołożył do rachunku</string>
+    <string name="addPerson_name_hint">wpisz imię&#8230;</string>
+    <string name="addPerson_addAtomPayment_button">nowa płatność</string>
+    <string name="addPerson_gift">prezent</string>
+    <string name="addPerson_gotGift_text">Dostał prezent</string>
+    <string name="addPerson_buysGift_text">Płacił za prezent</string>
+    <string name="addPerson_gift_howMuchPaid">ile zapłacił za prezent</string>
+    <string name="addPerson_error_emptyNameField">Wpisz imię osoby</string>
+    <string name="addPerson_error_duplicatedPersonName">Osoba o tym imieniu jest już na liście</string>
+    <string name="addPerson_error_shouldPayValue">Wpisz poprawną kwotę jaką osoba powinna zapłacić</string>
+    <string name="addPerson_personNameLabel">imię</string>
+    <string name="addPerson_howMuchPaid_label">ile dołożył do rachunku</string>
 
-    <string name="EnterPays_billPay_headerText">ile zapłacił</string>
-    <string name="EnterPays_atomPay_headerText">za co powinien zapłacić</string>
-    <string name="EnterPays_atomPay_headerText_left">płatności (razem: </string>
-    <string name="EnterPays_atomPay_headerText_right">)</string>
+    <string name="addPerson_billPay_header">ile zapłacił</string>
+    <string name="addPerson_atomPay_potluck_header">co kupił</string>
+    <string name="addPerson_atomPay_restaurant_header">za co powinien zapłacić</string>
     <string name="EnterPays_atomPay_defaultName">płatność</string>
     <string name="EnterPays_atomPay_nameHint">nazwa płatności</string>
     

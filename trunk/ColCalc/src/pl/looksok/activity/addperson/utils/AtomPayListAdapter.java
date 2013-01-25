@@ -1,6 +1,5 @@
 package pl.looksok.activity.addperson.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pl.looksok.R;
@@ -25,8 +24,6 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 	private List<AtomPayment> items;
 	private int layoutResourceId;
 	private Context context;
-
-	private ArrayList<OnTotalPayChangeListener> totalPayChangeListeners = new ArrayList<OnTotalPayChangeListener>();
 
 	private OnKeyListener keyboardHiderListener = null;
 
@@ -99,9 +96,6 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				try{
 					holder.atomPayment.setValue(Double.parseDouble(s.toString()));
-					for (OnTotalPayChangeListener listener : totalPayChangeListeners) {
-						listener.notifyOnTotalPayChange(getTotalPay());
-					}
 				}catch (NumberFormatException e) {
 //					Log.d(LOG_TAG, "this is not correct double number (s = " + s + "). It will not be persisted: " + e.getMessage());
 					holder.atomPayment.setValue(FormatterHelper.decodeValueFromCurrency(s.toString()));
@@ -127,14 +121,6 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 			result += item.getValue();
 		}
 		return result;
-	}
-
-	public void registerOnTotalChangeListener(OnTotalPayChangeListener listener){
-		totalPayChangeListeners.add(listener);
-	}
-
-	public void unregisterOnTotalChangeListener(OnTotalPayChangeListener listener){
-		totalPayChangeListeners.remove(listener);
 	}
 
 	public void setKeyboardHiderListener(OnKeyListener hideKeyboardListener) {

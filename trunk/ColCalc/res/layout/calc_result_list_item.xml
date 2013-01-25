@@ -17,7 +17,7 @@
         android:layout_marginRight="@dimen/margin_micro"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@drawable/button_bgnd_gray"
-        android:contentDescription="@string/EnterPays_Menu_Remove"
+        android:contentDescription="@string/app_name_potluck"
         android:onClick="removePerson"
         android:src="@drawable/trashbin_icon" />
 
@@ -36,7 +36,7 @@
             android:layout_weight="8"
             android:drawableLeft="@drawable/person"
             android:drawablePadding="@dimen/margin_small"
-            android:text="@string/calculation_TextView_name"
+            android:text="@string/calcResult_name_textView"
             android:textColor="@color/gray_dark"
             android:textSize="@dimen/textSize_medium"
             android:textStyle="bold"
@@ -49,7 +49,7 @@
             android:layout_marginLeft="@dimen/margin_normal"
             android:drawableLeft="@drawable/bills_dark"
             android:drawablePadding="@dimen/margin_micro"
-            android:text="@string/calculation_TextView_personPay"
+            android:text="@string/calcResult_personPay_zero_textView"
             android:textColor="@color/gray_dark"
             android:textSize="@dimen/textSize_micro"
             android:singleLine="true" />
@@ -61,7 +61,7 @@
             android:layout_marginLeft="@dimen/margin_normal"
             android:drawableLeft="@android:drawable/ic_notification_overlay"
             android:drawablePadding="@dimen/margin_micro"
-            android:text="@string/calculation_TextView_personPay"
+            android:text="@string/calcResult_personPay_zero_textView"
             android:textColor="@color/gray_dark"
             android:textSize="@dimen/textSize_micro"
             android:singleLine="true" />
@@ -73,7 +73,7 @@
             android:layout_marginLeft="@dimen/margin_normal"
             android:drawableLeft="@drawable/giftbuyer_dark"
             android:drawablePadding="@dimen/margin_micro"
-            android:text="@string/calculation_TextView_personPay"
+            android:text="@string/calcResult_personPay_zero_textView"
             android:textColor="@color/gray_dark"
             android:textSize="@dimen/textSize_micro"
             android:singleLine="true" />
@@ -83,7 +83,7 @@
             android:layout_width="@dimen/textSize_medium"
             android:layout_height="@dimen/textSize_medium"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/app_name_potluck"
             android:scaleType="centerCrop"
             android:src="@drawable/giftreceiver_dark"
             android:layout_gravity="center" />

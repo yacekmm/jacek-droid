@@ -23,7 +23,7 @@
         android:layout_height="fill_parent"
         android:gravity="center"
         android:background="@drawable/edittext_bgnd_gray_middle"
-        android:text="@string/EnterPays_TextView_ZeroValue"
+        android:text="@string/calcResult_personPay_zero_textView"
         style="@style/textMediumDarkBold"
          />
 

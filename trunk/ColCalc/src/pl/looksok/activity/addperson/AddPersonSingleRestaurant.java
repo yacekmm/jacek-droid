@@ -5,7 +5,6 @@ import java.util.HashSet;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.InputValidator;
-import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
 import pl.looksok.activity.calcresult.CalcResultRestaurantActivity;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -13,7 +12,7 @@ import pl.looksok.utils.CalcFormatterHelper;
 import android.view.View;
 import android.widget.EditText;
 
-public class AddPersonSingleRestaurant extends AddPersonSingleBase implements OnTotalPayChangeListener {
+public class AddPersonSingleRestaurant extends AddPersonSingleBase {
 	
 	private EditText mHowMuchPaidEditText;
 
