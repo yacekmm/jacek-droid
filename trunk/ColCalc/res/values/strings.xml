@@ -58,8 +58,7 @@
     <string name="calcResult_save_button">Zapisz i wyjdź</string>
     <string name="calcResult_addPerson_button">dodaj osobę</string>
     <string name="calcResult_addPerson_multi_button">dodaj wielu</string>
-    <string name="calculation_saved_text">Zapisano!</string>
-    <string name="calculation_load_error_text">Nie znaleziono żadnych zapisanych rozliczeń</string>
+    <string name="calcResult_calcSaved">Zapisano!</string>
     
     <string name="email_subject">Rozliczenie naszych składek</string>
     <string name="email_content_welcome">Hej!</string>
@@ -69,13 +68,12 @@
     <string name="email_utils_error_noEmailProvided">Uwaga! Nie znam adresu email do wszystkich osób. Dodaj je ręcznie.</string>
     <string name="email_utils_error_mockEmailAddress">[nieznane maile]</string>
     
-    <string name="calculation_printText_howMuchPaid">zapłacone</string>
-    <string name="calculation_printText_howMuchShouldPay">powinno być zapłacone</string>
-    <string name="calculation_printText_return">musi oddać</string>
-    <string name="calculation_printText_for">dla</string>
-    <string name="calculation_printText_refund">dostaje zwrot</string>
-    <string name="calculation_printText_from">od</string>
-    <string name="calculation_printText_titleText">Podsumowanie rozliczeń</string>
+    <string name="email_calcResult_printText_paid">zapłacone</string>
+    <string name="email_calcResult_printText_shouldPay">powinno być zapłacone</string>
+    <string name="email_calcResult_printText_shouldReturn">musi oddać</string>
+    <string name="email_calcResult_printText_for">dla</string>
+    <string name="email_calcResult_printText_from">od</string>
+    <string name="email_calcResult_printText_title">Podsumowanie rozliczeń</string>
     
     
 </resources>

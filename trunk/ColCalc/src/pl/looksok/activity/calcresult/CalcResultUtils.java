@@ -70,11 +70,11 @@ public class CalcResultUtils {
 		sb.append(getAppUrl(context)).append("!").append(endOfLine).append(endOfLine);
 		sb.append(CalculationPrinter.printCalcResultForEmail(
 				calc.getCalculationResult(),
-				context.getString(R.string.calculation_printText_titleText),
-				context.getString(R.string.calculation_printText_howMuchPaid),
-				context.getString(R.string.calculation_printText_howMuchShouldPay),
-				context.getString(R.string.calculation_printText_return),
-				context.getString(R.string.calculation_printText_for),
+				context.getString(R.string.email_calcResult_printText_title),
+				context.getString(R.string.email_calcResult_printText_paid),
+				context.getString(R.string.email_calcResult_printText_shouldPay),
+				context.getString(R.string.email_calcResult_printText_shouldReturn),
+				context.getString(R.string.email_calcResult_printText_for),
 				endOfLine
 				));
 

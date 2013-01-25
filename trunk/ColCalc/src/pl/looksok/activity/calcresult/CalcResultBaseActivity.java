@@ -151,7 +151,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		calc.setCalcName( calcName );
 		calc.setDateSaved(DateTime.now());
 		CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
-		Toast.makeText(getApplicationContext(), R.string.calculation_saved_text, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), R.string.calcResult_calcSaved, Toast.LENGTH_SHORT).show();
 	}
 
 	OnClickListener shareCalculationButtonClickListener = new OnClickListener() {
