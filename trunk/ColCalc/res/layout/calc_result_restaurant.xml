@@ -69,7 +69,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:background="@drawable/button_bgnd_restaurant_middle"
-                android:contentDescription="@string/calculation_button_sendCalculation_text"
+                android:contentDescription="@string/app_name_potluck"
                 android:src="@drawable/share_icon" />
 
             <ImageButton

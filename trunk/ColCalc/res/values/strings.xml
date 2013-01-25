@@ -16,7 +16,7 @@
     
     <string name="calcResult_calcName_hint">wpisz nazwę imprezy</string>
     <string name="calcResult_name_textView">Imię</string>
-    <string name="calcResult_personPay_zero_textView">0,00</string>
+    <string name="calcResult_personPay_zero_textView">0</string>
     <string name="calcResult_default_name">Rozliczenie z </string>
     <string name="calcResult_noPeopleAddedYet">dodaj osoby\naby zobaczyć rozliczenie</string>
 
@@ -53,13 +53,11 @@
     <string name="addPerson_billPay_header">ile zapłacił</string>
     <string name="addPerson_atomPay_potluck_header">co kupił</string>
     <string name="addPerson_atomPay_restaurant_header">za co powinien zapłacić</string>
-    <string name="EnterPays_atomPay_defaultName">płatność</string>
-    <string name="EnterPays_atomPay_nameHint">nazwa płatności</string>
+    <string name="addPerson_atomPay_payNameHint">nazwa płatności</string>
     
-    <string name="calculation_button_save_text">Zapisz i wyjdź</string>
-    <string name="calculation_button_sendCalculation_text">Wyślij</string>
-    <string name="calculation_button_addPerson_text">dodaj osobę</string>
-    <string name="calculation_button_addPersonMulti_text">dodaj wielu</string>
+    <string name="calcResult_save_button">Zapisz i wyjdź</string>
+    <string name="calcResult_addPerson_button">dodaj osobę</string>
+    <string name="calcResult_addPerson_multi_button">dodaj wielu</string>
     <string name="calculation_saved_text">Zapisano!</string>
     <string name="calculation_load_error_text">Nie znaleziono żadnych zapisanych rozliczeń</string>
     

@@ -12,7 +12,7 @@
         android:layout_toLeftOf="@+id/calc_addPerson_buttonsLayout"
         android:background="@drawable/button_bgnd_potluck"
         android:drawableLeft="@drawable/save"
-        android:text="@string/calculation_button_save_text" />
+        android:text="@string/calcResult_save_button" />
 
     <LinearLayout
         android:id="@+id/calc_addPerson_buttonsLayout"
@@ -28,10 +28,9 @@
             android:layout_weight="1"
             android:layout_marginRight="@dimen/margin_micro"
             android:background="@drawable/button_bgnd_potluck_left"
-            android:contentDescription="@string/calculation_button_addPerson_text"
             android:drawableLeft="@drawable/add_person"
             android:drawablePadding="@dimen/margin_small"
-            android:text="@string/calculation_button_addPerson_text" />
+            android:text="@string/calcResult_addPerson_button" />
 
         <Button
             android:id="@+id/calc_addMultiPerson_button"
@@ -43,7 +42,7 @@
             android:contentDescription="@string/emptyText"
             android:drawableLeft="@drawable/add_multi_person"
             android:drawablePadding="@dimen/margin_small"
-            android:text="@string/calculation_button_addPersonMulti_text" />
+            android:text="@string/calcResult_addPerson_multi_button" />
     </LinearLayout>
 
 </RelativeLayout>
