@@ -32,6 +32,7 @@
     <string name="welcome_mode_potluckParty">dotknij, aby rozliczyć się\npo imprezie</string>
     <string name="welcome_mode_restaurant">dotknij, aby rozliczyć się\nw restauracji</string>
     <string name="welcome_noSavedCalcsYet">nie masz jeszcze żadnych\nzapisanych rozliczeń</string>
+    <string name="welcome_savedCalcs">zapisane rozliczenia</string>
     
     <string name="addPerson_multi_personPay">Każda z osób zapłaciła:</string>
     <string name="addPerson_multi_peopleCount_textView">liczba osób do dodania</string>
