@@ -51,7 +51,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@drawable/edittext_bgnd_gray"
-                android:hint="@string/calcResult_calcName_hint"
+                android:hint="@string/calcResult_calcName_potluck_hint"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
                 android:singleLine="true" />
