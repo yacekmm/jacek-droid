@@ -37,6 +37,8 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 		
 		mNewPersonPayInput = (CurrencyEditText)findViewById(R.id.enterPaysMulti_EditText_Pay);
 		mNewPersonPayInput.setOnKeyListener(hideKeyboardListener);
+		mNewPersonPayInput.setText(CalcFormatterHelper.currencyFormat(0.0));
+		
 		mHowManyPersonsScroller = (LinearLayout)findViewById(R.id.enterPaysMulti_peopleCount_content);
 
 		for(int i=Constants.MULTI_PERSON_MIN_COUNT; i<Constants.MULTI_PERSON_MAX_COUNT; i++){
@@ -84,8 +86,7 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 				name = namePrefix + " " + (i + nameOffset);
 			}
 
-			String atomPayName = new StringBuilder(getString(R.string.EnterPays_atomPay_defaultName)).append(" ").append(i).toString();
-			List<AtomPayment> atomPays = PersonDataUtils.getDefaultAtomPaymentsList(atomPayName, payDouble);
+			List<AtomPayment> atomPays = PersonDataUtils.getDefaultAtomPaymentsList("", payDouble);
 			personDataSet.add(new PersonData(name, atomPays, emails));
 		}
 		return personDataSet;
