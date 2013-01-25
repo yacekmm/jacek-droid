@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
             android:drawableLeft="@drawable/person_light"
-            android:text="@string/enterPaysMulti_TextView_peopleCount" />
+            android:text="@string/addPerson_multi_peopleCount_textView" />
 
         <HorizontalScrollView
             android:id="@+id/enterPaysMulti_peopleCount_scroll"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
             android:drawableLeft="@drawable/bills"
-            android:text="@string/enterPaysMulti_pays" />
+            android:text="@string/addPerson_pays" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/enterPaysMulti_EditText_Pay"
-                android:text="@string/enterPaysMulti_TextView_Pay"
+                android:text="@string/addPerson_multi_personPay"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/textSize_medium" />
 
@@ -69,7 +69,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/edittext_bgnd_gray"
                 android:gravity="center"
-                android:text="@string/EnterPays_TextView_ZeroValue" />
+                android:text="@string/calcResult_personPay_zero_textView" />
         </RelativeLayout>
     </LinearLayout>
 

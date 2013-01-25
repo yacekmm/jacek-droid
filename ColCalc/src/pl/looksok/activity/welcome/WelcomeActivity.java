@@ -107,7 +107,7 @@ public class WelcomeActivity extends ColCalcActivity {
 		}catch(BadInputDataException e){
 			//TODO: handle BadInputDataException on recalculate maybe simply open calculation?
 			Log.e(LOG_TAG, "BadInputData exception: " + e.getMessage());
-			Toast.makeText(getApplicationContext(), getString(R.string.calculation_badInputDataError_whileSharingCalc), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.calcResult_badInputDataError_whileSharingCalc), Toast.LENGTH_LONG).show();
 			return;
 		}
 		CalcResultUtils utils = new CalcResultUtils();

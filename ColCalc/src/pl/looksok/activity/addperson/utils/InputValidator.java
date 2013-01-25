@@ -10,13 +10,13 @@ import android.widget.Toast;
 public class InputValidator {
 	public static boolean inputIsValid(Context context, String name, double payDouble, double shouldPayDouble, boolean equalPayments, List<PersonData> inputPaysList) {
 		if(name.length()<1 || payDouble < 0){
-    		Toast.makeText(context, context.getResources().getString(R.string.EnterPays_Toast_BadNameAndPayError), Toast.LENGTH_SHORT).show();
+    		Toast.makeText(context, context.getResources().getString(R.string.addPerson_error_emptyNameField), Toast.LENGTH_SHORT).show();
     		return false;
     	}else if(duplicatedName(name, inputPaysList)){
-    		Toast.makeText(context, context.getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT).show();
+    		Toast.makeText(context, context.getResources().getString(R.string.addPerson_error_duplicatedPersonName), Toast.LENGTH_SHORT).show();
     		return false;
     	}else if(shouldPayDouble < 0 && !equalPayments){
-    		Toast.makeText(context, context.getResources().getString(R.string.EnterPays_Toast_ShouldPayError), Toast.LENGTH_SHORT).show();
+    		Toast.makeText(context, context.getResources().getString(R.string.addPerson_error_shouldPayValue), Toast.LENGTH_SHORT).show();
     		return false;
     	}
     	
@@ -25,10 +25,10 @@ public class InputValidator {
 
 	public static boolean inputIsValid(Context context, String name, double payDouble, List<PersonData> inputPaysList) {
 		if(name.length()<1 || payDouble < 0){
-			Toast.makeText(context, context.getResources().getString(R.string.EnterPays_Toast_BadNameAndPayError), Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.addPerson_error_emptyNameField), Toast.LENGTH_SHORT).show();
 			return false;
 		}else if(duplicatedName(name, inputPaysList)){
-			Toast.makeText(context, context.getResources().getString(R.string.EnterPays_Toast_DuplicatedNameError), Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.addPerson_error_duplicatedPersonName), Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		

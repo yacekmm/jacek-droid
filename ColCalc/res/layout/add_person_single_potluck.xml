@@ -32,7 +32,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_small"
             android:drawableLeft="@drawable/person_light"
-            android:text="@string/EnterPays_personLabel" />
+            android:text="@string/addPerson_personNameLabel" />
 
         <EditText
             android:id="@+id/EnterPays_EditText_Name"
@@ -42,7 +42,7 @@
             android:layout_below="@+id/EnterPays_personHeader"
             android:layout_toLeftOf="@+id/EnterPays_button_getPersonFromContacts"
             android:background="@drawable/edittext_bgnd_gray_left"
-            android:hint="@string/EnterPays_TextView_Name"
+            android:hint="@string/addPerson_name_hint"
             android:padding="@dimen/margin_normal"
             android:singleLine="true" />
 
@@ -53,7 +53,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/EnterPays_personHeader"
             android:background="@drawable/button_bgnd_gray_right"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/app_name_potluck"
             android:src="@drawable/addressbook" />
     </RelativeLayout>
 
@@ -69,7 +69,7 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         android:drawableLeft="@drawable/bills"
-        android:text="@string/EnterPays_atomPay_headerText" />
+        android:text="@string/addPerson_atomPay_potluck_header" />
 
     <RelativeLayout
         android:id="@+id/EnterPays_AtomPaymentsHolder"
@@ -99,7 +99,7 @@
         android:layout_marginTop="@dimen/margin_normal"
         android:background="@drawable/button_bgnd_gray"
         android:drawableLeft="@drawable/add_icon"
-        android:text="@string/EnterPays_button_addAtomPayment" />
+        android:text="@string/addPerson_addAtomPayment_button" />
 
     <LinearLayout
         android:id="@+id/EnterPays_giftDetails"
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
             android:drawableLeft="@drawable/gift"
-            android:text="@string/EnterPays_gift" />
+            android:text="@string/addPerson_gift" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -132,7 +132,7 @@
                 android:drawableLeft="@drawable/giftreceiver"
                 android:drawablePadding="@dimen/margin_normal"
                 android:gravity="center_vertical"
-                android:text="@string/EnterPays_gotGift_text"
+                android:text="@string/addPerson_gotGift_text"
                 android:textColor="@color/gray" />
 
             <CheckBox
@@ -165,7 +165,7 @@
                     android:drawableLeft="@drawable/giftbuyer"
                     android:drawablePadding="@dimen/margin_normal"
                     android:gravity="center_vertical"
-                    android:text="@string/EnterPays_buysGift_text"
+                    android:text="@string/addPerson_buysGift_text"
                     android:textColor="@color/gray" />
 
                 <CheckBox
@@ -190,7 +190,7 @@
                     android:layout_toLeftOf="@+id/EnterPays_EditText_giftValue"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/margin_big"
-                    android:text="@string/EnterPays_boughtGiftValue_hint"
+                    android:text="@string/addPerson_gift_howMuchPaid"
                     android:textColor="@color/gray" />
 
                 <pl.looksok.currencyedittext.CurrencyEditText
@@ -200,7 +200,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/edittext_bgnd_gray"
                     android:gravity="center"
-                    android:text="@string/EnterPays_TextView_ZeroValue" />
+                    android:text="@string/calcResult_personPay_zero_textView" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

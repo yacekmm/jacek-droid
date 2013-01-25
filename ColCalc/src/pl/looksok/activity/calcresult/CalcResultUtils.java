@@ -86,7 +86,7 @@ public class CalcResultUtils {
 		sb.append("<a href=\"");
 		sb.append(Constants.APPLICATION_WEBSITE_URL);
 		sb.append("\">");
-		sb.append(context.getString(R.string.app_name));
+		sb.append(context.getString(R.string.app_name_potluck));
 		sb.append("</a>");
 		return sb.toString();
 	}

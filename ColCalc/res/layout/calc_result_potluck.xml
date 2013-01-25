@@ -51,7 +51,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@drawable/edittext_bgnd_gray"
-                android:hint="@string/calculation_calcName_hint"
+                android:hint="@string/calcResult_calcName_hint"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
                 android:singleLine="true" />
@@ -103,7 +103,7 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/height_button"
             android:gravity="center"
-            android:text="@string/calculation_noPeopleAddedYet"
+            android:text="@string/calcResult_noPeopleAddedYet"
             android:textColor="@color/gray"
             android:textSize="@dimen/textSize_micro" />
 

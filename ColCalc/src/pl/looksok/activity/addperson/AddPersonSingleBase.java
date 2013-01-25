@@ -7,10 +7,8 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.AtomPayListAdapter;
-import pl.looksok.activity.addperson.utils.OnTotalPayChangeListener;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
-import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,13 +17,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public abstract class AddPersonSingleBase extends AddPersonBase implements OnTotalPayChangeListener {
+public abstract class AddPersonSingleBase extends AddPersonBase {
 	protected EditText mNewPersonNameInput;
 
 	private PersonData editPersonData = null;
@@ -56,7 +54,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 			mNewPersonNameInput.setText(editPersonData.getName());
 			loadSpecificInputDataFromBundle(editPersonData);
 			setUpAtomPayAdapter(editPersonData.getAtomPayments());
-			updateTotalPayValue(editPersonData.getHowMuchPersonPaid());
 		}
 	}
 
@@ -64,8 +61,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
-		if(adapter!=null)
-			adapter.unregisterOnTotalChangeListener(this);
 
 		if(atomPaymentsList.size()==0)
 			atomPaymentsList.add(new AtomPayment());
@@ -73,7 +68,6 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 		adapter = new AtomPayListAdapter(AddPersonSingleBase.this, R.layout.atom_pay_list_item, atomPaymentsList);
 		adapter.setKeyboardHiderListener(hideKeyboardListener);
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
-		adapter.registerOnTotalChangeListener(this);
 	}
 
 	public void removeAtomPayOnClickHandler(View v) {
@@ -145,17 +139,5 @@ public abstract class AddPersonSingleBase extends AddPersonBase implements OnTot
 			calculateAndShowResults();
 		}
 		super.onBackPressed();
-	}
-
-	@Override
-	public void notifyOnTotalPayChange(double totalPay) {
-		updateTotalPayValue(totalPay);
-	}
-
-	private void updateTotalPayValue(final double payMadeByPerson) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getString(R.string.EnterPays_atomPay_headerText_left)).append(" ");
-		sb.append(CalcFormatterHelper.currencyFormat(payMadeByPerson, 2));
-		sb.append(getString(R.string.EnterPays_atomPay_headerText_right));
 	}
 }

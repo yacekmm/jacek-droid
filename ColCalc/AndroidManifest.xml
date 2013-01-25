@@ -18,36 +18,36 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_name_potluck"
         android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
             android:name="pl.looksok.activity.addperson.AddPersonSinglePotluck"
-            android:label="@string/app_name"
+            android:label="@string/app_name_potluck"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name="pl.looksok.activity.addperson.AddPersonMultiPotluck"
-            android:label="@string/app_name"
+            android:label="@string/app_name_potluck"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="pl.looksok.activity.addperson.AddPersonSingleRestaurant"
-            android:label="@string/app_name"
+            android:label="@string/app_name_potluck"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name="pl.looksok.activity.calcresult.CalcResultPotluckActivity"
-            android:label="@string/app_name"
+            android:label="@string/app_name_potluck"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="pl.looksok.activity.calcresult.CalcResultRestaurantActivity"
-            android:label="@string/app_name"
+            android:label="@string/app_name_potluck"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name=".activity.welcome.WelcomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name_potluck" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

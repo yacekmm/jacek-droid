@@ -74,7 +74,7 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 		HashSet<PersonData> personDataSet = new HashSet<PersonData>();
 		double payDouble = CalcFormatterHelper.readDoubleFromEditText(mNewPersonPayInput);
 		double howManyPersons = Integer.parseInt(mHowManyPersonsSelectedBtn.getText().toString());
-		String namePrefix = getString(R.string.enterPaysMulti_personPrefix);
+		String namePrefix = getString(R.string.addPerson_multi_personPrefix);
 
 		int nameOffset = 0;
 		for(int i = 1; i<=howManyPersons; i++){
