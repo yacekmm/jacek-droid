@@ -51,7 +51,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@drawable/edittext_bgnd_gray"
-                android:hint="@string/calcResult_calcName_hint"
+                android:hint="@string/calcResult_calcName_restaurant_hint"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
                 android:singleLine="true" />
@@ -98,7 +98,8 @@
         android:layout_height="@dimen/height_button"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
-        android:layout_marginTop="@dimen/margin_normal" >
+        android:layout_marginTop="@dimen/margin_normal"
+        android:visibility="gone" >
 
         <TextView
             android:id="@+id/calc_tips"

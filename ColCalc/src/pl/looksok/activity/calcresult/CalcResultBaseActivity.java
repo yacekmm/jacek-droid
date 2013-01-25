@@ -246,7 +246,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	@Override
 	public void onBackPressed() {
 		if(CalcPersistence.isCalcOnSavedList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc)){
-			if(calcWasEdited)
+			if(calcWasEdited && calc.getInputPaysList().size() > 0)
 				saveCalculation();
 			goToWelcomeScreen();
 		}else if(calc.getInputPaysList().size()>0)
