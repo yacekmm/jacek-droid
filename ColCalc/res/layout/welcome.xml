@@ -33,7 +33,8 @@
             android:padding="@dimen/margin_small"
             android:text="@string/welcome_mode_potluckParty"
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_medium" />
+            android:textSize="@dimen/textSize_medium"
+            android:drawableTop="@drawable/mode_party" />
 
         <Button
             android:id="@+id/welcome_mode_restaurant"
@@ -46,7 +47,8 @@
             android:padding="@dimen/margin_small"
             android:text="@string/welcome_mode_restaurant"
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_medium" />
+            android:textSize="@dimen/textSize_medium"
+            android:drawableTop="@drawable/mode_restaurant" />
     </LinearLayout>
 
     <TextView
