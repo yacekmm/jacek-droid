@@ -14,6 +14,7 @@ import pl.looksok.utils.CalcFormatterHelper;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -49,7 +50,17 @@ public class AddPersonSinglePotluck extends AddPersonSingleBase {
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
 		mGiftValueInput.setOnFocusChangeListener(softInputModeSwitcherListener);
 		mGiftValueInput.setOnKeyListener(hideKeyboardListener);
+		
+		hideAddMultiPersonButton();
+		
 		setGiftPaymentFieldsVisibile(false, false);
+	}
+
+	protected void hideAddMultiPersonButton() {
+		findViewById(R.id.calc_addMultiPerson_button).setVisibility(View.GONE);
+		Button addPersonButton = (Button)findViewById(R.id.calc_addPerson_button);
+		addPersonButton.setBackgroundResource(R.drawable.button_bgnd_potluck);
+		addPersonButton.setText(getString(R.string.calcResult_saveAndAddNextPerson_button));
 	}
 	
 	OnCheckedChangeListener buysGiftChangeListener = new OnCheckedChangeListener() {
