@@ -59,7 +59,8 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		initCalculationDetailsBar();
 		if(calcWasEdited){
 			Log.i(LOG_TAG, "Calc was edited -> saving");
-			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+			saveCalculation();
+//			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 		}
 	}
 
@@ -144,6 +145,9 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	};
 
 	protected void saveCalculation() {
+		if(calc.getInputPaysList().size() == 0)
+			return;
+		
 		String calcName = mCalcNameEditText.getText().toString();
 		if(calcName.length() == 0)
 			calcName = getString(R.string.calcResult_default_name) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
@@ -236,7 +240,8 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			calc.removePerson(personDataHolder);
 			refreshCalculation();
 			populateListArray();
-			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
+			saveCalculation();
+//			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 		}else if(dialogType == DIALOG_REMOVE_CALC){
 			CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 			goToWelcomeScreen();

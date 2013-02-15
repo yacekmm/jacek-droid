@@ -12,7 +12,7 @@
         android:layout_toLeftOf="@+id/calc_addPerson_buttonsLayout"
         android:background="@drawable/button_bgnd_potluck"
         android:drawableLeft="@drawable/save"
-        android:text="@string/calcResult_save_button" />
+        android:text="@string/calcResult_saveAndExit_button" />
 
     <LinearLayout
         android:id="@+id/calc_addPerson_buttonsLayout"

@@ -60,7 +60,7 @@ public class AddPersonSinglePotluck extends AddPersonSingleBase {
 		findViewById(R.id.calc_addMultiPerson_button).setVisibility(View.GONE);
 		Button addPersonButton = (Button)findViewById(R.id.calc_addPerson_button);
 		addPersonButton.setBackgroundResource(R.drawable.button_bgnd_potluck);
-		addPersonButton.setText(getString(R.string.calcResult_saveAndAddNextPerson_button));
+		addPersonButton.setText(getString(R.string.addPerson_saveAndAddNextPerson_button));
 	}
 	
 	OnCheckedChangeListener buysGiftChangeListener = new OnCheckedChangeListener() {

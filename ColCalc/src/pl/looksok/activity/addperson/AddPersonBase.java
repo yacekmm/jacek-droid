@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public abstract class AddPersonBase extends ColCalcActivity {
 	protected static final String LOG_TAG = AddPersonBase.class.getSimpleName();
@@ -65,7 +66,9 @@ public abstract class AddPersonBase extends ColCalcActivity {
 	private void initTopControlsBar() {
 		findViewById(R.id.calc_addPerson_button).setOnClickListener(saveAndAddNextPersonClickListener);
 		findViewById(R.id.calc_addMultiPerson_button).setOnClickListener(saveAndAddNextMultiPersonClickListener);
-		findViewById(R.id.calc_saveCalculation_button).setOnClickListener(saveAndShowResultsClickListener);
+		Button mSaveAndCalculateButton = (Button)findViewById(R.id.calc_saveCalculation_button);
+		mSaveAndCalculateButton.setText(R.string.addPerson_saveAndCalculate_button);
+		mSaveAndCalculateButton.setOnClickListener(saveAndShowResultsClickListener);
 	}
 
 	OnClickListener saveAndShowResultsClickListener = new OnClickListener() {

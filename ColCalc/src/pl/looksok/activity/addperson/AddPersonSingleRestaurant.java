@@ -10,6 +10,7 @@ import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.CalcFormatterHelper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class AddPersonSingleRestaurant extends AddPersonSingleBase {
@@ -31,7 +32,9 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase {
 
 	@Override
 	protected void initButtonStyles() {
-		findViewById(R.id.calc_addPerson_button).setBackgroundResource(R.drawable.button_bgnd_restaurant);
+		Button mSaveAndAddNextPersonButton = (Button)findViewById(R.id.calc_addPerson_button);
+		mSaveAndAddNextPersonButton.setBackgroundResource(R.drawable.button_bgnd_restaurant);
+		mSaveAndAddNextPersonButton.setText(R.string.addPerson_saveAndAddNextPerson_button);
 		findViewById(R.id.calc_addMultiPerson_button).setVisibility(View.GONE);
 		findViewById(R.id.calc_saveCalculation_button).setBackgroundResource(R.drawable.button_bgnd_restaurant);
 	}

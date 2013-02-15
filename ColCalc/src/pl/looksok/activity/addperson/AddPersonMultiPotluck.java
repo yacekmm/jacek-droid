@@ -72,7 +72,7 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 		findViewById(R.id.calc_addPerson_button).setVisibility(View.GONE);
 		Button addPersonButton = (Button)findViewById(R.id.calc_addMultiPerson_button);
 		addPersonButton.setBackgroundResource(R.drawable.button_bgnd_potluck);
-		addPersonButton.setText(getString(R.string.calcResult_saveAndAddNextMultiPerson_button));
+		addPersonButton.setText(getString(R.string.addPerson_saveAndAddNextMultiPerson_button));
 	}
 
 	private OnClickListener setPeopleCountOnClickListener = new OnClickListener() {
