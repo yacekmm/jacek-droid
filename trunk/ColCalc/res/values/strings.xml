@@ -52,16 +52,18 @@
     <string name="addPerson_personNameLabel">imię</string>
     <string name="addPerson_howMuchPaid_label">ile dołożył do rachunku</string>
 
+    <string name="addPerson_saveAndCalculate_button">Zapisz i oblicz</string>
+    <string name="addPerson_saveAndAddNextPerson_button">zapisz i dodaj kolejną osobę</string>
+    <string name="addPerson_saveAndAddNextMultiPerson_button">zapisz i dodaj kolejne osoby</string>
+
     <string name="addPerson_billPay_header">ile zapłacił</string>
     <string name="addPerson_atomPay_potluck_header">co kupił</string>
     <string name="addPerson_atomPay_restaurant_header">za co powinien zapłacić</string>
     <string name="addPerson_atomPay_payNameHint">nazwa płatności</string>
     
-    <string name="calcResult_save_button">Zapisz i wyjdź</string>
+    <string name="calcResult_saveAndExit_button">Zapisz i wyjdź</string>
     <string name="calcResult_addPerson_button">dodaj osobę</string>
-    <string name="calcResult_saveAndAddNextPerson_button">zapisz i dodaj kolejną osobę</string>
     <string name="calcResult_addPerson_multi_button">dodaj wielu</string>
-    <string name="calcResult_saveAndAddNextMultiPerson_button">zapisz i dodaj kolejne osoby</string>
     <string name="calcResult_calcSaved">Zapisano!</string>
     
     <string name="email_subject">Rozliczenie naszych składek</string>

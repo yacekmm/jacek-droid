@@ -84,6 +84,10 @@ public class CalcPersistence {
 	private static int findCalcInList(CalculationLogic calc,
 			List<CalculationLogic> calcList) {
 		int index = -1;
+		
+		if(calcList == null)
+			return index;
+		
 		for (CalculationLogic calcItem : calcList) {
 			if(calcItem.getId() == calc.getId()){
 				index = calcList.indexOf(calcItem);
