@@ -14,8 +14,8 @@
     <string name="dialog_yes">Tak</string>
     <string name="dialog_no">Nie</string>
     
-    <string name="calcResult_calcName_potluck_hint">nazwa imprezy&#8230;</string>
-    <string name="calcResult_calcName_restaurant_hint">nazwa spotkania&#8230;</string>
+    <string name="calcResult_calcName_potluck_hint">nazwa imprezy</string>
+    <string name="calcResult_calcName_restaurant_hint">nazwa rozliczenia</string>
     <string name="calcResult_name_textView">Imię</string>
     <string name="calcResult_personPay_zero_textView">0</string>
     <string name="calcResult_default_name">Rozliczenie z </string>
@@ -59,7 +59,9 @@
     
     <string name="calcResult_save_button">Zapisz i wyjdź</string>
     <string name="calcResult_addPerson_button">dodaj osobę</string>
+    <string name="calcResult_saveAndAddNextPerson_button">zapisz i dodaj kolejną osobę</string>
     <string name="calcResult_addPerson_multi_button">dodaj wielu</string>
+    <string name="calcResult_saveAndAddNextMultiPerson_button">zapisz i dodaj kolejne osoby</string>
     <string name="calcResult_calcSaved">Zapisano!</string>
     
     <string name="email_subject">Rozliczenie naszych składek</string>

@@ -35,12 +35,18 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 	protected void initActivityViews() {
 		super.initActivityViews();
 		
+		hideAddPersonButton();
+		
 		mNewPersonPayInput = (CurrencyEditText)findViewById(R.id.enterPaysMulti_EditText_Pay);
 		mNewPersonPayInput.setOnKeyListener(hideKeyboardListener);
 		mNewPersonPayInput.setText(CalcFormatterHelper.currencyFormat(0.0));
 		
 		mHowManyPersonsScroller = (LinearLayout)findViewById(R.id.enterPaysMulti_peopleCount_content);
 
+		initPeopleCountSpinner();
+	}
+
+	protected void initPeopleCountSpinner() {
 		for(int i=Constants.MULTI_PERSON_MIN_COUNT; i<Constants.MULTI_PERSON_MAX_COUNT; i++){
 			Button b = new Button(getApplicationContext());
 			
@@ -60,6 +66,13 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 			b.setText("" + i);
 			b.setTextAppearance(getApplicationContext(), R.style.textMediumDarkBold);
 		}
+	}
+
+	protected void hideAddPersonButton() {
+		findViewById(R.id.calc_addPerson_button).setVisibility(View.GONE);
+		Button addPersonButton = (Button)findViewById(R.id.calc_addMultiPerson_button);
+		addPersonButton.setBackgroundResource(R.drawable.button_bgnd_potluck);
+		addPersonButton.setText(getString(R.string.calcResult_saveAndAddNextMultiPerson_button));
 	}
 
 	private OnClickListener setPeopleCountOnClickListener = new OnClickListener() {
