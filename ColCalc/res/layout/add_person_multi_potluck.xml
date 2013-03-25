@@ -67,7 +67,7 @@
                 android:layout_width="@dimen/height_button_big"
                 android:layout_height="@dimen/height_button"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/edittext_bgnd_gray"
+                android:background="@drawable/edittext_bgnd_gray_opaque"
                 android:gravity="center"
                 android:text="@string/calcResult_personPay_zero_textView" />
         </RelativeLayout>
