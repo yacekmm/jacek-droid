@@ -3,6 +3,7 @@
 
     <string name="app_name_potluck">Potluck</string>
     <string name="emptyText"></string>
+    
     <string name="adMob_publisherID">a150dc376e2d3f0</string>
     <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796</string>
     
@@ -41,7 +42,7 @@
     <string name="addPerson_pays">płatności</string>
 
     <string name="addPerson_name_hint">wpisz imię&#8230;</string>
-    <string name="addPerson_addAtomPayment_button">nowa płatność</string>
+    <string name="addPerson_addAtomPayment_button">dodaj kolejną płatność</string>
     <string name="addPerson_gift">prezent</string>
     <string name="addPerson_gotGift_text">Dostał prezent</string>
     <string name="addPerson_buysGift_text">Płacił za prezent</string>
