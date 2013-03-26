@@ -128,11 +128,9 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			calc.recalculate();
 		}catch (BadInputDataException bidException) {
 			handleException(bidException);
-//				Toast.makeText(getApplicationContext(), "BadInput data note recalculating: " + bidException.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
 
-	@SuppressWarnings("unused")
 	protected void handleException(Exception exception) { }
 
 	protected abstract CalculationType getCalculationType();
