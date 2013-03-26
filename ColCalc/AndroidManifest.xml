@@ -5,8 +5,9 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="10" />
+        android:minSdkVersion="7"
+        android:targetSdkVersion="10"
+         />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- AdMob -->
