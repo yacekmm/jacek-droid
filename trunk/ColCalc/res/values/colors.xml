@@ -7,13 +7,19 @@
     <color name="transparent">#00000000</color>
     
     <color name="gray">#D8D8D8</color>
+    <!-- <color name="gray_dark">#666666</color> -->
+    
     <color name="gray_dark">#242424</color>
+    
     <color name="blue">#3C9999</color>
     <color name="blue_button_pressed">#6AD2C3</color>
     <color name="black">#000000</color>
     <color name="yellow">#FBEC5D</color>
-    <color name="yellow_button">#FDAE24</color>
+    <color name="yellow_button">#FF9900</color>
+    <!-- <color name="yellow_button">#FDAE24</color> -->
 
-    <color name="darkBlue_button">#6A87C3</color>
+    <!-- <color name="darkBlue_button">#6A87C3</color> -->
+
+    <color name="darkBlue_button">#ABDB25</color>
     
 </resources>
