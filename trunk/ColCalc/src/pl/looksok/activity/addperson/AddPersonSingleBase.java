@@ -19,9 +19,12 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 public abstract class AddPersonSingleBase extends AddPersonBase {
 	protected EditText mNewPersonNameInput;
@@ -67,6 +70,20 @@ public abstract class AddPersonSingleBase extends AddPersonBase {
 		adapter = new AtomPayListAdapter(AddPersonSingleBase.this, R.layout.atom_pay_list_item, atomPaymentsList);
 		adapter.setKeyboardHiderListener(hideKeyboardListener);
 		((ListView)findViewById(R.id.EnterPays_atomPaysList)).setAdapter(adapter);
+		
+		setAtomPaymentViewHeight(atomPaymentsList);
+	}
+
+	private void setAtomPaymentViewHeight(List<AtomPayment> atomPaymentsList) {
+		RelativeLayout atomPaymentListHolder = (RelativeLayout)findViewById(R.id.EnterPays_AtomPaymentsHolder);
+		android.widget.RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)atomPaymentListHolder.getLayoutParams();
+
+		if(atomPaymentsList.size() <= 1){
+			params.height = getResources().getDimensionPixelSize(R.dimen.height_button);
+		} else {
+			params.height = (int)(getResources().getDimensionPixelSize(R.dimen.height_button) * 2.1);
+		}
+		atomPaymentListHolder.setLayoutParams(params);
 	}
 
 	public void removeAtomPayOnClickHandler(View v) {
