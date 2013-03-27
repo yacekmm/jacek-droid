@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/EnterPays_mainLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -85,7 +86,8 @@
             android:layout_height="wrap_content"
             android:cacheColorHint="@color/transparent"
             android:divider="@color/transparent"
-            android:dividerHeight="@dimen/margin_normal" >
+            android:dividerHeight="@dimen/margin_normal"
+            tools:listitem="@layout/atom_pay_list_item" >
         </ListView>
     </RelativeLayout>
 
@@ -105,8 +107,8 @@
         android:id="@+id/EnterPays_giftDetails"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/EnterPays_adView"
         android:layout_below="@+id/EnterPays_addAtomPayment"
-		android:layout_above="@+id/EnterPays_adView"
         android:layout_margin="@dimen/margin_normal"
         android:gravity="top"
         android:orientation="vertical" >
@@ -121,13 +123,13 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/height_button"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_normal"
             android:background="@drawable/border_rounded" >
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_height="@dimen/height_button_small"
                 android:layout_toLeftOf="@+id/EnterPays_gotGift_checkbox"
                 android:drawableLeft="@drawable/giftreceiver"
                 android:drawablePadding="@dimen/margin_normal"
@@ -138,7 +140,7 @@
             <CheckBox
                 android:id="@+id/EnterPays_gotGift_checkbox"
                 android:layout_width="@dimen/height_button_big"
-                android:layout_height="fill_parent"
+                android:layout_height="@dimen/height_button_small"
                 android:layout_alignParentRight="true"
                 android:button="@drawable/checkbox_button"
                 android:gravity="center_vertical" />
@@ -149,18 +151,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
+            android:padding="@dimen/margin_normal"
             android:background="@drawable/border_rounded"
             android:orientation="vertical" >
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/height_button"
-                android:layout_marginTop="@dimen/margin_normal" >
+                android:layout_height="@dimen/height_button_small"
+                 >
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_height="@dimen/height_button_small"
                     android:layout_toLeftOf="@+id/EnterPays_buysGift_checkbox"
                     android:drawableLeft="@drawable/giftbuyer"
                     android:drawablePadding="@dimen/margin_normal"
@@ -171,7 +173,7 @@
                 <CheckBox
                     android:id="@+id/EnterPays_buysGift_checkbox"
                     android:layout_width="@dimen/height_button_big"
-                    android:layout_height="fill_parent"
+                    android:layout_height="@dimen/height_button_small"
                     android:layout_alignParentRight="true"
                     android:button="@drawable/checkbox_button"
                     android:gravity="center_vertical" />
@@ -179,14 +181,14 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/height_button"
-                android:layout_margin="@dimen/margin_normal" >
+                android:layout_height="@dimen/height_button_small"
+                android:layout_marginTop="@dimen/margin_normal" 
+                >
 
                 <TextView
                     android:id="@+id/EnterPays_TextView_giftValue"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_height="@dimen/height_button_small"
                     android:layout_toLeftOf="@+id/EnterPays_EditText_giftValue"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/margin_big"
@@ -196,7 +198,7 @@
                 <pl.looksok.currencyedittext.CurrencyEditText
                     android:id="@+id/EnterPays_EditText_giftValue"
                     android:layout_width="@dimen/height_button_big"
-                    android:layout_height="fill_parent"
+                    android:layout_height="@dimen/height_button_small"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/edittext_bgnd_gray_opaque"
                     android:gravity="center"
