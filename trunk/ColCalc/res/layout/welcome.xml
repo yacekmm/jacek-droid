@@ -23,34 +23,34 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/welcome_mode_potluckParty"
-            android:layout_width="0sp"
-            android:layout_height="fill_parent"
-            android:layout_margin="@dimen/margin_small"
-            android:layout_weight="1"
-            android:background="@drawable/button_bgnd_potluck"
-            android:gravity="center"
-            android:padding="@dimen/margin_small"
-            android:text="@string/welcome_mode_potluckParty"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textSize_medium"
-            android:typeface="serif"
-            android:drawableTop="@drawable/mode_party" />
-
-        <Button
             android:id="@+id/welcome_mode_restaurant"
             android:layout_width="0sp"
             android:layout_height="fill_parent"
             android:layout_margin="@dimen/margin_small"
             android:layout_weight="1"
             android:background="@drawable/button_bgnd_restaurant"
+            android:drawableTop="@drawable/mode_restaurant"
             android:gravity="center"
             android:padding="@dimen/margin_small"
             android:text="@string/welcome_mode_restaurant"
             android:textColor="@color/black"
             android:textSize="@dimen/textSize_medium"
-            android:typeface="serif"
-            android:drawableTop="@drawable/mode_restaurant" />
+            android:typeface="serif" />
+
+        <Button
+            android:id="@+id/welcome_mode_potluckParty"
+            android:layout_width="0sp"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_weight="1"
+            android:background="@drawable/button_bgnd_potluck"
+            android:drawableTop="@drawable/mode_party"
+            android:gravity="center"
+            android:padding="@dimen/margin_small"
+            android:text="@string/welcome_mode_potluckParty"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize_medium"
+            android:typeface="serif" />
     </LinearLayout>
 
     <TextView

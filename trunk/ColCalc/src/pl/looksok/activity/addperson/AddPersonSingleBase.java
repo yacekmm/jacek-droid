@@ -109,6 +109,7 @@ public abstract class AddPersonSingleBase extends AddPersonBase {
 		public void onClick(View v) {
 			adapter.insert(new AtomPayment(), adapter.getCount());
 			setUpAtomPayAdapter(adapter.getItems());
+			((ListView)findViewById(R.id.EnterPays_atomPaysList)).setSelection(adapter.getCount());
 		}
 	};
 	
