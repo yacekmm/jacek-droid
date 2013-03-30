@@ -46,6 +46,8 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 
 	private EditText mCalcNameEditText;
 
+	private Button saveCalcBtn;
+
 	private static boolean calcWasEdited = false;
 
 	@Override
@@ -60,7 +62,6 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		if(calcWasEdited){
 			Log.i(LOG_TAG, "Calc was edited -> saving");
 			saveCalculation();
-//			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 		}
 	}
 
@@ -78,28 +79,30 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	protected abstract int getXmlLayout();
 
 	private void initButtonsActions() {
-		boolean isAnyPersonOnList = calc.getTotalPersons() > 0;
-
-		Button saveCalcBtn = (Button)findViewById(R.id.calc_saveCalculation_button);
+		saveCalcBtn = (Button)findViewById(R.id.calc_saveCalculation_button);
 		saveCalcBtn.setOnClickListener(saveCalculationButtonClickListener);
-		saveCalcBtn.setEnabled(isAnyPersonOnList);
+		saveCalcBtn.setEnabled(isAnyPersonOnList());
 
 		ImageButton shareCalcBtn = (ImageButton)findViewById(R.id.calc_sendCalculation_button);
 		shareCalcBtn.setOnClickListener(shareCalculationButtonClickListener);
-		shareCalcBtn.setEnabled(isAnyPersonOnList);
+		shareCalcBtn.setEnabled(isAnyPersonOnList());
 
 		((Button)findViewById(R.id.calc_addPerson_button)).setOnClickListener(addPersonButtonClickListener);
 		((Button)findViewById(R.id.calc_addMultiPerson_button)).setOnClickListener(addMultiPersonButtonClickListener);
 		((ImageButton)findViewById(R.id.calc_removeCalc_button)).setOnClickListener(removeCalcButtonClickListener);
 	}
+	
+	protected boolean isAnyPersonOnList() {
+		return calc.getTotalPersons() > 0;
+	}
 
 	private void initCalculationDetailsBar() {
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setText(calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setTextColor(getResources().getColor(R.color.gray));
-		
+
 		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(CalcFormatterHelper.currencyFormat(calc.getTotalPay(), 0));
 		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setTextColor(getResources().getColor(R.color.gray));
-		
+
 		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));
 		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setTextColor(getResources().getColor(R.color.gray));
 	}
@@ -149,9 +152,12 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 	};
 
 	protected void saveCalculation() {
-		if(calc.getInputPaysList().size() == 0)
+		if(calc.getInputPaysList().size() == 0 && !CalcPersistence.isCalcOnSavedList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc)){
+			Log.i(LOG_TAG, "Calc not saved: it has 0 persons and was not saved earlier");
+			saveCalcBtn.setEnabled(false);
 			return;
-		
+		}
+
 		String calcName = mCalcNameEditText.getText().toString();
 		if(calcName.length() == 0)
 			calcName = getString(R.string.calcResult_default_name) + " " + DateTime.now().toString(Constants.SIMPLE_DATE_FORMAT_WITH_HOUR);
@@ -245,7 +251,6 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			refreshCalculation();
 			populateListArray();
 			saveCalculation();
-//			CalcPersistence.addCalculationToList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 		}else if(dialogType == DIALOG_REMOVE_CALC){
 			CalcPersistence.removeCalculationFromList(getApplicationContext(), Constants.PERSISTENCE_SAVED_CALCS_FILE, calc);
 			goToWelcomeScreen();
@@ -290,5 +295,11 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 			}
 		})
 		.create();
+	}
+
+	@Override
+	protected void onResume() {
+		saveCalcBtn.setEnabled(isAnyPersonOnList());
+		super.onResume();
 	}
 }
