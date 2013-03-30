@@ -19,10 +19,8 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -60,7 +58,7 @@ public abstract class AddPersonSingleBase extends AddPersonBase {
 		}
 	}
 
-	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {}
+	protected void loadSpecificInputDataFromBundle(@SuppressWarnings("unused") PersonData loadedPersonData) {}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
 
