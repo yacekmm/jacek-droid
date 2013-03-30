@@ -13,7 +13,8 @@
         android:contentDescription="@string/app_name_potluck"
         android:drawableLeft="@drawable/calendar"
         android:drawablePadding="@dimen/margin_micro"
-        android:textColor="@color/gray"
+        android:textColor="@color/gray_dark"
+        android:text="@string/app_name_potluck"
         android:textSize="@dimen/textSize_micro" />
 
     <TextView
@@ -26,7 +27,8 @@
         android:contentDescription="@string/app_name_potluck"
         android:drawableLeft="@drawable/sum"
         android:drawablePadding="@dimen/margin_micro"
-        android:textColor="@color/gray"
+        android:textColor="@color/gray_dark"
+        android:text="@string/app_name_potluck"
         android:textSize="@dimen/textSize_micro" />
 
     <TextView
@@ -39,7 +41,8 @@
         android:contentDescription="@string/app_name_potluck"
         android:drawableLeft="@drawable/person"
         android:drawablePadding="@dimen/margin_micro"
-        android:textColor="@color/gray"
+        android:textColor="@color/gray_dark"
+        android:text="@string/app_name_potluck"
         android:textSize="@dimen/textSize_micro" />
 
 </LinearLayout>

@@ -95,8 +95,13 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 
 	private void initCalculationDetailsBar() {
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setText(calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
+		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setTextColor(getResources().getColor(R.color.gray));
+		
 		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(CalcFormatterHelper.currencyFormat(calc.getTotalPay(), 0));
+		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setTextColor(getResources().getColor(R.color.gray));
+		
 		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));
+		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setTextColor(getResources().getColor(R.color.gray));
 	}
 
 	private void populateListArray() {
@@ -131,6 +136,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	protected void handleException(Exception exception) { }
 
 	protected abstract CalculationType getCalculationType();

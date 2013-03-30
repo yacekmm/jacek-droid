@@ -64,7 +64,7 @@
     
     <string name="calcResult_saveAndExit_button">Zapisz i wyjdź</string>
     <string name="calcResult_addPerson_button">dodaj osobę</string>
-    <string name="calcResult_addPerson_multi_button">dodaj wielu</string>
+    <string name="calcResult_addPerson_multi_button">dodaj grupę</string>
     <string name="calcResult_calcSaved">Zapisano!</string>
     
     <string name="email_subject">Rozliczenie naszych składek</string>
