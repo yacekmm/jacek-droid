@@ -45,7 +45,8 @@
             android:background="@drawable/edittext_bgnd_gray_left"
             android:hint="@string/addPerson_name_hint"
             android:padding="@dimen/margin_normal"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:inputType="textCapWords" />
 
         <ImageButton
             android:id="@+id/EnterPays_button_getPersonFromContacts"

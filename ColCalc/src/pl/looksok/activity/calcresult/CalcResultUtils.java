@@ -10,7 +10,6 @@ import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.utils.CalculationPrinter;
-import pl.looksok.utils.Constants;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
@@ -84,7 +83,7 @@ public class CalcResultUtils {
 	private String getAppUrl(Context context) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<a href=\"");
-		sb.append(Constants.APPLICATION_WEBSITE_URL);
+		sb.append(context.getApplicationContext().getString(R.string.app_url));
 		sb.append("\">");
 		sb.append(context.getString(R.string.app_name_potluck));
 		sb.append("</a>");

@@ -28,6 +28,7 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase {
 		mHowMuchPaidEditText = (EditText)findViewById(R.id.EnterPaysRest_howMuchPaid_value);
 		mHowMuchPaidEditText.setOnKeyListener(hideKeyboardListener);
 		mHowMuchPaidEditText.setOnFocusChangeListener(softInputModeSwitcherListener);
+		mHowMuchPaidEditText.setText(CalcFormatterHelper.currencyFormat(CalcFormatterHelper.readDoubleFromEditText(mHowMuchPaidEditText)));
 	}
 
 	@Override

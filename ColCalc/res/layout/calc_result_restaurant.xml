@@ -54,7 +54,8 @@
                 android:hint="@string/calcResult_calcName_restaurant_hint"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:inputType="textCapWords" />
         </FrameLayout>
 
         <LinearLayout
@@ -92,35 +93,6 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         layout="@layout/add_person_header" />
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_button"
-        android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginRight="@dimen/margin_normal"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:visibility="gone" >
-
-        <TextView
-            android:id="@+id/calc_tips"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_toLeftOf="@+id/calc_tip_money"
-            android:gravity="center_vertical"
-            android:text="@string/calcResult_restaurant_tips"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textSize_micro" />
-
-        <pl.looksok.currencyedittext.CurrencyEditText
-            android:id="@+id/calc_tip_money"
-            style="@style/textMediumDarkBold"
-            android:layout_width="@dimen/height_button_big"
-            android:layout_height="@dimen/height_button"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/edittext_bgnd_gray"
-            android:gravity="center"
-            android:text="@string/calcResult_personPay_zero_textView" />
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"

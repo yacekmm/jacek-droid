@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name_potluck">Potluck</string>
+    <string name="emptyText"></string>
+    
+    <string name="adMob_publisherID">a150dc376e2d3f0</string>
+    <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796</string>
+    
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_deletePerson">Usuń</string>
+    <string name="dialog_button_cancel">Anuluj</string>
+    <string name="dialog_remove_text">Usunąć?</string>
+    <string name="dialog_saveCalc">Zapisać to rozliczenie?</string>
+    <string name="dialog_yes">Tak</string>
+    <string name="dialog_no">Nie</string>
+    
+    <string name="calcResult_calcName_potluck_hint">nazwa imprezy</string>
+    <string name="calcResult_calcName_restaurant_hint">nazwa rozliczenia</string>
+    <string name="calcResult_name_textView">Imię</string>
+    <string name="calcResult_default_name">Rozliczenie z </string>
+    <string name="calcResult_noPeopleAddedYet">dodaj osoby\naby zobaczyć rozliczenie</string>
+
+    <string name="calcResult_nullPointerError_whileSharingCalc">Nieprawidłowe adresy email.\nWysyłanie nieudane</string>
+    <string name="calcResult_badInputDataError_whileSharingCalc">Nieprawidłowe dane w rozliczeniu!\nPopraw rozliczenie przed wysłaniem</string>
+    <string name="calcResult_badInputDataError_part1">Nieprawidłowe dane do obliczeń!\n\nOsoby dołożyły do rachunku w sumie</string>
+    <string name="calcResult_badInputDataError_part2">\na kwota na rachunku to</string>
+    <string name="calcResult_badInputDataError_part3">\n\ndodawaj nadal kolejne osoby lub popraw kwoty już dodanych</string>
+
+    <string name="welcome_mode_potluckParty">rozlicz się\npo imprezie</string>
+    <string name="welcome_mode_restaurant">rozlicz się\nw restauracji</string>
+    <string name="welcome_noSavedCalcsYet">nie masz jeszcze żadnych\nzapisanych rozliczeń</string>
+    <string name="welcome_savedCalcs">zapisane rozliczenia</string>
+    
+    <string name="addPerson_multi_personPay">Każda z osób zapłaciła:</string>
+    <string name="addPerson_multi_peopleCount_textView">liczba osób do dodania</string>
+    <string name="addPerson_multi_personPrefix">Osoba</string>
+    
+    <string name="addPerson_pays">płatności</string>
+
+    <string name="addPerson_name_hint">wpisz imię&#8230;</string>
+    <string name="addPerson_addAtomPayment_button">dodaj kolejną płatność</string>
+    <string name="addPerson_gift">prezent</string>
+    <string name="addPerson_gotGift_text">Dostał prezent</string>
+    <string name="addPerson_buysGift_text">Płacił za prezent</string>
+    <string name="addPerson_gift_howMuchPaid">ile zapłacił za prezent</string>
+    <string name="addPerson_error_emptyNameField">Wpisz imię osoby</string>
+    <string name="addPerson_error_duplicatedPersonName">Osoba o tym imieniu jest już na liście</string>
+    <string name="addPerson_error_shouldPayValue">Wpisz poprawną kwotę jaką osoba powinna zapłacić</string>
+    <string name="addPerson_personNameLabel">imię</string>
+    <string name="addPerson_howMuchPaid_label">ile dołożył do rachunku</string>
+
+    <string name="addPerson_saveAndCalculate_button">Zapisz i oblicz</string>
+    <string name="addPerson_saveAndAddNextPerson_button">zapisz i dodaj kolejną osobę</string>
+    <string name="addPerson_saveAndAddNextMultiPerson_button">zapisz i dodaj kolejne osoby</string>
+
+    <string name="addPerson_billPay_header">ile zapłacił</string>
+    <string name="addPerson_atomPay_potluck_header">co kupił</string>
+    <string name="addPerson_atomPay_restaurant_header">za co powinien zapłacić</string>
+    <string name="addPerson_atomPay_payNameHint">nazwa płatności</string>
+    
+    <string name="calcResult_saveAndExit_button">Zapisz i wyjdź</string>
+    <string name="calcResult_addPerson_button">dodaj osobę</string>
+    <string name="calcResult_addPerson_multi_button">dodaj grupę</string>
+    <string name="calcResult_calcSaved">Zapisano!</string>
+    
+    <string name="email_subject">Rozliczenie naszych składek</string>
+    <string name="email_content_welcome">Hej!</string>
+    <string name="email_content_text">Przesyłam rozliczenie po naszych składkach. Info kto komu ile powinien oddać jest niżej.</string>
+    <string name="email_content_madeBy">Aha&#8230; a obliczyła to wszystko aplikacja</string>
+    <string name="email_utils_chooseEmailClient">Wybierz sposób udostępnienia</string>
+    <string name="email_utils_error_noEmailProvided">Uwaga! Nie znam adresu email do wszystkich osób. Dodaj je ręcznie.</string>
+    <string name="email_utils_error_mockEmailAddress">[nieznane maile]</string>
+    
+    <string name="email_calcResult_printText_paid">zapłacone</string>
+    <string name="email_calcResult_printText_shouldPay">powinno być zapłacone</string>
+    <string name="email_calcResult_printText_shouldReturn">musi oddać</string>
+    <string name="email_calcResult_printText_for">dla</string>
+    <string name="email_calcResult_printText_from">od</string>
+    <string name="email_calcResult_printText_title">Podsumowanie rozliczeń</string>
+    
+    
+</resources>

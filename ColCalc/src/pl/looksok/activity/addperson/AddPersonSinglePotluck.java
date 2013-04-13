@@ -50,6 +50,7 @@ public class AddPersonSinglePotluck extends AddPersonSingleBase {
 		mGiftValueInput = (CurrencyEditText)findViewById(R.id.EnterPays_EditText_giftValue);
 		mGiftValueInput.setOnFocusChangeListener(softInputModeSwitcherListener);
 		mGiftValueInput.setOnKeyListener(hideKeyboardListener);
+		mGiftValueInput.setText(FormatterHelper.currencyFormat(CalcFormatterHelper.readDoubleFromEditText(mGiftValueInput), 2));
 		
 		hideAddMultiPersonButton();
 		

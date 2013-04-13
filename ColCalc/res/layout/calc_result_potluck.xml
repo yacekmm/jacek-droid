@@ -54,7 +54,8 @@
                 android:hint="@string/calcResult_calcName_potluck_hint"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:inputType="textCapWords" />
         </FrameLayout>
 
         <LinearLayout
