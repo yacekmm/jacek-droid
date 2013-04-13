@@ -13,7 +13,6 @@ import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.logic.exceptions.BadPeopleCountException;
 import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 import pl.looksok.logic.exceptions.PaysNotCalculatedException;
-import pl.looksok.logic.utils.CalculationPrinter;
 import pl.looksok.logic.utils.CalculationUtils;
 import pl.looksok.logic.utils.FormatterHelper;
 import pl.looksok.logic.utils.InputValidator;
@@ -155,13 +154,6 @@ public class CalculationLogic implements Serializable {
 		}catch(NullPointerException e){
 			throw new PaysNotCalculatedException("Call 'calculate' method before reading results");
 		}
-	}
-
-	@Override
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(CalculationPrinter.printCalcResultForResultsList(calculationResult, "Calculation results", "should return", "for"));
-		return sb.toString();
 	}
 
 	public List<PersonData> getInputPaysList() {

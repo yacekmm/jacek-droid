@@ -3,11 +3,11 @@ package pl.looksok.activity.calcresult;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
-import pl.looksok.logic.utils.CalculationPrinter;
-import pl.looksok.utils.CalcFormatterHelper;
+import pl.looksok.utils.CalculationPrinter;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -80,7 +80,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 			holder.txtPaidForGift.setVisibility(View.VISIBLE);
 			if(!pd.receivesGift()){
 				holder.imgReceivesGift.setVisibility(View.GONE);
-				holder.txtPaidForGift.setText(CalcFormatterHelper.currencyFormat(pd.getHowMuchIPaidForGift(), 2));
+				holder.txtPaidForGift.setText(FormatterHelper.currencyFormat(pd.getHowMuchIPaidForGift(), 2));
 				holder.txtPaidForGift.setVisibility(View.VISIBLE);
 			}else{
 				holder.imgReceivesGift.setVisibility(View.VISIBLE);
@@ -88,7 +88,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 			}
 		}else if(calc.getCalculationType().equals(CalculationType.RESTAURANT)){
 			holder.txtShouldPay.setVisibility(View.VISIBLE);
-			holder.txtShouldPay.setText(CalcFormatterHelper.currencyFormat(pd.getHowMuchPersonShouldPay(), 2));
+			holder.txtShouldPay.setText(FormatterHelper.currencyFormat(pd.getHowMuchPersonShouldPay(), 2));
 		}
 		
 
@@ -109,7 +109,7 @@ public class ResultsListAdapter extends ArrayAdapter<PersonData> {
 	}
 
 	private void setHowMuchUserPaidText(ResultHolder holder, PersonData pp) {
-		holder.txtBalance.setText(CalcFormatterHelper.currencyFormat(pp.getHowMuchPersonPaid(), 2));
+		holder.txtBalance.setText(FormatterHelper.currencyFormat(pp.getHowMuchPersonPaid(), 2));
 	}
 
 	public class ResultHolder {

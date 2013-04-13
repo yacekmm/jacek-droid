@@ -8,11 +8,11 @@ import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
 import pl.looksok.activity.addperson.AddPersonMultiPotluck;
 import pl.looksok.activity.welcome.WelcomeActivity;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
-import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.CalcPersistence;
 import pl.looksok.utils.Constants;
 import android.app.AlertDialog;
@@ -100,7 +100,7 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setText(calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
 		((TextView)findViewById(R.id.calcDetailsHeader_calcDate)).setTextColor(getResources().getColor(R.color.gray));
 
-		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(CalcFormatterHelper.currencyFormat(calc.getTotalPay(), 0));
+		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setText(FormatterHelper.currencyFormat(calc.getTotalPay(), 0));
 		((TextView)findViewById(R.id.calcDetailsHeader_calcTotal)).setTextColor(getResources().getColor(R.color.gray));
 
 		((TextView)findViewById(R.id.calcDetailsHeader_calcPersons)).setText(String.valueOf(calc.getTotalPersons()));

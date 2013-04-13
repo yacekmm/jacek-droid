@@ -1,10 +1,8 @@
 package pl.looksok.utils;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 import pl.looksok.currencyedittext.utils.FormatterHelper;
-
 import android.widget.EditText;
 
 public class CalcFormatterHelper {
@@ -26,15 +24,5 @@ public class CalcFormatterHelper {
 				payDouble = FormatterHelper.decodeValueFromCurrency(payString);
 			}
 		return payDouble;
-	}
-	
-	public static String currencyFormat(double value, int fractionDigits){
-		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		nf.setMaximumFractionDigits(fractionDigits);
-		return(nf.format(value));
-	}
-	
-	public static String currencyFormat(double value){
-		return currencyFormat(value, 2);
 	}
 }

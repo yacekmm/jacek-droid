@@ -1,36 +1,12 @@
-package pl.looksok.logic.utils;
+package pl.looksok.utils;
 
 import java.util.HashMap;
 import java.util.Iterator;
 
 import pl.looksok.logic.PersonData;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 
 public class CalculationPrinter {
-	/**
-	 * returns String with calculation result like:
-	 * [titleText]:
-	 * [personName] [returnToText]:
-	 * [calculatedReturnValue] [forText] [otherPersonName] 
-	 * @param calculationResult 
-	 * @param titleText
-	 * @param returnToText
-	 * @return
-	 */
-	public static String printCalcResultForResultsList(HashMap<String, PersonData> calculationResult, String titleText, String returnToText, String forText){
-		StringBuilder sb = new StringBuilder(titleText).append(":\n");
-
-		if(calculationResult != null){
-			Iterator<String> it = calculationResult.keySet().iterator();
-
-			while (it.hasNext()){
-				PersonData pp = calculationResult.get(it.next());
-				sb.append(printPersonReturnsToOthers(pp, returnToText, forText)).append("\n");
-			}
-		}
-
-		return sb.toString();
-	}
-
 	/**
 	 * returns String with calculation result like:
 	 * [titleText]:
@@ -86,7 +62,6 @@ public class CalculationPrinter {
 	}
 
 	public static String printPersonDebtsSimple(PersonData pd, String helpText) {
-//		HashMap<String, Double> refundMap = pd.getRefundForOtherPeople();
 		HashMap<String, Double> debtsMap = pd.getPersonDebts();
 		return simplePrinter("-", helpText, debtsMap);
 	}
@@ -106,7 +81,6 @@ public class CalculationPrinter {
 			double value = payMap.get(key);
 			if(value > 0){
 				if(!first){
-					//sb.append(",    ");
 					sb.append("\n");
 				}else
 					first = false;
