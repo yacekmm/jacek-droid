@@ -17,7 +17,7 @@
     <LinearLayout
         android:id="@+id/welcome_modes_layout"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_button_welcome_mode"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/welcome_logo"
         android:layout_margin="@dimen/margin_normal"
         android:orientation="horizontal" >
@@ -34,7 +34,7 @@
             android:padding="@dimen/margin_small"
             android:text="@string/welcome_mode_restaurant"
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_medium"
+            android:textSize="@dimen/textSize_small"
             android:typeface="serif" />
 
         <Button
@@ -49,7 +49,7 @@
             android:padding="@dimen/margin_small"
             android:text="@string/welcome_mode_potluckParty"
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_medium"
+            android:textSize="@dimen/textSize_small"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -87,7 +87,6 @@
         android:cacheColorHint="@color/gray_dark"
         android:divider="@null"
         android:dividerHeight="@dimen/margin_normal"
-        android:stackFromBottom="true"
         android:visibility="invisible" >
     </ListView>
 
