@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:drawableLeft="@android:drawable/ic_notification_overlay"
+            android:drawableLeft="@drawable/shopping_cart"
             android:drawablePadding="@dimen/margin_micro"
             android:text="@string/calcResult_personPay_zero_textView"
             android:textColor="@color/gray_dark"

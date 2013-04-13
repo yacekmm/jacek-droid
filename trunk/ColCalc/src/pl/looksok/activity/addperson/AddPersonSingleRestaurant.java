@@ -6,6 +6,7 @@ import java.util.HashSet;
 import pl.looksok.R;
 import pl.looksok.activity.addperson.utils.InputValidator;
 import pl.looksok.activity.calcresult.CalcResultRestaurantActivity;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
 import pl.looksok.utils.CalcFormatterHelper;
@@ -28,7 +29,7 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase {
 		mHowMuchPaidEditText = (EditText)findViewById(R.id.EnterPaysRest_howMuchPaid_value);
 		mHowMuchPaidEditText.setOnKeyListener(hideKeyboardListener);
 		mHowMuchPaidEditText.setOnFocusChangeListener(softInputModeSwitcherListener);
-		mHowMuchPaidEditText.setText(CalcFormatterHelper.currencyFormat(CalcFormatterHelper.readDoubleFromEditText(mHowMuchPaidEditText)));
+		mHowMuchPaidEditText.setText(FormatterHelper.currencyFormat(CalcFormatterHelper.readDoubleFromEditText(mHowMuchPaidEditText), 2));
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class AddPersonSingleRestaurant extends AddPersonSingleBase {
 	@Override
 	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {
 		super.loadSpecificInputDataFromBundle(loadedPersonData);
-		mHowMuchPaidEditText.setText(CalcFormatterHelper.currencyFormat(loadedPersonData.getHowMuchPersonPaid(), 2));
+		mHowMuchPaidEditText.setText(FormatterHelper.currencyFormat(loadedPersonData.getHowMuchPersonPaid(), 2));
 	}
 
 	@Override

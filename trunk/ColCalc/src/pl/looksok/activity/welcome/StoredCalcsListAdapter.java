@@ -3,9 +3,9 @@ package pl.looksok.activity.welcome;
 import java.util.List;
 
 import pl.looksok.R;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
-import pl.looksok.utils.CalcFormatterHelper;
 import pl.looksok.utils.Constants;
 import android.app.Activity;
 import android.content.Context;
@@ -68,7 +68,7 @@ public class StoredCalcsListAdapter extends ArrayAdapter<CalculationLogic> {
 	private void setupItemContent(ResultHolder holder) {
 		holder.txtCalcName.setText(holder.calc.getCalcName());
 		holder.txtCalcDate.setText(holder.calc.getDateSaved().toString(Constants.SIMPLE_DATE_FORMAT));
-		holder.txtCalcTotal.setText(CalcFormatterHelper.currencyFormat(holder.calc.getTotalPay(), 0));
+		holder.txtCalcTotal.setText(FormatterHelper.currencyFormat(holder.calc.getTotalPay(), 0));
 		holder.txtCalcPersons.setText(String.valueOf(holder.calc.getTotalPersons()));
 	}
 	

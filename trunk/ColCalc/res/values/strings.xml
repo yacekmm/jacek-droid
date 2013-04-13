@@ -76,7 +76,7 @@
     <string name="app_url">http://wp.me/p1ZhsT-dK</string>
     
     <string name="email_calcResult_printText_paid">paid</string>
-    <string name="email_calcResult_printText_shouldPay">should be paid</string>
+    <string name="email_calcResult_printText_shouldPay">should pay</string>
     <string name="email_calcResult_printText_shouldReturn">has to return</string>
     <string name="email_calcResult_printText_for">to</string>
     <string name="email_calcResult_printText_from">from</string>

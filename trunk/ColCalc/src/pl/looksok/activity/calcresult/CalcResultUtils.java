@@ -9,7 +9,7 @@ import java.util.Iterator;
 import pl.looksok.R;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
-import pl.looksok.logic.utils.CalculationPrinter;
+import pl.looksok.utils.CalculationPrinter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;

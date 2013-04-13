@@ -6,6 +6,7 @@ import java.util.List;
 import pl.looksok.R;
 import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.currencyedittext.CurrencyEditText;
+import pl.looksok.currencyedittext.utils.FormatterHelper;
 import pl.looksok.logic.AtomPayment;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
@@ -39,7 +40,7 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 		
 		mNewPersonPayInput = (CurrencyEditText)findViewById(R.id.enterPaysMulti_EditText_Pay);
 		mNewPersonPayInput.setOnKeyListener(hideKeyboardListener);
-		mNewPersonPayInput.setText(CalcFormatterHelper.currencyFormat(0.0));
+		mNewPersonPayInput.setText(FormatterHelper.currencyFormat(0.0));
 		
 		mHowManyPersonsScroller = (LinearLayout)findViewById(R.id.enterPaysMulti_peopleCount_content);
 
