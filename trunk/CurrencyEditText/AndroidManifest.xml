@@ -5,9 +5,6 @@
 
     <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15" />
 
-    <application android:label="@string/app_name_currency"
-        android:theme="@style/AppTheme">
-
-    </application>
+    <application />
 
 </manifest>

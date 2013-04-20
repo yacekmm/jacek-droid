@@ -3,7 +3,6 @@ package pl.looksok.currencyedittext.utils;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Currency;
 
 import android.widget.EditText;
 
@@ -29,7 +28,7 @@ public class FormatterHelper{
 
 	public static String currencyFormat(double value, int fractionDigits){
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		nf.setCurrency(Currency.getInstance("USD"));
+//		nf.setCurrency(Currency.getInstance("USD"));
 		nf.setMaximumFractionDigits(fractionDigits);
 		return(nf.format(value));
 	}
