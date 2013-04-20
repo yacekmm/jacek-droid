@@ -32,7 +32,7 @@ public class AddNewPerson extends Activity {
 		ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
 		atomPaysListView.setAdapter(adapter);
 	}
-
+	
 	private void setupAddPaymentButton() {
 		findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(new OnClickListener() {
 			
