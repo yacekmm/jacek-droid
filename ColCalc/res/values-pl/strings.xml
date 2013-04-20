@@ -17,6 +17,7 @@
     
     <string name="calcResult_calcName_potluck_hint">nazwa imprezy</string>
     <string name="calcResult_calcName_restaurant_hint">nazwa rozliczenia</string>
+    <string name="calcResult_personPay_zero_textView"></string>
     <string name="calcResult_name_textView">Imię</string>
     <string name="calcResult_default_name">Rozliczenie z </string>
     <string name="calcResult_noPeopleAddedYet">dodaj osoby\naby zobaczyć rozliczenie</string>
@@ -71,6 +72,7 @@
     <string name="email_utils_chooseEmailClient">Wybierz sposób udostępnienia</string>
     <string name="email_utils_error_noEmailProvided">Uwaga! Nie znam adresu email do wszystkich osób. Dodaj je ręcznie.</string>
     <string name="email_utils_error_mockEmailAddress">[nieznane maile]</string>
+    <string name="app_url">http://wp.me/p1ZhsT-dK</string>
     
     <string name="email_calcResult_printText_paid">zapłacone</string>
     <string name="email_calcResult_printText_shouldPay">powinno być zapłacone</string>
