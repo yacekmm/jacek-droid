@@ -148,7 +148,7 @@
         xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
         android:id="@+id/EnterPays_adView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adMob_publisherID"
