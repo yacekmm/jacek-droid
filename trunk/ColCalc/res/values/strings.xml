@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name_potluck">Potluck</string>
+    <string name="app_name_potluck">Pay Together</string>
     <string name="emptyText"></string>
     
     <string name="adMob_publisherID">a150dc376e2d3f0</string>
-    <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796</string>
+    <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796, E77A32D005BCCC2A3B7A3803263722E9</string>
     
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_deletePerson">Remove</string>
