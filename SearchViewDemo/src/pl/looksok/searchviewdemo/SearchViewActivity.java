@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SearchViewActivity extends Activity {
 
