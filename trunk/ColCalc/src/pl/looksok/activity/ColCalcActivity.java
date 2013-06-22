@@ -60,7 +60,6 @@ public class ColCalcActivity extends Activity {
 		.create();
 	}
 
-	@SuppressWarnings("unused")
 	protected void handleRemoveConfirm(int dialogRemove) {}
 	
 	protected void clearEditTextFocus(EditText editText){

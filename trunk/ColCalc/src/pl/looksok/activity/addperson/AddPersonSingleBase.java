@@ -58,7 +58,7 @@ public abstract class AddPersonSingleBase extends AddPersonBase {
 		}
 	}
 
-	protected void loadSpecificInputDataFromBundle(@SuppressWarnings("unused") PersonData loadedPersonData) {}
+	protected void loadSpecificInputDataFromBundle(PersonData loadedPersonData) {}
 
 	private void setUpAtomPayAdapter(List<AtomPayment> atomPaymentsList) {
 
