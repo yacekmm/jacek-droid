@@ -20,7 +20,7 @@
     <string name="calcResult_name_textView">Name</string>
     <string name="calcResult_personPay_zero_textView"></string>
     <string name="calcResult_default_name">calc made</string>
-    <string name="calcResult_noPeopleAddedYet">add persons\nto see expenses account</string>
+    <string name="calcResult_noPeopleAddedYet">add persons\n to see expenses account</string>
 
     <string name="calcResult_nullPointerError_whileSharingCalc">Incorrect emails.\nSending failed</string>
     <string name="calcResult_badInputDataError_whileSharingCalc">Bad input data!\nFix calculation before sharing it</string>

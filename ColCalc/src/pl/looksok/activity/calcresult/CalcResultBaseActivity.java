@@ -139,7 +139,6 @@ public abstract class CalcResultBaseActivity extends ColCalcActivity {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	protected void handleException(Exception exception) { }
 
 	protected abstract CalculationType getCalculationType();
