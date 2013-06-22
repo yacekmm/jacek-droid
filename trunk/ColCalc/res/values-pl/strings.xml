@@ -49,7 +49,7 @@
     <string name="addPerson_error_duplicatedPersonName">Osoba o tym imieniu jest już na liście</string>
     <string name="addPerson_error_shouldPayValue">Wpisz poprawną kwotę jaką osoba powinna zapłacić</string>
     <string name="addPerson_personNameLabel">imię</string>
-    <string name="addPerson_howMuchPaid_label">ile dołożył do rachunku</string>
+    <string name="addPerson_howMuchPaid_label">ile się dołożył do rachunku</string>
 
     <string name="addPerson_saveAndCalculate_button">Zapisz i oblicz</string>
     <string name="addPerson_saveAndAddNextPerson_button">zapisz i dodaj kolejną osobę</string>
@@ -58,7 +58,7 @@
     <string name="addPerson_billPay_header">ile zapłacił</string>
     <string name="addPerson_atomPay_potluck_header">co kupił</string>
     <string name="addPerson_atomPay_restaurant_header">za co powinien zapłacić</string>
-    <string name="addPerson_atomPay_payNameHint">nazwa płatności</string>
+    <string name="addPerson_atomPay_payNameHint">co kupił</string>
     
     <string name="calcResult_saveAndExit_button">Zapisz i wyjdź</string>
     <string name="calcResult_addPerson_button">dodaj osobę</string>

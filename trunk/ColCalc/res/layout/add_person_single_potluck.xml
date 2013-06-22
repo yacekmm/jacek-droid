@@ -94,10 +94,11 @@
 
     <Button
         android:id="@+id/EnterPays_addAtomPayment"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/height_button"
         android:layout_below="@+id/EnterPays_AtomPaymentsHolder"
-        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_alignParentRight="true"
+        android:paddingRight="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
         android:background="@drawable/button_bgnd_gray"
