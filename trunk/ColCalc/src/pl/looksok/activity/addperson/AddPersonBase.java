@@ -10,6 +10,7 @@ import pl.looksok.activity.addperson.utils.AddPersonUtils;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.PersonData;
 import pl.looksok.logic.exceptions.BadInputDataException;
+import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 import pl.looksok.utils.Constants;
 import android.content.Intent;
 import android.os.Bundle;
@@ -139,7 +140,9 @@ public abstract class AddPersonBase extends ColCalcActivity {
 			calc.calculate(inputPaysList);
 		}catch(BadInputDataException e){
 			Log.d(LOG_TAG, "Bad input data provided: " + e.getMessage());
-		}finally{
+		}catch(DuplicatePersonNameException e){
+			Log.d(LOG_TAG, "Bad input data provided (Duplicated person name): " + e.getMessage());
+		} finally{
 			Intent intent = new Intent(this.getApplicationContext(), getCalcResultActivity()) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);

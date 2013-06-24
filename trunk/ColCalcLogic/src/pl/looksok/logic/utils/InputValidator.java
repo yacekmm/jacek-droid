@@ -11,7 +11,7 @@ import pl.looksok.logic.exceptions.DuplicatePersonNameException;
 public class InputValidator{
 		
 	public static HashMap<String, PersonData> convertAndValidateInput(List<PersonData> inputPaysList, CalculationType calculationType) 
-				throws BadInputDataException{
+				throws BadInputDataException, DuplicatePersonNameException{
 		
 		HashMap<String, PersonData> inputPays = new HashMap<String, PersonData>();
 		double sumOfAllPays = 0.0;
