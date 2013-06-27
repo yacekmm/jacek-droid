@@ -5,7 +5,7 @@
     <string name="emptyText"></string>
     
     <string name="adMob_publisherID">a150dc376e2d3f0</string>
-    <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796, E77A32D005BCCC2A3B7A3803263722E9</string>
+    <string name="adMob_testDevices">TEST_EMULATOR, 14AE8DF8564BE03315EC969FF6038796, E77A32D005BCCC2A3B7A3803263722E9, B88BD0C4418D2ED8744F4FCA82BB30D9</string>
     
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_deletePerson">Usuń</string>

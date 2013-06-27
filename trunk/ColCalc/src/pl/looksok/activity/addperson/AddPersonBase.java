@@ -77,7 +77,7 @@ public abstract class AddPersonBase extends ColCalcActivity {
 			try{
 				saveAndShowResults(getNewInputDataToAdd());
 			}catch(BadInputDataException e){
-				Log.d(LOG_TAG, "Input data was not valid");
+				Log.d(LOG_TAG, "Input data was not valid: " + e.getMessage());
 			}
 		}
 	};
@@ -109,6 +109,7 @@ public abstract class AddPersonBase extends ColCalcActivity {
 	OnClickListener saveAndAddNextMultiPersonClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			try{
+				v.requestFocus();
 				HashSet<PersonData> data = getNewInputDataToAdd();
 				saveAndAddNext(data, AddPersonMultiPotluck.class);
 			}catch(BadInputDataException e){
@@ -123,13 +124,14 @@ public abstract class AddPersonBase extends ColCalcActivity {
 				inputPaysList.add(pd);
 			}
 			calc.calculate(inputPaysList);
+		}catch(BadInputDataException e){
+			Log.i(LOG_TAG, "Input data was not valid: " + e.getMessage());
+		}finally{
 			Intent intent = new Intent(getApplicationContext(), nextActivityClass) ;
 			intent.putExtra(Constants.BUNDLE_CALCULATION_OBJECT, calc);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 			finish();
-		}catch(BadInputDataException e){
-			Log.d(LOG_TAG, "Input data was not valid");
 		}
 	}
 
@@ -139,7 +141,7 @@ public abstract class AddPersonBase extends ColCalcActivity {
 		try{
 			calc.calculate(inputPaysList);
 		}catch(BadInputDataException e){
-			Log.d(LOG_TAG, "Bad input data provided: " + e.getMessage());
+			Log.d(LOG_TAG, "Bad input data provided (BadInputDataException): " + e.getMessage());
 		}catch(DuplicatePersonNameException e){
 			Log.d(LOG_TAG, "Bad input data provided (Duplicated person name): " + e.getMessage());
 		} finally{
