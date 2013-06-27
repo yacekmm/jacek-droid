@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>pl.looksok</groupId>
-	<artifactId>ColCalc</artifactId>
+	<groupId>pl.looksok.test</groupId>
+	<artifactId>ColCalcTest</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>apk</packaging>
 
@@ -10,7 +10,7 @@
 		<sourceDirectory>${project.basedir}/src</sourceDirectory>
 		<plugins>
 
- 			<plugin>
+			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
 				<version>3.3.2</version>
@@ -27,7 +27,7 @@
 				</configuration>
 				<extensions>true</extensions>
 
-			</plugin> 
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -42,15 +42,26 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>pl.looksok.logic</groupId>
-			<artifactId>ColCalcLogic</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<groupId>com.jayway.android.robotium</groupId>
+			<artifactId>robotium</artifactId>
+			<version>4.1</version>
+			<type>pom</type>
 		</dependency>
 		<dependency>
-			<groupId>pl.looksok.currencyedittext</groupId>
-			<artifactId>CurrencyEditText</artifactId>
+			<groupId>org.apache.maven.surefire</groupId>
+			<artifactId>common-junit4</artifactId>
+			<version>2.15</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.android.robotium</groupId>
+			<artifactId>robotium-solo</artifactId>
+			<version>4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>pl.looksok</groupId>
+			<artifactId>ColCalc</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<type>apklib</type>
+			<type>apk</type>
 		</dependency>
 	</dependencies>
 </project>
