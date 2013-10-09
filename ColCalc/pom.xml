@@ -10,7 +10,7 @@
 		<sourceDirectory>${project.basedir}/src</sourceDirectory>
 		<plugins>
 
- 			<plugin>
+			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
 				<version>3.3.2</version>
@@ -27,7 +27,7 @@
 				</configuration>
 				<extensions>true</extensions>
 
-			</plugin> 
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

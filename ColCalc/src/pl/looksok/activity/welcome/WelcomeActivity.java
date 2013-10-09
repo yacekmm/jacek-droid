@@ -4,9 +4,9 @@ import java.util.List;
 
 import pl.looksok.R;
 import pl.looksok.activity.ColCalcActivity;
+import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.activity.calcresult.CalcResultRestaurantActivity;
 import pl.looksok.activity.calcresult.CalcResultUtils;
-import pl.looksok.activity.calcresult.CalcResultPotluckActivity;
 import pl.looksok.logic.CalculationLogic;
 import pl.looksok.logic.CalculationType;
 import pl.looksok.logic.exceptions.BadInputDataException;

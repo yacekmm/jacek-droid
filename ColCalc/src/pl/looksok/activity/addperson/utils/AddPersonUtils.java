@@ -3,7 +3,6 @@ package pl.looksok.activity.addperson.utils;
 import java.util.HashSet;
 
 import pl.looksok.activity.addperson.AddPersonBase;
-
 import android.database.Cursor;
 import android.provider.ContactsContract;
 
