@@ -18,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 public class AddPersonMultiPotluck extends AddPersonBase {
 
 	private LinearLayout mHowManyPersonsScroller;
@@ -127,5 +129,17 @@ public class AddPersonMultiPotluck extends AddPersonBase {
 	@Override
 	protected Class<?> getAddNewPersonSingleActivity()  {
 		return AddPersonSinglePotluck.class;
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);
 	}
 }

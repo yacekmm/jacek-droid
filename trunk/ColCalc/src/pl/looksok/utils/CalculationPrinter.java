@@ -3,8 +3,8 @@ package pl.looksok.utils;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import pl.looksok.logic.PersonData;
 import pl.looksok.currencyedittext.utils.FormatterHelper;
+import pl.looksok.logic.PersonData;
 
 public class CalculationPrinter {
 	/**
