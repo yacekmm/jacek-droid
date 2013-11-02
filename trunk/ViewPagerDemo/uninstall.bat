@@ -1,0 +1,1 @@
+adb uninstall pl.looksok.viewpagerdemo
