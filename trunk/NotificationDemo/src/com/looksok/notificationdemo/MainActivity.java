@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationCompat.InboxStyle;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -60,6 +61,7 @@ public class MainActivity extends Activity {
 	private Notification createBasicNotification(PendingIntent notificationIntent) {
 		NotificationCompat.Builder builder = new Builder(getApplicationContext());
 		long[] vibrationPattern = {0, 200, 800, 200, 600, 200, 400, 200, 200, 200, 100, 200, 50, 200, 50, 200, 50, 200, 50, 200};
+		NotificationCompat.InboxStyle inboxStyle = prepareBigNotificationDetails();
 		
 		Notification notification = builder
 				.setSmallIcon(R.drawable.ic_launcher)
@@ -71,9 +73,22 @@ public class MainActivity extends Activity {
 				.setContentInfo(getString(R.string.notif_contentInfo))
 				.setWhen(Calendar.getInstance().getTimeInMillis() + 1000*60+60)
 				.setVibrate(vibrationPattern)
+				.setStyle(inboxStyle)
 				.build();
 		
 		return notification;
+	}
+
+	private InboxStyle prepareBigNotificationDetails() {
+		NotificationCompat.InboxStyle result = new InboxStyle();
+		result.setBigContentTitle(getString(R.string.notif_inboxStyleTitle));
+		result.addLine(getString(R.string.notif_inboxStyle_line1));
+		result.addLine(getString(R.string.notif_inboxStyle_line2));
+		result.addLine(getString(R.string.notif_inboxStyle_line3));
+		result.addLine(getString(R.string.notif_inboxStyle_line4));
+		result.addLine(getString(R.string.notif_inboxStyle_line5));
+		result.addLine(getString(R.string.notif_inboxStyle_line6));
+		return result;
 	}
 
 	private void displayNotification(Notification notification) {
