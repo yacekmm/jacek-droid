@@ -7,5 +7,6 @@
     
     <string name="notif_title">Hey!</string>
     <string name="notif_text">Why did you close me?</string>
+    <string name="notif_contentInfo">Looks OK!</string>
 
 </resources>

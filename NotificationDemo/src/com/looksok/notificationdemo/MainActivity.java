@@ -1,5 +1,7 @@
 package com.looksok.notificationdemo;
 
+import java.util.Calendar;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
@@ -7,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
@@ -40,6 +43,7 @@ public class MainActivity extends Activity {
 		displayNotification(notification);
 	}
 
+
 	@SuppressLint("InlinedApi")
 	private PendingIntent preparePendingIntent() {
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -55,12 +59,18 @@ public class MainActivity extends Activity {
 
 	private Notification createBasicNotification(PendingIntent notificationIntent) {
 		NotificationCompat.Builder builder = new Builder(getApplicationContext());
+		long[] vibrationPattern = {0, 200, 800, 200, 600, 200, 400, 200, 200, 200, 100, 200, 50, 200, 50, 200, 50, 200, 50, 200};
+		
 		Notification notification = builder
-				.setSmallIcon(R.drawable.me)
+				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle(getString(R.string.notif_title))
 				.setContentText(getString(R.string.notif_text))
 				.setAutoCancel(true)
 				.setContentIntent(notificationIntent)
+				.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.me))
+				.setContentInfo(getString(R.string.notif_contentInfo))
+				.setWhen(Calendar.getInstance().getTimeInMillis() + 1000*60+60)
+				.setVibrate(vibrationPattern)
 				.build();
 		
 		return notification;
