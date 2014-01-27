@@ -8,5 +8,12 @@
     <string name="notif_title">Hey!</string>
     <string name="notif_text">Why did you close me?</string>
     <string name="notif_contentInfo">Looks OK!</string>
+    <string name="notif_inboxStyleTitle">My list of details</string>
+    <string name="notif_inboxStyle_line1">My first item</string>
+    <string name="notif_inboxStyle_line2">The second one</string>
+    <string name="notif_inboxStyle_line3">and yet another one!</string>
+    <string name="notif_inboxStyle_line4">let us make this list long</string>
+    <string name="notif_inboxStyle_line5">is it finished?</string>
+    <string name="notif_inboxStyle_line6">yes, now it is!</string>
 
 </resources>
